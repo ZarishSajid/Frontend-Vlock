@@ -2,12 +2,16 @@
 
 .main-navbar .navbar {
   height: $main-navbar-height;
+  background-color:#424242;
+
 
   > * {
     display: flex;
   }
 
   .nav-link {
+    padding: 0rem;
+
     min-width: $main-navbar-nav-link-min-width;
   }
 

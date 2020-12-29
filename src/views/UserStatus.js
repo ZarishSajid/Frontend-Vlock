@@ -3,8 +3,19 @@ import { Container, Button, bool } from "shards-react";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { BsUnlockFill } from "react-icons/bs";
+import { BsLockFill } from "react-icons/bs";
+import { BsFillEnvelopeFill } from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
+import { BsLink45Deg } from "react-icons/bs";
+import { AiFillEdit } from "react-icons/ai";
+import { AiFillDatabase } from "react-icons/ai";
+import { AiFillSafetyCertificate } from "react-icons/ai";
+
+
 import { Tooltip } from "antd";
 import { Table } from "reactstrap";
+import { Label } from "reactstrap";
 import { Radio, Form, Typography } from "antd";
 import { Modal, ModalBody, ModalHeader } from "shards-react";
 import axios from "axios";
@@ -42,20 +53,25 @@ class UserList extends React.Component {
       openActive: false,
     };
     this.toggle = this.toggle.bind(this);
-    this.Activetoggle = this.Activetoggle.bind(this);
+    // this.Activetoggle = this.Activetoggle.bind(this);
   }
-  sendEmail() {
+  sendEmail(e) {
     const data = {
+      //email: "rajazara75@gmail.com",
       email: this.state.email,
       subject: "Vlock Notification",
-      message: "abcc",
+      message: this.state.Description,
+      //message: "Dear zara your account has been blocked",
     };
     const header = {
       header: {
         token: localStorage.getItem("token"),
       },
     };
-    axios.post(`http://localhost:8080/vlock/email`, data);
+    axios.post(`http://localhost:8080/vlock/email`, data).then((res) => {
+      alert("Email Sent ");
+      window.location.reload(false);
+    });
   }
   handleDescription = (e) => {
     this.setState({
@@ -67,9 +83,11 @@ class UserList extends React.Component {
       open: !this.state.open,
     });
   }
-  Activetoggle() {
+  Activetoggle(e, email) {
+    e.preventDefault();
     this.setState({
       openActive: !this.state.openActive,
+      email: email,
     });
   }
   handleOk = (e) => {
@@ -84,11 +102,7 @@ class UserList extends React.Component {
       open: !this.state.open,
     });
   };
-  handleActiveBack = () => {
-    this.setState({
-      openActive: !this.state.openActive,
-    });
-  };
+
   componentDidMount() {
     this.fetchData();
   }
@@ -182,14 +196,29 @@ class UserList extends React.Component {
         </div>
         <Table striped>
           <thead>
-            <tr style={{ backgroundColor: "#85DBE9" }}>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Sap ID</th>
-              <th>Department</th>
-              <th>Status</th>
-              <th>Action</th>
+            <tr style={{ backgroundColor: "#569CE5"}}>
+              <th>
+                {" "}
+                <BsLink45Deg></BsLink45Deg> #
+              </th>
+              <th>
+                <BsFillPersonFill></BsFillPersonFill> Name{" "}
+              </th>
+              
+              <th>
+                {" "}
+                <AiFillEdit></AiFillEdit> Sap ID
+              </th>
+              <th>
+                {" "}
+                <AiFillDatabase> </AiFillDatabase> Department
+              </th>
+              <th> <AiFillSafetyCertificate ></AiFillSafetyCertificate> Status</th>
+              <th>
+                {" "}
+                <BsFillEnvelopeFill></BsFillEnvelopeFill> Email
+              </th>
+              <th> <AiFillSafetyCertificate></AiFillSafetyCertificate>  Action</th>
               <th></th>
               <th></th>
               <th></th>
@@ -214,10 +243,11 @@ class UserList extends React.Component {
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{values.name}</td>
-                    <td>{values.email}</td>
                     <td>{values.sapID}</td>
                     <td>{values.department}</td>
                     <td>{values.active ? "Active" : "Inactive"}</td>
+                    <td>{values.email}</td>
+
                     <td>
                       {" "}
                       <AiOutlineRest
@@ -234,23 +264,39 @@ class UserList extends React.Component {
                           style={{ marginLeft: "10px", color: "blue" }}
                         />
                       </NavLink>
-                    </td>
-                    {values.active ? (
-                      <Button
-                        onClick={this.sendEActivetogglemail}
-                        style={{ marginTop: "3px" }}
+                      <NavLink
+                        to={{
+                          pathname: "/components/editUser",
+                          aboutProps: { userData: values },
+                        }}
                       >
-                        Make Inactive
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={this.Activetoggle}
-                        style={{ marginTop: "3px" }}
-                      >
-                        Make Active
-                      </Button>
-                    )}
-
+                        <IoMdCreate style={{ marginLeft: "10px" }} />
+                      </NavLink>
+                      {values.active ? (
+                        <Button
+                          onClick={(e) => this.Activetoggle(e, values.email)}
+                          style={{
+                            marginTop: "3px",
+                            marginLeft: "10px",
+                            height: "30px",
+                          }}
+                        >
+                          <BsUnlockFill></BsUnlockFill>
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={(e) => this.Activetoggle(e, values.email)}
+                          style={{
+                            marginTop: "3px",
+                            backgroundColor: "red",
+                            marginLeft: "10px",
+                          }}
+                        >
+                          <BsLockFill></BsLockFill>
+                        </Button>
+                      )}
+                    </td>{" "}
+                    <td></td>
                     <td></td>
                     <td></td>
                   </tr>
@@ -310,8 +356,36 @@ class UserList extends React.Component {
           </tbody>
         </Table>
         <Modal size="md" open={openActive} Activetoggle={this.Activetoggle}>
-          <ModalHeader> Message</ModalHeader>
+          <h6
+            style={{
+              marginLeft: "140px",
+              color: "black",
+              fontWeight: "bold",
+              marginTop: "30px",
+            }}
+          >
+            {" "}
+            Compose Your Message
+          </h6>
           <ModalBody>
+            <Label style={{ color: "black", fontWeight: "bold" }}>
+              Subject:
+            </Label>
+
+            <FormInput
+              style={{ color: "black" }}
+              type="textarea"
+              onChange={this.handleSubject}
+              size="lg"
+              className="mb-3"
+              placeholder="Type Your Subject"
+            />
+
+            <br />
+            <Label style={{ color: "black", fontWeight: "bold" }}>
+              Message:
+            </Label>
+
             <FormInput
               style={{ color: "black" }}
               type="textarea"
@@ -320,17 +394,20 @@ class UserList extends React.Component {
               className="mb-3"
               placeholder="Type Your Message"
             />
+
             <Button
-              style={{ marginLeft: "30px" }}
+              size="sm"
+              style={{ marginLeft: "110px" }}
               type="secondary"
               onClick={this.handleActiveBack}
             >
               Cancel
             </Button>
             <Button
+              size="sm"
               style={{ marginLeft: "30px" }}
               type="secondary"
-              onClick={(e) => this.sendEmail(this.state.email)}
+              onClick={(e) => this.sendEmail()}
             >
               Send
             </Button>

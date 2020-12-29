@@ -36,6 +36,7 @@ class title extends React.Component {
       name: "",
       email: "",
       password: "",
+      department:"",
     };
   }
 
@@ -51,6 +52,7 @@ class title extends React.Component {
           name: formData.name,
           email: formData.email,
           password: formData.password,
+          department:formData.department,
         };
         axios
           .put(`http://localhost:8080/vlock/update`, data, headers)
@@ -149,13 +151,62 @@ class title extends React.Component {
                   initialValue: this.state.email,
                 })(<Input placeholder=" abc@gmail.com" type="email" />)}
               </FormItem>
+               <br />
+               <br />
+              <FormItem
+                style={{ color: "red" }}
+                label={
+                  <Text style={{ fontWeight: "bold", color: "black" }}>
+                    Department
+                  </Text>
+                }
+              >
+                {getFieldDecorator("department", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Department is Required",
+                    },
+                  ],
+                  initialValue: this.state.department,
+                })(<Input placeholder=" Please enter your department" type="text" />)}
+              </FormItem>
 
               <br />
+              <FormItem
+                style={{ color: "red" }}
+                label={
+                  <Text style={{ fontWeight: "bold", color: "black" }}>
+                    New Password
+                  </Text>
+                }
+              >
+                {getFieldDecorator("password", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please enter  your password",
+                    },
+                    // {
+                    //   validator: (rule, value, callback) => {
+                    //      if (!value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/)) {
+                    //       callback(" Your password must include 1 lowercase character, 1 uppercase character,1 number and 1 special character in (!@#*&/^)");
+                    //     }
+                    //     return callback();
+                    //   }
+                    // }
+                  ],
+                  initialValue: this.state.password,
+                })(<Input placeholder="password" type="password" />)}
+              </FormItem>
+
+              <br />
+              
                   <b />
                   <b>
                     {" "}
                     <Button
-                      style={{ marginTop: "0px" }}
+                      style={{ marginLeft: "250px" }}
                       onClick={() => this.onRedirect()}
                       color="primary"
                       theme="accent"
@@ -164,7 +215,7 @@ class title extends React.Component {
                     </Button>
                   </b>
 
-                  <a
+                  {/* <a
                     style={{
                       color: "primary",
                       textDecorationLine: "underline",
@@ -173,7 +224,7 @@ class title extends React.Component {
                     href="/ResetPassword"
                   >
                     Reset Password
-                  </a>
+                  </a> */}
                 </Col>
               </Row>
             </ListGroupItem>

@@ -9,6 +9,7 @@ const SidebarNavItem = ({ item }) => (
       {item.htmlBefore && (
         <div
           className="d-inline-block item-icon-wrapper"
+          
           dangerouslySetInnerHTML={{ __html: item.htmlBefore }}
         />
       )}
@@ -16,6 +17,7 @@ const SidebarNavItem = ({ item }) => (
       {item.htmlAfter && (
         <div
           className="d-inline-block item-icon-wrapper"
+        
           dangerouslySetInnerHTML={{ __html: item.htmlAfter }}
         />
       )}

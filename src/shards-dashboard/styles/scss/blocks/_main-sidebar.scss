@@ -4,9 +4,11 @@
 }
 .ant-radio-wrapper {
   margin-left: 20px;
+
 }
 .main-sidebar {
   top: 0;
+
   position: fixed;
   height: $main-sidebar-height;
   background: $main-sidebar-background;
@@ -53,6 +55,7 @@
 
   .nav-wrapper {
     overflow-y: auto;
+    background-color: black;
     overflow-x: hidden;
     height: $main-sidebar-nav-wrapper-height;
   }
@@ -63,6 +66,8 @@
     .nav-link {
       white-space: nowrap;
       min-width: 100%;
+      background-color: black;
+
       max-width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -118,6 +123,7 @@
       }
 
       .dropdown-menu {
+        min-width: 9rem;
         box-shadow: $main-sidebar-nav-no-borders-dropdown-menu-box-shadow;
 
         .dropdown-item:first-child {
@@ -129,11 +135,14 @@
 
   // Dropdown menu
   .dropdown-menu {
+    min-width: 9rem;
     position: static !important;
     transform: translate(0) !important;
     box-shadow: none;
     border-radius: 0;
     width: 100%;
+    background-color:black;
+
     border: none;
     padding: 0;
     box-shadow: $main-sidebar-dropdown-menu-box-shadow;
@@ -185,6 +194,8 @@
       transition: $dropdown-icon-transition;
       border: none;
       position: absolute;
+      background-color:black;
+
       top: 50%;
       right: 0.625rem;
       transform: translateY(-50%);

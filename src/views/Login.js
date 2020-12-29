@@ -82,7 +82,7 @@ class Login extends React.Component {
 
                 localStorage.setItem("token", this.state.data.token);
                 localStorage.setItem("userType", this.state.data.userType);
-                localStorage.setItem("id", this.state.data.id);
+                localStorage.setItem("id", this.state.data._id);
                 localStorage.setItem("sapID", this.state.data.sapID);
                 localStorage.setItem("email", this.state.data.email);
                 localStorage.setItem("password", this.state.data.password);
@@ -118,7 +118,7 @@ class Login extends React.Component {
         } else {
           setTimeout(() => {
             localStorage.setItem("count", 0);
-          }, 3000);
+          }, 5000);
           alert("try 3 and above time");
         }
       }

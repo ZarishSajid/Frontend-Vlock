@@ -35,7 +35,8 @@ class SidebarNavItems extends React.Component {
     console.log(" item ", items);
 
     return (
-      <div className="nav-wrapper" >
+      <div className="nav-wrapper "
+       >
         <Nav className="nav--no-borders flex-column">
           {items.map((item, idx) => (
             

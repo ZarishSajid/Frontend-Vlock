@@ -1154,9 +1154,8 @@ i.material-icons {
 
 .dropdown-menu {
   z-index: 1000;
-  min-width: 10rem;
   padding: 10px 0;
-  margin: 0 0 0;
+  min-width: 9rem;  margin: 0 0 0;
   font-size: 1rem;
   color: #5A6169;
   background-color: #fff;
@@ -1679,7 +1678,7 @@ i.material-icons {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
 
 .nav-link {
-  padding: 0.625rem 0.625rem;
+  padding: 0rem;
   transition: all 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06); }
   .nav-link.disabled {
     color: #868e96; }
@@ -3894,6 +3893,8 @@ label {
 
 .nav-link {
   font-size: 0.8125rem;
+  padding: 0rem;
+
   font-weight: 400; }
   .nav-link-icon {
     color: #818EA3; }
@@ -4110,10 +4111,16 @@ a.text-accent:hover, a.text-accent:focus {
 .main-navbar .navbar {
   height: 3.75rem; }
   .main-navbar .navbar > * {
+
     display: flex; }
+
   .main-navbar .navbar .nav-link {
+    background-color:#424242;
+
     min-width: 3.75rem; }
   .main-navbar .navbar .notifications {
+    background-color:black;
+
     position: relative; }
     @media (max-width: 767.98px) {
       .main-navbar .navbar .notifications {
@@ -4193,6 +4200,8 @@ a.text-accent:hover, a.text-accent:focus {
     border-top-right-radius: 0;
     border-top: none; }
   .main-navbar .navbar .nav-link-icon i {
+    background-color:#424242;
+
     line-height: 2.5rem; }
 
 .main-content > .main-navbar,
@@ -4233,6 +4242,8 @@ a.text-accent:hover, a.text-accent:focus {
         font-size: 90%; } }
   .main-sidebar .nav-wrapper {
     overflow-y: auto;
+    background-color:#424242;
+
     overflow-x: hidden;
     height: calc(100vh - 3.75rem - 1px); }
   .main-sidebar .nav .nav-item,
@@ -4247,6 +4258,8 @@ a.text-accent:hover, a.text-accent:focus {
     transition: box-shadow 200ms ease, color 200ms ease, background-color 200ms ease;
     font-size: 0.85rem; }
   .main-sidebar .nav .nav-item .nav-link {
+    color:#fff;
+
     border-bottom: 1px solid #e1e5eb;
     font-weight: 400;
     color: #3D5170;
@@ -4264,9 +4277,9 @@ a.text-accent:hover, a.text-accent:focus {
       font-size: 1.125rem;
       top: -1px; }
   .main-sidebar .nav .nav-item.active, .main-sidebar .nav .nav-item .nav-link.active, .main-sidebar .nav .nav-item:hover, .main-sidebar .nav .nav-item .nav-link:hover {
-    box-shadow: inset 0.1875rem 0 0 #5A6169;
-    background-color: #FBFBFB;
-    color: #5A6169; }
+    box-shadow:#fff;
+    background-color: #569CE5;
+    color: #fff }
     .main-sidebar .nav .nav-item.active i, .main-sidebar .nav .nav-item .nav-link.active i, .main-sidebar .nav .nav-item:hover i, .main-sidebar .nav .nav-item .nav-link:hover i {
       color: #5A6169; }
   .main-sidebar .nav--no-borders .nav-item .nav-link {

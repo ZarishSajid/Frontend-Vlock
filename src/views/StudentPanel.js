@@ -161,10 +161,7 @@ class StudentPanel extends React.Component {
       <Container fluid className="main-content-container px-4">
         <Separator className="mb-5" />
 
-        <h4 style={{ marginLeft: "380px", color: "black" }}>
-          {" "}
-          Dashboard
-        </h4>
+        <h4 style={{ marginLeft: "380px", color: "black" }}> Dashboard</h4>
         <Row>
           <Col>
             <Card small className="mb-4">
@@ -241,19 +238,19 @@ class StudentPanel extends React.Component {
             </CardBody>
           </Card>
         </Col> */}
-         <Col lg="12" >
-            <Card className="card-chart">
-              <CardHeader>
-                <h5 className="card-category">Weekly Polls</h5>
-                <CardTitle tag="h3"></CardTitle>
-              </CardHeader>
-              <CardBody>
-                <div className="chart-area">
-                  <Line data={linChart} />
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
+        <Col>
+          <Card className="card-chart">
+            <CardHeader>
+              <h5 className="card-category">Weekly Polls</h5>
+              <CardTitle tag="h3"></CardTitle>
+            </CardHeader>
+            <CardBody>
+              <div className="chart-area">
+                <Line data={linChart}  width={500} height={110} />
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
       </Container>
     );
   }

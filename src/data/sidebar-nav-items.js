@@ -1,12 +1,19 @@
 export default function() {
 if(localStorage.getItem('userType') === 'admin')
 { 
+  
   return [
     {
 
       title: "Dashboard",
       htmlBefore: '<i class="material-icons">vertical_split</i>',
       to: "/components/Admin",
+    },
+    {
+
+      title: "Profile",
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: "/components/Profile",
     },
     // {
     //   title: "Student Panel",
@@ -66,9 +73,7 @@ if(localStorage.getItem('userType') === 'admin')
     //   title: "Forms & Components",
     //   htmlBefore: '<i class="material-icons">view_module</i>',
     //   to: "/conponents/components-overview",
-    // },
-    // {
-    //   title: "Tables",
+    // },/components/Admin
     //   htmlBefore: '<i class="material-icons">table_chart</i>',
     //   to: "/tables",
     // },
@@ -106,6 +111,11 @@ if(localStorage.getItem('userType') === 'admin')
       title: "Poll Request",
       htmlBefore: '<i class="material-icons"> poll</i>',
       to: "/components/PollRequest",
+    },
+    {
+      title: "",
+      htmlBefore: '<i class="material-icons"> </i>',
+      to: "/components/editUser",
     },
     // {
     //   title: " Poll List",

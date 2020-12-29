@@ -61,14 +61,13 @@ class CreatePoll extends React.Component {
       // selectedAudience:["student","faculty","uniAdmin"],
       pollQuestion: "",
       pollOptions: "",
-      
     };
     this.handleAudience = this.handleAudience.bind(this);
 
     // this.showModal = this.showModal.bind(this);
     // this.handleOk = this.handleOk.bind(this);
   }
-  
+
   handleDescription = (e) => {
     this.setState({
       pollDescription: e.target.value,
@@ -106,7 +105,8 @@ class CreatePoll extends React.Component {
     };
 
     console.log("dataaaa", data);
-    axios.put(`http://localhost:8080/vlock/polls/${userData._id}`, data, headers)
+    axios
+      .put(`http://localhost:8080/vlock/polls/${userData._id}`, data, headers)
       .then((res) => {
         console.log("RESPONSE = ", res);
         console.log(res.message);
@@ -152,7 +152,6 @@ class CreatePoll extends React.Component {
             style={{ marginLeft: "380px" }}
           />
         </Row>
-
         <Col lg="10" md="12">
           <Card small style={{ width: "60rem", height: "43rem" }}>
             <CardBody>
@@ -238,7 +237,6 @@ class CreatePoll extends React.Component {
                         : this.state.startDate,
                   })(
                     <DayPickerInput
-
                       selected={this.state.startDate}
                       style={{ marginLeft: "20px" }}
                       onDayChange={(day) =>
@@ -262,9 +260,9 @@ class CreatePoll extends React.Component {
                       },
                     ],
                     initialValue:
-                    userData && userData._id
-                      ? moment(userData.endDate).format("MM-DD-YYYY")
-                      : this.state.endDate,
+                      userData && userData._id
+                        ? moment(userData.endDate).format("MM-DD-YYYY")
+                        : this.state.endDate,
                   })(
                     <DayPickerInput
                       style={{ marginLeft: "20px" }}

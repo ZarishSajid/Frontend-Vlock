@@ -8,6 +8,7 @@ import {
   MDBIcon,
   MDBInput,
 } from "mdbreact";
+import { Modal, ModalBody, ModalHeader } from "shards-react";
 import Link from "@material-ui/core/Link";
 import { Redirect, NavLink } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
@@ -34,33 +35,38 @@ const { Text } = Typography;
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.onRedirect = this.onRedirect.bind(this);
 
     this.state = {
+      number: "",
       //    SapId: "2284",
       //  password: "admin",
     };
+    this.toggle = this.toggle.bind(this);
+
   }
-  onRedirect = () => {
-    console.log("clicked");
+  toggle() {
+    const headers = {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    };
+    const data = {
+      number: this.state.number,
+    };
+    axios
+      .post(`http://localhost:8080/vlock/sms`, headers)
 
-    // const history = createHashHistory();
-    // const history = useHistory();
-    //  history.go("/components/Admin");
-    this.props.history.push("/components/Admin");
+      .then((res) => {
+        console.log("RESPONSE = ", res);
 
-    //  history.push("/components/Admin");
-  };
+        this.setState({ pulls: res.data });
+        // this.userDetails.privateKey = res.data.data.accountId.privateKey;
 
-  // change = e => {
-  //   this.setState({
-  //       [e.target.name]: e.target.value
-  //   });
-  // }
-  // submitForm = (e) => {
-  //   e.preventDefault();
-  //   this.props.OnsubmitForm(this.state);
-  // }
+      });
+    this.setState({
+      open: !this.state.open,
+    });
+  }
 
   prefixSelector = (
     <Form.Item name="prefix" noStyle>
@@ -71,6 +77,7 @@ export default class Login extends React.Component {
     </Form.Item>
   );
   render() {
+    const { open, values } = this.state;
     return (
       <MDBRow
         style={{
@@ -156,15 +163,15 @@ export default class Login extends React.Component {
                   {" "}
                   Please register Yourself.
                 </p>
-                <MDBBtn
-                  style={{ width: "180px" }}
-                  onClick={() => this.onRedirect()}
-                  color="primary"
-                  rounded
-                >
-                  Reset
-                </MDBBtn>
               </NavLink>
+              <MDBBtn
+                style={{ width: "180px" }}
+                onClick={this.toggle}
+                color="primary"
+                rounded
+              >
+                Reset
+              </MDBBtn>
             </center>
             <br />
             {/* 
@@ -174,6 +181,15 @@ export default class Login extends React.Component {
           </div>
 
           {/* </form> P*/}
+          <Modal size="md" open={open} toggle={this.toggle}>
+            <ModalHeader style={{ marginLeft: "30px" }}>
+              {" "}
+              OTP
+            </ModalHeader>
+            <ModalBody>
+              <p> {}</p>
+            </ModalBody>
+          </Modal>
         </MDBCard>
       </MDBRow>
     );

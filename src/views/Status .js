@@ -251,8 +251,8 @@ class PollStatus extends React.Component {
                 );
               })}
             <Modal size="md" open={open} toggle={this.toggle}>
-              <ModalHeader style={{ marginLeft: "180px" }}>
-                Poll Detail
+              <ModalHeader style={{ marginLeft: "0px" }}>
+                <h4>Poll Detail</h4>
               </ModalHeader>
               <ModalBody>
                 <p

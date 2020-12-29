@@ -39,7 +39,7 @@ const linChart = {
   labels: ["Fri", "Thur", "Wed", "Tue", "Mon", "Sat", "Sun"],
   datasets: [
     {
-      label: "",
+      label: "Previous Week",
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
@@ -62,13 +62,13 @@ const linChart = {
   ],
 };
 const pieChart = {
-	labels: ["Pending", "Completed", "Request"],
+	labels: ["Accepted", "Rejected", "Pending"],
 	datasets: [{
 		data: [0,0,0],
 		backgroundColor: [
-      "rgba(0,123,255,0.9)",
-      "rgba(0,123,255,0.5)",
-      "rgba(0,123,255,0.3)"
+      "rgba(102,0,0,0.7)",
+      "rgba(0,123,255,0.8)",
+      "rgba(204,153,0,0.8)"
 		],
       hoverBorderColor:[ "#ffffff",
 
@@ -189,57 +189,57 @@ export default class Admin extends React.Component {
         <Row>
           <Col>
             <Card className="mb-4" style={{ color: "" }}>
-              <CardBody>
+              <CardBody style={{backgroundColor:"#569CE5"}}>
                 <br />
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "blue" }} />
+                  <FaPoll style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
-                  <CardTitle>Polls Approved</CardTitle>
+                  <CardTitle style={{color:"white"}}>Polls Approved</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "blue" }}>{this.state.approvedCount}</p>
+                  <p style={{ color: "white" }}>{this.state.approvedCount}</p>
                 </center>
               </CardBody>
             </Card>
           </Col>
           <Col>
             <Card className="mb-4">
-              <CardBody>
+              <CardBody style={{backgroundColor:"#A9A9F5"}}>
                 <br />
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "blue" }} />
+                  <FaPoll style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
-                  <CardTitle>Polls Dispproved</CardTitle>
+                  <CardTitle style={{color:"white"}}>Polls Dispproved</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "blue" }}>{this.state.disapprovedCount}</p>
+                  <p style={{ color: "white" }}>{this.state.disapprovedCount}</p>
                 </center>
               </CardBody>
             </Card>
           </Col>
           <Col>
             <Card className="mb-4">
-              <CardBody>
+              <CardBody style={{backgroundColor:"#F1948A"}}>
                 <br />
                 <center>
                   {" "}
-                  <BsFillPeopleFill style={{ color: "blue", size: "80px" }} />
+                  <BsFillPeopleFill style={{ color: "white", size: "80px" }} />
                 </center>
                 <center>
                   {" "}
-                  <CardTitle>Polls Request</CardTitle>
+                  <CardTitle style={{color:"white"}}>Polls Request</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "blue" }}>{this.state.pendingCount}</p>
+                  <p style={{ color: "white" }}>{this.state.pendingCount}</p>
                 </center>
               </CardBody>
             </Card>
@@ -248,13 +248,13 @@ export default class Admin extends React.Component {
         </Row>
 
         <Row>
-          <Col lg="6" sm="4">
+          <Col lg="6" sm="6">
             <Card className="card-chart">
-              <CardHeader>
+              <CardHeader >
                 <h5 className="card-category">Weekly Polls</h5>
                 <CardTitle tag="h3"></CardTitle>
               </CardHeader>
-              <CardBody>
+              <CardBody style={{padding:"0 1.75rem",}}>
                 <div className="chart-area">
                   <Line data={linChart} />
                 </div>
@@ -262,11 +262,12 @@ export default class Admin extends React.Component {
             </Card>
           </Col>
 
-          <Col lg="6" sm="4">
+          <Col lg="6" sm="6">
             <Card small className="h-100">
             <CardHeader className="border-bottom">
+
         </CardHeader>
-        <CardBody className="d-flex py-0" style={{height:"195px",marginTop:"40px"}}>
+        <CardBody className="d-flex py-0" style={{height:"15px",marginTop:"0px"}}>
            < Doughnut data={pieChart} />
         </CardBody>
            

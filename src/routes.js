@@ -30,6 +30,8 @@ import ForgotPassword from "./views/ForgotPassword";
 import ResetPassword from "./views/ResetPassword";
 import UserStatus from "./views/UserStatus";
 import editPoll from "./views/editPoll";
+import editUser from "./views/editUser";
+
 export default [
 
   {
@@ -158,5 +160,10 @@ export default [
     path: "/components/editPoll",
     layout:editPoll ,
     component:editPoll,
+  },
+  {
+    path: "/components/editUser",
+    layout:editUser ,
+    component:editUser,
   },
 ];

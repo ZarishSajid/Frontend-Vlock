@@ -116,7 +116,7 @@ class PollStatus extends React.Component {
     const data = {
       status:"disapproved",
     };
-    axios.put(`http://localhost:8080/vlock/change/${id}`, data, headers)
+    axios.put(`http://localhost:8080/vlock/status/${id}`, data, headers)
 
       .then((res) => {
         console.log("RESPONSE = ", res);
@@ -234,10 +234,12 @@ class PollStatus extends React.Component {
                      onClick={this.toggle}
                       style={{ marginLeft: "10px",color:"blue" }}
                     />
-                    </NavLink>
+                    </NavLink>        
                   
 
-     <AiOutlineCheck  onClick={(e) => this.changeStatus(e, values._id)} style={{color:"green",fontWeight:"bold",marginLeft:"10px"}} />
+                    <Tooltip title="Delete"> <AiOutlineCheck  onClick={(e) => this.changeStatus(e, values._id)} style={{color:"green",fontWeight:"bold",marginLeft:"10px"}} />
+                    </Tooltip>
+
                  <AiOutlineClose onClick={(e) => this.disapprove(e, values._id)} style={{color:"red",marginLeft:"10px"}} /> 
                     </td>
                     <td></td>

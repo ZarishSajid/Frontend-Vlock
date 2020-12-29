@@ -224,6 +224,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import {BsFillPersonFill }from  "react-icons/bs";
 import {
+ 
+  UncontrolledDropdown,
+ 
+} from "reactstrap";
+import {
   Dropdown,
   DropdownToggle,
   DropdownMenu,
@@ -275,8 +280,10 @@ export default class UserActions extends React.Component {
       
   render() {
     return (
+      
       <NavItem tag={Dropdown}  caret toggle={this.toggleUserActions}>
-        <DropdownToggle style={{marginRight:"30px"}} caret tag={NavLink} className="text-nowrap px-3">
+      
+        <DropdownToggle style={{marginRight:"100px",width:"10px",marginTop:"20px"}} caret tag={NavLink} className="text-nowrap px-3">
           
         <img style={{height:"30px"}}
             className="user-avatar rounded-circle mr-2"
@@ -285,7 +292,7 @@ export default class UserActions extends React.Component {
           />{" "} 
         
         </DropdownToggle>
-        <Collapse tag={DropdownMenu}style={{marginRight:"30px"}} right small open={this.state.visible}>
+        <Collapse tag={DropdownMenu}style={{marginRight:"100px",marginTop:"20px"}} right small open={this.state.visible}>
           <DropdownItem tag={Link} to="/components/user-profile-lite">
             <i className="material-icons">&#xE7FD;</i> Profile
           </DropdownItem>
@@ -299,7 +306,10 @@ export default class UserActions extends React.Component {
             <i className="material-icons text-danger">&#xE879;</i> Logout
           </DropdownItem>
         </Collapse>
+        
       </NavItem>
+      
     );
+    
   }
 }

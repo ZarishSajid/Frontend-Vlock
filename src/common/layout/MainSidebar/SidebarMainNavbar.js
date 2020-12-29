@@ -13,7 +13,7 @@ class SidebarMainNavbar extends React.Component {
 
   handleToggleSidebar() {
     Dispatcher.dispatch({
-      actionType: Constants.TOGGLE_SIDEBAR
+      actionType: Constants.TOGGLE_SIDEBAR,
     });
   }
 
@@ -22,27 +22,28 @@ class SidebarMainNavbar extends React.Component {
     return (
       <div className="main-navbar">
         <Navbar
-          className="align-items-stretch bg-white flex-md-nowrap border-bottom p-0"
-          type="light"
-          style={{marginTop:"0px"}}
+          className="align-items-stretch bg-black flex-md-nowrap border-bottom p-0"
+          color="black"
+          style={{ marginTop: "0px" }}
         >
+          <div className="d-table m-auto">
+            <img
+              id="main-logo"
+              style={{
+                maxWidth: "85px",
+                color: "blue",
+                marginRight: "90px",
+                // marginRight: "6rem!important",
+              
+              }}
+              src={require("../../../images/shards-logo.svg")}
+              alt="VLock"
+            />
+      
          
-            <div className="d-table m-auto" >
-              <img
-                id="main-logo"
-                className="d-inline-block align-top mr-1"
-                style={{ maxWidth: "60px", height:"55px",color:"blue",marginRight:"80px" ,marginRight:"6rem!important",marginTop:"2px",marginBottom:"80px"}}
-                src={require("../../../images/shards-dashboards-orignal.svg")}
-                alt="VLock"
-              />
-              <br/>
-              <br/>
-            </div>
-            <br/>
-            <br/>
 
-         
           {/* eslint-disable-next-line */}
+          </div>
           <a
             className="toggle-sidebar d-sm-inline d-md-none d-lg-none"
             onClick={this.handleToggleSidebar}
@@ -59,11 +60,11 @@ SidebarMainNavbar.propTypes = {
   /**
    * Whether to hide the logo text, or not.
    */
-  hideLogoText: PropTypes.bool
+  hideLogoText: PropTypes.bool,
 };
 
 SidebarMainNavbar.defaultProps = {
-  hideLogoText: false
+  hideLogoText: false,
 };
 
 export default SidebarMainNavbar;

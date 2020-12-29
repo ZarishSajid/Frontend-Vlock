@@ -30,6 +30,8 @@ import editPoll from "../src/views/editPoll";
 import Status from "../src/views/Status ";
 import PollRequest from "../src/views/PollRequest";
 import userGuide from "../src/views/userGuide";
+import editUser from "../src/views/editUser";
+import Profile from "../src/views/Profile";
 
 class Components extends Component {
     
@@ -78,6 +80,8 @@ class Components extends Component {
                   <Route path='/components/Status' component={Status}/>
                   <Route path='/components/PollRequest' component={PollRequest}/>
                   <Route path='/components/userGuide' component={userGuide}/>
+                  <Route path='/components/editUser' component={editUser}/>
+                  <Route path='/components/Profile' component={Profile}/>
 
 
                   {/* <Route path='/ResetPassword' component={ResetPassword}/> */}
