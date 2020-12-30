@@ -333,8 +333,7 @@ class PollStatus extends React.Component {
         </Table>
 
         
-        <br />
-        <br />
+    
         <br />
         <br />
         <br />
