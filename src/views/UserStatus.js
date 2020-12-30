@@ -269,8 +269,15 @@ class UserList extends React.Component {
                           pathname: "/components/editUser",
                           aboutProps: { userData: values },
                         }}
+                      > <Button 
+                      style={{
+                        marginTop: "3px",
+                        marginLeft: "10px",
+                        height: "30px"
+                      }}
                       >
-                        <IoMdCreate style={{ marginLeft: "10px" }} />
+                         <AiFillEdit  />
+                         </Button>
                       </NavLink>
                       {values.active ? (
                         <Button
@@ -304,39 +311,41 @@ class UserList extends React.Component {
               })
             )}
 
-            <Modal size="sm" open={open} toggle={this.toggle}>
-              <ModalHeader>User Detail</ModalHeader>
+            <Modal size="md" open={open} toggle={this.toggle}>
+            <ModalHeader style={{ marginLeft: "0px" }}>
+                <h4 style={{color:"black"}}>User Detail</h4>
+              </ModalHeader>
               <ModalBody>
                 <p
                   style={{
-                    border: "2px solid grey",
+                    border: "2px solid black",
                     borderRadius: "16px",
                     padding: "15px",
                   }}
                 >
-                  <p style={{ color: "blue" }}>
-                    Name:
-                    {userData && userData._id ? userData.name : this.state.name}
+                  <p style={{ color: "black" }}>
+                    Name:   
+                             {userData && userData._id ? userData.name : this.state.name}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Sap Id:{" "}
                     {userData && userData._id
                       ? userData.sapID
                       : this.state.sapID}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Email:
                     {userData && userData._id
                       ? userData.email
                       : this.state.email}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Department:{" "}
                     {userData && userData._id
                       ? userData.department
                       : this.state.department}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     {" "}
                     User Type:{" "}
                     {userData && userData._id

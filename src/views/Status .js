@@ -257,63 +257,63 @@ class PollStatus extends React.Component {
               <ModalBody>
                 <p
                   style={{
-                    border: "4px solid blue",
+                    border: "4px solid black",
                     borderRadius: "20px",
                     padding: "15px",
                   }}
                 >
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Poll Type:{" "}
                     {userData && userData._id
                       ? userData.pollType
                       : this.state.pollType}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Poll Question:{" "}
                     {userData && userData._id
                       ? userData.pollQuestion
                       : this.state.pollQuestion}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Created By:{" "}
                     {userData && userData._id
                       ? userData.createdBy.name
                       : this.state.createdBy.name}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Department:{" "}
                     {userData && userData._id
                       ? userData.createdBy.department
                       : this.state.createdBy.department}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Email:{" "}
                     {userData && userData._id
                       ? userData.createdBy.email
                       : this.state.createdBy.email}
                   </p>
 
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     {" "}
                     Selected Audience:{" "}
                     {userData && userData._id
                       ? userData.selectedAudience
                       : this.state.selectedAudience}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     {" "}
                     Poll Options:{" "}
                     {userData && userData._id
                       ? userData.pollOptions
                       : this.state.pollOptions}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Start Date:
                     {userData && userData._id
                       ? moment(userData.startDate).format("MM-DD-YYYY")
                       : this.state.startDate}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     End Date:{" "}
                     {userData && userData._id
                       ? moment(userData.endDate).format("MM-DD-YYYY")
@@ -332,9 +332,7 @@ class PollStatus extends React.Component {
           </tbody>
         </Table>
 
-        <br />
-        <br />
-        <br />
+        
         <br />
         <br />
         <br />
