@@ -1,4 +1,5 @@
 pragma solidity ^0.5.16;
+pragma experimental ABIEncoderV2;
 
 // import "@nomiclabs/builder/console.sol";
 
@@ -11,8 +12,52 @@ contract Election {
         uint voteCount;
         string department;
         string email;
-        
     }
+
+    struct Poll {
+        uint256 id;
+        string pollid;
+        string option;
+        uint256 voteCount;
+    }
+
+    // mapping(address => bool) public voters;
+    mapping(uint256 => Poll) public polls;
+    uint256 public pollCount;
+    bool public check=false;
+
+
+    event voteEvent(string indexed pollId, string indexed option);
+
+    function voted(string memory pollid, string memory option) public
+    {
+        if(keccak256(abi.encodePacked((polls[pollCount].pollid))) == keccak256(abi.encodePacked((pollid))) && (keccak256(abi.encodePacked(polls[pollCount].option)) == (keccak256(abi.encodePacked(option)))))
+        {
+            check = true;
+            polls[pollCount].voteCount ++;
+            voters[msg.sender]=true;
+            emit voteEvent(pollid,option);
+
+        } else {
+            check = false;
+            voters[msg.sender]=true;
+            pollCount++;
+            polls[pollCount]= Poll(pollCount, pollid, option,0);
+            polls[pollCount].voteCount ++;
+            emit voteEvent(pollid,option);
+        }
+    }
+
+
+    function getAll() public view returns (Poll[] memory){
+
+        Poll [] memory myPoll = new Poll[](pollCount);
+        for (uint256 i = 0 ; i <pollCount; i++)    {
+            Poll storage pol = polls[i];
+            myPoll[i] = pol;
+        }
+        return myPoll;
+    }        
 
     // Store accounts that have voted
     mapping(address => bool) public voters;

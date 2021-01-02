@@ -44,7 +44,7 @@ class Test extends React.Component {
       alert("You have to install MetaMask !");
     }
     window.ethereum.enable();
-    console.log(" typoe of = ", typeof web3);
+    // console.log(" typoe of = ", typeof web3);
     if (typeof web3 != "undefined") {
       this.web3Provider = web3.currentProvider;
       window.ethereum.enable();
@@ -59,38 +59,42 @@ class Test extends React.Component {
     // txnCount = web3.eth.getTransactionCount(web3.eth.accounts[0])
     // console.log("account cteat",web3.eth.accounts.create);
     web3.eth.getTransactionCount((err, res) => {
-      console.log(" TransAccountsss***");
-      console.log(res);
+      console.log(" getTransactionCount ", err, res)
+      // console.log(res);
       // console.log(res);
       // console.log(res[2]);
       // console.log(res[3]);
       // console.log(res[4]);
-      console.log("TransAccountsss***");
+      // console.log("TransAccountsss***");
     });
     web3.eth.getAccounts((err, res) => {
-      console.log("Accountsss***");
-      console.log(res[0]);
-      console.log(res);
-      console.log(res[2]);
-      console.log(res[3]);
-      console.log(res[4]);
-      console.log("Accountsss***");
+      console.log("getAccounts = ", res);
+      // console.log(res[0]);
+      // console.log(res);
+      // console.log(res[2]);
+      // console.log(res[3]);
+      // console.log(res[4]);
+      // console.log("Accountsss***");
     });
 
     // web3.eth.getAccounts().then( function (result) { console.log (result[0] )});
-    console.log("Web 3 Accounts", web3.eth.getAccounts());
+    // console.log("Web 3 Accounts", web3.eth.getAccounts());
     // var accounts = web3.eth.getAccounts();
     //  console.log(accounts[1]);
 
-    console.log("Zara 1st test this.web3Provider", this.web3Provider);
+    // console.log("Zara 1st test this.web3Provider", this.web3Provider);
 
     this.web3 = new Web3(this.web3Provider);
-    console.log("Zara 2st test this.web3Provider", this.web3Provider);
-    this.castVote = this.castVote.bind(this);
+    // console.log("Zara 2st test this.web3Provider", this.web3Provider);
+    this.castVoteToZara = this.castVoteToZara.bind(this);
     this.watchEvents = this.watchEvents.bind(this);
     this.registerCandidate = this.registerCandidate.bind(this);
     this.gettingDep = this.gettingDep.bind(this);
     this.onUserRegister = this.onUserRegister.bind(this);
+    this.election = TruffleContract(Election);
+    this.election.setProvider(this.web3Provider);
+
+
     this.poll = TruffleContract(Poll);
     this.poll.setProvider(this.web3Provider);
     this.optioncontract = TruffleContract(Option);
@@ -130,8 +134,8 @@ class Test extends React.Component {
   }
 
   async componentDidMount() {
-    console.log("zara test inside component Didmount");
-    console.log(" Account************", this.state.account);
+    console.log("inside componentDidMount ");
+    // console.log(" Account************", this.state.account);
     //     this.web3.eth.getAccounts()
     // .then(console.log);
     // web3-eth-accounts
@@ -139,66 +143,75 @@ class Test extends React.Component {
     //     const accountAddress = await accounting[0];
     //     console.log("accountAddress",accountAddress);
     this.web3.eth.getCoinbase(async (err, account) => {
-      const accounts = await this.web3.eth.getAccounts();
-      console.log("accounts  === ", accounts);
+      console.log("getCoinbase = ", account);
+      // this.state.account =
+      this.setState({ account: account });
+      // const accounts = await this.web3.eth.getAccounts();
+      // console.log("getCoinbase => getAccounts  === ", accounts);
 
       //  this.web3.eth.getAccounts()
       // .then((accounts) => {
       //    console.log(accounts);
       // });
 
-      this.setState({ account });
-      this.poll.deployed().then((pollInstance) => {
-        this.pollInstance = pollInstance;
-
+      // this.setState({ account });
+      this.pollInstance = await this.election.deployed(); 
         console.log("PollInstance", this.pollInstance);
-
         // this.watchEvents()
+        // const voted = await this.pollInstance.voted("1", "A");
 
-        this.pollInstance.candidatesCount().then((candidatesCount) => {
-          console.log("Zara candidatesCount", candidatesCount);
-          console.log(" Account************", this.state.account);
-          //     this.web3.eth.getAccounts.then(console.log);
-          // var transaction = this.web3.eth.getTransactionFromBlock(this.state.account, 2).then( (result) => {
-          //   var res= result;
-          //   console.log(res);
-          // });
 
-          // console.log( this.web3.eth.getAccounts());
-          // this.web3.eth.getAccounts(err, account).then((result) => {
-          // //this.setState({ hasVoted, loading: false });
-          //   console.log(result);
-          // });
 
-          for (var i = 1; i <= candidatesCount; i++) {
-            this.pollInstance.polls(i).then((poll) => {
-              console.log("APP >> Before >> polls", JSON.stringify(poll));
 
-              const polls = [...this.state.polls];
-              polls.push({
-                id: poll[0],
-                option: poll[1],
 
-                voteCount: poll[2],
-              });
+        // this.pollInstance.voted("1", "A", { from: this.state.account }).then((voted) => {
+        // console.log("voted  = ", voted);
+        const pollCount = await this.pollInstance.pollCount();  
+            console.log("pollCount =  ", pollCount);
+            const polls = [...this.state.polls];
+            for (var i = 0; i <= pollCount; i++) {
+                const poll = await this.pollInstance.polls(i);
+                polls.push({ id: poll[1],option: poll[2],voteCount: poll[3]});
+            }
+            this.setState({ polls: polls });
 
-              console.log("APP >> candidates >> Array ", JSON.stringify(polls));
-
-              this.setState({ polls: polls });
-            });
-          }
-        });
-
-        this.pollInstance.voters(this.state.account).then((hasVoted) => {
-          this.setState({ hasVoted, loading: false });
-        });
-      });
+            console.log("\n polls = ",polls)
+        // this.pollInstance.voters(this.state.account).then((hasVoted) => {
+        //   this.setState({ hasVoted, loading: false });
+        // });
+      // });
     });
   }
 
   selectPollOption = (e) => {
     this.setState({ selectedOption: e.target.value });
   };
+
+  async castVoteToZara(id, option) {
+    
+    const results = await this.pollInstance.voted(id, option, { from: this.state.account });
+    // set state value or update this user in DB and marked as casted so he/she cant vote again
+{1,B,5};
+    /**
+     * Get count again and save values into DBs for count.
+     */
+
+    // const pollCount = await this.pollInstance.pollCount();  
+    // console.log("pollCount =  ", pollCount);
+    // const polls = [...this.state.polls];
+    // for (var i = 0; i <= pollCount; i++) {
+    //     const poll = await this.pollInstance.polls(i);
+    //     polls.push({ id: poll[1],option: poll[2],voteCount: poll[3]});
+    // }
+    // this.setState({ polls: polls });
+
+
+    // console.log("results", results);
+    this.setState({ voting: true });  
+    // this.electionInstance
+    //   .vote(candidateId, { from: this.state.account })
+    //   .then((result) => this.setState({ hasVoted: true }));
+  }
 
   watchEvents() {
     // TODO: trigger event when vote is counted, not when component renders
@@ -237,15 +250,15 @@ class Test extends React.Component {
       });
   }
 
-  castVote(candidateId) {
-    console.log("zara test castVote", candidateId);
-    this.setState({ voting: true });
-    //this.loginInstance.
+  // castVote(candidateId) {
+  //   console.log("zara test castVote", candidateId);
+  //   this.setState({ voting: true });
+  //   //this.loginInstance.
 
-    this.PollInstance.vote(candidateId, {
-      from: this.state.account,
-    }).then((result) => this.setState({ hasVoted: true }));
-  }
+  //   // this.PollInstance.vote(candidateId, {
+  //   //   from: this.state.account,
+  //   // }).then((result) => this.setState({ hasVoted: true }));
+  // }
 
   gettingDep(namee) {
     console.log("=== Test >> gettingDep >> inside getting >>>> Test.js");
@@ -370,7 +383,7 @@ class Test extends React.Component {
                             <br />
                           </Radio.Group>
                         ))}
-                      <Button style={{MarginLeft:"50px"}} onClick={() => this.onUserRegister()}>
+                      <Button style={{MarginLeft:"50px"}} onClick={() => this.castVoteToZara()}>
                         Vote
                       </Button>
                       <p>Your account: {this.state.account}</p>
