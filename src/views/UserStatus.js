@@ -317,7 +317,7 @@ class UserList extends React.Component {
                           `}
                         >
                           <BsLockFill
-                            onClick={(e) => this.Activetoggle(e, values.email,values._id)}
+                            onClick={(e) => this.Activetoggle(e, values.email, values._id)}
                             style={{
                               marginTop: "3px",
                               color: "red",

@@ -67,9 +67,9 @@ const pieChart = {
 	datasets: [{
 		data: [0,0,0],
 		backgroundColor: [
-      "rgba(86,156,229)",
+      "rgba(127, 167, 179) ",
       "rgba(113, 115, 120)",
-      "rgba(127, 167, 179) "
+      "rgba(86,156,229)",
 		],
       hoverBorderColor:[ "#ffffff",
 
@@ -190,7 +190,7 @@ export default class Admin extends React.Component {
         <Row>
           <Col>
             <Card className="mb-4" style={{ color: "" }}>
-              <CardBody style={{backgroundColor:"#569CE5"}}>
+              <CardBody style={{backgroundColor:"#7FA7B3"}}>
                 <br />
                 <center>
                   {" "}
@@ -228,7 +228,7 @@ export default class Admin extends React.Component {
           </Col>
           <Col>
             <Card className="mb-4">
-              <CardBody style={{backgroundColor:"#7FA7B3"}}>
+              <CardBody style={{backgroundColor:"#569CE5"}}>
                 <br />
                 <center>
                   {" "}

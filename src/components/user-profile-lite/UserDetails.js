@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Label } from "reactstrap";
+import { FcKey } from "react-icons/fc";
 
 import {
   Card,
@@ -44,18 +45,24 @@ class UserDetails extends React.Component {
       metaTitle: "Description",
       openActive: false,
       Description: "",
-      subject:"",
+      subject: "",
       active: Boolean,
       loading: false,
       visible: false,
       setIsModalVisible: false,
       pulls: [],
       metaValue:
-        "Click on the view key button copy the key from the box and in the top of  the browser see the metamask icon click on the icon and select the import account option and paste the key ",
+      <ul>
+      <li style={{color:"#569CE5"}} >Click on the view key button.</li>
+      <li style={{color:"#569CE5"}}  >Copy the key from the box.</li>
+      <li style={{color:"#569CE5"}}   >In the top of the browser see the metamask icon. </li>
+     <li style={{color:"#569CE5"}}  > click on the icon.</li>
+     <li  style={{color:"#569CE5"}}  > Select the import account option and paste the key.</li>
+
+</ul>
     };
     this.toggle = this.toggle.bind(this);
   }
-
   onRedirect = (e) => {};
   toggle() {
     const headers = {
@@ -82,56 +89,21 @@ class UserDetails extends React.Component {
       open: !this.state.open,
     });
   }
-  Activetoggle() {
-    this.setState({
-      openActive: !this.state.openActive,
-    });
-  }
-  sendEmail(e) {
-    const data = {
-      //email: "rajazara75@gmail.com",
-      email: "teamvlock@gmail.com",
-      subject: this.state.subject,
-      message: this.state.Description,
-      //message: "Dear zara your account has been blocked",
-    };
-    const header = {
-      header: {
-        token: localStorage.getItem("token"),
-      },
-    };
-    axios.post(`http://localhost:8080/vlock/email`, data).then((res) => {
-      alert("Email Sent ");
-      window.location.reload(false);
-    });
-  }
-  handleDescription = (e) => {
-    this.setState({
-      Description: e.target.value,
-    });
-  };
-  handleSubject = (e) => {
-    this.setState({
-      subject: e.target.value,
-    });
-  };
-  toggle() {
+  handleBack = () => {
     this.setState({
       open: !this.state.open,
     });
-  }
+  };
   render() {
     const { openActive } = this.state;
-
     const { open, values } = this.state;
     let { pulls } = this.userDetails.privateKey;
     console.log("inside render ", this.userDetails.privateKey);
-    // const { match } = this.props;
     return (
       <Card
         small
         className="mb-4 pt-3"
-        style={{ height: "510px", marginTop: "0px", border: "red" }}
+        style={{ height: "43rem", marginTop: "20px", border: "red" }}
       >
         <CardHeader className="border-bottom text-center">
           <h4 className="mb-0">{this.userDetails.name}</h4>
@@ -141,174 +113,41 @@ class UserDetails extends React.Component {
           <Button pill outline size="sm" className="mb-2" onClick={this.toggle}>
             <i className="material-icons mr-1"></i> View Key
           </Button>
+          <p style={{color:"black"}}>{localStorage.getItem("name")}</p>
+
           <Modal size="sm" open={open} toggle={this.toggle}>
             <ModalHeader style={{ marginLeft: "30px" }}>
               {" "}
-              Your Private Key
+              <FcKey>Your Private Key</FcKey> 
             </ModalHeader>
             <ModalBody>
               <p> {this.userDetails.privateKey}</p>
+              <center><Button
+              size="sm"
+              color="primary"
+              theme="accent"
+              onClick={this.handleBack} >
+              Cancel
+            </Button>
+            </center>
             </ModalBody>
+            
+           
           </Modal>
         </CardHeader>
         <ListGroup flush>
           <ListGroupItem className="px-4">
             <div className="progress-wrapper">
-              <strong className="text-muted d-block mb-2">
-                {/* {userDetails.performanceReportTitle} */}
-              </strong>
-              {/* <Progress
-                  className="progress-sm"
-                 
-                  // value={userDetails.performanceReportValue}
-                >
-                  <span className="progress-value">
-                    {   userDetails.performanceReportValue}%
-                  </span>
-                </Progress> */}
+              <strong className="text-muted d-block mb-2"></strong>
             </div>
           </ListGroupItem>
           <ListGroupItem className="p-4">
-            <strong className="text-black d-block mb-2">
-              {/* {userDetails.metaTitle} */}
-            </strong>
+            <strong className="text-black d-block mb-2"></strong>
             <span style={{ color: "black" }}>{this.userDetails.metaValue}</span>
           </ListGroupItem>
-          <Modal  size="md" open={openActive} Activetoggle={this.Activetoggle}>
-            <h6 style={{marginLeft:"140px",color:"black",fontWeight:"bold",marginTop:"30px"}}> Compose Your Message</h6>
-            <ModalBody>
-              <Label style={{ color: "black", fontWeight: "bold" }}>
-                Subject:
-              </Label>
-
-              <FormInput
-                style={{ color: "black" }}
-                type="textarea"
-                onChange={this.handleSubject}
-                size="lg"
-                className="mb-3"
-                placeholder="Type Your Subject"
-              />
-
-              <br />
-              <Label style={{ color: "black", fontWeight: "bold" }}>
-                Message:
-              </Label>
-
-              <FormInput
-                style={{ color: "black" }}
-                type="textarea"
-                onChange={this.handleDescription}
-                size="lg"
-                className="mb-3"
-                placeholder="Type Your Message"
-              />
-
-              <Button
-                style={{ marginLeft: "110px" }}
-                type="secondary"
-                onClick={this.handleActiveBack}
-              >
-                Cancel
-              </Button>
-              <Button
-                style={{ marginLeft: "70px" }}
-                type="secondary"
-                onClick={(e) => this.sendEmail()}
-              >
-                Send
-              </Button>
-            </ModalBody>
-          </Modal>
-          <CardHeader
-            style={{
-              color: "blue",
-              marginTop: "80px",
-              borderRadius: "10px",
-              marginLeft: "2opx",
-              padding: "15px",
-              // border: "2px solid grey",
-            }}
-          >
-            <p style={{ color: "blue" }} onClick={() => this.Activetoggle()}>
-              In case of having any issue while u contact
-              To Team Vlock  teamvlock@gmail.com
-            </p>
-          </CardHeader>
         </ListGroup>
       </Card>
     );
   }
 }
-
-// const UserDetails = ({ userDetails }) => (
-
-//   <Card small className="mb-4 pt-3"  style={{height:"400px",marginTop:"30px", border: 'red',
-// }}>
-//     <CardHeader className="border-bottom text-center">
-//       <div className="mb-3 mx-auto">
-//         <img
-//           className="rounded-circle"
-//           src={userDetails.avatar}
-//           alt={userDetails.name}
-//           width="110"
-//         />
-//       </div>
-//       <h4 className="mb-0">{userDetails.name}</h4>
-//       <span  style={{color:"#000"}}className="text-black d-block mb-2">{ userDetails.jobTitle }</span>
-//       <Button pill outline size="sm" className="mb-2">
-//         <i className="material-icons mr-1"></i> View Key
-//       </Button>
-//     </CardHeader>
-//     <ListGroup flush>
-//       <ListGroupItem className="px-4">
-//         <div className="progress-wrapper">
-//           <strong className="text-muted d-block mb-2">
-//             {/* {userDetails.performanceReportTitle} */}
-//           </strong>
-//           {/* <Progress
-//             className="progress-sm"
-
-//             // value={userDetails.performanceReportValue}
-//           >
-//             <span className="progress-value">
-//               {   userDetails.performanceReportValue}%
-//             </span>
-//           </Progress> */}
-//         </div>
-//       </ListGroupItem>
-//       <ListGroupItem className="p-4">
-//         <strong className="text-black d-block mb-2">
-//           {/* {userDetails.metaTitle} */}
-//         </strong>
-//         <span style={{color:"black"}} >{userDetails.metaValue}</span>
-//       </ListGroupItem>
-//     </ListGroup>
-//   </Card>
-
-// );
-
-// UserDetails.propTypes = {
-//   // /**
-//   //  * The user details object.
-//   //  */
-//   userDetails: PropTypes.object
-// };
-
-// UserDetails.defaultProps = {
-//   userDetails: {
-
-//     name: "",
-//     avatar:"",
-//     jobTitle: "Student",
-//     performanceReportTitle: "Workload",
-//     performanceReportValue: 74,
-//     metaTitle: "Description",
-//     metaValue:
-//       "Click on the view key button copy the key from the box and in the top of  the browser see the metamask icon click on the icon and select the import account option and paste the key ",
-//   }
-// };
-
-// export default UserDetails;
-
 export default UserDetails;

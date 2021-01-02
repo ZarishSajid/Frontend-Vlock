@@ -8,7 +8,6 @@ import UserAccountDetails from "../components/user-profile-lite/UserAccountDetai
 const UserProfileLite = () => (
   <Container fluid className="main-content-container px-4">
     <Row  noGutters className="text-black " style={{marginLeft:"250px",color:"black",marginTop:"10px"}}>
-      < PageTitle title="Update Profile"   md="8" className="ml-sm-auto mr-sm-auto "style={{color:"black"}} />
     </Row>
     <Row>
       <Col lg="4">

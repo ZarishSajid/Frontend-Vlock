@@ -36,9 +36,11 @@ class SidebarMainNavbar extends React.Component {
 
           <p style={{fontWeight:"bold"}}>
                 
-                <span style={{width:"60px",fontWeight:"bold"}} className="#569CE5 text-bold">V</span> 
+                <span style={{width:"60px",fontWeight:"bold",color:"white"}} className="#fff text-bold">V</span> 
                 <span style={{color:"white",width:"60px",fontWeight:"bold"}}>LOCK</span>
               </p>
+              <p style={{color:"black"}}>{localStorage.getItem("name")}</p>
+
             {/* <img
  id="main-logo"
  className="d-inline-block align-top mr-1"

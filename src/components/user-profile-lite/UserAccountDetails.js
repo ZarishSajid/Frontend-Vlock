@@ -15,6 +15,7 @@ import { Form, Typography } from "antd";
 import PropTypes from "prop-types";
 import {
   Card,
+  CardBody,
   CardHeader,
   ListGroup,
   ListGroupItem,
@@ -97,10 +98,27 @@ class title extends React.Component {
     return (
       <Form onSubmit={this.onRedirect}>
         <Card
-          small
-          className="mb-4"
-          style={{ height: "400px", width: "40rem ", marginTop: "0px" }}
-        >
+            sm
+            className="mb-4"
+            style={{
+              height: "43rem",
+              width: "42rem ",
+              marginTop:"20px"
+            }}
+          >
+            <CardHeader
+              style={{
+                border: "1px solid white",
+                borderRadius: "10px",
+                padding: "25px",
+                marginLeft: "30px",
+                marginRight: "30px",
+                backgroundColor: "#569CE5",
+              }}
+            >
+             <h4 style={{color:"black",fontWeight:"bold"}} > <center> Update Profile</center></h4>
+            </CardHeader>
+            <CardBody>
           <ListGroup flush>
             <ListGroupItem className="p-3">
               <Row>
@@ -256,6 +274,7 @@ class title extends React.Component {
               </Row>
             </ListGroupItem>
           </ListGroup>
+          </CardBody>
         </Card>
       </Form>
     );

@@ -79,14 +79,13 @@ class Login extends React.Component {
               if (res.data.success) {
                 alert("Login Sucessfully");
                 console.log(this.state.data.token);
-
                 localStorage.setItem("token", this.state.data.token);
                 localStorage.setItem("userType", this.state.data.userType);
                 localStorage.setItem("id", this.state.data._id);
                 localStorage.setItem("sapID", this.state.data.sapID);
                 localStorage.setItem("email", this.state.data.email);
                 localStorage.setItem("password", this.state.data.password);
-
+                localStorage.setItem("name", this.state.data.name);
                 const userType = localStorage.getItem("userType");
                 // localStorage.setItem('sapID', this.state.sapID);
                 // localStorage.getItem('sapID');

@@ -43,7 +43,9 @@ import { useParams } from "react-router-dom";
 
 const FormItem = Form.Item;
 const { Text } = Typography;
-
+var today = moment();
+var tomorrow = moment(today).add(1, 'days');
+const date = new Date(tomorrow);
 class CreatePoll extends React.Component {
   constructor(props) {
     super(props);
@@ -237,6 +239,7 @@ class CreatePoll extends React.Component {
                         : this.state.startDate,
                   })(
                     <DayPickerInput
+                    dayPickerProps={{ disabledDays: {before: new Date()}}}
                       selected={this.state.startDate}
                       style={{ marginLeft: "20px" }}
                       onDayChange={(day) =>
@@ -265,6 +268,7 @@ class CreatePoll extends React.Component {
                         : this.state.endDate,
                   })(
                     <DayPickerInput
+                    dayPickerProps={{ disabledDays: {before: new Date()}}}
                       style={{ marginLeft: "20px" }}
                       selected={this.state.endDate}
                       onDayChange={(day) =>

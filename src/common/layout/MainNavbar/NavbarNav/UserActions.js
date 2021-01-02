@@ -287,13 +287,15 @@ export default class UserActions extends React.Component {
         <DropdownToggle  style={{marginRight:"100px",width:"10px"}} tag={NavLink} className="text-nowrap px-3">
        
 
-        <img style={{height:"30px",marginTop:"10px"}}
+        <img style={{height:"30px",marginTop:"10px",marginRight:"100px"}}
             className="user-avatar rounded-circle mr-2"
             src={require("../../../../images/avatars/0.jpg")}
             alt="User Avatar"
           />{" "} 
-        
+
         </DropdownToggle>
+                  <span style={{marginTop:"30px",color:"white",fontWeight:"bold",fontSize:"15sp"}}>{localStorage.getItem("name")}</span>
+
         <Collapse tag={DropdownMenu}style={{marginRight:"100px"}} right small open={this.state.visible}>
           <DropdownItem tag={Link} to="/components/user-profile-lite">
             <i className="material-icons">&#xE7FD;</i> Profile
@@ -307,8 +309,9 @@ export default class UserActions extends React.Component {
           <DropdownItem tag={Link} to="/"  onClick={() => this.Logout()} className="text-danger">
             <i className="material-icons text-danger">&#xE879;</i> Logout
           </DropdownItem>
+
         </Collapse>
-        
+
       </NavItem>
       
     );

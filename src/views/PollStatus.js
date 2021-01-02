@@ -4,28 +4,28 @@ import { AiFillDelete } from "react-icons/ai";
 import { ImCross, ImCheckmark } from "react-icons/im";
 import { RiDeleteBinLine } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
-import { Tooltip } from "antd";
 import { Table } from "reactstrap";
 import * as moment from "moment";
 import { IoMdCreate } from "react-icons/io";
 import getToken from "../helpers/auth";
+import Tooltip from "react-simple-tooltip";
 import { NavLink } from "react-router-dom";
 import { Icon } from "antd";
-// import Loader from "Loader"
+import { AiOutlineRest } from "react-icons/ai";
 import { Modal, ModalBody, ModalHeader } from "shards-react";
 import { Redirect } from "react-router-dom";
-
 import { AiOutlineEye } from "react-icons/ai";
 import { Spinner } from "reactstrap";
 import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import SweetAlert from "sweetalert-react/lib/SweetAlert";
 import { css } from "@emotion/core";
+import { AiFillEdit } from "react-icons/ai";
 const override = css`
   position: absolute;
-  left: 50%;
+  left: 40%;
   right: 0;
-  top: 50%;
+  top: 60%;
   border-color: blue;
 `;
 class PollStatus extends React.Component {
@@ -139,13 +139,12 @@ class PollStatus extends React.Component {
             <tr style={{ backgroundColor: "#85DBE9" }}>
               <th>#</th>
               <th> Poll Type</th>
-              <th style={{ width:"220px"}}> Poll Question</th>
+              <th> Poll Question</th>
               <th>Created By</th>
               <th>Start Date</th>
               <th>End Date</th>
               <th>Status</th>
               <th>Action</th>
-              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -154,7 +153,7 @@ class PollStatus extends React.Component {
               <tr>
                 {" "}
                 <td
-                  colspan="8"
+                  colspan="12"
                   className="text-center"
                   style={{ color: "black", fontWeight: "bold" }}
                 >
@@ -190,16 +189,29 @@ class PollStatus extends React.Component {
                           aboutProps: { userData: values },
                         }}
                       >
+                        <Tooltip
+                          content=" View Poll"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
                         <AiOutlineEye
                           onClick={this.toggle}
                           style={{ marginLeft: "10px", color: "blue" }}
                         />
+                        </Tooltip>
                       </NavLink>
-                    
-                      <Button onClick={(e) => this.deletePoll(e, values._id)}>
-                        <AiFillDelete />
-                      </Button>
-
+                      <Tooltip
+                          content=" Delete Poll"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
+                      <AiOutlineRest
+                        style={{ marginLeft: "10px", color: "blue" }}
+                        onClick={(e) => this.deletePoll(e, values._id)}
+                      ></AiOutlineRest>
+                      </Tooltip>
                       {values.status !== "pending" ? null : (
                         <NavLink
                           disabled={values.status !== "pending"}
@@ -208,13 +220,17 @@ class PollStatus extends React.Component {
                             aboutProps: { userData: values },
                           }}
                         >
-                          {" "}
-                          <Button
-                            style={{ marginTop: "3px",marginLeft:"10px" }}
+                           <Tooltip
+                          content="Edit Poll"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
+                          <AiFillEdit
+                            style={{ marginTop: "3px", marginLeft: "10px",color:"blue" }}
                             disabled={values.status !== "pending"}
-                          >
-                            <IoMdCreate />
-                          </Button>
+                          />
+                          </Tooltip>
                         </NavLink>
                       )}
                     </td>
@@ -225,7 +241,7 @@ class PollStatus extends React.Component {
             )}
             <Modal size="md" open={open} toggle={this.toggle}>
               <ModalHeader style={{ marginLeft: "0px" }}>
-                <h4 style={{marginLeft:"150px"}}>Poll Detail</h4> 
+                <h4 style={{ marginLeft: "150px" }}>Poll Detail</h4>
               </ModalHeader>
               <ModalBody>
                 <p
@@ -253,7 +269,7 @@ class PollStatus extends React.Component {
                       ? userData.createdBy.name
                       : this.state.createdBy.name}
                   </p>
-                 
+
                   <p style={{ color: "blue" }}>
                     Email:{" "}
                     {userData && userData._id
