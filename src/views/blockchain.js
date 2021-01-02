@@ -8,13 +8,12 @@ import TruffleContract from "truffle-contract";
 import Election from "../build/contracts/Election.json";
 import Poll from "../build/contracts/Poll.json";
 import Option from "../build/contracts/Option.json";
-import Form from "./Form";
-import { Radio, Typography } from "antd";
-
+import { Radio, Form } from "antd";
 class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       account: "0x0",
       polls: [],
       selectedOption: "",
@@ -59,7 +58,7 @@ class Test extends React.Component {
     // txnCount = web3.eth.getTransactionCount(web3.eth.accounts[0])
     // console.log("account cteat",web3.eth.accounts.create);
     web3.eth.getTransactionCount((err, res) => {
-      console.log(" getTransactionCount ", err, res)
+      console.log(" getTransactionCount ", err, res);
       // console.log(res);
       // console.log(res);
       // console.log(res[2]);
@@ -93,7 +92,6 @@ class Test extends React.Component {
     this.onUserRegister = this.onUserRegister.bind(this);
     this.election = TruffleContract(Election);
     this.election.setProvider(this.web3Provider);
-
 
     this.poll = TruffleContract(Poll);
     this.poll.setProvider(this.web3Provider);
@@ -155,48 +153,58 @@ class Test extends React.Component {
       // });
 
       // this.setState({ account });
-      this.pollInstance = await this.election.deployed(); 
-        console.log("PollInstance", this.pollInstance);
-        // this.watchEvents()
-        // const voted = await this.pollInstance.voted("1", "A");
+      this.pollInstance = await this.election.deployed();
+      console.log("PollInstance", this.pollInstance);
+      // this.watchEvents()
+      // const voted = await this.pollInstance.voted("1", "A");
 
+      // this.pollInstance.voted("1", "A", { from: this.state.account }).then((voted) => {
+      // console.log("voted  = ", voted);
+      const pollCount = await this.pollInstance.pollCount();
+      console.log("pollCount =  ", pollCount);
+      const polls = [...this.state.polls];
+      for (var i = 0; i <= pollCount; i++) {
+        const poll = await this.pollInstance.polls(i);
+        polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
+      }
+      this.setState({ polls: polls });
 
-
-
-
-        // this.pollInstance.voted("1", "A", { from: this.state.account }).then((voted) => {
-        // console.log("voted  = ", voted);
-        const pollCount = await this.pollInstance.pollCount();  
-            console.log("pollCount =  ", pollCount);
-            const polls = [...this.state.polls];
-            for (var i = 0; i <= pollCount; i++) {
-                const poll = await this.pollInstance.polls(i);
-                polls.push({ id: poll[1],option: poll[2],voteCount: poll[3]});
-            }
-            this.setState({ polls: polls });
-
-            console.log("\n polls = ",polls)
-        // this.pollInstance.voters(this.state.account).then((hasVoted) => {
-        //   this.setState({ hasVoted, loading: false });
-        // });
+      console.log("\n polls = ", polls);
+      // this.pollInstance.voters(this.state.account).then((hasVoted) => {
+      //   this.setState({ hasVoted, loading: false });
+      // });
       // });
     });
   }
 
   selectPollOption = (e) => {
     this.setState({ selectedOption: e.target.value });
+    console.log("radio butto selected stateee!!!");
   };
 
-  async castVoteToZara(id, option) {
-    
-    const results = await this.pollInstance.voted(id, option, { from: this.state.account });
+  async castVoteToZara(e,values) {
+    e.preventDefault();
+    const userData =
+      this.props.location &&
+      this.props.location.aboutProps &&
+      this.props.location.aboutProps.userData;
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log("sselected  options!!!", values.pollOption);
+        console.log("iddddd", userData._id);
+
+      }
+    }); 
+    const results = await this.pollInstance.voted(userData._id, values.pollOption, {
+       from: this.state.account,
+    });
     // set state value or update this user in DB and marked as casted so he/she cant vote again
-{1,B,5};
+    // {1,B,5};
     /**
      * Get count again and save values into DBs for count.
      */
 
-    // const pollCount = await this.pollInstance.pollCount();  
+    // const pollCount = await this.pollInstance.pollCount();
     // console.log("pollCount =  ", pollCount);
     // const polls = [...this.state.polls];
     // for (var i = 0; i <= pollCount; i++) {
@@ -205,14 +213,13 @@ class Test extends React.Component {
     // }
     // this.setState({ polls: polls });
 
-
     // console.log("results", results);
-    this.setState({ voting: true });  
+    this.setState({ voting: true });
     // this.electionInstance
     //   .vote(candidateId, { from: this.state.account })
     //   .then((result) => this.setState({ hasVoted: true }));
   }
-
+  
   watchEvents() {
     // TODO: trigger event when vote is counted, not when component renders
     console.log("zara test inside watchevent");
@@ -316,10 +323,20 @@ class Test extends React.Component {
   }
 
   render() {
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
     const userData =
       this.props.location &&
       this.props.location.aboutProps &&
       this.props.location.aboutProps.userData;
+    console.log(" ++++ inside blockchain", userData);
+    // console.log(
+    //   " ***** selected radio button",
+    //   userData &&
+
+    //   userData.pollOptions
+    // );
+
     return (
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
@@ -341,7 +358,13 @@ class Test extends React.Component {
                 <ListGroupItem className="p-3">
                   <Row>
                     <Col md="6" className="form-group">
-                      <label style={{color:"black",fontWeight:"bold"}}htmlFor=""> Poll Question</label>
+                      <label
+                        style={{ color: "black", fontWeight: "bold" }}
+                        htmlFor=""
+                      >
+                        {" "}
+                        Poll Question
+                      </label>
                       <p
                         style={{
                           border: "1px solid grey",
@@ -353,7 +376,12 @@ class Test extends React.Component {
                           ? userData.pollQuestion
                           : this.state.pollQuestion}
                       </p>
-                      <label style={{color:"black",fontWeight:"bold"}} htmlFor="">Description</label>
+                      <label
+                        style={{ color: "black", fontWeight: "bold" }}
+                        htmlFor=""
+                      >
+                        Description
+                      </label>
                       <p
                         style={{
                           border: "1px solid grey",
@@ -365,29 +393,48 @@ class Test extends React.Component {
                           ? userData.pollDescription
                           : this.state.pollDescription}
                       </p>
-                      {userData &&
-                        userData._id &&
-                        userData.pollOptions &&
-                        userData.pollOptions.length > 0 &&
-                        userData.pollOptions.map((option, index) => (
-                          <Radio.Group
-                            key={index.toString()}
-                            value={this.state.selectedOption}
-                            onChange={this.selectPollOption}
-                          >
-                            <Radio style={{ color: "black" }} value={option}>
-                              <span style={{ paddingLeft: "10px" }}>
-                                {option}
-                              </span>
-                            </Radio>
-                            <br />
-                          </Radio.Group>
-                        ))}
-                      <Button style={{MarginLeft:"50px"}} onClick={() => this.castVoteToZara()}>
-                        Vote
-                      </Button>
+                      <Form onSubmit={this.castVoteToZara}>
+                        {userData &&
+                          userData._id &&
+                          userData.pollOptions &&
+                          userData.pollOptions.length > 0 &&
+                          userData.pollOptions.map((option, index) => (
+                            <Form.Item>
+                              {getFieldDecorator("pollOption", {
+                                rules: [
+                                  {
+                                    required: true,
+                                    message: "Please select an option",
+                                  },
+                                ],
+                              })(
+                                <Radio.Group
+                                  key={index.toString()}
+                                  value={this.state.selectedOption}
+                                  onChange={this.selectPollOption}
+                                >
+                                  <Radio
+                                    style={{ color: "black" }}
+                                    value={option}
+                                  >
+                                    <span style={{ paddingLeft: "10px" }}>
+                                      {option}
+                                    </span>
+                                  </Radio>
+                                  <br />
+                                </Radio.Group>
+                              )}
+                            </Form.Item>
+                          ))}
+                        <Button
+                          type="html"
+                          style={{ MarginLeft: "50px" }}
+                          // onClick={() => this.castVoteToZara()}
+                        >
+                          Vote
+                        </Button>
+                      </Form>
                       <p>Your account: {this.state.account}</p>
-
                     </Col>
                   </Row>
                 </ListGroupItem>
@@ -400,5 +447,5 @@ class Test extends React.Component {
   }
 }
 
-ReactDOM.render(<Test />, document.querySelector("#root"));
-export default Test;
+// ReactDOM.render(<Test />, document.querySelector("#root"));
+export default Form.create()(Test);

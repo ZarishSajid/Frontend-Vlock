@@ -51,15 +51,15 @@ class UserDetails extends React.Component {
       visible: false,
       setIsModalVisible: false,
       pulls: [],
-      metaValue:
-      <ul>
-      <li style={{color:"#569CE5"}} >Click on the view key button.</li>
-      <li style={{color:"#569CE5"}}  >Copy the key from the box.</li>
-      <li style={{color:"#569CE5"}}   >In the top of the browser see the metamask icon. </li>
-     <li style={{color:"#569CE5"}}  > click on the icon.</li>
-     <li  style={{color:"#569CE5"}}  > Select the import account option and paste the key.</li>
-
-</ul>
+      metaValue: (
+        <ul>
+          <li> Click on the view key button.</li>
+          <li> Copy the key from the box.</li>
+          <li> In the top of the browser see the metamask icon. </li>
+          <li> Cick on the Meta mask icon.</li>
+          <li> Select the import account option and paste the key.</li>
+        </ul>
+      ),
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -113,26 +113,27 @@ class UserDetails extends React.Component {
           <Button pill outline size="sm" className="mb-2" onClick={this.toggle}>
             <i className="material-icons mr-1"></i> View Key
           </Button>
-          <p style={{color:"black"}}>{localStorage.getItem("name")}</p>
+          <p style={{ color: "black" }}>{localStorage.getItem("name")}</p>
+          <p style={{ color: "black" }}>{localStorage.getItem("sapID")}</p>
 
           <Modal size="sm" open={open} toggle={this.toggle}>
             <ModalHeader style={{ marginLeft: "30px" }}>
               {" "}
-              <FcKey>Your Private Key</FcKey> 
+              <FcKey>Your Private Key</FcKey>
             </ModalHeader>
             <ModalBody>
               <p> {this.userDetails.privateKey}</p>
-              <center><Button
-              size="sm"
-              color="primary"
-              theme="accent"
-              onClick={this.handleBack} >
-              Cancel
-            </Button>
-            </center>
+              <center>
+                <Button
+                  size="sm"
+                  color="primary"
+                  theme="accent"
+                  onClick={this.handleBack}
+                >
+                  Cancel
+                </Button>
+              </center>
             </ModalBody>
-            
-           
           </Modal>
         </CardHeader>
         <ListGroup flush>

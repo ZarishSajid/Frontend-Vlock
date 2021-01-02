@@ -135,7 +135,7 @@ class CastVote extends React.Component {
                   style={{ color: "black", fontWeight: "bold" }}
                 >
                   {" "}
-                  No Poll Request are Available
+                  No Poll are Available
                 </td>
               </tr>
             ) : (

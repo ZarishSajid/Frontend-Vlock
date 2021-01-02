@@ -307,6 +307,7 @@ class CreatePoll extends React.Component {
                     //when you want to change the radio button here you will call a fucn
                     onChange={(e) => this.handleOnChange(e.target.value)}
                     value={this.state.optionValue}
+                    
                   >
                   </Radio.Group>
                 )}
