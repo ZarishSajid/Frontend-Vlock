@@ -4236,7 +4236,7 @@ a.text-accent:hover, a.text-accent:focus {
   .main-sidebar .navbar-brand {
     overflow: hidden;
     height: 3.75rem;
-    font-size: 1rem; }
+    font-size: 20px; }
     @media (max-width: 991.98px) {
       .main-sidebar .navbar-brand {
         font-size: 90%; } }
@@ -4278,10 +4278,12 @@ a.text-accent:hover, a.text-accent:focus {
       top: -1px; }
   .main-sidebar .nav .nav-item.active, .main-sidebar .nav .nav-item .nav-link.active, .main-sidebar .nav .nav-item:hover, .main-sidebar .nav .nav-item .nav-link:hover {
     box-shadow:#fff;
-    background-color: #569CE5;
+    background-color: #fff;
+    color:"white";
+
     color: #fff }
     .main-sidebar .nav .nav-item.active i, .main-sidebar .nav .nav-item .nav-link.active i, .main-sidebar .nav .nav-item:hover i, .main-sidebar .nav .nav-item .nav-link:hover i {
-      color: #5A6169; }
+      color: #fff; }
   .main-sidebar .nav--no-borders .nav-item .nav-link {
     border-bottom: 0; }
   .main-sidebar .nav--no-borders .dropdown-menu {

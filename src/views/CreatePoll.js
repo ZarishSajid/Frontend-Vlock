@@ -383,7 +383,7 @@ class CreatePoll extends React.Component {
                     // initialValue: this.state.startDate,
                   })(
                     <DayPickerInput  
-                      dayPickerProps={{ disabledDays: {before: date} }}
+                      dayPickerProps={{ disabledDays:  new Date() }}
                       selected={this.state.startDate}
                       style={{ marginLeft: "20px" }}
                       onDayChange={(day) =>
@@ -405,7 +405,7 @@ class CreatePoll extends React.Component {
                     // initialValue: this.state.endDate,
                   })(
                     <DayPickerInput
-                    dayPickerProps={{ disabledDays: {before: new Date()} }}
+                    dayPickerProps={{ disabledDays: new Date()}}
                       style={{ marginLeft: "20px" }}
                       selected={this.state.endDate}
                       onDayChange={(day) =>

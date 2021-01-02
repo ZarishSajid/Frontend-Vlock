@@ -139,7 +139,7 @@ class PollStatus extends React.Component {
             <tr style={{ backgroundColor: "#85DBE9" }}>
               <th>#</th>
               <th> Poll Type</th>
-              <th style={{ marginLeft: "70px" }}> Poll Question</th>
+              <th style={{ width:"220px"}}> Poll Question</th>
               <th>Created By</th>
               <th>Start Date</th>
               <th>End Date</th>
@@ -195,8 +195,7 @@ class PollStatus extends React.Component {
                           style={{ marginLeft: "10px", color: "blue" }}
                         />
                       </NavLink>
-                    </td>
-                    <td>
+                    
                       <Button onClick={(e) => this.deletePoll(e, values._id)}>
                         <AiFillDelete />
                       </Button>
@@ -211,7 +210,7 @@ class PollStatus extends React.Component {
                         >
                           {" "}
                           <Button
-                            style={{ marginTop: "3px" }}
+                            style={{ marginTop: "3px",marginLeft:"10px" }}
                             disabled={values.status !== "pending"}
                           >
                             <IoMdCreate />

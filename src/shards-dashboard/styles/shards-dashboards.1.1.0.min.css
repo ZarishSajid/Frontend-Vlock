@@ -5120,7 +5120,7 @@ a.text-accent:hover {
 .main-sidebar .navbar-brand {
   overflow: hidden;
   height: 3.75rem;
-  font-size: 1rem;
+  font-size: 20px;
 }
 .main-sidebar .nav-wrapper {
   overflow-y: auto;
@@ -5161,6 +5161,8 @@ a.text-accent:hover {
 }
 .main-sidebar .nav .nav-item .nav-link i.material-icons {
   font-size: 1.125rem;
+        color:"white";
+
   top: -1px;
 }
 .main-sidebar .nav .nav-item .nav-link.active,

@@ -10,6 +10,7 @@ import {
   MDBIcon,
   MDBInput,
 } from "mdbreact";
+import { FormCheckbox } from "shards-react";
 import Link from "@material-ui/core/Link";
 import { Redirect, NavLink } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
@@ -98,7 +99,6 @@ class Register extends React.Component {
     }
     return callback();
   };
-  
 
   onRedirect = (e) => {
     // e.preventDefault();
@@ -106,7 +106,7 @@ class Register extends React.Component {
     // this.setState(this.initialState)
 
     console.log("clicked");
-    
+
     this.props.form.validateFieldsAndScroll((error, formData) => {
       if (!error && formData) {
         axios
@@ -132,7 +132,7 @@ class Register extends React.Component {
               this.setState({
                 // redirectRoute: userType === 'faculty' ? "/components/FacultyPanel" : userType === 'student' ? "/components/StudentPanel" : userType === 'uniAdmin' ? "/components/UniversityAdministration":"/components/Admin" ,
                 fireRedirect: true,
-                fireRedirect:"/Login"
+                fireRedirect: "/Login",
               });
             } else {
               //  console.log("else")
@@ -142,8 +142,7 @@ class Register extends React.Component {
           });
       }
     });
-
-  }
+  };
   onChange = (e) => {
     console.log("radio checked", e.target.value);
     this.setState({
@@ -168,7 +167,7 @@ class Register extends React.Component {
           <Redirect key={2} to={redirectRoute} />,
         ]}
       </Fragment>,
-      <Form onSubmit={this.onRedirect} >
+      <Form onSubmit={this.onRedirect}>
         <div></div>
         <MDBRow
           style={{
@@ -197,12 +196,12 @@ class Register extends React.Component {
               Lock Your Decision
             </h4>
             {/* <p style={{color:"white",marginLeft:"20px"}}>Register yourself here and be a part of Riphah biggest decision making platform.If you are already a member.</p> */}
-           
-              <p style={{ color: "white", marginLeft: "30px" }}>
-                {" "}
-                Please register Yourself.
-              </p>
-          
+
+            <p style={{ color: "white", marginLeft: "30px" }}>
+              {" "}
+              Please register Yourself.
+            </p>
+
             <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
               <div>
                 <h5 className="pink-text"></h5>
@@ -244,7 +243,7 @@ class Register extends React.Component {
                 </h4>
                 <a href="#!" className="green-text font-weight-bold"></a>
               </h3>
-             
+
               <FormItem
                 style={{ color: "red" }}
                 label={
@@ -276,7 +275,7 @@ class Register extends React.Component {
                 style={{ color: "red" }}
                 label={
                   <Text style={{ fontWeight: "bold", color: "black" }}>
-                   Full Name
+                    Full Name
                   </Text>
                 }
               >
@@ -286,22 +285,21 @@ class Register extends React.Component {
                       required: true,
                       message: "Full Name is Required",
                     },
-                  
+
                     // {
-                    //   validator: (rule, value, callback) => {                      
+                    //   validator: (rule, value, callback) => {
                     //      if (!value.match(/^[a-zA-Z]+$/)) {
                     //       callback("Alphabets only");
                     //     }
                     //     return callback();
                     //   }
                     // }
-                    
                   ],
                   initialValue: this.state.name,
                 })(<Input placeholder=" Please enter your full name" />)}
               </FormItem>
               <br />
-              
+
               <FormItem
                 style={{ color: "red" }}
                 label={
@@ -322,7 +320,9 @@ class Register extends React.Component {
                     },
                   ],
                   initialValue: this.state.email,
-                })(<Input placeholder=" Please enter your email" type="email" />)}
+                })(
+                  <Input placeholder=" Please enter your email" type="email" />
+                )}
               </FormItem>
 
               <br />
@@ -337,23 +337,34 @@ class Register extends React.Component {
                 {getFieldDecorator("password", {
                   rules: [
                     {
-                     message:""
+                      message: "",
                     },
                     {
                       required: true,
-                       message: "Password is Required",
+                      message: "Password is Required",
                     },
                     {
-                      validator: (rule, value, callback) => {                      
-                         if (!value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/)) {
-                          callback(" Your password must include 1 lowercase character, 1 uppercase character,1 number and 1 special character in (!@#*&/^)");
+                      validator: (rule, value, callback) => {
+                        if (
+                          !value.match(
+                            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/
+                          )
+                        ) {
+                          callback(
+                            " Your password must include 1 lowercase character, 1 uppercase character,1 number and 1 special character in (!@#*&/^)"
+                          );
                         }
                         return callback();
-                      }
-                    }
+                      },
+                    },
                   ],
                   initialValue: this.state.password,
-                })(<Input placeholder=" Please enter your password" type="password" />)}
+                })(
+                  <Input
+                    placeholder=" Please enter your password"
+                    type="password"
+                  />
+                )}
               </FormItem>
 
               <br />
@@ -373,7 +384,12 @@ class Register extends React.Component {
                     },
                   ],
                   initialValue: this.state.department,
-                })(<Input placeholder=" Please enter your department" type="text" />)}
+                })(
+                  <Input
+                    placeholder=" Please enter your department"
+                    type="text"
+                  />
+                )}
               </FormItem>
 
               <br />
@@ -390,19 +406,19 @@ class Register extends React.Component {
                   Student
                 </Radio>
                 <br />
-              
+
                 <Radio style={{ color: "black" }} value="faculty">
                   {" "}
                   Faculty
                 </Radio>
-        
-                <br/> 
+
+                <br />
                 <Radio style={{ color: "black" }} value="uniAdmin">
                   {" "}
                   University Administration
                 </Radio>
               </Radio.Group>
-              <br/>
+              <br />
               {userType !== "" && userType === "student" && (
                 <>
                   <FormItem
@@ -466,7 +482,12 @@ class Register extends React.Component {
                         },
                       ],
                       initialValue: this.state.designation,
-                    })(<Input placeholder=" Please enter your designation" type="text" />)}
+                    })(
+                      <Input
+                        placeholder=" Please enter your designation"
+                        type="text"
+                      />
+                    )}
                   </FormItem>
                 </>
               )}
@@ -474,7 +495,7 @@ class Register extends React.Component {
                 <>
                   <br />
                   <b>{/* <IntlMessages id="Designation" /> */}</b>
-                
+
                   <FormItem
                     style={{ color: "red" }}
                     label={
@@ -491,10 +512,20 @@ class Register extends React.Component {
                         },
                       ],
                       initialValue: this.state.designation,
-                    })(<Input placeholder=" Please enter your designation" type="text" />)}
+                    })(
+                      <Input
+                        placeholder=" Please enter your designation"
+                        type="text"
+                      />
+                    )}
+                 
                   </FormItem>
                 </>
               )}
+                  <FormCheckbox style={{color:"black"}}>
+                      {/* eslint-disable-next-line */ }I agree with your{" "}
+                      <a href="#">Privacy Policy</a>.
+                    </FormCheckbox>
               <MDBRow className="d-flex align-items-center mb-4">
                 <center>
                   {" "}
@@ -503,6 +534,7 @@ class Register extends React.Component {
                     {" "}
                     Please register Yourself.
                   </p>
+                   
                   <MDBBtn
                     style={{ width: "180px", marginLeft: "100px" }}
                     onClick={() => this.onRedirect()}

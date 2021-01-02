@@ -7,13 +7,11 @@ import { BsUnlockFill } from "react-icons/bs";
 import { BsLockFill } from "react-icons/bs";
 import { BsFillEnvelopeFill } from "react-icons/bs";
 import { BsFillPersonFill } from "react-icons/bs";
-import { BsLink45Deg } from "react-icons/bs";
-import { AiFillEdit } from "react-icons/ai";
+import { BsLink45Deg, BsStopFill } from "react-icons/bs";
+import { AiFillEdit, AiFillEye } from "react-icons/ai";
 import { AiFillDatabase } from "react-icons/ai";
 import { AiFillSafetyCertificate } from "react-icons/ai";
-
-
-import { Tooltip } from "antd";
+import Tooltip from "react-simple-tooltip";
 import { Table } from "reactstrap";
 import { Label } from "reactstrap";
 import { Radio, Form, Typography } from "antd";
@@ -50,6 +48,7 @@ class UserList extends React.Component {
       visible: false,
       setIsModalVisible: false,
       pulls: [],
+      status: "",
       openActive: false,
     };
     this.toggle = this.toggle.bind(this);
@@ -83,11 +82,24 @@ class UserList extends React.Component {
       open: !this.state.open,
     });
   }
-  Activetoggle(e, email) {
+  Activetoggle(e, email, id) {
     e.preventDefault();
     this.setState({
       openActive: !this.state.openActive,
       email: email,
+    });
+    const data = {
+      status: "inactive",
+
+    };
+    const header = {
+      header: {
+        token: localStorage.getItem("token"),
+      },
+    };
+    axios.put(`http://localhost:8080/vlock/active/${id}`, data).then((res) => {
+      alert("Email Sent ");
+      // window.location.reload(false);
     });
   }
   handleOk = (e) => {
@@ -180,8 +192,7 @@ class UserList extends React.Component {
     return (
       <div>
         <br />
-        <h3 style={{ marginLeft: "400px" }}> User Status</h3>
-
+        <h3 style={{ marginLeft: "400px", color: "black" }}> User Status</h3>
         <div
           style={{ marginBottom: "10px" }}
           className="d-flex justify-content-center"
@@ -196,29 +207,14 @@ class UserList extends React.Component {
         </div>
         <Table striped>
           <thead>
-            <tr style={{ backgroundColor: "#569CE5"}}>
-              <th>
-                {" "}
-                <BsLink45Deg></BsLink45Deg> #
-              </th>
-              <th>
-                <BsFillPersonFill></BsFillPersonFill> Name{" "}
-              </th>
-              
-              <th>
-                {" "}
-                <AiFillEdit></AiFillEdit> Sap ID
-              </th>
-              <th>
-                {" "}
-                <AiFillDatabase> </AiFillDatabase> Department
-              </th>
-              <th> <AiFillSafetyCertificate ></AiFillSafetyCertificate> Status</th>
-              <th>
-                {" "}
-                <BsFillEnvelopeFill></BsFillEnvelopeFill> Email
-              </th>
-              <th> <AiFillSafetyCertificate></AiFillSafetyCertificate>  Action</th>
+            <tr style={{ backgroundColor: "#85DBE9" }}>
+              <th> #</th>
+              <th>Name </th>
+              <th> Sap ID</th>
+              <th> Department</th>
+              <th> Status</th>
+              <th> Email</th>
+              <th> Action</th>
               <th></th>
               <th></th>
               <th></th>
@@ -229,12 +225,12 @@ class UserList extends React.Component {
               <tr>
                 {" "}
                 <td
-                  colspan="8"
+                  colspan="12"
                   className="text-center"
                   style={{ color: "black", fontWeight: "bold" }}
                 >
                   {" "}
-                  No Data are found
+                  No Data found
                 </td>
               </tr>
             ) : (
@@ -247,60 +243,88 @@ class UserList extends React.Component {
                     <td>{values.department}</td>
                     <td>{values.active ? "Active" : "Inactive"}</td>
                     <td>{values.email}</td>
-
                     <td>
                       {" "}
-                      <AiOutlineRest
-                        style={{ color: "blue" }}
-                        onClick={(e) => this.deleteUser(e, values._id)}
-                      />
+                      <Tooltip
+                        content=" Click here to delete user"
+                        customCss={css`
+                          white-space: nowrap;
+                        `}
+                      >
+                        <AiOutlineRest
+                          style={{ color: "blue" }}
+                          onClick={(e) => this.deleteUser(e, values._id)}
+                        ></AiOutlineRest>
+                      </Tooltip>
                       <NavLink
                         to={{
                           aboutProps: { userData: values },
                         }}
                       >
-                        <AiOutlineEye
-                          onClick={this.toggle}
-                          style={{ marginLeft: "10px", color: "blue" }}
-                        />
+                        <Tooltip
+                          content=" Click here to view user"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
+                          <AiOutlineEye
+                            style={{ color: "blue", marginLeft: "10px" }}
+                            onClick={this.toggle}
+                          ></AiOutlineEye>
+                        </Tooltip>
                       </NavLink>
                       <NavLink
                         to={{
                           pathname: "/components/editUser",
                           aboutProps: { userData: values },
                         }}
-                      > <Button 
-                      style={{
-                        marginTop: "3px",
-                        marginLeft: "10px",
-                        height: "30px"
-                      }}
                       >
-                         <AiFillEdit  />
-                         </Button>
+                        <Tooltip
+                          content=" Click here to edit user"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
+                          <AiFillEdit
+                            style={{ color: "blue", marginLeft: "10px" }}
+                          />
+                        </Tooltip>
                       </NavLink>
                       {values.active ? (
-                        <Button
-                          onClick={(e) => this.Activetoggle(e, values.email)}
-                          style={{
-                            marginTop: "3px",
-                            marginLeft: "10px",
-                            height: "30px",
-                          }}
+                        <Tooltip
+                          content="Click here to block user"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
                         >
-                          <BsUnlockFill></BsUnlockFill>
-                        </Button>
+                          <BsUnlockFill
+                            style={{
+                              marginTop: "3px",
+                              color: "green",
+                              marginLeft: "10px",
+                              height: "30px",
+                            }}
+                            onClick={(e) =>
+                              this.Activetoggle(e, values.email, values._id)
+                            }
+                          ></BsUnlockFill>
+                        </Tooltip>
                       ) : (
-                        <Button
-                          onClick={(e) => this.Activetoggle(e, values.email)}
-                          style={{
-                            marginTop: "3px",
-                            backgroundColor: "red",
-                            marginLeft: "10px",
-                          }}
+                        <Tooltip
+                          content=" Click  here to unblock user"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
                         >
-                          <BsLockFill></BsLockFill>
-                        </Button>
+                          <BsLockFill
+                            onClick={(e) => this.Activetoggle(e, values.email,values._id)}
+                            style={{
+                              marginTop: "3px",
+                              color: "red",
+                              marginLeft: "10px",
+                            }}
+                          ></BsLockFill>
+                        </Tooltip>
                       )}
                     </td>{" "}
                     <td></td>
@@ -312,8 +336,8 @@ class UserList extends React.Component {
             )}
 
             <Modal size="md" open={open} toggle={this.toggle}>
-            <ModalHeader style={{ marginLeft: "0px" }}>
-                <h4 style={{color:"black"}}>User Detail</h4>
+              <ModalHeader style={{ marginLeft: "0px" }}>
+                <h4 style={{ color: "black" }}>User Detail</h4>
               </ModalHeader>
               <ModalBody>
                 <p
@@ -324,8 +348,8 @@ class UserList extends React.Component {
                   }}
                 >
                   <p style={{ color: "black" }}>
-                    Name:   
-                             {userData && userData._id ? userData.name : this.state.name}
+                    Name:
+                    {userData && userData._id ? userData.name : this.state.name}
                   </p>
                   <p style={{ color: "black" }}>
                     Sap Id:{" "}
@@ -354,7 +378,7 @@ class UserList extends React.Component {
                   </p>
                 </p>
                 <Button
-                  style={{ marginLeft: "50px" }}
+                  style={{ marginLeft: "160px" }}
                   type="secondary"
                   onClick={this.handleBack}
                 >

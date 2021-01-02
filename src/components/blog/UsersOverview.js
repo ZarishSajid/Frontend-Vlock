@@ -146,7 +146,7 @@ UsersOverview.defaultProps = {
 
            borderColor: "#1b49b5",
             pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "",
+        pointHoverBackgroundColor: "#fff",
          pointBorderColor: "#1b49b5",
 
         pointRadius: 3,

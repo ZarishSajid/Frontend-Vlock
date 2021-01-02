@@ -10,6 +10,7 @@ import {
   CardHeader,
   Card,
 } from "shards-react";
+
 import { SignalFilled } from "@ant-design/icons";
 import { TeamOutlined } from "@ant-design/icons";
 import { Colxx, Separator } from "../../src/common/CustomBootstrap";
@@ -66,9 +67,9 @@ const pieChart = {
 	datasets: [{
 		data: [0,0,0],
 		backgroundColor: [
-      "rgba(102,0,0,0.7)",
-      "rgba(0,123,255,0.8)",
-      "rgba(204,153,0,0.8)"
+      "rgba(86,156,229)",
+      "rgba(113, 115, 120)",
+      "rgba(127, 167, 179) "
 		],
       hoverBorderColor:[ "#ffffff",
 
@@ -132,12 +133,12 @@ export default class Admin extends React.Component {
       .then((res) => {
         // console.log("RESPONSE = ", res.data);
         this.setState({ pulls: res.data });
-        console.log("approved count  =", res.data.data.approvedCount);
-        console.log("poending count  =", res.data.data.pendingCount);
-        console.log(
-          "disapprovedCount count  =",
-          res.data.data.disapprovedCount
-        );
+        // console.log("approved count  =", res.data.data.approvedCount);
+        // console.log("poending count  =", res.data.data.pendingCount);
+        // console.log(
+        //   "disapprovedCount count  =",
+        //   res.data.data.disapprovedCount
+        // );
 
         this.state.disapprovedCount = res.data.data.disapprovedCount;
 
@@ -201,14 +202,14 @@ export default class Admin extends React.Component {
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "white" }}>{this.state.approvedCount}</p>
+                  <p style={{ color: "white" ,fontWeight:"bold"}}>{this.state.approvedCount}</p>
                 </center>
               </CardBody>
             </Card>
           </Col>
           <Col>
             <Card className="mb-4">
-              <CardBody style={{backgroundColor:"#A9A9F5"}}>
+              <CardBody style={{backgroundColor:"#717378"}}>
                 <br />
                 <center>
                   {" "}
@@ -220,14 +221,14 @@ export default class Admin extends React.Component {
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "white" }}>{this.state.disapprovedCount}</p>
+                  <p style={{ color: "white",fontWeight:"bold" }}>{this.state.disapprovedCount}</p>
                 </center>
               </CardBody>
             </Card>
           </Col>
           <Col>
             <Card className="mb-4">
-              <CardBody style={{backgroundColor:"#F1948A"}}>
+              <CardBody style={{backgroundColor:"#7FA7B3"}}>
                 <br />
                 <center>
                   {" "}
@@ -239,7 +240,7 @@ export default class Admin extends React.Component {
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "white" }}>{this.state.pendingCount}</p>
+                  <p style={{ color: "white",fontWeight:"bold", }}>{this.state.pendingCount}</p>
                 </center>
               </CardBody>
             </Card>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "reactstrap";
+import { Input, CardBody } from "reactstrap";
 
 import {
   MDBCard,
@@ -11,7 +11,7 @@ import {
   MDBInput,
 } from "mdbreact";
 import axios from "axios";
-import { Form ,Typography} from "antd";
+import { Form, Typography } from "antd";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -36,7 +36,9 @@ class title extends React.Component {
       name: "",
       email: "",
       password: "",
-      department:"",   };
+      department: "",
+      cpassword: "",
+    };
   }
 
   onRedirect = (e) => {
@@ -51,8 +53,12 @@ class title extends React.Component {
           name: formData.name,
           email: formData.email,
           password: formData.password,
-          department:formData.department
+          department: formData.department,
         };
+        if (formData.password !== formData.cpassword) {
+          alert("Your Password did not match");
+          return;
+        }
         axios
           .put(`http://localhost:8080/vlock/update`, data, headers)
 
@@ -65,6 +71,8 @@ class title extends React.Component {
               //  console.log("else")
               alert(res.data.message);
             }
+            window.location.reload(false);
+
             //res.sucess=();
           });
       }
@@ -88,137 +96,172 @@ class title extends React.Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-        
-        
-        <div>
+      <div>
         <br />
-        <h3 style={{ marginLeft: "460px",marginTop:"0px",color:"black"}}>Profile</h3>
-      <Form onSubmit={this.onRedirect}>
-        <Card
-          sm
-          className="mb-4"
-          style={{ height:"33rem" ,width: "50rem ", marginTop: "30px",marginLeft:"145px" }}
-        >
-          <CardHeader className="border-bottom"></CardHeader>
-          <ListGroup flush>
-            <ListGroupItem className="p-3">
-              <Row>
-                <Col>
-                <FormItem
-                style={{ color: "red" }}
-                label={
-                  <Text style={{ fontWeight: "bold", color: "black" }}>
-                    Name
-                  </Text>
-                }
-              >
-                {getFieldDecorator("name", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Full Name is Required",
-                  },
-                
-                  // {
-                  //   validator: (rule, value, callback) => {                      
-                  //      if (!value.match(/^[a-zA-Z]+$/)) {
-                  //       callback("Alphabets only");
-                  //     }
-                  //     return callback();
-                  //   }
-                  // }
-                  
-                ],
-                initialValue: this.state.name,
-                })(<Input placeholder=" Full Name" />)}
-              </FormItem>
-              <br />
-              <FormItem
-                style={{ color: "red" }}
-                label={
-                  <Text style={{ fontWeight: "bold", color: "black" }}>
-                    Email
-                  </Text>
-                }
-              >
-                {getFieldDecorator("email", {
-                  rules: [
-                    {
-                      type: "email",
-                      message: "Please enter valid E-mail",
-                    },
-                    {
-                      required: true,
-                      message: "Email is Required",
-                    },
-                  ],
-                  initialValue: this.state.email,
-                })(<Input placeholder=" abc@gmail.com" type="email" />)}
-              </FormItem>
-               <br />
-               <br />
-              <FormItem
-                style={{ color: "red" }}
-                label={
-                  <Text style={{ fontWeight: "bold", color: "black" }}>
-                    Department
-                  </Text>
-                }
-              >
-                {getFieldDecorator("department", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Department is Required",
-                    },
-                  ],
-                  initialValue: this.state.department,
-                })(<Input placeholder=" Please enter your department" type="text" />)}
-              </FormItem>
+        <Form onSubmit={this.onRedirect}>
+          <Card
+            sm
+            className="mb-4"
+            style={{
+              height: "43rem",
+              width: "50rem ",
+              marginTop: "30px",
+              marginLeft: "145px",
+            }}
+          >
+            <CardHeader
+              style={{
+                border: "1px solid white",
+                borderRadius: "10px",
+                padding: "25px",
+                marginLeft: "30px",
+                marginRight: "30px",
+                backgroundColor: "#569CE5",
+              }}
+            >
+             <h4 style={{color:"black",fontWeight:"bold"}} > <center>Profile</center></h4>
+            </CardHeader>
+            <CardBody>
+              <ListGroup flush>
+                <ListGroupItem className="p-3">
+                  <Row>
+                    <Col>
+                      <FormItem
+                        style={{ color: "red" }}
+                        label={
+                          <Text style={{ fontWeight: "bold", color: "black" }}>
+                            Full Name
+                          </Text>
+                        }
+                      >
+                        {getFieldDecorator("name", {
+                          rules: [
+                            {
+                              required: true,
+                              message: "Full Name is Required",
+                            },
 
-              <br />
-              <FormItem
-                style={{ color: "red" }}
-                label={
-                  <Text style={{ fontWeight: "bold", color: "black" }}>
-                    New Password
-                  </Text>
-                }
-              >
-                {getFieldDecorator("password", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please enter  your password",
-                    },
-                    // {
-                    //   validator: (rule, value, callback) => {
-                    //      if (!value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/)) {
-                    //       callback(" Your password must include 1 lowercase character, 1 uppercase character,1 number and 1 special character in (!@#*&/^)");
-                    //     }
-                    //     return callback();
-                    //   }
-                    // }
-                  ],
-                  initialValue: this.state.password,
-                })(<Input placeholder="password" type="password" />)}
-              </FormItem>
+                            // {
+                            //   validator: (rule, value, callback) => {
+                            //      if (!value.match(/^[a-zA-Z]+$/)) {
+                            //       callback("Alphabets only");
+                            //     }
+                            //     return callback();
+                            //   }
+                            // }
+                          ],
+                          initialValue: this.state.name,
+                        })(<Input placeholder=" Full Name" />)}
+                      </FormItem>
+                      <br />
+                      <FormItem
+                        style={{ color: "red" }}
+                        label={
+                          <Text style={{ fontWeight: "bold", color: "black" }}>
+                            Email
+                          </Text>
+                        }
+                      >
+                        {getFieldDecorator("email", {
+                          rules: [
+                            {
+                              type: "email",
+                              message: "Please enter valid E-mail",
+                            },
+                            {
+                              required: true,
+                              message: "Email is Required",
+                            },
+                          ],
+                          initialValue: this.state.email,
+                        })(<Input placeholder=" abc@gmail.com" type="email" />)}
+                      </FormItem>
+                      <br />
+                      <br />
+                      <FormItem
+                        style={{ color: "red" }}
+                        label={
+                          <Text style={{ fontWeight: "bold", color: "black" }}>
+                            Department
+                          </Text>
+                        }
+                      >
+                        {getFieldDecorator("department", {
+                          rules: [
+                            {
+                              required: true,
+                              message: "Department is Required",
+                            },
+                          ],
+                          initialValue: this.state.department,
+                        })(
+                          <Input
+                            placeholder=" Please enter your department"
+                            type="text"
+                          />
+                        )}
+                      </FormItem>
 
-              <br />
-              
-                  <b />
-                  <b>
-                    {" "}
-                    <Button
-                      style={{ marginLeft: "330px" }}
-                      onClick={() => this.onRedirect()}
-                      color="primary"
-                    >
-                      Update
-                    </Button>
-                  </b>
+                      <br />
+                      <FormItem
+                        style={{ color: "red" }}
+                        label={
+                          <Text style={{ fontWeight: "bold", color: "black" }}>
+                            New Password
+                          </Text>
+                        }
+                      >
+                        {getFieldDecorator("password", {
+                          rules: [
+                            {
+                              required: true,
+                              message: "Please enter  your password",
+                            },
+                            // {
+                            //   validator: (rule, value, callback) => {
+                            //      if (!value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/)) {
+                            //       callback(" Your password must include 1 lowercase character, 1 uppercase character,1 number and 1 special character in (!@#*&/^)");
+                            //     }
+                            //     return callback();
+                            //   }
+                            // }
+                          ],
+                          initialValue: this.state.password,
+                        })(<Input placeholder="password" type="password" />)}
+                      </FormItem>
 
-                  {/* <a
+                      <br />
+                      <FormItem
+                        style={{ color: "red" }}
+                        label={
+                          <Text style={{ fontWeight: "bold", color: "black" }}>
+                            Confirm Password
+                          </Text>
+                        }
+                      >
+                        {getFieldDecorator("cpassword", {
+                          rules: [
+                            {
+                              required: true,
+                              message: "Please re-enter  your password",
+                            },
+                          ],
+                          initialValue: this.state.cpassword,
+                        })(<Input placeholder="password" type="password" />)}
+                      </FormItem>
+                      <b />
+                      <b>
+                        {" "}
+                        <Button
+                          style={{ marginLeft: "330px", marginTop: "10px" }}
+                          onClick={() => this.onRedirect()}
+                          color="primary"
+                        >
+                          Update
+                        </Button>
+                      </b>
+
+                      {/* <a
                     style={{
                       color: "primary",
                       textDecorationLine: "underline",
@@ -228,12 +271,13 @@ class title extends React.Component {
                   >
                     Reset Password
                   </a> */}
-                </Col>
-              </Row>
-            </ListGroupItem>
-          </ListGroup>
-        </Card>
-      </Form>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              </ListGroup>
+            </CardBody>
+          </Card>
+        </Form>
       </div>
     );
   }

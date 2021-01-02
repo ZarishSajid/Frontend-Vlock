@@ -131,7 +131,7 @@ class UserDetails extends React.Component {
       <Card
         small
         className="mb-4 pt-3"
-        style={{ height: "470px", marginTop: "30px", border: "red" }}
+        style={{ height: "510px", marginTop: "0px", border: "red" }}
       >
         <CardHeader className="border-bottom text-center">
           <h4 className="mb-0">{this.userDetails.name}</h4>

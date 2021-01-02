@@ -4,24 +4,31 @@ import { AiOutlineRest } from "react-icons/ai";
 import { ImCheckmark } from "react-icons/im";
 import { RiDeleteBinLine } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
-import { Tooltip } from "antd";
-import { Table } from "reactstrap";
+import Tooltip from "react-simple-tooltip";
+import { MdLock } from "react-icons/md";
+import { AiFillCalendar } from "react-icons/ai";
+import { AiFillSafetyCertificate } from "react-icons/ai";
+import { BsFillPersonFill, BsFillCalendarFill } from "react-icons/bs";
+import { Table,Label } from "reactstrap";
+import { FormInput } from "shards-react";
+import { Form } from "antd";
 import * as moment from "moment";
 import { IoMdCreate } from "react-icons/io";
 import getToken from "../helpers/auth";
 import { NavLink } from "react-router-dom";
 import { Icon } from "antd";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
-// import Loader from "Loader"
 import { Modal, ModalBody, ModalHeader } from "shards-react";
+import { BsFillBarChartFill } from "react-icons/bs";
 import { Redirect } from "react-router-dom";
-
 import { AiOutlineEye } from "react-icons/ai";
 import { Spinner } from "reactstrap";
 import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import SweetAlert from "sweetalert-react/lib/SweetAlert";
 import { css } from "@emotion/core";
+import { BsUnlockFill } from "react-icons/bs";
+import { BsLockFill } from "react-icons/bs";
 const override = css`
   position: absolute;
   left: 40%;
@@ -38,7 +45,7 @@ class PollStatus extends React.Component {
       endDate: "",
       status: "",
       createdBy: "",
-     pulls: [],
+      pulls: [],
       _id: "",
       loading: false,
       index: "",
@@ -49,11 +56,51 @@ class PollStatus extends React.Component {
     };
     this.toggle = this.toggle.bind(this);
   }
+  sendEmail(e) {
+    const data = {
+      //email: "rajazara75@gmail.com",
+      email: this.state.email,
+      subject: "Vlock Notification",
+      message: this.state.Description,
+      //message: "Dear zara your account has been blocked",
+    };
+    const header = {
+      header: {
+        token: localStorage.getItem("token"),
+      },
+    };
+    axios.post(`http://localhost:8080/vlock/email`, data).then((res) => {
+      alert("Email Sent ");
+      window.location.reload(false);
+    });
+  }
   toggle() {
     this.setState({
       open: !this.state.open,
     });
   }
+
+  Activetoggle(e, email,id) {
+    e.preventDefault();
+    this.setState({
+      openActive: !this.state.openActive,
+      email: email,
+    });
+    const data = {
+      status: "inactive",
+       
+    };
+    const header = {
+      header: {
+        token: localStorage.getItem("token"),
+      },
+    };
+    axios.put(`http://localhost:8080/vlock/active/${id}`, data).then((res) => {
+      alert("Email Sent ");
+      // window.location.reload(false);
+    });
+  }
+  
   deletePoll(e, id) {
     e.preventDefault();
     console.log("id inside delete poll");
@@ -124,6 +171,7 @@ class PollStatus extends React.Component {
         //res.sucess=();
       });
   }
+
   componentDidMount() {
     this.fetchData();
   }
@@ -147,13 +195,19 @@ class PollStatus extends React.Component {
       console.log(res.message);
     });
   }
+  handleBack = () => {
+    this.setState({
+      //openActive: !this.state.openActive,
+      open: !this.state.open,
+    });
+  };
   render() {
     const userData =
       this.props.location &&
       this.props.location.aboutProps &&
       this.props.location.aboutProps.userData;
     const { fireRedirect, redirectRoute } = this.state;
-
+    const {openActive } = this.state;
     const { open, userType } = this.state;
     const { pulls } = this.state;
     const { match } = this.props;
@@ -168,7 +222,7 @@ class PollStatus extends React.Component {
 
       <div>
         <br />
-        <h3 style={{ marginLeft: "400px" }}>Poll Status</h3>
+        <h3 style={{ marginLeft: "400px", color: "black" }}>Poll Status</h3>
 
         <div
           style={{ marginBottom: "10px" }}
@@ -186,27 +240,37 @@ class PollStatus extends React.Component {
           <thead>
             <tr style={{ backgroundColor: "#85DBE9" }}>
               <th>#</th>
-              <th> Poll Type</th>
-              <th style={{ marginLeft: "70px" }}> Poll Question</th>
+              <th>Poll Type</th>
               <th>Created By</th>
-              <th>Start Date</th>
-              <th>End Date</th>
+              <th>Department</th>
+              <th>Poll Question</th>
               <th>Status</th>
-              <th>Action</th>
+              <th>Active/Inactive</th>
+              <th>Action</th>{" "}
             </tr>
           </thead>
           <tbody>
-          {!pulls.length
-            ? <tr> <td colspan="8" className="text-center" style={{color:"black",fontWeight:"bold" }}> No Data Found</td></tr>
-              :pulls.map((values, index) => {
+            {!pulls.length ? (
+              <tr>
+                {" "}
+                <td
+                  colspan="8"
+                  className="text-center"
+                  style={{ color: "black", fontWeight: "bold" }}
+                >
+                  {" "}
+                  No Data Found
+                </td>
+              </tr>
+            ) : (
+              pulls.map((values, index) => {
                 return (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{values.pollType}</td>
-                    <td>{values.pollQuestion}</td>
                     <td>{values.createdBy.name}</td>
-                    <td>{moment(values.startDate).format("MM-DD-YYYY")}</td>
-                    <td>{moment(values.endDate).format("MM-DD-YYYY")}</td>
+                    <td>{values.createdBy.department}</td>
+                    <td>{values.pollQuestion}</td>
                     <td>
                       {values.status == "approve"
                         ? "Approve"
@@ -218,11 +282,19 @@ class PollStatus extends React.Component {
                         ? "Started"
                         : "Expired"}
                     </td>
+                    <td>{values.active ? "Active" : "Inactive"}</td>
                     <td>
-                      <AiOutlineRest
-                        style={{ color: "blue" }}
-                        onClick={(e) => this.deletePoll(e, values._id)}
-                      />
+                      <Tooltip
+                        content="Delete User"
+                        customCss={css`
+                          white-space: nowrap;
+                        `}
+                      >
+                        <AiOutlineRest
+                          style={{ color: "blue" }}
+                          onClick={(e) => this.deletePoll(e, values._id)}
+                        />
+                      </Tooltip>
                       {values.status !== "pending" ? null : (
                         <NavLink
                           disabled={values.status !== "pending"}
@@ -239,17 +311,57 @@ class PollStatus extends React.Component {
                           aboutProps: { userData: values },
                         }}
                       >
-                        <AiOutlineEye
-                          onClick={this.toggle}
-                          style={{ marginLeft: "10px", color: "blue" }}
-                        />
-                      </NavLink>
-                      {/* <AiOutlineCheck  onClick={(e) => this.changeStatus(e, values._id)} style={{color:"green",fontWeight:"bold",marginLeft:"10px"}} />
-                 <AiOutlineClose onClick={(e) => this.disapprove(e, values._id)} style={{color:"red",marginLeft:"10px"}} />  */}
+                        <Tooltip
+                          content="View User"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
+                          <AiOutlineEye
+                            onClick={this.toggle}
+                            style={{ marginLeft: "10px", color: "blue" }}
+                          />
+                        </Tooltip>
+                      </NavLink>{" "}
+                      {values.active ? (
+                        <Tooltip
+                          content="Unblock User"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
+                          <BsUnlockFill
+                            onClick={(e) => this.Activetoggle(e, values.email,values._id)}
+                            style={{
+                              marginTop: "3px",
+                              marginLeft: "10px",
+                              height: "30px",
+                              color: "green",
+                            }}
+                          ></BsUnlockFill>
+                        </Tooltip>
+                      ) : (
+                        <Tooltip
+                          content="Block User"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
+                          <MdLock
+                            onClick={(e) => this.Activetoggle(e, values.email,values._id)}
+                            style={{
+                              marginTop: "3px",
+                              marginLeft: "10px",
+                              color: "red",
+                            }}
+                          ></MdLock>
+                        </Tooltip>
+                      )}
                     </td>
                   </tr>
                 );
-              })}
+              })
+            )}
             <Modal size="md" open={open} toggle={this.toggle}>
               <ModalHeader style={{ marginLeft: "0px" }}>
                 <h4>Poll Detail</h4>
@@ -319,21 +431,76 @@ class PollStatus extends React.Component {
                       ? moment(userData.endDate).format("MM-DD-YYYY")
                       : this.state.endDate}
                   </p>
+                  <Button
+                    style={{ marginLeft: "150px" }}
+                    type="secondary"
+                    onClick={this.handleBack}
+                  >
+                    Cancel
+                  </Button>
                 </p>
-                <Button
-                  style={{ marginLeft: "150px" }}
-                  type="secondary"
-                  onClick={this.handleBack}
-                >
-                  Cancel
-                </Button>
               </ModalBody>
             </Modal>
           </tbody>
         </Table>
+        <Modal size="md" open={openActive} Activetoggle={this.Activetoggle}>
+          <h6
+            style={{
+              marginLeft: "140px",
+              color: "black",
+              fontWeight: "bold",
+              marginTop: "30px",
+            }}
+          >
+            {" "}
+            Compose Your Message
+          </h6>
+          <ModalBody>
+            <Label style={{ color: "black", fontWeight: "bold" }}>
+              Subject:
+            </Label>
 
-        
-    
+            <FormInput
+              style={{ color: "black" }}
+              type="textarea"
+              onChange={this.handleSubject}
+              size="lg"
+              className="mb-3"
+              placeholder="Type Your Subject"
+            />
+
+            <br />
+            <Label style={{ color: "black", fontWeight: "bold" }}>
+              Message:
+            </Label>
+
+            <FormInput
+              style={{ color: "black" }}
+              type="textarea"
+              onChange={this.handleDescription}
+              size="lg"
+              className="mb-3"
+              placeholder="Type Your Message"
+            />
+
+            <Button
+              size="sm"
+              style={{ marginLeft: "110px" }}
+              type="secondary"
+              onClick={this.handleActiveBack}
+            >
+              Cancel
+            </Button>
+            <Button
+              size="sm"
+              style={{ marginLeft: "30px" }}
+              type="secondary"
+              onClick={(e) => this.sendEmail()}
+            >
+              Send
+            </Button>
+          </ModalBody>
+        </Modal>
         <br />
         <br />
         <br />
