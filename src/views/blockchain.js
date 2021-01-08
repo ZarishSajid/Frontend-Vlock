@@ -174,6 +174,8 @@ class Test extends React.Component {
       console.log("PollInstance", this.pollInstance);
       const pollCount = await this.pollInstance.pollCount();
       console.log("pollCount =  ", pollCount);
+      // const result = await this.pollInstance.getAll();
+      // console.log("Get All MEthod", result);
       const polls = [...this.state.polls];
       for (var i = 0; i <= pollCount; i++) {
         const poll = await this.pollInstance.polls(i);
@@ -181,17 +183,23 @@ class Test extends React.Component {
       }
       this.setState({ polls: polls });
 
-      console.log("\n polls list of polls = ", JSON.stringify(polls));
+      console.log("\n polls list of polls = ", JSON.stringify(polls), polls.length);
 
-      for(var i=0; i<polls.length; i++)
-      {
-       console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
+      // for(var i=0; i<polls.length; i++)
+      // {
+      //  console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
           
-      }
-      // this.pollInstance.getAll().then((polls) => {
-      //   console.log("Polls are here", polls);
-      // });
+      // }
+      // const result = await this.pollInstance.getAll();
+      // console.log("Get All MEthod", result);
+      this.pollInstance.getAll().then((polls) => {
+        console.log("Get All MEthod", polls);
+      });
     });
+
+    // this.loginInstance.getName().then((name) => {
+    //   console.log("=== Sohhhhhhhhhhhh === getName output  = ", name);
+    // });
 
     // console.log("zara test castVote", candidateId);
     // this.setState({ voting: true });
