@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import Web3 from "web3";
 import TruffleContract from "truffle-contract";
 import Election from "../build/contracts/Election.json";
-import Poll from "../build/contracts/Poll.json";
+// import Poll from "../build/contracts/Poll.json";
 import Option from "../build/contracts/Option.json";
 import { Radio, Form } from "antd";
 class Test extends React.Component {
@@ -149,7 +149,7 @@ class Test extends React.Component {
         console.log("iddddd", userData._id);
 
         const results = await this.pollInstance
-          .voted(userData._id, values.pollOption, {
+          .vote(userData._id, values.pollOption, {
             from: this.state.account,
           })
           .then((result) => this.setState({ hasVoted: true }));
@@ -186,7 +186,7 @@ class Test extends React.Component {
       for(var i=0; i<polls.length; i++)
       {
        console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
-
+          
       }
       // this.pollInstance.getAll().then((polls) => {
       //   console.log("Polls are here", polls);

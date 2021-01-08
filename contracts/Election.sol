@@ -1,155 +1,67 @@
-// pragma solidity ^0.5.16;
-// pragma experimental ABIEncoderV2;
-
-// // import "@nomiclabs/builder/console.sol";
-
-// contract Election {
-//     // Model a Candidate
-   
-//     struct Poll {
-//         uint256 id;
-//         string pollid;
-//         string option;
-//         uint256 voteCount;
-//         //
-//     }
-
-//     // mapping(address => bool) public voters;
-//     mapping(uint256 => Poll) public polls;
-//     uint256 public pollCount;
-//     bool public check=false;
-
-
-//     event voteEvent(string indexed pollId, string indexed option);
-
-//     function voted(string memory pollid, string memory option) public
-//     {
-//         if(keccak256(abi.encodePacked((polls[pollCount].pollid))) == keccak256(abi.encodePacked((pollid))) && (keccak256(abi.encodePacked(polls[pollCount].option)) == (keccak256(abi.encodePacked(option)))))
-//         {
-//             check = true;
-//             require(!voters[msg.sender], "User Already Voted");
-//             voters[msg.sender] = true;
-              
-//             polls[pollCount].voteCount ++;
-//             emit voteEvent(pollid,option);
-
-//         } else {
-//             check = false;
-//             require(!voters[msg.sender], "User Already Voted");
-//             voters[msg.sender] = true;
-//             pollCount++;
-//             polls[pollCount]= Poll(pollCount, pollid, option,0);
-//             polls[pollCount].voteCount ++;
-//             emit voteEvent(pollid,option);
-//         }
-
-        
-//     }
-
-
-//     function getAll() public view returns (Poll[] memory){
-
-//         Poll [] memory myPoll = new Poll[](pollCount);
-//         for (uint256 i = 0 ; i <pollCount; i++)    {
-//             Poll storage pol = polls[i];
-//             myPoll[i] = pol;
-//         }
-//         return myPoll;
-//     }        
-
-//     // Store accounts that have voted
-//     mapping(address => bool) public voters;
-//     // Store Candidates
-//     // Fetch Candidate
-
-
-
-//     constructor() public {
-        
-//     }
-
-
-   
-// }
-
-
 pragma solidity ^0.5.16;
 pragma experimental ABIEncoderV2;
-contract Polling {
-// Model a Candidate
-struct Poll {
-uint256 id;
-string pollid;
-string option;
-uint256 voteCount;
-address voter;
-}
 
-mapping(address => bool) public voters;
-mapping(uint256 => Poll) public polls;
+contract Election {
+    // Model a Candidate
+    struct Poll {
+        uint256 id;
+        string pollid;
+        string option;
+        uint256 voteCount;
+        address[] voter;
+    }
 
-uint256 public pollCount;
-constructor() public {
- 
-}
+    mapping(address => bool) public voters;
+    mapping(uint256 => Poll) public polls;
 
-bool public check=false;
+    uint256 public pollCount;
 
+    constructor() public {}
 
+    bool public check = false;
+    bool public voterExist = false;
 
-event votedEvent(string indexed pollId, string indexed option);
+    event votedEvent(string indexed pollId, string indexed option);
 
-function vote(string memory pollid, string memory option) public
-{
+    function vote(string memory pollid, string memory option) public {
+        if (
+            keccak256(abi.encodePacked((polls[pollCount].pollid))) ==
+            keccak256(abi.encodePacked((pollid))) &&
+            (keccak256(abi.encodePacked(polls[pollCount].option)) ==
+                (keccak256(abi.encodePacked(option))))
+        ) {
+            for (uint256 i = 0; i < polls[pollCount].voter.length; i++) {
+                if (polls[pollCount].voter[i] == msg.sender) {
+                    voterExist = true;
+                    voters[msg.sender] = true;
+                    require(!voters[msg.sender], "User Already Voted ");
+                } else {
+                    polls[pollCount].voter.push(msg.sender);
+                    polls[pollCount].voteCount++;
+                    // here neeed to store id and suser
+                }
+            }
+        } else {
+            //stonedetailsTable[0].stoneidsbycutter.push("hello");
 
-for(uint256 i=0; i<pollCount; i++){
-if(keccak256(abi.encodePacked((polls[i].pollid))) == keccak256(abi.encodePacked((pollid)))
+            check = false;
+            pollCount++;
+            polls[pollCount].id = pollCount;
+            polls[pollCount].pollid = pollid;
+            polls[pollCount].option = option;
+            polls[pollCount].voteCount = 0;
+            polls[pollCount].voter.push(msg.sender);
+            polls[pollCount].voteCount++;
+            emit votedEvent(pollid, option);
+        }
+    }
 
-&& (keccak256(abi.encodePacked(polls[i].option)) == (keccak256(abi.encodePacked(option)))) && polls[i].voter==msg.sender)
-{
-
-voters[msg.sender]=true;
-}
-
-else if(keccak256(abi.encodePacked((polls[i].pollid))) == keccak256(abi.encodePacked((pollid)))
-
-&& (keccak256(abi.encodePacked(polls[i].option)) == (keccak256(abi.encodePacked(option)))) && polls[i].voter!=msg.sender)
-{
-    check = true;
-    voters[msg.sender]=true;
-    polls[pollCount].voteCount ++;
-}
-
-else
-
-{
-
-check = false;
-pollCount++;
-polls[pollCount]= Poll(pollCount, pollid, option,0,msg.sender);
-polls[pollCount].voteCount ++;
-emit votedEvent(pollid,option);
-
-}
-}
-
-}
-
-
-function getAll() public view returns (Poll[] memory){
-
-   Poll [] memory myPoll = new Poll[](pollCount);
-     for (uint256 i = 0 ; i <pollCount; i++)
-     {
-        Poll storage pol = polls[i];
-        myPoll[i] = pol;
-       }
-             return myPoll;
-    
-    
-}
-
-
-
-
+    function getAll() public view returns (Poll[] memory) {
+        Poll[] memory myPoll = new Poll[](pollCount);
+        for (uint256 i = 0; i < pollCount; i++) {
+            Poll storage pol = polls[i];
+            myPoll[i] = pol;
+        }
+        return myPoll;
+    }
 }

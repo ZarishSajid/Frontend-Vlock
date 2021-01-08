@@ -70,14 +70,14 @@
     "absolutePath": "/home/zara/Documents/Frontend-Vlock/contracts/Option.sol",
     "exportedSymbols": {
       "Option": [
-        517
+        467
       ]
     },
-    "id": 518,
+    "id": 468,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 486,
+        "id": 436,
         "literals": [
           "solidity",
           "^",
@@ -93,19 +93,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 517,
+        "id": 467,
         "linearizedBaseContracts": [
-          517
+          467
         ],
         "name": "Option",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 489,
+            "id": 439,
             "name": "MyBytesArray",
             "nodeType": "VariableDeclaration",
-            "scope": 517,
+            "scope": 467,
             "src": "79:29:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -115,7 +115,7 @@
             },
             "typeName": {
               "baseType": {
-                "id": 487,
+                "id": 437,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "79:7:3",
@@ -124,7 +124,7 @@
                   "typeString": "bytes32"
                 }
               },
-              "id": 488,
+              "id": 438,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "79:9:3",
@@ -138,7 +138,7 @@
           },
           {
             "body": {
-              "id": 502,
+              "id": 452,
               "nodeType": "Block",
               "src": "163:47:3",
               "statements": [
@@ -149,7 +149,7 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 500,
+                    "id": 450,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -159,11 +159,11 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 497,
+                          "id": 447,
                           "name": "_item",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 491,
+                          "referencedDeclaration": 441,
                           "src": "193:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
@@ -180,18 +180,18 @@
                         ],
                         "expression": {
                           "argumentTypes": null,
-                          "id": 494,
+                          "id": 444,
                           "name": "MyBytesArray",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 489,
+                          "referencedDeclaration": 439,
                           "src": "175:12:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_array$_t_bytes32_$dyn_storage",
                             "typeString": "bytes32[] storage ref"
                           }
                         },
-                        "id": 496,
+                        "id": 446,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -205,7 +205,7 @@
                           "typeString": "function (bytes32) returns (uint256)"
                         }
                       },
-                      "id": 498,
+                      "id": 448,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -224,7 +224,7 @@
                     "rightExpression": {
                       "argumentTypes": null,
                       "hexValue": "31",
-                      "id": 499,
+                      "id": 449,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -245,29 +245,29 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 501,
+                  "id": 451,
                   "nodeType": "ExpressionStatement",
                   "src": "175:27:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 503,
+            "id": 453,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "addItem",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 492,
+              "id": 442,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 491,
+                  "id": 441,
                   "name": "_item",
                   "nodeType": "VariableDeclaration",
-                  "scope": 503,
+                  "scope": 453,
                   "src": "141:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -276,7 +276,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 490,
+                    "id": 440,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "141:7:3",
@@ -292,12 +292,12 @@
               "src": "140:15:3"
             },
             "returnParameters": {
-              "id": 493,
+              "id": 443,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "163:0:3"
             },
-            "scope": 517,
+            "scope": 467,
             "src": "124:86:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -305,7 +305,7 @@
           },
           {
             "body": {
-              "id": 515,
+              "id": 465,
               "nodeType": "Block",
               "src": "297:34:3",
               "statements": [
@@ -317,25 +317,25 @@
                         "argumentTypes": null,
                         "baseExpression": {
                           "argumentTypes": null,
-                          "id": 510,
+                          "id": 460,
                           "name": "MyBytesArray",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 489,
+                          "referencedDeclaration": 439,
                           "src": "308:12:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_array$_t_bytes32_$dyn_storage",
                             "typeString": "bytes32[] storage ref"
                           }
                         },
-                        "id": 512,
+                        "id": 462,
                         "indexExpression": {
                           "argumentTypes": null,
-                          "id": 511,
+                          "id": 461,
                           "name": "index",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 505,
+                          "referencedDeclaration": 455,
                           "src": "321:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -354,7 +354,7 @@
                         }
                       }
                     ],
-                    "id": 513,
+                    "id": 463,
                     "isConstant": false,
                     "isInlineArray": false,
                     "isLValue": false,
@@ -367,30 +367,30 @@
                       "typeString": "bytes32"
                     }
                   },
-                  "functionReturnParameters": 509,
-                  "id": 514,
+                  "functionReturnParameters": 459,
+                  "id": 464,
                   "nodeType": "Return",
                   "src": "301:27:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 516,
+            "id": 466,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getMyBytesArray",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 506,
+              "id": 456,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 505,
+                  "id": 455,
                   "name": "index",
                   "nodeType": "VariableDeclaration",
-                  "scope": 516,
+                  "scope": 466,
                   "src": "256:10:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -399,7 +399,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 504,
+                    "id": 454,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "256:4:3",
@@ -415,15 +415,15 @@
               "src": "255:12:3"
             },
             "returnParameters": {
-              "id": 509,
+              "id": 459,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 508,
+                  "id": 458,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 516,
+                  "scope": 466,
                   "src": "288:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -432,7 +432,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 507,
+                    "id": 457,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "288:7:3",
@@ -447,14 +447,14 @@
               ],
               "src": "287:9:3"
             },
-            "scope": 517,
+            "scope": 467,
             "src": "231:100:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 518,
+        "scope": 468,
         "src": "30:305:3"
       }
     ],
@@ -464,14 +464,14 @@
     "absolutePath": "/home/zara/Documents/Frontend-Vlock/contracts/Option.sol",
     "exportedSymbols": {
       "Option": [
-        517
+        467
       ]
     },
-    "id": 518,
+    "id": 468,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 486,
+        "id": 436,
         "literals": [
           "solidity",
           "^",
@@ -487,19 +487,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 517,
+        "id": 467,
         "linearizedBaseContracts": [
-          517
+          467
         ],
         "name": "Option",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 489,
+            "id": 439,
             "name": "MyBytesArray",
             "nodeType": "VariableDeclaration",
-            "scope": 517,
+            "scope": 467,
             "src": "79:29:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -509,7 +509,7 @@
             },
             "typeName": {
               "baseType": {
-                "id": 487,
+                "id": 437,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "79:7:3",
@@ -518,7 +518,7 @@
                   "typeString": "bytes32"
                 }
               },
-              "id": 488,
+              "id": 438,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "79:9:3",
@@ -532,7 +532,7 @@
           },
           {
             "body": {
-              "id": 502,
+              "id": 452,
               "nodeType": "Block",
               "src": "163:47:3",
               "statements": [
@@ -543,7 +543,7 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 500,
+                    "id": 450,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -553,11 +553,11 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 497,
+                          "id": 447,
                           "name": "_item",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 491,
+                          "referencedDeclaration": 441,
                           "src": "193:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
@@ -574,18 +574,18 @@
                         ],
                         "expression": {
                           "argumentTypes": null,
-                          "id": 494,
+                          "id": 444,
                           "name": "MyBytesArray",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 489,
+                          "referencedDeclaration": 439,
                           "src": "175:12:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_array$_t_bytes32_$dyn_storage",
                             "typeString": "bytes32[] storage ref"
                           }
                         },
-                        "id": 496,
+                        "id": 446,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -599,7 +599,7 @@
                           "typeString": "function (bytes32) returns (uint256)"
                         }
                       },
-                      "id": 498,
+                      "id": 448,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -618,7 +618,7 @@
                     "rightExpression": {
                       "argumentTypes": null,
                       "hexValue": "31",
-                      "id": 499,
+                      "id": 449,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -639,29 +639,29 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 501,
+                  "id": 451,
                   "nodeType": "ExpressionStatement",
                   "src": "175:27:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 503,
+            "id": 453,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "addItem",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 492,
+              "id": 442,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 491,
+                  "id": 441,
                   "name": "_item",
                   "nodeType": "VariableDeclaration",
-                  "scope": 503,
+                  "scope": 453,
                   "src": "141:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -670,7 +670,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 490,
+                    "id": 440,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "141:7:3",
@@ -686,12 +686,12 @@
               "src": "140:15:3"
             },
             "returnParameters": {
-              "id": 493,
+              "id": 443,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "163:0:3"
             },
-            "scope": 517,
+            "scope": 467,
             "src": "124:86:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -699,7 +699,7 @@
           },
           {
             "body": {
-              "id": 515,
+              "id": 465,
               "nodeType": "Block",
               "src": "297:34:3",
               "statements": [
@@ -711,25 +711,25 @@
                         "argumentTypes": null,
                         "baseExpression": {
                           "argumentTypes": null,
-                          "id": 510,
+                          "id": 460,
                           "name": "MyBytesArray",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 489,
+                          "referencedDeclaration": 439,
                           "src": "308:12:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_array$_t_bytes32_$dyn_storage",
                             "typeString": "bytes32[] storage ref"
                           }
                         },
-                        "id": 512,
+                        "id": 462,
                         "indexExpression": {
                           "argumentTypes": null,
-                          "id": 511,
+                          "id": 461,
                           "name": "index",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 505,
+                          "referencedDeclaration": 455,
                           "src": "321:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -748,7 +748,7 @@
                         }
                       }
                     ],
-                    "id": 513,
+                    "id": 463,
                     "isConstant": false,
                     "isInlineArray": false,
                     "isLValue": false,
@@ -761,30 +761,30 @@
                       "typeString": "bytes32"
                     }
                   },
-                  "functionReturnParameters": 509,
-                  "id": 514,
+                  "functionReturnParameters": 459,
+                  "id": 464,
                   "nodeType": "Return",
                   "src": "301:27:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 516,
+            "id": 466,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getMyBytesArray",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 506,
+              "id": 456,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 505,
+                  "id": 455,
                   "name": "index",
                   "nodeType": "VariableDeclaration",
-                  "scope": 516,
+                  "scope": 466,
                   "src": "256:10:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -793,7 +793,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 504,
+                    "id": 454,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "256:4:3",
@@ -809,15 +809,15 @@
               "src": "255:12:3"
             },
             "returnParameters": {
-              "id": 509,
+              "id": 459,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 508,
+                  "id": 458,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 516,
+                  "scope": 466,
                   "src": "288:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -826,7 +826,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 507,
+                    "id": 457,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "288:7:3",
@@ -841,14 +841,14 @@
               ],
               "src": "287:9:3"
             },
-            "scope": 517,
+            "scope": 467,
             "src": "231:100:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 518,
+        "scope": 468,
         "src": "30:305:3"
       }
     ],
@@ -859,51 +859,15 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {
-    "5777": {
+    "1610020017867": {
       "events": {},
       "links": {},
-      "address": "0x040776Ac981CA89DD768C51FA0E2BdCb3B76C103",
-      "transactionHash": "0x9ea9f83c9bc3d431be148a481e7ddc7e27618c9ac09b52071a16d77a7dfd5661"
-    },
-    "1605198198710": {
-      "events": {},
-      "links": {},
-      "address": "0xA0515978861433261f153E592101B525d1c68996",
-      "transactionHash": "0x7b628bf7dd1acdf292ec6423cd29cf25f4f0c943fbcdfdd49bef363be4178587"
-    },
-    "1609586102224": {
-      "events": {},
-      "links": {},
-      "address": "0xeE8681916E7AB629F780CF85f7f5656BF5833D08",
-      "transactionHash": "0x26aa9d338c84ac7aabe8d874cd3a8eb1ec49a35def6999f14e247ecc5aaf4978"
-    },
-    "1609665331594": {
-      "events": {},
-      "links": {},
-      "address": "0x7140dde4f88B88E09fe07BBa2f19E786BBaf3B31",
-      "transactionHash": "0xde7945b0b8745624a3873a15b5a4f6fe8f451216ddf677857e7f8852d64c7b94"
-    },
-    "1609691435154": {
-      "events": {},
-      "links": {},
-      "address": "0xf4e2442cef9A4950FCfe483D169618FC5850abaF",
-      "transactionHash": "0x41bf8364664d758298e8b1c9d504da94bf05e6fa43dc4eaa8868a87af8833ae1"
-    },
-    "1609694484620": {
-      "events": {},
-      "links": {},
-      "address": "0xc90511CD084e159D5B4AE25F18b6eD319D36c37B",
-      "transactionHash": "0x791e503b34d8122db260c0062fa72387d35833bc1c7efd0ff0af20e9c9e9c943"
-    },
-    "1609776729117": {
-      "events": {},
-      "links": {},
-      "address": "0x020C27693779A3bFD08B5f0E8ceAABA36f9E9F03",
-      "transactionHash": "0xf34da13e7a0e619e620c1d52124b73c959c33f0f04f9554689cfb45ddcc763dd"
+      "address": "0x674c963B5830e65DC446e73ff699B988fDe4AF6B",
+      "transactionHash": "0xc3eee67c6ea96319677b71b2cc9b30dc243288dcc466fbfb170e406a4ddc7782"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2021-01-04T16:12:43.304Z",
+  "updatedAt": "2021-01-07T14:48:38.109Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
