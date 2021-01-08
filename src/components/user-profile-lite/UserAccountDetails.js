@@ -253,6 +253,7 @@ class title extends React.Component {
 
                     <b>
                       {" "}
+                      <br/>
                       <Button
                         style={{ marginLeft: "250px", marginTop: "10px" }}
                         onClick={() => this.onRedirect()}

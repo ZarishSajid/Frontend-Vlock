@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Label } from "reactstrap";
-import { FcKey } from "react-icons/fc";
+import { FcKey, FcOk } from "react-icons/fc";
+import { BsFillCircleFill } from "react-icons/bs";
 
 import {
   Card,
@@ -52,12 +53,23 @@ class UserDetails extends React.Component {
       setIsModalVisible: false,
       pulls: [],
       metaValue: (
+
         <ul>
-          <li> Click on the view key button.</li>
-          <li> Copy the key from the box.</li>
-          <li> In the top of the browser see the metamask icon. </li>
-          <li> Cick on the Meta mask icon.</li>
-          <li> Select the import account option and paste the key.</li>
+
+<p style={{ color: "black",fontWeight:"bold",fontSize:"30sp" }}>Dear  {localStorage.getItem("name")}</p>
+
+          <p> 1- Click on the view key button.</p>
+   
+          <p> 2- Copy the key from the box.</p>
+      
+
+          <p> 3- In the top of the browser see the metamask icon. </p>
+        
+
+          <p> 4- Cick on the Meta mask icon.</p>
+        
+
+          <p> 5- Select the import account option and paste the key.</p>
         </ul>
       ),
     };
@@ -113,13 +125,11 @@ class UserDetails extends React.Component {
           <Button pill outline size="sm" className="mb-2" onClick={this.toggle}>
             <i className="material-icons mr-1"></i> View Key
           </Button>
-          <p style={{ color: "black" }}>{localStorage.getItem("name")}</p>
-          <p style={{ color: "black" }}>{localStorage.getItem("sapID")}</p>
-
+        
           <Modal size="sm" open={open} toggle={this.toggle}>
             <ModalHeader style={{ marginLeft: "30px" }}>
-              {" "}
-              <FcKey>Your Private Key</FcKey>
+              
+              <p><FcKey></FcKey>Private Key</p>
             </ModalHeader>
             <ModalBody>
               <p> {this.userDetails.privateKey}</p>

@@ -36,7 +36,7 @@
 //   Nav,
 //   Container,
 //   Modal,
- 
+
 // } from "reactstrap";
 // import { Link } from "react-router-dom";
 
@@ -83,7 +83,7 @@
 //       });
 //     }
 //     this.setState({
-      
+
 //       collapseOpen: !this.state.collapseOpen
 //     });
 //   };
@@ -105,7 +105,7 @@
 //        console.log("RESPONSE = ", res);
 
 //        this.setState({
-            
+
 //         redirectRoute:"/Login",
 
 //         fireRedirect: true,
@@ -115,8 +115,7 @@
 
 //       });
 //     }
-  
-  
+
 //   render() {
 //     const { userType, fireRedirect, redirectRoute } = this.state;
 //     return [
@@ -180,16 +179,12 @@
 //                     <span className="d-lg-none d-md-block">Search</span>
 //                   </Button>
 //                 </InputGroup>
-                
-               
-                  
-               
 
 //                 {/* <Link  to={"/Login"} > */}
 
 //                   <button   onClick={() => this.Logout()}>Logout</button>
 //                   {/* </Link> */}
-                
+
 //               </Nav>
 //             </Collapse>
 //           </Container>
@@ -222,14 +217,10 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {BsFillPersonFill }from  "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { BsBellFill } from "react-icons/bs";
 
-import {
- 
-  UncontrolledDropdown,
- 
-} from "reactstrap";
+import { UncontrolledDropdown } from "reactstrap";
 import {
   Dropdown,
   DropdownToggle,
@@ -237,7 +228,7 @@ import {
   DropdownItem,
   Collapse,
   NavItem,
-  NavLink
+  NavLink,
 } from "shards-react";
 
 export default class UserActions extends React.Component {
@@ -245,7 +236,7 @@ export default class UserActions extends React.Component {
     super(props);
 
     this.state = {
-      visible: false
+      visible: false,
     };
 
     this.toggleUserActions = this.toggleUserActions.bind(this);
@@ -253,68 +244,84 @@ export default class UserActions extends React.Component {
 
   toggleUserActions() {
     this.setState({
-      visible: !this.state.visible
+      visible: !this.state.visible,
     });
   }
   Logout = () => {
-        const headers = {
-          headers: {
-            token: localStorage.getItem("token"),
-          },
-        };
-        axios.get(`http://localhost:8080/logout`, headers)
-    
-        .then((res) => {
-           console.log("RESPONSE = ", res);
-    
-           this.setState({
-                
-            redirectRoute:"/Login",
-    
-            fireRedirect: true,
-    
-          });
-          window.location.reload(false);
-    
-          });
-        }
-      
-      
+    const headers = {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    };
+    axios
+      .get(`http://localhost:8080/logout`, headers)
+
+      .then((res) => {
+        console.log("RESPONSE = ", res);
+
+        this.setState({
+          redirectRoute: "/Login",
+
+          fireRedirect: true,
+        });
+        window.location.reload(false);
+      });
+  };
+
   render() {
     return (
-      
-      <NavItem tag={Dropdown}  toggle={this.toggleUserActions}>
-        <DropdownToggle  style={{marginRight:"100px",width:"10px"}} tag={NavLink} className="text-nowrap px-3">
-       
-
-        <img style={{height:"30px",marginTop:"10px",marginRight:"100px"}}
+     
+      <NavItem tag={Dropdown} toggle={this.toggleUserActions}>
+         
+        <DropdownToggle
+          style={{ marginRight: "100px", width: "10px" }}
+          tag={NavLink}
+          className="text-nowrap px-3"
+        >
+          <img
+            style={{ height: "30px", marginTop: "10px", marginRight: "100px" }}
             className="user-avatar rounded-circle mr-2"
             src={require("../../../../images/avatars/0.jpg")}
             alt="User Avatar"
-          />{" "} 
-
+          />{" "}
+       <span
+      style={{
+        marginTop: "20px",
+        color: "white",
+        height: "30px",
+        fontWeight: "bold",
+        fontSize: "25sp",
+      }}
+    >
+      {localStorage.getItem("name")}
+    </span>
         </DropdownToggle>
-                  <span style={{marginTop:"30px",color:"white",fontWeight:"bold",fontSize:"15sp"}}>{localStorage.getItem("name")}</span>
 
-        <Collapse tag={DropdownMenu}style={{marginRight:"100px"}} right small open={this.state.visible}>
+        <Collapse
+          tag={DropdownMenu}
+          style={{ marginRight: "100px" }}
+          right
+          small
+          open={this.state.visible}
+        >
           <DropdownItem tag={Link} to="/components/user-profile-lite">
             <i className="material-icons">&#xE7FD;</i> Profile
           </DropdownItem>
           <DropdownItem tag={Link} to="edit-user-profile">
             <i className="material-icons">&#xE8B8;</i> Guide
           </DropdownItem>
-         
-        
+
           <DropdownItem divider />
-          <DropdownItem tag={Link} to="/"  onClick={() => this.Logout()} className="text-danger">
+          <DropdownItem
+            tag={Link}
+            to="/"
+            onClick={() => this.Logout()}
+            className="text-danger"
+          >
             <i className="material-icons text-danger">&#xE879;</i> Logout
           </DropdownItem>
-
         </Collapse>
-
       </NavItem>
-      
     );
-    
   }
 }

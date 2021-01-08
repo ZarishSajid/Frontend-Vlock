@@ -33,7 +33,7 @@ const linChart = {
   labels: ["Fri", "Thur", "Wed", "Tue", "Mon", "Sat", "Sun"],
   datasets: [
     {
-      label: "",
+      label: "Previous Week",
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
@@ -159,69 +159,61 @@ class UniverityAdministration extends React.Component {
     return (
       <Container fluid className="main-content-container px-4">
         <Separator className="mb-5" />
-        {/* Page Header */}
-        <Row noGutters className="page-header py-4">
-          <PageTitle
-            title="            Dashboard"
-            subtitle=""
-            className="text-sm-left mb-3"
-            style={{ marginLeft: "300px", color: "black" }}
-          />
-        </Row>
+        <h4 style={{ marginLeft: "400px", color: "black" }}> Dashboard</h4>
 
         <Row>
           <Col>
-            <Card small className="mb-4">
+            <Card small className="mb-4"style={{backgroundColor:"#7FA7B3"}} >
               <br />
-              <CardBody>
+              <CardBody >
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "blue" }} />
+                  <FaPoll style={{ color: "white" }}  />
                 </center>
                 <center>
                   {" "}
-                  <CardTitle>Poll Created </CardTitle>
+                  <CardTitle style={{color:"white"}}>Poll Created </CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "blue" }}>{this.state.pollCreated}</p>
+                  <p style={{color:"white",fontWeight:"bold"}}>{this.state.pollCreated}</p>
                 </center>
               </CardBody>
             </Card>
           </Col>
           <Col>
-            <Card small className="mb-4">
+            <Card small className="mb-4" style={{backgroundColor:"#717378"}}>
               <br />
-              <CardBody>
+              <CardBody  >
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "blue" }} />
+                  <FaPoll style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
-                  <CardTitle>New Poll</CardTitle>
+                  <CardTitle style={{color:"white"}}>New Poll</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "blue" }}>{this.state.newPoll}</p>
+                  <p style={{ color: "white",fontWeight:"bold" }}>{this.state.newPoll}</p>
                 </center>
               </CardBody>
             </Card>
           </Col>
           <Col>
-            <Card small className="mb-4">
-              <CardBody>
+            <Card small className="mb-4" >
+              <CardBody style={{backgroundColor:"#569CE5"}}>
                 <br />
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "blue" }} />
+                  <FaPoll style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
-                  <CardTitle> Casted Votes</CardTitle>
+                  <CardTitle style={{color:"white"}}> Casted Votes</CardTitle>
                 </center>
                 <center>
-                  <p style={{ color: "blue" }}>{this.state.castedVotes}</p>
+                  <p style={{color:"white",fontWeight:"bold"}}>{this.state.castedVotes}</p>
                 </center>
               </CardBody>
             </Card>
@@ -230,15 +222,15 @@ class UniverityAdministration extends React.Component {
         </Row>
 
         <Row></Row>
-        <Col >
-          <Card  width='100' height='50' className="card-chart">
+        <Col>
+          <Card width="100" height="50" className="card-chart">
             <CardHeader>
               <h5 className="card-category">Weekly Polls</h5>
               <CardTitle tag="h3"></CardTitle>
             </CardHeader>
             <CardBody>
               <div className="chart-area">
-                <Bar data={linChart} />
+                <Line data={linChart} width={515} height={110} />
               </div>
             </CardBody>
           </Card>

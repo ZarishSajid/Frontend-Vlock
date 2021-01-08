@@ -18,7 +18,7 @@ import Loader from "react-loader-spinner";
 import { css } from "@emotion/core";
 const override = css`
   position: absolute;
-  left: 30%;
+  left: 70%;
   right: 0;
   top: 50%;
   border-color: blue;
@@ -100,7 +100,7 @@ class CastVote extends React.Component {
     return (
       <div>
         <br />
-        <h3 style={{ marginLeft: "400px" }}>Cast Vote</h3>
+        <h3 style={{ marginLeft: "400px",color:"black" }}>Cast Vote</h3>
 
         <div
           style={{ marginBottom: "10px" }}
@@ -116,7 +116,7 @@ class CastVote extends React.Component {
         </div>
         <Table striped>
           <thead>
-            <tr style={{ backgroundColor: "#85DBE9" }}>
+            <tr style={{ backgroundColor: "#569CE5" }}>
               <th>#</th>
               <th>Poll Type</th>
               <th>Created By</th>

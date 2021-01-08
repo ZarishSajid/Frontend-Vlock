@@ -370,6 +370,7 @@ class Test extends React.Component {
                           border: "1px solid grey",
                           borderRadius: "10px",
                           padding: "15px",
+                          color:"black",
                         }}
                       >
                         {userData && userData._id
@@ -387,6 +388,7 @@ class Test extends React.Component {
                           border: "1px solid grey",
                           borderRadius: "10px",
                           padding: "15px",
+                           color:"black",
                         }}
                       >
                         {userData && userData._id
@@ -426,9 +428,10 @@ class Test extends React.Component {
                               )}
                             </Form.Item>
                           ))}
+                          <br/>
                         <Button
                           type="html"
-                          style={{ MarginLeft: "50px" }}
+                          style={{ MarginLeft: "100px" }}
                           // onClick={() => this.castVoteToZara()}
                         >
                           Vote

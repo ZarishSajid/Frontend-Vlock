@@ -44,7 +44,7 @@ import { useParams } from "react-router-dom";
 const FormItem = Form.Item;
 const { Text } = Typography;
 var today = moment();
-var tomorrow = moment(today).add(1, 'days');
+var tomorrow = moment(today).add(1, "days");
 const date = new Date(tomorrow);
 class CreatePoll extends React.Component {
   constructor(props) {
@@ -145,17 +145,33 @@ class CreatePoll extends React.Component {
       <Container fluid className="main-content-container px-4 pb-4">
         {/* Page Header */}
 
-        <Row noGutters className="page-header py-4">
-          <PageTitle
-            sm="4"
-            title="Edit Poll"
-            subtitle=""
-            className="text-sm-left"
-            style={{ marginLeft: "380px" }}
-          />
-        </Row>
+        <Row noGutters className="page-header py-4"></Row>
         <Col lg="10" md="12">
-          <Card small style={{ width: "60rem", height: "43rem" }}>
+          <Card
+            sm
+            className="mb-4"
+            style={{
+              height: "43rem",
+              width: "50rem ",
+              marginTop: "30px",
+              marginLeft: "100px",
+            }}
+          >
+            <CardHeader
+              style={{
+                border: "1px solid white",
+                borderRadius: "10px",
+                padding: "25px",
+                marginLeft: "30px",
+                marginRight: "30px",
+                backgroundColor: "#569CE5",
+              }}
+            >
+              <h4 style={{ color: "black", fontWeight: "bold" }}>
+                {" "}
+                <center>Edit Poll</center>
+              </h4>
+            </CardHeader>
             <CardBody>
               <Form className="add-new-post">
                 <br />
@@ -174,7 +190,7 @@ class CreatePoll extends React.Component {
                       initialValue: this.state.selectedAudience,
                     })}
                     <FormSelect
-                      style={{ height: "50px", width: "58rem" }}
+                      style={{ height: "50px", width: "47rem" }}
                       onChange={this.handleAudience}
                     >
                       <option style={{ color: "black" }} value="Student">
@@ -239,7 +255,7 @@ class CreatePoll extends React.Component {
                         : this.state.startDate,
                   })(
                     <DayPickerInput
-                    dayPickerProps={{ disabledDays: {before: new Date()}}}
+                      dayPickerProps={{ disabledDays: { before: new Date() } }}
                       selected={this.state.startDate}
                       style={{ marginLeft: "20px" }}
                       onDayChange={(day) =>
@@ -268,7 +284,7 @@ class CreatePoll extends React.Component {
                         : this.state.endDate,
                   })(
                     <DayPickerInput
-                    dayPickerProps={{ disabledDays: {before: new Date()}}}
+                      dayPickerProps={{ disabledDays: { before: new Date() } }}
                       style={{ marginLeft: "20px" }}
                       selected={this.state.endDate}
                       onDayChange={(day) =>
@@ -287,7 +303,7 @@ class CreatePoll extends React.Component {
                 style={{
                   width: "140px",
                   mrginTop: "10px",
-                  marginLeft: "370px",
+                  marginLeft: "290px",
                 }}
                 onClick={() => this.onRedirect()}
                 color="primary"

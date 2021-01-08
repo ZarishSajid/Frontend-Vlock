@@ -25,7 +25,7 @@ const linChart = {
   labels: ["Fri", "Thur", "Wed", "Tue", "Mon", "Sat", "Sun"],
   datasets: [
     {
-      label: "",
+      label: "Previous Week",
       fill: false,
       lineTension: 0.1,
       backgroundColor:  "rgba(0,123,255,0.3)",
@@ -90,7 +90,7 @@ export default class Faculty extends React.Component {
       localStorage.setItem("data ", this.state.data);
       localStorage.setItem("days ", this.state.days);
     });
-    axios.get(`http://192.168.1.153:8080/vlock/total`, headers,data)
+    axios.get(`http://localhost:8080/vlock/total`, headers,data)
       //  console.log("header")
 
       .then((res) => {
@@ -106,7 +106,7 @@ export default class Faculty extends React.Component {
       });
       
 
-      axios.get(`http://192.168.1.153:8080/vlock/count`, headers)
+      axios.get(`http://localhost:8080/vlock/count`, headers)
       //  console.log("header")
 
       .then((res) => {
@@ -119,7 +119,7 @@ export default class Faculty extends React.Component {
 
         console.log(res.message);
       });
-      axios.get(`http://192.168.1.153:8080/vlock/totalpolls`, headers)
+      axios.get(`http://localhost:8080/vlock/totalpolls`, headers)
       //  console.log("header")
 
       .then((res) => {
@@ -138,7 +138,6 @@ export default class Faculty extends React.Component {
     let { pulls} = this.state;
     let{pullss }= this.state;
     let{casted}=this.state;
-
     const data = pulls;
 
     console.log("poll created in render in panel panel",pulls);
@@ -156,34 +155,34 @@ export default class Faculty extends React.Component {
     <Row>
     
     <Col>
-    <Card  small className="mb-4"> 
+    <Card  small className="mb-4"style={{backgroundColor:"#7FA7B3"}} > 
    <br/>
-      <CardBody>
-      <center><FaPoll  style={{color:"blue"}} /></center>
-      <center>  <CardTitle  > Poll Created</CardTitle></center>
-  <center> <p style={{color:"blue"}}>{this.state.pollCreated}</p></center>
+      <CardBody >
+      <center><FaPoll  style={{ color: "white" }} /></center>
+      <center>  <CardTitle style={{color:"white"}} > Poll Created</CardTitle></center>
+  <center> <p style={{ color: "white" ,fontWeight:"bold"}}>{this.state.pollCreated}</p></center>
        
       </CardBody>
     </Card>
     </Col>
    <Col>
-   <Card   small className="mb-4"> 
+   <Card  small className="mb-4" style={{backgroundColor:"#717378"}}> 
     <br/>
-      <CardBody>
-      <center><FaPoll  style={{color:"blue"}}  /></center>
-        <center><CardTitle  >New Polls</CardTitle></center>
-    <center>   <p style={{color:"blue"}}>{this.state.newPoll}</p></center>
+      <CardBody  >
+      <center><FaPoll  style={{ color: "white" }}  /></center>
+        <center><CardTitle style={{color:"white"}}  >New Polls</CardTitle></center>
+    <center>   <p style={{ color: "white",fontWeight:"bold" }}>{this.state.newPoll}</p></center>
        
       </CardBody>
     </Card>
     </Col>
    <Col>
-   <Card  small className="mb-4"> 
+   <Card  small className="mb-4" style={{backgroundColor:"#569CE5"}}> 
    <br/>
-      <CardBody>
-      <center><FaPoll  style={{color:"blue"}} /></center>
-      <center>  <CardTitle  > Casted Votes</CardTitle></center>
-  <center> <p style={{color:"blue"}}>{this.state.castedVotes}</p></center>
+      <CardBody >
+      <center><FaPoll  style={{ color: "white"}}  /></center>
+      <center>  <CardTitle style={{color:"white"}} > Casted Votes</CardTitle></center>
+  <center> <p style={{ color: "white",fontWeight:"bold" }}>{this.state.castedVotes}</p></center>
        
       </CardBody>
     </Card>
@@ -200,7 +199,7 @@ export default class Faculty extends React.Component {
             </CardHeader>
             <CardBody>
               <div className="chart-area">
-                <Line  data={linChart} />
+                <Line  data={linChart} width={525} height={110}/>
               </div>
             </CardBody>
           </Card>

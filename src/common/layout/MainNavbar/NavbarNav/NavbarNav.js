@@ -26,12 +26,12 @@ class NavBar extends React.Component {
   };
   render() {
     return (
-    
+     
+      
       <Nav navbar className="flex-row">
-    <Notifications />
-    <UserActions />
+    <Notifications  />
+    <UserActions  />
   </Nav>
-
 
     
     

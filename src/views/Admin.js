@@ -240,7 +240,7 @@ export default class Admin extends React.Component {
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "white",fontWeight:"bold", }}>{this.state.pendingCount}</p>
+                  <p style={{ color: "white",fontWeight:"bold" }}>{this.state.pendingCount}</p>
                 </center>
               </CardBody>
             </Card>

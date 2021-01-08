@@ -32,7 +32,7 @@ const linChart = {
   labels: ["Fri", "Thur", "Wed", "Tue", "Mon", "Sat", "Sun"],
   datasets: [
     {
-      label: "",
+      label: "Previous Week",
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
@@ -164,54 +164,63 @@ class StudentPanel extends React.Component {
         <h4 style={{ marginLeft: "380px", color: "black" }}> Dashboard</h4>
         <Row>
           <Col>
-            <Card small className="mb-4">
+            <Card small className="mb-4" style={{ backgroundColor: "#7FA7B3" }}>
               <br />
               <CardBody>
                 <center>
-                  <FaPoll style={{ color: "blue" }} />
+                  <FaPoll style={{ color: "white", fontWeight: "bold" }} />
                 </center>
                 <center>
-                  <CardTitle>Poll Created</CardTitle>
+                  <CardTitle style={{ color: "white" }}>Poll Created</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "blue" }}>{this.state.pollCreated}</p>
+                  <p style={{ color: "white", fontWeight: "bold" }}>
+                    {this.state.pollCreated}
+                  </p>
                 </center>
               </CardBody>
             </Card>
           </Col>
           <Col>
-            <Card small className="mb-4">
+            <Card small className="mb-4" style={{ backgroundColor: "#717378" }}>
               <br />
               <CardBody>
                 <center>
-                  <FaPoll style={{ color: "blue" }} />
+                  <FaPoll style={{ color: "white" }} />
                 </center>
                 <center>
-                  <CardTitle>New Polls</CardTitle>
+                  <CardTitle style={{ color: "white" }}>New Polls</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "blue" }}>{this.state.newPoll}</p>
+                  <p style={{ color: "white", fontWeight: "bold" }}>
+                    {this.state.newPoll}
+                  </p>
                 </center>
               </CardBody>
             </Card>
           </Col>
 
           <Col>
-            <Card small className="mb-4">
+            <Card small className="mb-4" style={{ backgroundColor: "#569CE5" }}>
               <br />
               <CardBody>
                 <center>
-                  <FaPoll style={{ color: "blue" }} />
+                  <FaPoll style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
-                  <CardTitle> Casted Votes</CardTitle>
+                  <CardTitle style={{ color: "white" }}>
+                    {" "}
+                    Casted Votes
+                  </CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "blue" }}>{this.state.count}</p>
+                  <p style={{ color: "white", fontWeight: "bold" }}>
+                    {this.state.count}
+                  </p>
                 </center>
               </CardBody>
             </Card>
@@ -246,7 +255,7 @@ class StudentPanel extends React.Component {
             </CardHeader>
             <CardBody>
               <div className="chart-area">
-                <Line data={linChart}  width={500} height={110} />
+                <Line data={linChart} width={515} height={110} />
               </div>
             </CardBody>
           </Card>

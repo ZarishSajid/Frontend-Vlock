@@ -191,9 +191,28 @@ class CreatePoll extends React.Component {
     return (
       <Container>
 
- <center> <h4 style={{color:"black",marginTop:"30px"}}>Create Poll</h4></center>
         <Col lg="10" md="14">
-          <Card small style={{ width: "62rem", height: "55rem" }}>
+          <Card  sm
+            className="mb-4"
+            style={{
+              height: "65rem",
+              width: "50rem ",
+              marginTop: "30px",
+              marginLeft: "130px",
+            }}
+          >
+             <CardHeader
+              style={{
+                border: "1px solid white",
+                borderRadius: "10px",
+                padding: "25px",
+                marginLeft: "30px",
+                marginRight: "30px",
+                backgroundColor: "#569CE5",
+              }}
+            >
+             <h4 style={{color:"black",fontWeight:"bold"}} > <center>Create Poll</center></h4>
+            </CardHeader>
             <CardBody>
               <Form className="add-new-post">
                 <Row>
@@ -213,7 +232,7 @@ class CreatePoll extends React.Component {
                       initialValue: this.state.pollType,
                     })}
                     <FormSelect
-                      style={{ height: "50px", width: "60rem" }}
+                      style={{ height: "50px", width: "47rem" }}
                       onChange={this.handleDropdownChange}
                     >
                       <option
@@ -258,7 +277,7 @@ class CreatePoll extends React.Component {
                       initialValue: this.state.selectedAudience,
                     })}
                     <FormSelect
-                      style={{ height: "50px", width: "60rem" }}
+                      style={{ height: "50px", width: "47rem" }}
                       onChange={this.handleAudience}
                     >
                       <option style={{ color: "black" }} value="Student">
@@ -394,6 +413,7 @@ class CreatePoll extends React.Component {
                     />
                   )}
                 </FormItem>
+                <br/>
                 <b style={{ color: "black", marginLeft: "0px" }}> End Date </b>
                 <FormItem>
                   {getFieldDecorator("endDate", {
@@ -425,7 +445,7 @@ class CreatePoll extends React.Component {
                 style={{
                   width: "140px",
                   mrginTop: "10px",
-                  marginLeft: "370px",
+                  marginLeft: "300px",
                 }}
                 onClick={() => this.onRedirect()}
                 color="primary"

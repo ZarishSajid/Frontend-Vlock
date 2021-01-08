@@ -23,6 +23,7 @@ const MainNavbar = ({ layout, stickyTop }) => {
         
         >
           <NavbarSearch />
+          
           <NavbarNav />
           <NavbarToggle />
         </Navbar>

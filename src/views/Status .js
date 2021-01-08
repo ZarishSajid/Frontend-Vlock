@@ -238,7 +238,7 @@ class PollStatus extends React.Component {
         </div>
         <Table striped>
           <thead>
-            <tr style={{ backgroundColor: "#85DBE9" }}>
+            <tr style={{ backgroundColor: "#569CE5" }}>
               <th>#</th>
               <th>Poll Type</th>
               <th>Created By</th>

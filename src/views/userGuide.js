@@ -41,10 +41,11 @@ class CastVote extends React.Component {
     return (
       <div>
         <br />
-        <h3 style={{ marginLeft: "400px" }}>Uer Guide</h3>
+        <h4 style={{ marginLeft: "350px",color:"black" }}>How To Import Your Private Key </h4>
 
         <center>
           {" "}
+          <br/>
           <ReactPlayer
             controls
             url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
