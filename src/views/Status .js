@@ -9,7 +9,7 @@ import { MdLock } from "react-icons/md";
 import { AiFillCalendar } from "react-icons/ai";
 import { AiFillSafetyCertificate } from "react-icons/ai";
 import { BsFillPersonFill, BsFillCalendarFill } from "react-icons/bs";
-import { Table,Label } from "reactstrap";
+import { Table, Label } from "reactstrap";
 import { FormInput } from "shards-react";
 import { Form } from "antd";
 import * as moment from "moment";
@@ -81,7 +81,7 @@ class PollStatus extends React.Component {
     });
   }
 
-  Activetogglee(e, email,id) {
+  Activetogglee(e, email, id) {
     e.preventDefault();
     this.setState({
       openActive: !this.state.openActive,
@@ -89,20 +89,19 @@ class PollStatus extends React.Component {
     });
     const data = {
       status: "inactive",
-       
     };
     const header = {
       header: {
         token: localStorage.getItem("token"),
       },
     };
-    axios.put(`http://localhost:8080/vlock/polin/${id}` ,data).then((res) => {
+    axios.put(`http://localhost:8080/vlock/polin/${id}`, data).then((res) => {
       alert("Poll Blocked Sucessfully ");
       window.location.reload(false);
     });
   }
- 
-  Activetoggle(e, email,id) {
+
+  Activetoggle(e, email, id) {
     e.preventDefault();
     this.setState({
       openActive: !this.state.openActive,
@@ -110,7 +109,6 @@ class PollStatus extends React.Component {
     });
     const data = {
       status: "active",
-       
     };
     const header = {
       header: {
@@ -119,10 +117,10 @@ class PollStatus extends React.Component {
     };
     axios.put(`http://localhost:8080/vlock/pollact${id}`, data).then((res) => {
       alert("Poll Unblocked Sucessfully ");
-      window.location.reload(false);    
+      window.location.reload(false);
     });
   }
-  
+
   deletePoll(e, id) {
     e.preventDefault();
     console.log("id inside delete poll");
@@ -132,8 +130,6 @@ class PollStatus extends React.Component {
       },
     };
 
-
-    
     console.log("before axios", id);
 
     axios
@@ -226,13 +222,27 @@ class PollStatus extends React.Component {
       open: !this.state.open,
     });
   };
+  getAudience = (userData) => {
+    if (userData && userData._id) {
+      if (userData.selectedAudience && !userData.selectedAudience.length) {
+        return <p style={{ color: "black" }}> {userData.selectedAudience}</p>;
+      }
+      if (userData.selectedAudience && userData.selectedAudience.length > 0) {
+        return userData.selectedAudience.map((Audience) => (
+          <li style={{ color: "black" }}>{Audience}</li>
+        ));
+      }
+    } else {
+      return <p style={{ color: "black" }}>{this.state.selectedAudience}</p>;
+    }
+  };
   render() {
     const userData =
       this.props.location &&
       this.props.location.aboutProps &&
       this.props.location.aboutProps.userData;
     const { fireRedirect, redirectRoute } = this.state;
-    const {openActive } = this.state;
+    const { openActive } = this.state;
     const { open, userType } = this.state;
     const { pulls } = this.state;
     const { match } = this.props;
@@ -266,8 +276,8 @@ class PollStatus extends React.Component {
             <tr style={{ backgroundColor: "#569CE5" }}>
               <th>#</th>
               <th>Poll Type</th>
-              {/* <th>Created By</th> */}
-              {/* <th>Department</th> */}
+              <th>Created By</th>
+              <th>Department</th>
               <th>Status</th>
               <th>Active/Inactive</th>
               <th>Action</th>{" "}
@@ -292,8 +302,8 @@ class PollStatus extends React.Component {
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{values.pollType}</td>
-                    {/* <td>{values.createdBy.name}</td> */}
-                    {/* <td>{values.createdBy.department}</td> */}
+                    <td>{values.createdBy && values.createdBy.name}</td>
+                    <td>{values.createdBy && values.createdBy.department}</td>
                     <td>
                       {values.status == "approve"
                         ? "Approve"
@@ -354,8 +364,10 @@ class PollStatus extends React.Component {
                           `}
                         >
                           <BsUnlockFill
-                          //active
-                            onClick={(e) => this.Activetogglee(e, values.email,values._id)}
+                            //active
+                            onClick={(e) =>
+                              this.Activetogglee(e, values.email, values._id)
+                            }
                             style={{
                               marginTop: "3px",
                               marginLeft: "10px",
@@ -372,8 +384,10 @@ class PollStatus extends React.Component {
                           `}
                         >
                           <MdLock
-                          //inactive
-                            onClick={(e) => this.Activetoggle(e, values.email,values._id)}
+                            //inactive
+                            onClick={(e) =>
+                              this.Activetoggle(e, values.email, values._id)
+                            }
                             style={{
                               marginTop: "3px",
                               marginLeft: "10px",
@@ -388,8 +402,12 @@ class PollStatus extends React.Component {
               })
             )}
             <Modal size="md" open={open} toggle={this.toggle}>
-            
-               <center><h4 style={{color:"black",marginTop:"30px"}}> Poll Detail</h4></center> 
+              <center>
+                <h4 style={{ color: "black", marginTop: "30px" }}>
+                  {" "}
+                  Poll Detail
+                </h4>
+              </center>
               <ModalBody>
                 <p
                   style={{
@@ -412,8 +430,8 @@ class PollStatus extends React.Component {
                   </p>
                   <p style={{ color: "black" }}>
                     Created By:{" "}
-                    {userData && userData._id
-                      ? userData.createdBy.name
+                    {userData && userData._id && userData.createdBy
+                      ? userData.createdBy && userData.createdBy.name
                       : this.state.createdBy.name}
                   </p>
                   <p style={{ color: "black" }}>
@@ -427,23 +445,15 @@ class PollStatus extends React.Component {
                     {userData && userData._id
                       ? userData.createdBy.email
                       : this.state.createdBy.email}
-                  </p>
-
-                  <p style={{ color: "black" }}>
-                    {" "}
-                    Selected Audience:{" "}
-
-                    {userData && userData._id
-                      ? userData.selectedAudience
-                      : this.state.selectedAudience}
-                  </p>
-                  <p style={{ color: "black" }}>
-                    {" "}
-                    Poll Options:{" "}
-                    {userData && userData._id
-                      ? userData.pollOptions
-                      : this.state.pollOptions}
-                  </p>
+                  </p>{" "}
+                  Selected Audience: {this.getAudience(userData)} Poll Options:{" "}
+                  {userData && userData._id ? (
+                    userData.pollOptions.map((option) => (
+                      <li style={{ color: "black" }}>{option}</li>
+                    ))
+                  ) : (
+                    <p style={{ color: "black" }}>{this.state.pollOptions}</p>
+                  )}
                   <p style={{ color: "black" }}>
                     Start Date:
                     {userData && userData._id

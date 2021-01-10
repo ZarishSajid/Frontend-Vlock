@@ -246,12 +246,11 @@ class ResetPassword extends React.Component {
     super(props);
     this.Redirect = this.Redirect.bind(this);
     this.state = {
-      sapID:"",
+      sapID: "",
       number: "",
-      
     };
   }
-  
+
   Redirect() {
     const headers = {
       headers: {
@@ -262,8 +261,8 @@ class ResetPassword extends React.Component {
       sapID: this.state.sapID,
       number: this.state.number,
     };
- 
-    console.log("SapID" , this.state.sapID);
+
+    console.log("SapID", this.state.sapID);
     console.log("Number", this.state.number);
 
     axios
@@ -378,6 +377,7 @@ class ResetPassword extends React.Component {
               </div>
               <FormItem
                 style={{ color: "red" }}
+                onChange={(e) => this.setState({ sapID: e.target.value })}
                 label={
                   <Text style={{ fontWeight: "bold", color: "black" }}>
                     Sap ID
@@ -399,9 +399,8 @@ class ResetPassword extends React.Component {
                     //     this.validateSapId(value, callback),
                     // },
                   ],
-                value:this.state.sapID,
-                })(
-                <Input  placeholder="sapID" />)}
+                  initialValue: this.state.sapID,
+                })(<Input placeholder="sapID" />)}
               </FormItem>
               <br />{" "}
               <PhoneInput

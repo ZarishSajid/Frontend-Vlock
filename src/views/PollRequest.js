@@ -85,12 +85,13 @@ class PollStatus extends React.Component {
         console.log("RESPONSE = ", res);
         console.log(res.message);
         if (res.data.success) {
-          // alert("Approved Sucessfully");
+          alert("Approved Sucessfully");
+         window.location.reload(false);
+
         } else {
           //  console.log("else")
           // alert(res.data.message);
         }
-        // window.location.reload(false);
       });
     const dataa = {
       email: this.state.email,
@@ -125,7 +126,10 @@ class PollStatus extends React.Component {
         console.log(res.message);
 
         if (res.data.success) {
-          // alert("Disapproved Sucessfully");
+        
+          alert("Disapproved Sucessfully");
+          window.location.reload(false);
+
         } else {
           //  console.log("else")
           // alert(res.data.message);
@@ -220,7 +224,7 @@ class PollStatus extends React.Component {
                   style={{ color: "black", fontWeight: "bold" }}
                 >
                   {" "}
-                  No Poll Request are Available
+                  No Poll Request  Available
                 </td>
               </tr>
             ) : (
@@ -251,7 +255,7 @@ class PollStatus extends React.Component {
                           />
                         </Tooltip>
                       </NavLink>{" "}
-                      <Tooltip content=" Accept Poll "  customCss={css`
+                      <Tooltip content=" Approve Poll "  customCss={css`
                           white-space: nowrap;
                         `}>
                         <AiOutlineCheck
@@ -264,7 +268,7 @@ class PollStatus extends React.Component {
                         />
                       </Tooltip>
                       <Tooltip
-                        content="Reject Poll"
+                        content="Disapprove Poll"
                         customCss={css`
                           white-space: nowrap;
                         `}

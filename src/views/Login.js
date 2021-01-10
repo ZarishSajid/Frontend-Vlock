@@ -46,7 +46,7 @@ class Login extends React.Component {
       redirectRoute: "",
       data: {},
       count: 0,
-      notifications:"",
+      notifications: "",
     };
   }
 
@@ -74,18 +74,12 @@ class Login extends React.Component {
                 localStorage.setItem("email", this.state.data.email);
                 localStorage.setItem("password", this.state.data.password);
                 localStorage.setItem("name", this.state.data.name);
-                localStorage.setItem("notification1", res.data.notifications[1].message);
-                localStorage.setItem("notification2", res.data.notifications[2].message);
-                localStorage.setItem("notification3", res.data.notifications[3].message);
-                localStorage.setItem("notification4", res.data.notifications[4].message);
-                // localStorage.setItem("notification5", res.data.notifications[5].message);
-                // localStorage.setItem("notification5", res.data.notifications[5].message);
-                // localStorage.setItem("notification6", res.data.notifications[6].message);
-                // localStorage.setItem("notification8", res.data.notifications[7].message);
-                // localStorage.setItem("notification9", res.data.notifications[8].message);
-                // localStorage.setItem("notification10", res.data.notifications[9].message);
-
-                console.log("notificationss",res.data.notifications);
+                localStorage.setItem(
+                  "notifications",
+                  res.data.notifications.map(
+                    (notification) => notification.message
+                  )
+                );
 
                 const userType = localStorage.getItem("userType");
                 // localStorage.setItem('sapID', this.state.sapID);
@@ -104,7 +98,6 @@ class Login extends React.Component {
                       : "/components/FacultyPanel",
 
                   fireRedirect: true,
-                  
                 });
                 window.location.reload(false);
               } else {

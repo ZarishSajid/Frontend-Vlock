@@ -15,28 +15,23 @@ class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bigChartData: "data1"
+      bigChartData: "data1",
     };
   }
- 
-  setBgChartData = name => {
+
+  setBgChartData = (name) => {
     this.setState({
-      bigChartData: name
+      bigChartData: name,
     });
   };
   render() {
     return (
-     
-      
-      <Nav navbar className="flex-row">
-    <Notifications  />
-    <UserActions  />
-  </Nav>
-
-    
-    
-);
-}
+      <Nav navbar className="flex-row" style={{ marginRight: "20px" }}>
+        <Notifications />
+        <UserActions />
+      </Nav>
+    );
+  }
 }
 
 export default NavBar;

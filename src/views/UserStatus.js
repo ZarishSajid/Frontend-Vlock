@@ -69,7 +69,12 @@ class UserList extends React.Component {
     };
     axios.post(`http://localhost:8080/vlock/email`, data).then((res) => {
       alert("Email Sent ");
-      window.location.reload(false);
+      this.setState({
+        openActive: !this.state.openActive,
+      });
+      if (res.data.success === true) {
+        this.fetchData();
+      }
     });
   }
   handleDescription = (e) => {
@@ -90,20 +95,20 @@ class UserList extends React.Component {
     });
     const data = {
       status: "active",
-
     };
     const headers = {
       headers: {
-        token: localStorage.getItem('token'),
+        token: localStorage.getItem("token"),
       },
     };
-    console.log("token in active", localStorage.getItem('token'))
+    console.log("token in active", localStorage.getItem("token"));
 
     axios.put(`http://localhost:8080/vlock/active/${id}`, data).then((res) => {
       // alert("Email Sent ");
-      // window.location.reload(false);
+      // window.location.reload
     });
   }
+
   Activetogglee(e, email, id) {
     e.preventDefault();
     this.setState({
@@ -112,21 +117,22 @@ class UserList extends React.Component {
     });
     const data = {
       status: "inactive",
-
     };
     const headers = {
       headers: {
         token: localStorage.getItem('token"'),
       },
     };
-    console.log("token in inactive", localStorage.getItem('token'))
+    console.log("token in inactive", localStorage.getItem("token"));
 
-    axios.put(`http://localhost:8080/vlock/inactive/${id}`,data).then((res) => {
-      // alert("Email Sent ");
-      console.log("token in inside apiii", localStorage.getItem('token'))
+    axios
+      .put(`http://localhost:8080/vlock/inactive/${id}`, data)
+      .then((res) => {
+        // alert("Email Sent ");
+        console.log("token in inside apiii", localStorage.getItem("token"));
 
-      // window.location.reload(false);
-    });
+        // window.location.reload(false);
+      });
   }
   handleOk = (e) => {
     console.log(e);
@@ -247,7 +253,7 @@ class UserList extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {!pulls.length ? (
+            {!pulls || pulls === undefined ? (
               <tr>
                 {" "}
                 <td
@@ -323,9 +329,8 @@ class UserList extends React.Component {
                             white-space: nowrap;
                           `}
                         >
-                          
-                        <BsUnlockFill
-                        // Active
+                          <BsUnlockFill
+                            // Active
                             style={{
                               marginTop: "3px",
                               color: "green",
@@ -345,8 +350,10 @@ class UserList extends React.Component {
                           `}
                         >
                           <BsLockFill
-                          // InActive
-                            onClick={(e) => this.Activetoggle(e, values.email, values._id)}
+                            // InActive
+                            onClick={(e) =>
+                              this.Activetoggle(e, values.email, values._id)
+                            }
                             style={{
                               marginTop: "3px",
                               color: "red",
@@ -365,7 +372,11 @@ class UserList extends React.Component {
             )}
 
             <Modal size="md" open={open} toggle={this.toggle}>
-                <center><h4 style={{ color: "black" ,marginTop:"30px"}}>User Detail</h4></center>
+              <center>
+                <h4 style={{ color: "black", marginTop: "30px" }}>
+                  User Detail
+                </h4>
+              </center>
               <ModalBody>
                 <p
                   style={{
@@ -408,29 +419,29 @@ class UserList extends React.Component {
                   style={{ marginLeft: "160px" }}
                   type="secondary"
                   onClick={this.handleBack}
-                  >
+                >
                   Cancel
                 </Button>
               </ModalBody>
             </Modal>
           </tbody>
         </Table>
-        <Modal
-        size="md" open={openActive} Activetoggle={this.Activetoggle}
-        >
-
-          <h6
-            style={{
-              marginLeft: "140px",
-              color: "black",
-              fontWeight: "bold",
-              marginTop: "30px",
-            }}
-          >
+        <Modal size="lg" open={openActive} Activetoggle={this.Activetoggle}>
+          <center>
             {" "}
-            Compose Your Message
-          </h6>
-          
+            <h6
+              style={{
+                marginLeft: "0px",
+                color: "black",
+                fontWeight: "bold",
+                marginTop: "30px",
+              }}
+            >
+              {" "}
+              Compose Your Message
+            </h6>
+          </center>
+
           <ModalBody>
             <Label style={{ color: "black", fontWeight: "bold" }}>
               Subject:
@@ -459,40 +470,41 @@ class UserList extends React.Component {
               placeholder="Type Your Message"
             />
 
-            <Button
+            {/* <Button
               size="sm"
               style={{ marginLeft: "110px" }}
               type="secondary"
               onClick={this.handleActiveBack}
             >
               Cancel
-            </Button>
+            </Button> */}
             <center>
-            <Button
-              size="sm"
-              style={{ marginLeft: "0px" }}
-              type="secondary"
-              onClick={(e) => this.sendEmail()}
-            >
-              Send
-            </Button>
+              <Button
+                size="sm"
+                style={{ marginLeft: "270px" }}
+                type="secondary"
+                onClick={(e) => this.sendEmail()}
+              >
+                Send
+              </Button>
             </center>
           </ModalBody>
         </Modal>
-        <Modal 
-        size="md" open={openActive} Activetoggle={this.Activetogglee}>
-        
-          <h6
-            style={{
-              marginLeft: "140px",
-              color: "black",
-              fontWeight: "bold",
-              marginTop: "30px",
-            }}
-          >
+        <Modal size="lg" open={openActive} Activetoggle={this.Activetogglee}>
+          <center>
             {" "}
-            Compose Your Message
-          </h6>
+            <h6
+              style={{
+                marginLeft: "0px",
+                color: "black",
+                fontWeight: "bold",
+                marginTop: "30px",
+              }}
+            >
+              {" "}
+              Compose Your Message
+            </h6>
+          </center>
           <ModalBody>
             <Label style={{ color: "black", fontWeight: "bold" }}>
               Subject:
@@ -531,7 +543,7 @@ class UserList extends React.Component {
             </Button> */}
             <Button
               size="sm"
-              style={{ marginLeft: "25px" }}
+              style={{ marginLeft: "270px" }}
               type="secondary"
               onClick={(e) => this.sendEmail()}
             >

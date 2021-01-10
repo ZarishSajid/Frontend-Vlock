@@ -263,19 +263,15 @@ export default class UserActions extends React.Component {
           redirectRoute: "/Login",
 
           fireRedirect: true,
-          
         });
         // localStorage.clear()
         window.location.reload();
-
       });
   };
 
   render() {
     return (
-     
       <NavItem tag={Dropdown} toggle={this.toggleUserActions}>
-         
         <DropdownToggle
           style={{ marginRight: "100px", width: "10px" }}
           tag={NavLink}
@@ -287,27 +283,27 @@ export default class UserActions extends React.Component {
             src={require("../../../../images/avatars/0.jpg")}
             alt="User Avatar"
           />{" "}
-       <span
-      style={{
-        marginTop: "20px",
-        color: "white",
-        height: "30px",
-        fontWeight: "bold",
-        fontSize: "25sp",
-      }}
-    >
-      {localStorage.getItem("name")}
-      
-    </span>
-    <br/>
-    <p style={{
-        marginLeft: "04px",
-        color: "white",
-        fontWeight: "bold",
-        fontSize: "25sp",
-      }}
-    >     
-</p>
+          <span
+            style={{
+              marginTop: "20px",
+              color: "white",
+              height: "30px",
+              fontWeight: "bold",
+              fontSize: "25sp",
+              verticalAlign: "sub",
+            }}
+          >
+            {localStorage.getItem("name")}
+          </span>
+          <br />
+          <p
+            style={{
+              marginLeft: "04px",
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "25sp",
+            }}
+          ></p>
         </DropdownToggle>
 
         <Collapse
