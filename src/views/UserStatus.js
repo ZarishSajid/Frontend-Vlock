@@ -430,6 +430,7 @@ class UserList extends React.Component {
             {" "}
             Compose Your Message
           </h6>
+          
           <ModalBody>
             <Label style={{ color: "black", fontWeight: "bold" }}>
               Subject:
