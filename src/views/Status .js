@@ -416,37 +416,38 @@ class PollStatus extends React.Component {
                     padding: "15px",
                   }}
                 >
-                  <p style={{ color: "black" }}>
+                  {/* <p style={{ color: "black" }}>
                     Poll Type:{" "}
                     {userData && userData._id
                       ? userData.pollType
                       : this.state.pollType}
-                  </p>
+                  </p> */}
                   <p style={{ color: "black" }}>
                     Poll Question:{" "}
                     {userData && userData._id
                       ? userData.pollQuestion
                       : this.state.pollQuestion}
                   </p>
-                  <p style={{ color: "black" }}>
+                  {/* <p style={{ color: "black" }}>
                     Created By:{" "}
                     {userData && userData._id && userData.createdBy
                       ? userData.createdBy && userData.createdBy.name
                       : this.state.createdBy.name}
-                  </p>
-                  <p style={{ color: "black" }}>
+                  </p> */}
+                  {/* <p style={{ color: "black" }}>
                     Department:{" "}
                     {userData && userData._id
                       ? userData.createdBy.department
                       : this.state.createdBy.department}
-                  </p>
+                  </p> */}
                   <p style={{ color: "black" }}>
                     Email:{" "}
                     {userData && userData._id
                       ? userData.createdBy.email
                       : this.state.createdBy.email}
                   </p>{" "}
-                  Selected Audience: {this.getAudience(userData)} Poll Options:{" "}
+                  Selected Audience: {this.getAudience(userData)}
+                   Poll Options:{" "}
                   {userData && userData._id ? (
                     userData.pollOptions.map((option) => (
                       <li style={{ color: "black" }}>{option}</li>
@@ -454,6 +455,7 @@ class PollStatus extends React.Component {
                   ) : (
                     <p style={{ color: "black" }}>{this.state.pollOptions}</p>
                   )}
+                  <br/>
                   <p style={{ color: "black" }}>
                     Start Date:
                     {userData && userData._id

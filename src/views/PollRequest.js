@@ -137,6 +137,12 @@ class PollStatus extends React.Component {
         // window.location.reload(false);
       });
   }
+  handleBack = () => {
+    this.setState({
+      //openActive: !this.state.openActive,
+      open: !this.state.open,
+    });
+  };
   componentDidMount() {
     this.fetchData();
   }
@@ -165,6 +171,20 @@ class PollStatus extends React.Component {
         console.log(res.message);
       });
   }
+  getAudience = (userData) => {
+    if (userData && userData._id) {
+      if (userData.selectedAudience && !userData.selectedAudience.length) {
+        return <p style={{ color: "black" }}> {userData.selectedAudience}</p>;
+      }
+      if (userData.selectedAudience && userData.selectedAudience.length > 0) {
+        return userData.selectedAudience.map((Audience) => (
+          <li style={{ color: "black" }}>{Audience}</li>
+        ));
+      }
+    } else {
+      return <p style={{ color: "black" }}>{this.state.selectedAudience}</p>;
+    }
+  };
   render() {
     const userData =
       this.props.location &&
@@ -186,7 +206,7 @@ class PollStatus extends React.Component {
 
       <div>
         <br />
-        <h3 style={{ marginLeft: "400px" }}>Poll Request</h3>
+        <h3 style={{ marginLeft: "400px" ,color:"black"}}>Poll Request</h3>
 
         <div
           style={{ marginBottom: "10px" }}
@@ -285,9 +305,9 @@ class PollStatus extends React.Component {
               })
             )}
             <Modal size="md" open={open} toggle={this.toggle}>
-            <ModalHeader style={{ marginLeft: "0px" }}>
-                <h4 style={{color:"black"}}>Poll Detail</h4>
-              </ModalHeader>
+            
+               <center> <h4 style={{color:"black",marginTop:"30px"}}>Poll Detail</h4></center>
+           
               <ModalBody>
                 <p
                   style={{
@@ -296,19 +316,19 @@ class PollStatus extends React.Component {
                     padding: "15px",
                   }}
                 >
-                  <p style={{ color: "black" }}>
+                  {/* <p style={{ color: "black" }}>
                     Poll Type:{" "}
                     {userData && userData._id
                       ? userData.pollType
                       : this.state.pollType}
-                  </p>
-                  <p style={{ color: "black" }}>
+                  </p> */}
+                  {/* <p style={{ color: "black" }}>
                     Poll Question:{" "}
                     {userData && userData._id
                       ? userData.pollQuestion
                       : this.state.pollQuestion}
-                  </p>
-                  <p style={{ color: "black" }}>
+                  </p> */}
+                  {/* <p style={{ color: "black" }}>
                     Created By:{" "}
                     {userData && userData._id
                       ? userData.createdBy.name
@@ -319,7 +339,7 @@ class PollStatus extends React.Component {
                     {userData && userData._id
                       ? userData.createdBy.department
                       : this.state.createdBy.department}
-                  </p>
+                  </p> */}
                   <p style={{ color: "black" }}>
                     Email:{" "}
                     {userData && userData._id
@@ -327,21 +347,17 @@ class PollStatus extends React.Component {
                       : this.state.createdBy.email}
                   </p>
                   <p style={{ color: "black" }}>
-                    {" "}
-                    Selected Audience:{" "}
-                    {userData && userData._id
-                      ? userData.selectedAudience
-                      : this.state.selectedAudience
-                     
-                    }
+                  Selected Audience: {this.getAudience(userData)}
                   </p>
-                  <p style={{ color: "black" }}>
-                    {" "}
-                    Poll Options:{" "}
-                    {userData && userData._id
-                      ? userData.pollOptions
-                      : this.state.pollOptions}
-                  </p>
+                  Poll Options:{" "}
+                  {userData && userData._id ? (
+                    userData.pollOptions.map((option) => (
+                      <li style={{ color: "black" }}>{option}</li>
+                    ))
+                  ) : (
+                    <p style={{ color: "black" }}>{this.state.pollOptions}</p>
+                  )}
+                  <br/>
                   <p style={{ color: "black" }}>
                     Start Date:
                     {userData && userData._id
@@ -355,13 +371,14 @@ class PollStatus extends React.Component {
                       : this.state.endDate}
                   </p>
                 </p>
-                <Button
-                  style={{ marginLeft: "100px" }}
+               <center> <Button
+                  style={{ marginLeft: "0px" }}
                   type="secondary"
                   onClick={this.handleBack}
                 >
                   Cancel
                 </Button>
+                </center>
               </ModalBody>
             </Modal>
           </tbody>
