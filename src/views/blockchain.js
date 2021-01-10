@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 import Web3 from "web3";
 import TruffleContract from "truffle-contract";
 import Election from "../build/contracts/Election.json";
-import Poll from "../build/contracts/Poll.json";
+// import Poll from "../build/contracts/Poll.json";
 import Option from "../build/contracts/Option.json";
 import { Radio, Form } from "antd";
 class Test extends React.Component {
@@ -21,6 +21,7 @@ class Test extends React.Component {
       loading: true,
       voting: false,
       option: "",
+      voteCount:0
     };
 
     var web3 = new Web3();
@@ -54,9 +55,6 @@ class Test extends React.Component {
       window.ethereum.enable();
     }
 
-    // web3.eth.getAccounts().then((acc)=>{ console.log(acc); });
-    // txnCount = web3.eth.getTransactionCount(web3.eth.accounts[0])
-    // console.log("account cteat",web3.eth.accounts.create);
     web3.eth.getTransactionCount((err, res) => {
       console.log(" getTransactionCount ", err, res);
       // console.log(res);
@@ -68,12 +66,6 @@ class Test extends React.Component {
     });
     web3.eth.getAccounts((err, res) => {
       console.log("getAccounts = ", res);
-      // console.log(res[0]);
-      // console.log(res);
-      // console.log(res[2]);
-      // console.log(res[3]);
-      // console.log(res[4]);
-      // console.log("Accountsss***");
     });
 
     // web3.eth.getAccounts().then( function (result) { console.log (result[0] )});
@@ -84,53 +76,13 @@ class Test extends React.Component {
     // console.log("Zara 1st test this.web3Provider", this.web3Provider);
 
     this.web3 = new Web3(this.web3Provider);
-    // console.log("Zara 2st test this.web3Provider", this.web3Provider);
     this.castVoteToZara = this.castVoteToZara.bind(this);
     this.watchEvents = this.watchEvents.bind(this);
-    this.registerCandidate = this.registerCandidate.bind(this);
-    this.gettingDep = this.gettingDep.bind(this);
-    this.onUserRegister = this.onUserRegister.bind(this);
     this.election = TruffleContract(Election);
     this.election.setProvider(this.web3Provider);
-
-    this.poll = TruffleContract(Poll);
-    this.poll.setProvider(this.web3Provider);
-    this.optioncontract = TruffleContract(Option);
-    this.optioncontract.setProvider(this.web3Provider);
   }
 
-  async onUserRegister() {
-    console.log("Inside Register user state =", this.state);
-    const { option } = this.state;
-
-    console.log("option");
-    console.log(option);
-    console.log("this.pollInstance = ", this.pollInstance);
-    this.pollInstance
-      .addOption(option, {
-        from: this.state.account,
-      })
-      .then(async (result) => {
-        console.log("result = ", result);
-        console.log("Before  state of polls = ", this.state.polls);
-        await this.registerCandidate();
-        console.log("\n this.state.event = ", this.state.event);
-        // console.log("APP >> Before >> candidates", JSON.stringify(candidate));
-        const polls = [...this.state.polls]; //for cancatination of array
-        const id = polls.length + 1;
-        polls.push({
-          id: id.toString(),
-          option,
-        });
-
-        console.log("APP >> polss >> Array ", JSON.stringify(polls));
-
-        this.setState({ polls: polls });
-
-        console.log("After  state of polls = ", this.state.polls);
-      });
-  }
-
+ 
   async componentDidMount() {
     console.log("inside componentDidMount ");
     // console.log(" Account************", this.state.account);
@@ -169,7 +121,10 @@ class Test extends React.Component {
       }
       this.setState({ polls: polls });
 
-      console.log("\n polls = ", polls);
+      console.log(
+        "\n downside of votecast method polls list of polls = ",
+        polls
+      );
       // this.pollInstance.voters(this.state.account).then((hasVoted) => {
       //   this.setState({ hasVoted, loading: false });
       // });
@@ -182,22 +137,70 @@ class Test extends React.Component {
     console.log("radio butto selected stateee!!!");
   };
 
-  async castVoteToZara(e,values) {
+  async castVoteToZara(e, values) {
     e.preventDefault();
     const userData =
       this.props.location &&
       this.props.location.aboutProps &&
       this.props.location.aboutProps.userData;
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log("sselected  options!!!", values.pollOption);
         console.log("iddddd", userData._id);
 
+        const results = await this.pollInstance
+          .vote(userData._id, values.pollOption, {
+            from: this.state.account,
+          })
+          .then((result) => this.setState({ hasVoted: true }));
       }
-    }); 
-    const results = await this.pollInstance.voted(userData._id, values.pollOption, {
-       from: this.state.account,
+
+    
     });
+    this.web3.eth.getCoinbase(async (err, account) => {
+      console.log("getCoinbase = ", account);
+      // this.state.account =
+      this.setState({ account: account });
+      // const accounts = await this.web3.eth.getAccounts();
+      // console.log("getCoinbase => getAccounts  === ", accounts);
+
+      //  this.web3.eth.getAccounts()
+      // .then((accounts) => {
+      //    console.log(accounts);
+      // });
+
+      // this.setState({ account });
+      this.pollInstance = await this.election.deployed();
+      console.log("PollInstance", this.pollInstance);
+      const pollCount = await this.pollInstance.pollCount();
+      console.log("pollCount =  ", pollCount);
+      const polls = [...this.state.polls];
+      for (var i = 0; i <= pollCount; i++) {
+        const poll = await this.pollInstance.polls(i);
+        polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
+      }
+      this.setState({ polls: polls });
+
+      console.log("\n polls list of polls = ", JSON.stringify(polls));
+
+      for(var i=0; i<polls.length; i++)
+      {
+       console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
+          
+      }
+      // this.pollInstance.getAll().then((polls) => {
+      //   console.log("Polls are here", polls);
+      // });
+    });
+
+    // console.log("zara test castVote", candidateId);
+    // this.setState({ voting: true });
+    // //this.loginInstance.
+
+    // this.electionInstance
+    //   .vote(candidateId, { from: this.state.account })
+    //   .then((result) => this.setState({ hasVoted: true }));
+
     // set state value or update this user in DB and marked as casted so he/she cant vote again
     // {1,B,5};
     /**
@@ -214,17 +217,17 @@ class Test extends React.Component {
     // this.setState({ polls: polls });
 
     // console.log("results", results);
-    this.setState({ voting: true });
+    // this.setState({ voting: true });
     // this.electionInstance
     //   .vote(candidateId, { from: this.state.account })
     //   .then((result) => this.setState({ hasVoted: true }));
   }
-  
+
   watchEvents() {
     // TODO: trigger event when vote is counted, not when component renders
     console.log("zara test inside watchevent");
     this.pollInstance
-      .votedEvent(
+      .voteEvent(
         {},
         {
           fromBlock: 0,
@@ -236,26 +239,7 @@ class Test extends React.Component {
       });
   }
 
-  async registerCandidate() {
-    // TODO: trigger event when vote is counted, not when component renders
-    console.log("zara test inside registerCandidate");
 
-    return await this.pollInstance
-      .registerCandidate(
-        {},
-        {
-          fromBlock: 0,
-          toBlock: "latest",
-        }
-      )
-      .watch((error, event) => {
-        const { argu } = event;
-        console.log("error , event ", error, JSON.stringify(event));
-        // const { argu } = event;
-        this.setState({ event: event });
-        return event;
-      });
-  }
 
   // castVote(candidateId) {
   //   console.log("zara test castVote", candidateId);
@@ -266,20 +250,6 @@ class Test extends React.Component {
   //   //   from: this.state.account,
   //   // }).then((result) => this.setState({ hasVoted: true }));
   // }
-
-  gettingDep(namee) {
-    console.log("=== Test >> gettingDep >> inside getting >>>> Test.js");
-    console.log("=== this.state.namee = ", this.state.namee);
-    this.loginInstance
-      .setName(namee, { from: this.state.account })
-      .then((namee) => {
-        console.log("=== setName output  = ", namee);
-
-        this.loginInstance.getName().then((name) => {
-          console.log("=== Zaraaaaaaaa === getName output  = ", name);
-        });
-      });
-  }
 
   drawGrid() {
     return (
@@ -330,13 +300,6 @@ class Test extends React.Component {
       this.props.location.aboutProps &&
       this.props.location.aboutProps.userData;
     console.log(" ++++ inside blockchain", userData);
-    // console.log(
-    //   " ***** selected radio button",
-    //   userData &&
-
-    //   userData.pollOptions
-    // );
-
     return (
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
@@ -347,7 +310,7 @@ class Test extends React.Component {
             className="text-sm-left"
           />
         </Row>
-        {this.drawGrid()}
+        {/* {this.drawGrid()} */}
         <Row>
           <Col>
             <Card small>

@@ -66,7 +66,10 @@ class title extends React.Component {
             console.log("RESPONSE = ", res);
             console.log(res.message);
             if (res.data.success) {
+              localStorage.setItem("name", formData.name);
+
               alert("Updated Sucessfully");
+              
             } else {
               //  console.log("else")
               alert(res.data.message);

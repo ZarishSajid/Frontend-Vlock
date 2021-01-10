@@ -190,7 +190,7 @@ class CreatePoll extends React.Component {
                       initialValue: this.state.selectedAudience,
                     })}
                     <FormSelect
-                      style={{ height: "50px", width: "47rem" }}
+                      style={{ height: "55px", width: "47rem" }}
                       onChange={this.handleAudience}
                     >
                       <option style={{ color: "black" }} value="Student">

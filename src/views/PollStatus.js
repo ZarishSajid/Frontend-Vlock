@@ -142,7 +142,6 @@ class PollStatus extends React.Component {
               <th>Created By</th>
               <th>Start Date</th>
               <th>End Date</th>
-              <th> Poll Question</th>
               <th>Status</th>
               <th>Action</th>
               <th></th>
@@ -170,10 +169,9 @@ class PollStatus extends React.Component {
                     <td>{values.createdBy.name}</td>
                     <td>{moment(values.startDate).format("MM-DD-YYYY")}</td>
                     <td>{moment(values.endDate).format("MM-DD-YYYY")}</td>
-                    <td>{values.pollQuestion}</td>
                     <td>
-                      {values.status == "approve"
-                        ? "Approve"
+                      {values.status == "approved"
+                        ? "Approved"
                         : values.status == "disapproved"
                         ? "Disapproved"
                         : values.status == "pending"

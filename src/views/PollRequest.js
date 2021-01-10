@@ -23,6 +23,7 @@ import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import SweetAlert from "sweetalert-react/lib/SweetAlert";
 import { css } from "@emotion/core";
+
 const override = css`
   position: absolute;
   left: 40%;
@@ -84,12 +85,12 @@ class PollStatus extends React.Component {
         console.log("RESPONSE = ", res);
         console.log(res.message);
         if (res.data.success) {
-          alert("Approved Sucessfully");
+          // alert("Approved Sucessfully");
         } else {
           //  console.log("else")
-          alert(res.data.message);
+          // alert(res.data.message);
         }
-        window.location.reload(false);
+        // window.location.reload(false);
       });
     const dataa = {
       email: this.state.email,
@@ -114,19 +115,22 @@ class PollStatus extends React.Component {
     const data = {
       status: "disapproved",
     };
+    console.log("status disapproveddd",data.status)
     axios
       .put(`http://localhost:8080/vlock/status/${id}`, data, headers)
 
       .then((res) => {
         console.log("RESPONSE = ", res);
         console.log(res.message);
+        console.log(res.message);
+
         if (res.data.success) {
-          alert("Disapproved Sucessfully");
+          // alert("Disapproved Sucessfully");
         } else {
           //  console.log("else")
-          alert(res.data.message);
+          // alert(res.data.message);
         }
-        window.location.reload(false);
+        // window.location.reload(false);
       });
   }
   componentDidMount() {
@@ -277,68 +281,70 @@ class PollStatus extends React.Component {
               })
             )}
             <Modal size="md" open={open} toggle={this.toggle}>
-              <ModalHeader style={{ marginLeft: "180px" }}>
-                Poll Detail
+            <ModalHeader style={{ marginLeft: "0px" }}>
+                <h4 style={{color:"black"}}>Poll Detail</h4>
               </ModalHeader>
               <ModalBody>
                 <p
                   style={{
-                    border: "4px solid blue",
+                    border: "4px solid black",
                     borderRadius: "20px",
                     padding: "15px",
                   }}
                 >
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Poll Type:{" "}
                     {userData && userData._id
                       ? userData.pollType
                       : this.state.pollType}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Poll Question:{" "}
                     {userData && userData._id
                       ? userData.pollQuestion
                       : this.state.pollQuestion}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Created By:{" "}
                     {userData && userData._id
                       ? userData.createdBy.name
                       : this.state.createdBy.name}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Department:{" "}
                     {userData && userData._id
                       ? userData.createdBy.department
                       : this.state.createdBy.department}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Email:{" "}
                     {userData && userData._id
                       ? userData.createdBy.email
                       : this.state.createdBy.email}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     {" "}
                     Selected Audience:{" "}
                     {userData && userData._id
                       ? userData.selectedAudience
-                      : this.state.selectedAudience}
+                      : this.state.selectedAudience
+                     
+                    }
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     {" "}
                     Poll Options:{" "}
                     {userData && userData._id
                       ? userData.pollOptions
                       : this.state.pollOptions}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Start Date:
                     {userData && userData._id
                       ? moment(userData.startDate).format("MM-DD-YYYY")
                       : this.state.startDate}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     End Date:{" "}
                     {userData && userData._id
                       ? moment(userData.endDate).format("MM-DD-YYYY")

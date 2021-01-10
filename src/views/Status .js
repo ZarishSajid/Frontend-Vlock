@@ -33,9 +33,10 @@ const override = css`
   position: absolute;
   left: 40%;
   right: 0;
-  top: 50%;
+  top: 70%;
   border-color: blue;
 `;
+
 class PollStatus extends React.Component {
   constructor(props) {
     super(props);
@@ -80,7 +81,7 @@ class PollStatus extends React.Component {
     });
   }
 
-  Activetoggle(e, email,id) {
+  Activetogglee(e, email,id) {
     e.preventDefault();
     this.setState({
       openActive: !this.state.openActive,
@@ -95,9 +96,30 @@ class PollStatus extends React.Component {
         token: localStorage.getItem("token"),
       },
     };
-    axios.put(`http://localhost:8080/vlock/active/${id}`, data).then((res) => {
-      alert("Email Sent ");
-      // window.location.reload(false);
+    axios.put(`http://localhost:8080/vlock/polin/${id}` ,data).then((res) => {
+      alert("Poll Blocked Sucessfully ");
+      window.location.reload(false);
+    });
+  }
+ 
+  Activetoggle(e, email,id) {
+    e.preventDefault();
+    this.setState({
+      openActive: !this.state.openActive,
+      email: email,
+    });
+    const data = {
+      status: "active",
+       
+    };
+    const header = {
+      header: {
+        token: localStorage.getItem("token"),
+      },
+    };
+    axios.put(`http://localhost:8080/vlock/pollact${id}`, data).then((res) => {
+      alert("Poll Unblocked Sucessfully ");
+      window.location.reload(false);    
     });
   }
   
@@ -109,6 +131,9 @@ class PollStatus extends React.Component {
         token: localStorage.getItem("token"),
       },
     };
+
+
+    
     console.log("before axios", id);
 
     axios
@@ -241,9 +266,8 @@ class PollStatus extends React.Component {
             <tr style={{ backgroundColor: "#569CE5" }}>
               <th>#</th>
               <th>Poll Type</th>
-              <th>Created By</th>
-              <th>Department</th>
-              <th>Poll Question</th>
+              {/* <th>Created By</th> */}
+              {/* <th>Department</th> */}
               <th>Status</th>
               <th>Active/Inactive</th>
               <th>Action</th>{" "}
@@ -268,9 +292,8 @@ class PollStatus extends React.Component {
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{values.pollType}</td>
-                    <td>{values.createdBy.name}</td>
-                    <td>{values.createdBy.department}</td>
-                    <td>{values.pollQuestion}</td>
+                    {/* <td>{values.createdBy.name}</td> */}
+                    {/* <td>{values.createdBy.department}</td> */}
                     <td>
                       {values.status == "approve"
                         ? "Approve"
@@ -285,7 +308,7 @@ class PollStatus extends React.Component {
                     <td>{values.active ? "Active" : "Inactive"}</td>
                     <td>
                       <Tooltip
-                        content="Delete User"
+                        content="Delete Poll"
                         customCss={css`
                           white-space: nowrap;
                         `}
@@ -312,7 +335,7 @@ class PollStatus extends React.Component {
                         }}
                       >
                         <Tooltip
-                          content="View User"
+                          content="View Poll"
                           customCss={css`
                             white-space: nowrap;
                           `}
@@ -325,13 +348,14 @@ class PollStatus extends React.Component {
                       </NavLink>{" "}
                       {values.active ? (
                         <Tooltip
-                          content="Unblock User"
+                          content="Unblock Poll"
                           customCss={css`
                             white-space: nowrap;
                           `}
                         >
                           <BsUnlockFill
-                            onClick={(e) => this.Activetoggle(e, values.email,values._id)}
+                          //active
+                            onClick={(e) => this.Activetogglee(e, values.email,values._id)}
                             style={{
                               marginTop: "3px",
                               marginLeft: "10px",
@@ -342,12 +366,13 @@ class PollStatus extends React.Component {
                         </Tooltip>
                       ) : (
                         <Tooltip
-                          content="Block User"
+                          content="Block Poll"
                           customCss={css`
                             white-space: nowrap;
                           `}
                         >
                           <MdLock
+                          //inactive
                             onClick={(e) => this.Activetoggle(e, values.email,values._id)}
                             style={{
                               marginTop: "3px",
@@ -363,9 +388,8 @@ class PollStatus extends React.Component {
               })
             )}
             <Modal size="md" open={open} toggle={this.toggle}>
-              <ModalHeader style={{ marginLeft: "0px" }}>
-                <h4>Poll Detail</h4>
-              </ModalHeader>
+            
+               <center><h4 style={{color:"black",marginTop:"30px"}}> Poll Detail</h4></center> 
               <ModalBody>
                 <p
                   style={{
@@ -408,6 +432,7 @@ class PollStatus extends React.Component {
                   <p style={{ color: "black" }}>
                     {" "}
                     Selected Audience:{" "}
+
                     {userData && userData._id
                       ? userData.selectedAudience
                       : this.state.selectedAudience}
@@ -443,7 +468,7 @@ class PollStatus extends React.Component {
             </Modal>
           </tbody>
         </Table>
-        <Modal size="md" open={openActive} Activetoggle={this.Activetoggle}>
+        {/* <Modal size="md" open={openActive} Activetoggle={this.Activetoggle}>
           <h6
             style={{
               marginLeft: "140px",
@@ -487,8 +512,8 @@ class PollStatus extends React.Component {
               size="sm"
               style={{ marginLeft: "110px" }}
               type="secondary"
-              onClick={this.handleActiveBack}
-            >
+              onClick={this.handleBack}
+              >
               Cancel
             </Button>
             <Button
@@ -500,7 +525,7 @@ class PollStatus extends React.Component {
               Send
             </Button>
           </ModalBody>
-        </Modal>
+        </Modal> */}
         <br />
         <br />
         <br />

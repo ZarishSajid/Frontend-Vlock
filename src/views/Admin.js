@@ -67,7 +67,7 @@ const pieChart = {
 	datasets: [{
 		data: [0,0,0],
 		backgroundColor: [
-      "rgba(127, 167, 179) ",
+      "#7FA7B3 ",
       "rgba(113, 115, 120)",
       "rgba(86,156,229)",
 		],
@@ -97,7 +97,10 @@ export default class Admin extends React.Component {
   };
 
   componentDidMount() {
+  
     this.fetchData();
+   
+    
   }
 
   fetchData() {
@@ -145,7 +148,7 @@ export default class Admin extends React.Component {
         this.state.approvedCount = res.data.data.approvedCount;
 
         this.state.pendingCount = res.data.data.pendingCount;
-        pieChart.datasets[0].data = [this.state.disapprovedCount,this.state.approvedCount,this.state.pendingCount]
+        pieChart.datasets[0].data = [this.state.approvedCount,this.state.disapprovedCount,this.state.pendingCount]
         console.log(
           "this.state.disapprovedCount  =",
           this.state.disapprovedCount
@@ -162,6 +165,8 @@ export default class Admin extends React.Component {
       });
   }
   render() {
+  
+  // window.location.reload(false);
     let { pulls } = this.state;
     // const {approvedCount} = pulls;
     console.log("pulsss12345s", pulls);

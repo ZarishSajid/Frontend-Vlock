@@ -89,16 +89,42 @@ class UserList extends React.Component {
       email: email,
     });
     const data = {
+      status: "active",
+
+    };
+    const headers = {
+      headers: {
+        token: localStorage.getItem('token'),
+      },
+    };
+    console.log("token in active", localStorage.getItem('token'))
+
+    axios.put(`http://localhost:8080/vlock/active/${id}`, data).then((res) => {
+      // alert("Email Sent ");
+      // window.location.reload(false);
+    });
+  }
+  Activetogglee(e, email, id) {
+    e.preventDefault();
+    this.setState({
+      openActive: !this.state.openActive,
+      email: email,
+    });
+    const data = {
       status: "inactive",
 
     };
-    const header = {
-      header: {
-        token: localStorage.getItem("token"),
+    const headers = {
+      headers: {
+        token: localStorage.getItem('token"'),
       },
     };
-    axios.put(`http://localhost:8080/vlock/active/${id}`, data).then((res) => {
-      alert("Email Sent ");
+    console.log("token in inactive", localStorage.getItem('token'))
+
+    axios.put(`http://localhost:8080/vlock/inactive/${id}`,data).then((res) => {
+      // alert("Email Sent ");
+      console.log("token in inside apiii", localStorage.getItem('token'))
+
       // window.location.reload(false);
     });
   }
@@ -114,7 +140,6 @@ class UserList extends React.Component {
       open: !this.state.open,
     });
   };
-
   componentDidMount() {
     this.fetchData();
   }
@@ -155,6 +180,7 @@ class UserList extends React.Component {
         token: localStorage.getItem("token"),
       },
     };
+
     console.log("before axios", id);
     axios
       .delete(`http://localhost:8080/vlock/user/${id}`, headers)
@@ -207,7 +233,7 @@ class UserList extends React.Component {
         </div>
         <Table striped>
           <thead>
-            <tr style={{ backgroundColor: "#85DBE9" }}>
+            <tr style={{ backgroundColor: "#569CE5" }}>
               <th> #</th>
               <th>Name </th>
               <th> Sap ID</th>
@@ -297,7 +323,9 @@ class UserList extends React.Component {
                             white-space: nowrap;
                           `}
                         >
-                          <BsUnlockFill
+                          
+                        <BsUnlockFill
+                        // Active
                             style={{
                               marginTop: "3px",
                               color: "green",
@@ -305,7 +333,7 @@ class UserList extends React.Component {
                               height: "30px",
                             }}
                             onClick={(e) =>
-                              this.Activetoggle(e, values.email, values._id)
+                              this.Activetogglee(e, values.email, values._id)
                             }
                           ></BsUnlockFill>
                         </Tooltip>
@@ -317,6 +345,7 @@ class UserList extends React.Component {
                           `}
                         >
                           <BsLockFill
+                          // InActive
                             onClick={(e) => this.Activetoggle(e, values.email, values._id)}
                             style={{
                               marginTop: "3px",
@@ -336,9 +365,7 @@ class UserList extends React.Component {
             )}
 
             <Modal size="md" open={open} toggle={this.toggle}>
-              <ModalHeader style={{ marginLeft: "0px" }}>
-                <h4 style={{ color: "black" }}>User Detail</h4>
-              </ModalHeader>
+                <center><h4 style={{ color: "black" ,marginTop:"30px"}}>User Detail</h4></center>
               <ModalBody>
                 <p
                   style={{
@@ -381,14 +408,17 @@ class UserList extends React.Component {
                   style={{ marginLeft: "160px" }}
                   type="secondary"
                   onClick={this.handleBack}
-                >
+                  >
                   Cancel
                 </Button>
               </ModalBody>
             </Modal>
           </tbody>
         </Table>
-        <Modal size="md" open={openActive} Activetoggle={this.Activetoggle}>
+        <Modal
+        size="md" open={openActive} Activetoggle={this.Activetoggle}
+        >
+
           <h6
             style={{
               marginLeft: "140px",
@@ -436,9 +466,71 @@ class UserList extends React.Component {
             >
               Cancel
             </Button>
+            <center>
             <Button
               size="sm"
-              style={{ marginLeft: "30px" }}
+              style={{ marginLeft: "0px" }}
+              type="secondary"
+              onClick={(e) => this.sendEmail()}
+            >
+              Send
+            </Button>
+            </center>
+          </ModalBody>
+        </Modal>
+        <Modal 
+        size="md" open={openActive} Activetoggle={this.Activetogglee}>
+        
+          <h6
+            style={{
+              marginLeft: "140px",
+              color: "black",
+              fontWeight: "bold",
+              marginTop: "30px",
+            }}
+          >
+            {" "}
+            Compose Your Message
+          </h6>
+          <ModalBody>
+            <Label style={{ color: "black", fontWeight: "bold" }}>
+              Subject:
+            </Label>
+
+            <FormInput
+              style={{ color: "black" }}
+              type="textarea"
+              onChange={this.handleSubject}
+              size="lg"
+              className="mb-3"
+              placeholder="Type Your Subject"
+            />
+
+            <br />
+            <Label style={{ color: "black", fontWeight: "bold" }}>
+              Message:
+            </Label>
+
+            <FormInput
+              style={{ color: "black" }}
+              type="textarea"
+              onChange={this.handleDescription}
+              size="lg"
+              className="mb-3"
+              placeholder="Type Your Message"
+            />
+
+            {/* <Button
+              size="sm"
+              style={{ marginLeft: "110px" }}
+              type="secondary"
+              onClick={this.handleActiveBack}
+            >
+              Cancel
+            </Button> */}
+            <Button
+              size="sm"
+              style={{ marginLeft: "25px" }}
               type="secondary"
               onClick={(e) => this.sendEmail()}
             >

@@ -38,23 +38,10 @@ class SidebarMainNavbar extends React.Component {
                 
                 <span style={{width:"60px",fontWeight:"bold",color:"white"}} className="#fff text-bold">V</span> 
                 <span style={{color:"white",width:"60px",fontWeight:"bold"}}>LOCK</span>
+                
               </p>
-              <p style={{color:"black"}}>{localStorage.getItem("name")}</p>
-
-            {/* <img
- id="main-logo"
- className="d-inline-block align-top mr-1"
-              style={{
-                maxWidth: "65px",
-                color: "blue",
-                marginRight: "0px",
-                marginRight: "6rem!important",
-              
-              }}
-              src={require("../../../images/shards-logo.svg")}
-              alt="VLock"
-            /> */}
-      
+             
+  
          
 
           {/* eslint-disable-next-line */}

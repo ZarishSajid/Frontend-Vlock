@@ -263,8 +263,11 @@ export default class UserActions extends React.Component {
           redirectRoute: "/Login",
 
           fireRedirect: true,
+          
         });
-        window.location.reload(false);
+        // localStorage.clear()
+        window.location.reload();
+
       });
   };
 
@@ -294,7 +297,17 @@ export default class UserActions extends React.Component {
       }}
     >
       {localStorage.getItem("name")}
+      
     </span>
+    <br/>
+    <p style={{
+        marginLeft: "04px",
+        color: "white",
+        fontWeight: "bold",
+        fontSize: "25sp",
+      }}
+    >     
+</p>
         </DropdownToggle>
 
         <Collapse
