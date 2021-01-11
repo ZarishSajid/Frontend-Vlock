@@ -35,7 +35,7 @@ class title extends React.Component {
     this.state = {
       name: "",
       email: localStorage.getItem("email"),
-      password: "",
+      password: localStorage.getItem("department"),
       department: "",
       cpassword: "",
     };
@@ -250,7 +250,7 @@ class title extends React.Component {
                             },
                           ],
                           initialValue: this.state.cpassword,
-                        })(<Input placeholder="password" type="password" />)}
+                        })(<Input placeholder=" Confirm Password" type="password" />)}
                       </FormItem>
                       <b />
                       <b>

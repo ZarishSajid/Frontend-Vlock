@@ -37,9 +37,11 @@ export default class Notifications extends React.Component {
           </div>
         </NavLink>
         <Collapse
-        
+        // style={{height: "330px !important",
+        //   overflowy: scroll,
+        //   display: "block" }}
           open={this.state.visible}
-          className="dropdown-menu dropdown-menu-small notify"
+          className="dropdown-menu dropdown-menu-small notify "
         >
           {notifications.map((notification) => (
             <DropdownItem>

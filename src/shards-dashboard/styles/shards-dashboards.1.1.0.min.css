@@ -4632,6 +4632,11 @@ label {
   border-color: #fbfbfb;
   color: #212529;
 }
+.notify{
+  height: 330px !important;
+  overflow-y: scroll
+
+}
 .btn.btn-white:not([disabled]):not(.disabled).active-light.active + .btn,
 .btn.btn-white:not([disabled]):not(.disabled).active-light:active + .btn {
   border-left: 1px solid red;

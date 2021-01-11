@@ -76,6 +76,8 @@ class Login extends React.Component {
                 localStorage.setItem("email", this.state.data.email);
                 localStorage.setItem("password", this.state.data.password);
                 localStorage.setItem("name", this.state.data.name);
+                localStorage.setItem("department", this.state.data.department);
+
                 localStorage.setItem("notifications", JSON.stringify(res.data.notifications));
 
                 // localStorage.setItem(
@@ -219,7 +221,7 @@ class Login extends React.Component {
                       color: "blue",
                       marginRight: "100px",
                     }}
-                    src={require("../../src/images/shards-dashboards-orignal.svg")}
+                    src={require("../../src/images/login.jpg")}
                     alt="VLock"
                   />
 

@@ -33,12 +33,13 @@ class SidebarMainNavbar extends React.Component {
         <div className="d-table m-auto">
           <img
             id="main-logo"
-            style={{ maxWidth: "25px" }}
-            src={require("../../../images/01.png")}
+            style={{ maxWidth: "35px" }}
+            src={require("../../../images/sidebarNav.png")}
             alt="Shards Dashboard"
           />
           {!hideLogoText && (
-            <span className="d-none d-md-inline ml-1">
+            <span style={{color:"white",fontWeight:"bold"}}>
+               
                VLOCK
             </span>
           )}
