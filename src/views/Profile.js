@@ -34,7 +34,7 @@ class title extends React.Component {
 
     this.state = {
       name: "",
-      email: "",
+      email: localStorage.getItem("email"),
       password: "",
       department: "",
       cpassword: "",

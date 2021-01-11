@@ -25,28 +25,25 @@ class SidebarMainNavbar extends React.Component {
           className="align-items-stretch bg-black flex-md-nowrap border-bottom p-0"
           color="black"
           style={{ marginTop: "0px" }}
-        > <NavbarBrand
+        >   <NavbarBrand
         className="w-100 mr-0"
         href="#"
-        style={{ lineHeight: "35px" }}
+        style={{ lineHeight: "45px" }}
       >
-       
-    
-          <div className="d-table m-auto">
-
-          <p style={{fontWeight:"bold"}}>
-                
-                <span style={{width:"60px",fontWeight:"bold",color:"white"}} className="#fff text-bold">V</span> 
-                <span style={{color:"white",width:"60px",fontWeight:"bold"}}>LOCK</span>
-                
-              </p>
-             
-  
-         
-
-          {/* eslint-disable-next-line */}
-          </div>
-          </NavbarBrand>
+        <div className="d-table m-auto">
+          <img
+            id="main-logo"
+            style={{ maxWidth: "25px" }}
+            src={require("../../../images/01.png")}
+            alt="Shards Dashboard"
+          />
+          {!hideLogoText && (
+            <span className="d-none d-md-inline ml-1">
+               VLOCK
+            </span>
+          )}
+        </div>
+      </NavbarBrand>
           <a
             className="toggle-sidebar d-sm-inline d-md-none d-lg-none"
             onClick={this.handleToggleSidebar}

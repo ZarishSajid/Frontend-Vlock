@@ -102,7 +102,11 @@ h5, .h5 {
 h6, .h6 {
   font-size: 1rem;
   line-height: 1.5rem; }
+.notify{
+  height: 300px !important;
+  overflow-y: scroll
 
+}
 .lead {
   line-height: 1.875rem; }
 

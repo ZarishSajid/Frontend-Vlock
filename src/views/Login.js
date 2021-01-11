@@ -64,8 +64,10 @@ class Login extends React.Component {
               // this.state.token=res.data.data.token;
               this.setState({ data: res.data.data });
               console.log(res.message);
+
               if (res.data.success) {
                 alert("Login Sucessfully");
+
                 console.log(this.state.data.token);
                 localStorage.setItem("token", this.state.data.token);
                 localStorage.setItem("userType", this.state.data.userType);
@@ -74,12 +76,14 @@ class Login extends React.Component {
                 localStorage.setItem("email", this.state.data.email);
                 localStorage.setItem("password", this.state.data.password);
                 localStorage.setItem("name", this.state.data.name);
-                localStorage.setItem(
-                  "notifications",
-                  res.data.notifications.map(
-                    (notification) => notification.message
-                  )
-                );
+                localStorage.setItem("notifications", JSON.stringify(res.data.notifications));
+
+                // localStorage.setItem(
+                //   "notifications",
+                //   res.data.notifications.map(
+                //     (notification) => notification.message
+                //   )
+                // );
 
                 const userType = localStorage.getItem("userType");
                 // localStorage.setItem('sapID', this.state.sapID);

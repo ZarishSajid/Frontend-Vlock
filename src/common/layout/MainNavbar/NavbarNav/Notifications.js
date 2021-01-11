@@ -20,8 +20,9 @@ export default class Notifications extends React.Component {
   }
 
   render() {
-    const notifications = localStorage.getItem("notifications");
-
+    // const notifications = localStorage.getItem("notifications");
+    const notifications= JSON.parse(localStorage.getItem("notifications")) || [];
+    console.log("notificationssssss",notifications);
     return (
       <NavItem className=" dropdown notifications">
         <NavLink
@@ -31,15 +32,16 @@ export default class Notifications extends React.Component {
           <div className="nav-link-icon__wrapper" style={{ marginTop: "5px" }}>
             <i className="material-icons">&#xE7F4;</i>
             <Badge pill theme="danger">
-              10
+              {notifications.length}
             </Badge>
           </div>
         </NavLink>
         <Collapse
+        
           open={this.state.visible}
-          className="dropdown-menu dropdown-menu-small"
+          className="dropdown-menu dropdown-menu-small notify"
         >
-          {[notifications].map((notification) => (
+          {notifications.map((notification) => (
             <DropdownItem>
               <div className="notification__icon-wrapper">
                 <div className="notification__icon">
@@ -48,7 +50,7 @@ export default class Notifications extends React.Component {
               </div>
               <div className="notification__content">
                 <span className="notification__category">Notification</span>
-                <p>{notification}</p>
+                <p>{notification.message}</p>
               </div>
             </DropdownItem>
           ))}

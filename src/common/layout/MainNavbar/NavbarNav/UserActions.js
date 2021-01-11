@@ -264,7 +264,7 @@ export default class UserActions extends React.Component {
 
           fireRedirect: true,
         });
-        // localStorage.clear()
+        localStorage.clear()
         window.location.reload();
       });
   };
