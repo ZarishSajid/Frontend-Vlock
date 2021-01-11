@@ -257,13 +257,19 @@ class ResetPassword extends React.Component {
         token: localStorage.getItem("token"),
       },
     };
+
     const data = {
       sapID: this.state.sapID,
-      number: this.state.number,
+      number: "+" + this.state.number,
     };
 
     console.log("SapID", this.state.sapID);
     console.log("Number", this.state.number);
+
+
+
+
+
 
     axios
       .post(`http://localhost:8080/vlock/sms`, data)

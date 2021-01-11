@@ -97,7 +97,10 @@ class PollStatus extends React.Component {
     };
     axios.put(`http://localhost:8080/vlock/polin/${id}`, data).then((res) => {
       alert("Poll Blocked Sucessfully ");
-      window.location.reload(false);
+      if (res.data.success === true) {
+        this.fetchData();
+      }
+      // window.location.reload(false);
     });
   }
 
@@ -110,14 +113,23 @@ class PollStatus extends React.Component {
     const data = {
       status: "active",
     };
+
     const header = {
       header: {
         token: localStorage.getItem("token"),
       },
     };
-    axios.put(`http://localhost:8080/vlock/pollact${id}`, data).then((res) => {
+    console.log("dataa",data.status);
+    console.log("iddd",id);
+
+
+    axios.put(`http://localhost:8080/vlock/pollact/${id}`, data)
+    .then((res) => {
       alert("Poll Unblocked Sucessfully ");
-      window.location.reload(false);
+      if (res.data.success === true) {
+        this.fetchData();
+      }
+      // window.location.reload(false);
     });
   }
 
@@ -364,7 +376,7 @@ class PollStatus extends React.Component {
                           `}
                         >
                           <BsUnlockFill
-                            //active
+                            //inactive
                             onClick={(e) =>
                               this.Activetogglee(e, values.email, values._id)
                             }

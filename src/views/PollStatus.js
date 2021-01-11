@@ -101,6 +101,26 @@ class PollStatus extends React.Component {
       console.log(res.message);
     });
   }
+  getAudience = (userData) => {
+    if (userData && userData._id) {
+      if (userData.selectedAudience && !userData.selectedAudience.length) {
+        return <p style={{ color: "black" }}> {userData.selectedAudience}</p>;
+      }
+      if (userData.selectedAudience && userData.selectedAudience.length > 0) {
+        return userData.selectedAudience.map((Audience) => (
+          <li style={{ color: "black" }}>{Audience}</li>
+        ));
+      }
+    } else {
+      return <p style={{ color: "black" }}>{this.state.selectedAudience}</p>;
+    }
+  };
+  handleBack = () => {
+    this.setState({
+      //openActive: !this.state.openActive,
+      open: !this.state.open,
+    });
+  };
   render() {
     const userData =
       this.props.location &&
@@ -238,77 +258,72 @@ class PollStatus extends React.Component {
               })
             )}
             <Modal size="md" open={open} toggle={this.toggle}>
-              <ModalHeader style={{ marginLeft: "0px" }}>
-                <h4 style={{ marginLeft: "150px" }}>Poll Detail</h4>
-              </ModalHeader>
+                <center><h4 style={{ marginTop: "30px" ,color:"black"}}>Poll Detail</h4></center>
               <ModalBody>
                 <p
                   style={{
-                    border: "4px solid blue",
+                    border: "4px solid black",
                     borderRadius: "20px",
                     padding: "15px",
                   }}
                 >
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Poll Type:{" "}
                     {userData && userData._id
                       ? userData.pollType
                       : this.state.pollType}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Poll Question:{" "}
                     {userData && userData._id
                       ? userData.pollQuestion
                       : this.state.pollQuestion}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  {/* <p style={{ color: "black" }}>
                     Created By:{" "}
                     {userData && userData._id
                       ? userData.createdBy.name
                       : this.state.createdBy.name}
-                  </p>
+                  </p> */}
 
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     Email:{" "}
                     {userData && userData._id
                       ? userData.createdBy.email
                       : this.state.createdBy.email}
                   </p>
 
-                  <p style={{ color: "blue" }}>
-                    {" "}
-                    Selected Audience:{" "}
-                    {userData && userData._id
-                      ? userData.selectedAudience
-                      : this.state.selectedAudience}
-                  </p>
-                  <p style={{ color: "blue" }}>
-                    {" "}
-                    Poll Options:{" "}
-                    {userData && userData._id
-                      ? userData.pollOptions
-                      : this.state.pollOptions}
-                  </p>
-                  <p style={{ color: "blue" }}>
+                  Selected Audience: {this.getAudience(userData)}
+                   Poll Options:{" "}
+                  {userData && userData._id ? (
+                    userData.pollOptions.map((option) => (
+                      <li style={{ color: "black" }}>{option}</li>
+                    ))
+                  ) : (
+                    <p style={{ color: "black" }}>{this.state.pollOptions}</p>
+                  )}
+                  <p style={{ color: "black" }}>
+                    <br/>
                     Start Date:
                     {userData && userData._id
                       ? moment(userData.startDate).format("MM-DD-YYYY")
                       : this.state.startDate}
                   </p>
-                  <p style={{ color: "blue" }}>
+                  <p style={{ color: "black" }}>
                     End Date:{" "}
                     {userData && userData._id
                       ? moment(userData.endDate).format("MM-DD-YYYY")
                       : this.state.endDate}
                   </p>
                 </p>
-                {/* <Button
-                  style={{ marginLeft: "150px" }}
+               <center> <Button
+                  style={{ marginLeft: "0px" }}
                   type="secondary"
                   onClick={this.handleBack}
                 >
                   Cancel
-                </Button> */}
+                </Button>
+                </center>
               </ModalBody>
             </Modal>
           </tbody>
