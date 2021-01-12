@@ -70,7 +70,9 @@ class PollStatus extends React.Component {
       .then((res) => {
         console.log("RESPONSE = ", res._id);
         alert("Sucesfully Deleted");
-        window.location.reload(false);
+        if (res.data.success === true) {
+          this.fetchData();
+        }
         console.log(res.message);
       });
   }
@@ -267,12 +269,12 @@ class PollStatus extends React.Component {
                     padding: "15px",
                   }}
                 >
-                  <p style={{ color: "black" }}>
+                  {/* <p style={{ color: "black" }}>
                     Poll Type:{" "}
                     {userData && userData._id
                       ? userData.pollType
                       : this.state.pollType}
-                  </p>
+                  </p> */}
                   <p style={{ color: "black" }}>
                     Poll Question:{" "}
                     {userData && userData._id

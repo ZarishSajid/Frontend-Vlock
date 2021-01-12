@@ -31,12 +31,12 @@ class SidebarMainNavbar extends React.Component {
         style={{ lineHeight: "45px" }}
       >
         <div className="d-table m-auto">
-          <img
+          {/* <img
             id="main-logo"
             style={{ maxWidth: "35px" }}
             src={require("../../../images/sidebarNav.png")}
             alt="Shards Dashboard"
-          />
+          /> */}
           {!hideLogoText && (
             <span style={{color:"white",fontWeight:"bold"}}>
                

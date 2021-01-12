@@ -123,7 +123,9 @@ class CreatePoll extends React.Component {
         console.log(res.message);
         if (res.data.success) {
           alert("Your Request has been sent  to the admin");
-
+          this.setState({
+           
+          });
           console.log("data", res.data.message);
         } else {
           //  console.log("else")

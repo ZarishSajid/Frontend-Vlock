@@ -33,7 +33,7 @@ import {
 import { Link } from "react-router-dom";
 import { ButtonGroup } from "reactstrap";
 import axios from "axios";
-
+import {BsFillBarChartFill} from "react-icons/bs";
 import classNames from "classnames";
 import { Line, Pie, Doughnut } from "react-chartjs-2";
 const linChart = {
@@ -199,7 +199,7 @@ export default class Admin extends React.Component {
                 <br />
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "white" }} />
+                  <BsFillBarChartFill style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
@@ -218,7 +218,7 @@ export default class Admin extends React.Component {
                 <br />
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "white" }} />
+                  <BsFillBarChartFill style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
@@ -237,7 +237,7 @@ export default class Admin extends React.Component {
                 <br />
                 <center>
                   {" "}
-                  <BsFillPeopleFill style={{ color: "white", size: "80px" }} />
+                  <BsFillBarChartFill style={{ color: "white", size: "80px" }} />
                 </center>
                 <center>
                   {" "}

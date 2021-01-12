@@ -370,7 +370,7 @@ class ResetPassword extends React.Component {
                       color: "blue",
                       marginRight: "100px",
                     }}
-                    src={require("../../src/images/login.jpg")}
+                    src={require("../../src/images/shards-dashboards-orignal.svg")}
                     alt="VLock"
                   />
 

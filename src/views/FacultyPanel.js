@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { Container, Row, Col ,Button,CardTitle,CardBody,CardHeader,Card} from "shards-react";
 import { Link } from "react-router-dom";
 import {FaPoll} from "react-icons/fa";
-
-
+import { BsFillBarChartFill} from "react-icons/bs";
 import PageTitle from "../components/common/PageTitle";
 import SmallStats from "../components/common/SmallStats";
 import UsersOverview from "../components/blog/UsersOverview";
@@ -158,7 +157,7 @@ export default class Faculty extends React.Component {
     <Card  small className="mb-4"style={{backgroundColor:"#7FA7B3"}} > 
    <br/>
       <CardBody >
-      <center><FaPoll  style={{ color: "white" }} /></center>
+      <center><BsFillBarChartFill  style={{ color: "white" }} /></center>
       <center>  <CardTitle style={{color:"white"}} > Poll Created</CardTitle></center>
   <center> <p style={{ color: "white" ,fontWeight:"bold"}}>{this.state.pollCreated}</p></center>
        
@@ -169,7 +168,7 @@ export default class Faculty extends React.Component {
    <Card  small className="mb-4" style={{backgroundColor:"#717378"}}> 
     <br/>
       <CardBody  >
-      <center><FaPoll  style={{ color: "white" }}  /></center>
+      <center><BsFillBarChartFill  style={{ color: "white" }}  /></center>
         <center><CardTitle style={{color:"white"}}  >New Polls</CardTitle></center>
     <center>   <p style={{ color: "white",fontWeight:"bold" }}>{this.state.newPoll}</p></center>
        
@@ -180,7 +179,7 @@ export default class Faculty extends React.Component {
    <Card  small className="mb-4" style={{backgroundColor:"#569CE5"}}> 
    <br/>
       <CardBody >
-      <center><FaPoll  style={{ color: "white"}}  /></center>
+      <center><BsFillBarChartFill  style={{ color: "white"}}  /></center>
       <center>  <CardTitle style={{color:"white"}} > Casted Votes</CardTitle></center>
   <center> <p style={{ color: "white",fontWeight:"bold" }}>{this.state.castedVotes}</p></center>
        

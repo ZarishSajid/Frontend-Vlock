@@ -86,8 +86,9 @@ class PollStatus extends React.Component {
         console.log(res.message);
         if (res.data.success) {
           alert("Approved Sucessfully");
-         window.location.reload(false);
-
+          if (res.data.success === true) {
+            this.fetchData();
+          }
         } else {
           //  console.log("else")
           // alert(res.data.message);
@@ -128,8 +129,9 @@ class PollStatus extends React.Component {
         if (res.data.success) {
         
           alert("Disapproved Sucessfully");
-          window.location.reload(false);
-
+          if (res.data.success === true) {
+            this.fetchData();
+          }
         } else {
           //  console.log("else")
           // alert(res.data.message);

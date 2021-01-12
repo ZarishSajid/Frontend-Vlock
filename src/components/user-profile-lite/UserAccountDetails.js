@@ -34,11 +34,11 @@ class title extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
-      email: "",
-      password: "",
-      cpassword: "",
-      department: "",
+      name: localStorage.getItem("name"),
+      email: localStorage.getItem("email"),
+      password:localStorage.getItem("password"),
+      cpassword:"",
+      department:  localStorage.getItem("department"),
     };
   }
 
@@ -210,7 +210,7 @@ class title extends React.Component {
                       style={{ color: "red" }}
                       label={
                         <Text style={{ fontWeight: "bold", color: "black" }}>
-                          New Password
+                         Password
                         </Text>
                       }
                     >

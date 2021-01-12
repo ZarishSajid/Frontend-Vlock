@@ -194,7 +194,9 @@ class UserList extends React.Component {
       .then((res) => {
         console.log("RESPONSE = ", res._id);
         alert("Sucesfully Deleted");
-
+        if (res.data.success === true) {
+          this.fetchData();
+        }
         //  window.location.reload(false);
         console.log(res.message);
         console.log("emailll", this.state.email);

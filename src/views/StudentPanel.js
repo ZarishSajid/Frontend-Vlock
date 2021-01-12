@@ -10,6 +10,7 @@ import {
   CardHeader,
   Card,
 } from "shards-react";
+import {BsFillBarChartFill } from "react-icons/bs";
 import { SignalFilled } from "@ant-design/icons";
 import { TeamOutlined } from "@ant-design/icons";
 import { Colxx, Separator } from "../../src/common/CustomBootstrap";
@@ -168,7 +169,7 @@ class StudentPanel extends React.Component {
               <br />
               <CardBody>
                 <center>
-                  <FaPoll style={{ color: "white", fontWeight: "bold" }} />
+                <BsFillBarChartFill style={{ color: "white", fontWeight: "bold" }} />
                 </center>
                 <center>
                   <CardTitle style={{ color: "white" }}>Poll Created</CardTitle>
@@ -187,7 +188,7 @@ class StudentPanel extends React.Component {
               <br />
               <CardBody>
                 <center>
-                  <FaPoll style={{ color: "white" }} />
+                <BsFillBarChartFill style={{ color: "white" }} />
                 </center>
                 <center>
                   <CardTitle style={{ color: "white" }}>New Polls</CardTitle>
@@ -207,7 +208,7 @@ class StudentPanel extends React.Component {
               <br />
               <CardBody>
                 <center>
-                  <FaPoll style={{ color: "white" }} />
+                  <BsFillBarChartFill style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}

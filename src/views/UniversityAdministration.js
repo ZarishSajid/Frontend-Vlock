@@ -10,6 +10,8 @@ import {
   CardHeader,
   Card,
 } from "shards-react";
+import { BsFillBarChartFill } from "react-icons/bs";
+
 import { SignalFilled } from "@ant-design/icons";
 import { TeamOutlined } from "@ant-design/icons";
 import { Colxx, Separator } from "../../src/common/CustomBootstrap";
@@ -168,7 +170,8 @@ class UniverityAdministration extends React.Component {
               <CardBody >
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "white" }}  />
+                  <BsFillBarChartFill style={{ color: "white" }} 
+                   />
                 </center>
                 <center>
                   {" "}
@@ -187,7 +190,7 @@ class UniverityAdministration extends React.Component {
               <CardBody  >
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "white" }} />
+                  <BsFillBarChartFill style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
@@ -206,7 +209,7 @@ class UniverityAdministration extends React.Component {
                 <br />
                 <center>
                   {" "}
-                  <FaPoll style={{ color: "white" }} />
+                  <BsFillBarChartFill style={{ color: "white" }} />
                 </center>
                 <center>
                   {" "}
