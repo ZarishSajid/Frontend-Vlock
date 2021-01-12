@@ -2,6 +2,9 @@ pragma solidity ^0.5.16;
 pragma experimental ABIEncoderV2;
 
 contract Election {
+
+    string myname;
+    string myemail; 
     // Model a Candidate
     struct Poll {
         uint256 id;
@@ -77,13 +80,21 @@ emit votedEvent(pollid,option);
         
     }
 
-    function getAll() public view returns (Poll[] memory) {
+     function setName(string memory _name) public {
+        myname = _name;
+    }
+
+    function getName() public view returns (string memory) {
+        return myname;
+    }
+
+    function getAllData() public view returns (Poll[] memory) {
         Poll[] memory myPoll = new Poll[](pollCount);
         for (uint256 i = 0; i < pollCount; i++) {
             Poll storage pol = polls[i];
             myPoll[i] = pol;
         }
-         require( myPoll.length>0,"Poll length ");
+
         return myPoll;
     }
 }

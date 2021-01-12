@@ -21,7 +21,7 @@ class Test extends React.Component {
       loading: true,
       voting: false,
       option: "",
-      voteCount:0
+      voteCount: 0,
     };
 
     var web3 = new Web3();
@@ -82,7 +82,6 @@ class Test extends React.Component {
     this.election.setProvider(this.web3Provider);
   }
 
- 
   async componentDidMount() {
     console.log("inside componentDidMount ");
     // console.log(" Account************", this.state.account);
@@ -148,14 +147,15 @@ class Test extends React.Component {
         console.log("sselected  options!!!", values.pollOption);
         console.log("iddddd", userData._id);
 
+        // this.loginInstance.getName().then((name) => {
+        //   console.log("=== getName output  = ", name);
+        // });
         const results = await this.pollInstance
           .vote(userData._id, values.pollOption, {
             from: this.state.account,
           })
           .then((result) => this.setState({ hasVoted: true }));
       }
-
-    
     });
     this.web3.eth.getCoinbase(async (err, account) => {
       console.log("getCoinbase = ", account);
@@ -183,18 +183,54 @@ class Test extends React.Component {
       }
       this.setState({ polls: polls });
 
-      console.log("\n polls list of polls = ", JSON.stringify(polls), polls.length);
+      console.log(
+        "\n polls list of polls = ",
+        JSON.stringify(polls),
+        polls.length
+      );
 
       // for(var i=0; i<polls.length; i++)
       // {
       //  console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
-          
+
       // }
       // const result = await this.pollInstance.getAll();
       // console.log("Get All MEthod", result);
-      this.pollInstance.getAll().then((polls) => {
-        console.log("Get All MEthod", polls);
-      });
+      // this.pollInstance.getAll().then((polls) => {
+      //   console.log("Get All MEthod", polls);
+      // });
+      // const p = await this.pollInstance.getAll();
+      // console.log("Get All MEthod2 s", JSON.stringify(p));
+      // const getAll = await instance.methods.getAll().call();
+      try {
+        // ***** Code for SS2 ****//
+        // this.pollInstance.contract.getAllData().call((result)=> {
+        //   console.log("get all method",result)
+        //   })
+        // ***** Code for SS2 ****//
+        // ***** Code for SS1 ****//
+        // const p = await this.pollInstance.getAllData();
+        // console.log("Get All MEthod2 s", p);
+        // ***** Code for SS1 ****//
+        // ***** Code for SS3 ****//
+        // const getAll = await this.pollInstance.contract.getAllData().call();
+        // console.log("GET ALL METHOD", getAll);
+        // getAll.map((value, index) => {
+        //   console.log("value get all", value);
+        // });
+        // ***** Code for SS3 ****//
+        // ***** Code for SS4****//
+        //     this.pollInstance.contract.getAllData().then((polls) => {
+        //   console.log("Get All MEthod", polls);
+        // });
+        // ***** Code for SS4 ****//
+        // ***** Code for SS5 ****//
+        //  const p = await this.pollInstance.getAllData();
+        //       console.log("Get All MEthod2 s", JSON.stringify(p));
+        // ***** Code for SS5 ****//
+      } catch (e) {
+        console.log("Get All MEthod error", e);
+      }
     });
 
     // this.loginInstance.getName().then((name) => {
@@ -246,8 +282,6 @@ class Test extends React.Component {
         this.setState({ voting: false });
       });
   }
-
-
 
   // castVote(candidateId) {
   //   console.log("zara test castVote", candidateId);
@@ -341,7 +375,7 @@ class Test extends React.Component {
                           border: "1px solid grey",
                           borderRadius: "10px",
                           padding: "15px",
-                          color:"black",
+                          color: "black",
                         }}
                       >
                         {userData && userData._id
@@ -359,7 +393,7 @@ class Test extends React.Component {
                           border: "1px solid grey",
                           borderRadius: "10px",
                           padding: "15px",
-                           color:"black",
+                          color: "black",
                         }}
                       >
                         {userData && userData._id
@@ -399,7 +433,7 @@ class Test extends React.Component {
                               )}
                             </Form.Item>
                           ))}
-                          <br/>
+                        <br />
                         <Button
                           type="html"
                           style={{ MarginLeft: "100px" }}
