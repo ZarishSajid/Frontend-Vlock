@@ -6,8 +6,7 @@ import ReactDOM from "react-dom";
 import Web3 from "web3";
 import TruffleContract from "truffle-contract";
 import Election from "../build/contracts/Election.json";
-// import Poll from "../build/contracts/Poll.json";
-import Option from "../build/contracts/Option.json";
+
 import { Radio, Form } from "antd";
 class Test extends React.Component {
   constructor(props) {
@@ -55,15 +54,15 @@ class Test extends React.Component {
       window.ethereum.enable();
     }
 
-    web3.eth.getTransactionCount((err, res) => {
-      console.log(" getTransactionCount ", err, res);
-      // console.log(res);
-      // console.log(res);
-      // console.log(res[2]);
-      // console.log(res[3]);
-      // console.log(res[4]);
-      // console.log("TransAccountsss***");
-    });
+    // web3.eth.getTransactionCount((err, res) => {
+    //   console.log(" getTransactionCount ", err, res);
+    //   // console.log(res);
+    //   // console.log(res);
+    //   // console.log(res[2]);
+    //   // console.log(res[3]);
+    //   // console.log(res[4]);
+    //   // console.log("TransAccountsss***");
+    // });
     web3.eth.getAccounts((err, res) => {
       console.log("getAccounts = ", res);
     });
@@ -91,10 +90,10 @@ class Test extends React.Component {
     // const accounting = await this.web3.eth.getAccounts();
     //     const accountAddress = await accounting[0];
     //     console.log("accountAddress",accountAddress);
-    this.web3.eth.getCoinbase(async (err, account) => {
-      console.log("getCoinbase = ", account);
-      // this.state.account =
-      this.setState({ account: account });
+    // this.web3.eth.getCoinbase(async (err, account) => {
+    //   console.log("getCoinbase = ", account);
+    //   // this.state.account =
+    //   this.setState({ account: account });
       // const accounts = await this.web3.eth.getAccounts();
       // console.log("getCoinbase => getAccounts  === ", accounts);
 
@@ -104,31 +103,31 @@ class Test extends React.Component {
       // });
 
       // this.setState({ account });
-      this.pollInstance = await this.election.deployed();
-      console.log("PollInstance", this.pollInstance);
+      // this.pollInstance = await this.election.deployed();
+      // console.log("PollInstance", this.pollInstance);
       // this.watchEvents()
       // const voted = await this.pollInstance.voted("1", "A");
 
       // this.pollInstance.voted("1", "A", { from: this.state.account }).then((voted) => {
       // console.log("voted  = ", voted);
-      const pollCount = await this.pollInstance.pollCount();
-      console.log("pollCount =  ", pollCount);
-      const polls = [...this.state.polls];
-      for (var i = 0; i <= pollCount; i++) {
-        const poll = await this.pollInstance.polls(i);
-        polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
-      }
-      this.setState({ polls: polls });
+      // const pollCount = await this.pollInstance.pollCount();
+      // console.log("pollCount =  ", pollCount);
+      // const polls = [...this.state.polls];
+      // for (var i = 0; i <= pollCount; i++) {
+      //   const poll = await this.pollInstance.polls(i);
+      //   polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
+      // }
+      // this.setState({ polls: polls });
 
-      console.log(
-        "\n downside of votecast method polls list of polls = ",
-        polls
-      );
+      // console.log(
+      //   "\n downside of votecast method polls list of polls = ",
+      //   JSON.stringify(polls),polls.length
+      // );
       // this.pollInstance.voters(this.state.account).then((hasVoted) => {
       //   this.setState({ hasVoted, loading: false });
       // });
       // });
-    });
+   // });
   }
 
   selectPollOption = (e) => {
@@ -150,121 +149,105 @@ class Test extends React.Component {
         // this.loginInstance.getName().then((name) => {
         //   console.log("=== getName output  = ", name);
         // });
-        const results = await this.pollInstance
-          .vote(userData._id, values.pollOption, {
-            from: this.state.account,
-          })
-          .then((result) => this.setState({ hasVoted: true }));
+        this.web3.eth.getCoinbase(async (err, account) => {
+          console.log("getCoinbase = ", account);
+          // this.state.account =
+          this.setState({ account: account });
+          // const accounts = await this.web3.eth.getAccounts();
+          // console.log("getCoinbase => getAccounts  === ", accounts);
+    
+          //  this.web3.eth.getAccounts()
+          // .then((accounts) => {
+          //    console.log(accounts);
+          // });
+    
+          // this.setState({ account });
+          this.election.deployed().then(async (pollInstance) => {
+          this.pollInstance = pollInstance;
+         // this.pollInstance = await this.election.deployed();
+         const results = await this.pollInstance
+         .vote(userData._id, values.pollOption, {
+           from: this.state.account,
+         })
+         .then((result) => this.setState({ hasVoted: true }));
+    
+         
+         console.log("PollInstance", this.pollInstance);
+         const pollCount = await this.pollInstance.pollCount();
+         console.log("pollCount =  ", pollCount);
+          // const result = await this.pollInstance.getAll();
+          // console.log("Get All MEthod", result);
+          const polls = [...this.state.polls];
+          for (var i = 0; i <= pollCount; i++) {
+            const poll = await this.pollInstance.polls(i);
+            polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
+          }
+          this.setState({ polls: polls });
+    
+          console.log(
+            "\n polls list of polls = ",
+            JSON.stringify(polls),
+            polls.length
+          );
+    
+          // for(var i=0; i<polls.length; i++)
+          // {
+          //  console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
+    
+          // }
+          // const result = await this.pollInstance.getAll();
+          // console.log("Get All MEthod", result);
+          // this.pollInstance.getAll().then((polls) => {
+          //   console.log("Get All MEthod", polls);
+          // });
+          // const p = await this.pollInstance.getAll();
+          // console.log("Get All MEthod2 s", JSON.stringify(p));
+          // const getAll = await instance.methods.getAll().call();
+          // try {
+          //   // ***** Code for SS2 ****//
+          //   // this.pollInstance.contract.getAllData().call((result)=> {
+          //   //   console.log("get all method",result)
+          //   //   })
+          //   // ***** Code for SS2 ****//
+          //   // ***** Code for SS1 ****//
+          //   // const p = await this.pollInstance.getAllData();
+          //   // console.log("Get All MEthod2 s", p);
+          //   // ***** Code for SS1 ****//
+          //   // ***** Code for SS3 ****//
+          //   // const getAll = await this.pollInstance.contract.getAllData().call();
+          //   // console.log("GET ALL METHOD", getAll);
+          //   // getAll.map((value, index) => {
+          //   //   console.log("value get all", value);
+          //   // });
+          //   // ***** Code for SS3 ****//
+          //   // ***** Code for SS4****//
+          //   // const results = await this.pollInstance
+          //   // .getAll( {
+          //   //   from: this.state.account,
+          //   // })
+          //   // .then((result) => console.log("get ALL vote", result, results));
+    
+          //       this.pollInstance.getAll().then((polls) => {
+          //     console.log("Get All MEthod", polls);
+          //   });
+          //   // // ***** Code for SS4 ****//
+          //   // ***** Code for SS5 ****//
+          //   //  const p = await this.pollInstance.getAllData();
+          //   //       console.log("Get All MEthod2 s", JSON.stringify(p));
+          //   // ***** Code for SS5 ****//
+    
+            
+          // } catch (e) {
+          //   console.log("Get All MEthod error", e);
+          // }
+        });
+      });
+     
+    
+          
       }
     });
-    this.web3.eth.getCoinbase(async (err, account) => {
-      console.log("getCoinbase = ", account);
-      // this.state.account =
-      this.setState({ account: account });
-      // const accounts = await this.web3.eth.getAccounts();
-      // console.log("getCoinbase => getAccounts  === ", accounts);
 
-      //  this.web3.eth.getAccounts()
-      // .then((accounts) => {
-      //    console.log(accounts);
-      // });
-
-      // this.setState({ account });
-      this.pollInstance = await this.election.deployed();
-      console.log("PollInstance", this.pollInstance);
-      const pollCount = await this.pollInstance.pollCount();
-      console.log("pollCount =  ", pollCount);
-      // const result = await this.pollInstance.getAll();
-      // console.log("Get All MEthod", result);
-      const polls = [...this.state.polls];
-      for (var i = 0; i <= pollCount; i++) {
-        const poll = await this.pollInstance.polls(i);
-        polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
-      }
-      this.setState({ polls: polls });
-
-      console.log(
-        "\n polls list of polls = ",
-        JSON.stringify(polls),
-        polls.length
-      );
-
-      // for(var i=0; i<polls.length; i++)
-      // {
-      //  console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
-
-      // }
-      // const result = await this.pollInstance.getAll();
-      // console.log("Get All MEthod", result);
-      // this.pollInstance.getAll().then((polls) => {
-      //   console.log("Get All MEthod", polls);
-      // });
-      // const p = await this.pollInstance.getAll();
-      // console.log("Get All MEthod2 s", JSON.stringify(p));
-      // const getAll = await instance.methods.getAll().call();
-      try {
-        // ***** Code for SS2 ****//
-        // this.pollInstance.contract.getAllData().call((result)=> {
-        //   console.log("get all method",result)
-        //   })
-        // ***** Code for SS2 ****//
-        // ***** Code for SS1 ****//
-        // const p = await this.pollInstance.getAllData();
-        // console.log("Get All MEthod2 s", p);
-        // ***** Code for SS1 ****//
-        // ***** Code for SS3 ****//
-        // const getAll = await this.pollInstance.contract.getAllData().call();
-        // console.log("GET ALL METHOD", getAll);
-        // getAll.map((value, index) => {
-        //   console.log("value get all", value);
-        // });
-        // ***** Code for SS3 ****//
-        // ***** Code for SS4****//
-        //     this.pollInstance.contract.getAllData().then((polls) => {
-        //   console.log("Get All MEthod", polls);
-        // });
-        // ***** Code for SS4 ****//
-        // ***** Code for SS5 ****//
-        //  const p = await this.pollInstance.getAllData();
-        //       console.log("Get All MEthod2 s", JSON.stringify(p));
-        // ***** Code for SS5 ****//
-      } catch (e) {
-        console.log("Get All MEthod error", e);
-      }
-    });
-
-    // this.loginInstance.getName().then((name) => {
-    //   console.log("=== Sohhhhhhhhhhhh === getName output  = ", name);
-    // });
-
-    // console.log("zara test castVote", candidateId);
-    // this.setState({ voting: true });
-    // //this.loginInstance.
-
-    // this.electionInstance
-    //   .vote(candidateId, { from: this.state.account })
-    //   .then((result) => this.setState({ hasVoted: true }));
-
-    // set state value or update this user in DB and marked as casted so he/she cant vote again
-    // {1,B,5};
-    /**
-     * Get count again and save values into DBs for count.
-     */
-
-    // const pollCount = await this.pollInstance.pollCount();
-    // console.log("pollCount =  ", pollCount);
-    // const polls = [...this.state.polls];
-    // for (var i = 0; i <= pollCount; i++) {
-    //     const poll = await this.pollInstance.polls(i);
-    //     polls.push({ id: poll[1],option: poll[2],voteCount: poll[3]});
-    // }
-    // this.setState({ polls: polls });
-
-    // console.log("results", results);
-    // this.setState({ voting: true });
-    // this.electionInstance
-    //   .vote(candidateId, { from: this.state.account })
-    //   .then((result) => this.setState({ hasVoted: true }));
   }
 
   watchEvents() {
