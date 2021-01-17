@@ -7146,7 +7146,7 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {
-    "1610904512028": {
+    "1610908732556": {
       "events": {
         "0xb72bc004d3c880dde5aa3e326a8cd34deb7b664a4eccf90d78bce917dce6964f": {
           "anonymous": false,
@@ -7169,38 +7169,12 @@
         }
       },
       "links": {},
-      "address": "0x3eDd093B8a4aaD545ad0AAC185dDeF48704B6177",
-      "transactionHash": "0x356ce0cd66e501d4d9c7467750abcf37a7ce694b1b91d1ce3c8b477a2765432d"
-    },
-    "1610906595005": {
-      "events": {
-        "0xb72bc004d3c880dde5aa3e326a8cd34deb7b664a4eccf90d78bce917dce6964f": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "string",
-              "name": "pollId",
-              "type": "string"
-            },
-            {
-              "indexed": true,
-              "internalType": "string",
-              "name": "option",
-              "type": "string"
-            }
-          ],
-          "name": "votedEvent",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0xB622f29C2e7A1d5f9C91a2857C716eFD36eC21b9",
-      "transactionHash": "0xc07c8e04b9d7a3bbe4b5ece26013556b87d5f2f9525cf5a83cd434ae82649a35"
+      "address": "0xBB6b642902f3Dc17D5D6D9939c36d546BBc4cD61",
+      "transactionHash": "0xe0e8ede26c7674a612dcb3ae87f171d7807a83f8f81e3adb17fe9fe38d941fc3"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2021-01-17T18:03:44.246Z",
+  "updatedAt": "2021-01-17T18:41:20.659Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

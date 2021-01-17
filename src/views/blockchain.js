@@ -202,22 +202,22 @@ class Test extends React.Component {
             // const res = await this.pollInstance.contract.getAll().call();
             // console.log("Get All", res);
 
-            // // *** Code for SS2 **//
+            // // ** Code for SS2 *//
             // // this.pollInstance.contract.getAllData().call((result)=> {
             // // console.log("get all method",result)
             // // })
-            // // *** Code for SS2 **//
-            // // *** Code for SS1 **//
+            // // ** Code for SS2 *//
+            // // ** Code for SS1 *//
             // // const p = await this.pollInstance.getAllData();
             // // console.log("Get All MEthod2 s", p);
-            // // *** Code for SS1 **//
-            // // *** Code for SS3 **//
+            // // ** Code for SS1 *//
+            // // ** Code for SS3 *//
             // // const getAll = await this.pollInstance.contract.getAllData().call();
             // // console.log("GET ALL METHOD", getAll);
             // // getAll.map((value, index) => {
             // // console.log("value get all", value);
             // // });
-            // // *** Code for SS3 **//
+            // // ** Code for SS3 *//
             // // ***** Code for SS4****//
             // // const results = await this.pollInstance
             // // .getAll( {
@@ -228,11 +228,11 @@ class Test extends React.Component {
             // this.pollInstance.getAll().then((polls) => {
             // console.log("Get All MEthod", polls);
             // });
-            // // // *** Code for SS4 **//
-            // // *** Code for SS5 **//
+            // // // ** Code for SS4 *//
+            // // ** Code for SS5 *//
             // // const p = await this.pollInstance.getAllData();
             // // console.log("Get All MEthod2 s", JSON.stringify(p));
-            // // *** Code for SS5 **//
+            // // ** Code for SS5 *//
 
             // } catch (e) {
             // console.log("Get All MEthod error", e);
@@ -328,7 +328,7 @@ return (
             className="text-sm-left"
           />
         </Row>
-        {/* {/ {this.drawGrid()} /} */}
+        {/* {/ {/ {this.drawGrid()} /} /} */}
         <Row>
           <Col>
             <Card small>
