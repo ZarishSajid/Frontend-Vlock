@@ -285,9 +285,9 @@ export default class UserActions extends React.Component {
           />{" "}
           <span
             style={{
-              marginTop: "20px",
+              marginTop: "30px",
               color: "white",
-              height: "30px",
+              height: "0px",
               fontWeight: "bold",
               fontSize: "25sp",
               verticalAlign: "sub",

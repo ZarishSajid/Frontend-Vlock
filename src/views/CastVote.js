@@ -18,7 +18,7 @@ import Loader from "react-loader-spinner";
 import { css } from "@emotion/core";
 const override = css`
   position: absolute;
-  left: 70%;
+  left: 40%;
   right: 0;
   top: 50%;
   border-color: blue;

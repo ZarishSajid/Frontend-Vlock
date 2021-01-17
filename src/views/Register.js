@@ -232,7 +232,7 @@ class Register extends React.Component {
                     color: "blue",
                     marginLeft: "150px",
                   }}
-                  src={require("../../src/images/shards-dashboards-orignal.svg")}
+                  src={require("../../src/images/login.jpg")}
                   alt="VLock"
                 />
                 {/* <Avatar style={{marginLeft:"200px",color:"white",backgroundColor:"#f58742"}}  >
@@ -532,7 +532,7 @@ class Register extends React.Component {
                   {/* <NavLink to={`/components/Admin`}> */}
                   <p style={{ color: "white", marginLeft: "30px" }}>
                     {" "}
-                    Please register Yourself.
+                    Please register Here.
                   </p>
                    
                   <MDBBtn

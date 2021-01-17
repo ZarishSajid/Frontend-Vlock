@@ -6,22 +6,21 @@ import ReactDOM from "react-dom";
 import Web3 from "web3";
 import TruffleContract from "truffle-contract";
 import Election from "../build/contracts/Election.json";
-// import Poll from "../build/contracts/Poll.json";
-import Option from "../build/contracts/Option.json";
+
 import { Radio, Form } from "antd";
 class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
+      pollId: "",
       account: "0x0",
       polls: [],
       selectedOption: "",
       hasVoted: false,
       loading: true,
       voting: false,
-      option: "",
-      voteCount:0
+      pollOption: "",
+      voteCount: 0,
     };
 
     var web3 = new Web3();
@@ -44,7 +43,6 @@ class Test extends React.Component {
       alert("You have to install MetaMask !");
     }
     window.ethereum.enable();
-    // console.log(" typoe of = ", typeof web3);
     if (typeof web3 != "undefined") {
       this.web3Provider = web3.currentProvider;
       window.ethereum.enable();
@@ -55,25 +53,9 @@ class Test extends React.Component {
       window.ethereum.enable();
     }
 
-    web3.eth.getTransactionCount((err, res) => {
-      console.log(" getTransactionCount ", err, res);
-      // console.log(res);
-      // console.log(res);
-      // console.log(res[2]);
-      // console.log(res[3]);
-      // console.log(res[4]);
-      // console.log("TransAccountsss***");
-    });
     web3.eth.getAccounts((err, res) => {
       console.log("getAccounts = ", res);
     });
-
-    // web3.eth.getAccounts().then( function (result) { console.log (result[0] )});
-    // console.log("Web 3 Accounts", web3.eth.getAccounts());
-    // var accounts = web3.eth.getAccounts();
-    //  console.log(accounts[1]);
-
-    // console.log("Zara 1st test this.web3Provider", this.web3Provider);
 
     this.web3 = new Web3(this.web3Provider);
     this.castVoteToZara = this.castVoteToZara.bind(this);
@@ -82,54 +64,53 @@ class Test extends React.Component {
     this.election.setProvider(this.web3Provider);
   }
 
- 
   async componentDidMount() {
     console.log("inside componentDidMount ");
     // console.log(" Account************", this.state.account);
-    //     this.web3.eth.getAccounts()
+    // this.web3.eth.getAccounts()
     // .then(console.log);
     // web3-eth-accounts
     // const accounting = await this.web3.eth.getAccounts();
-    //     const accountAddress = await accounting[0];
-    //     console.log("accountAddress",accountAddress);
-    this.web3.eth.getCoinbase(async (err, account) => {
-      console.log("getCoinbase = ", account);
-      // this.state.account =
-      this.setState({ account: account });
-      // const accounts = await this.web3.eth.getAccounts();
-      // console.log("getCoinbase => getAccounts  === ", accounts);
+    // const accountAddress = await accounting[0];
+    // console.log("accountAddress",accountAddress);
+    // this.web3.eth.getCoinbase(async (err, account) => {
+    // console.log("getCoinbase = ", account);
+    // // this.state.account =
+    // this.setState({ account: account });
+    // const accounts = await this.web3.eth.getAccounts();
+    // console.log("getCoinbase => getAccounts === ", accounts);
 
-      //  this.web3.eth.getAccounts()
-      // .then((accounts) => {
-      //    console.log(accounts);
-      // });
+    // this.web3.eth.getAccounts()
+    // .then((accounts) => {
+    // console.log(accounts);
+    // });
 
-      // this.setState({ account });
-      this.pollInstance = await this.election.deployed();
-      console.log("PollInstance", this.pollInstance);
-      // this.watchEvents()
-      // const voted = await this.pollInstance.voted("1", "A");
+    // this.setState({ account });
+    // this.pollInstance = await this.election.deployed();
+    // console.log("PollInstance", this.pollInstance);
+    // this.watchEvents()
+    // const voted = await this.pollInstance.voted("1", "A");
 
-      // this.pollInstance.voted("1", "A", { from: this.state.account }).then((voted) => {
-      // console.log("voted  = ", voted);
-      const pollCount = await this.pollInstance.pollCount();
-      console.log("pollCount =  ", pollCount);
-      const polls = [...this.state.polls];
-      for (var i = 0; i <= pollCount; i++) {
-        const poll = await this.pollInstance.polls(i);
-        polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
-      }
-      this.setState({ polls: polls });
+    // this.pollInstance.voted("1", "A", { from: this.state.account }).then((voted) => {
+    // console.log("voted = ", voted);
+    // const pollCount = await this.pollInstance.pollCount();
+    // console.log("pollCount = ", pollCount);
+    // const polls = [...this.state.polls];
+    // for (var i = 0; i <= pollCount; i++) {
+    // const poll = await this.pollInstance.polls(i);
+    // polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
+    // }
+    // this.setState({ polls: polls });
 
-      console.log(
-        "\n downside of votecast method polls list of polls = ",
-        polls
-      );
-      // this.pollInstance.voters(this.state.account).then((hasVoted) => {
-      //   this.setState({ hasVoted, loading: false });
-      // });
-      // });
-    });
+    // console.log(
+    // "\n downside of votecast method polls list of polls = ",
+    // JSON.stringify(polls),polls.length
+    // );
+    // this.pollInstance.voters(this.state.account).then((hasVoted) => {
+    // this.setState({ hasVoted, loading: false });
+    // });
+    // });
+    // });
   }
 
   selectPollOption = (e) => {
@@ -145,90 +126,121 @@ class Test extends React.Component {
       this.props.location.aboutProps.userData;
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log("sselected  options!!!", values.pollOption);
+        console.log("sselected options!!!", values.pollOption);
         console.log("iddddd", userData._id);
 
-        const results = await this.pollInstance
-          .vote(userData._id, values.pollOption, {
-            from: this.state.account,
-          })
-          .then((result) => this.setState({ hasVoted: true }));
+        console.log("PollInstance", this.pollInstance);
+        this.web3.eth.getCoinbase(async (err, account) => {
+          console.log("getCoinbase = ", account);
+          this.setState({ account: account });
+          this.election.deployed().then(async (pollInstance) => {
+            this.pollInstance = pollInstance;
+            // var mypolls=[];
+            // mypolls=this.pollInstance.getAll();
+            // console.log("Call to get all", mypolls);
+            try {
+              const results = await this.pollInstance.vote(
+                userData._id,
+                values.pollOption,
+                {
+                  from: this.state.account,
+                }
+              );
+              console.log("Inside Cast vote Method", results);
+            } catch (e) {
+              console.log("Error from log", e);
+            }
+            // .then(async (result) => {
+
+            console.log("PollInstance", this.pollInstance);
+            this.setState({ hasVoted: true });
+            const pollCount = await this.pollInstance.getLength();
+            console.log("getLength = ", pollCount);
+            // const polls = [...this.state.polls];
+            const polls = [];
+            for (var i = 0; i < pollCount; i++) {
+              const poll = await this.pollInstance.polls(i);
+              polls.push({
+                pollId: poll[0],
+                pollOption: poll[1],
+                voteCount: poll[2],
+              });
+            }
+            this.setState({ polls: polls });
+
+            console.log(
+              "\n polls list of polls = ",
+              JSON.stringify(polls),
+              polls.length
+            );
+            polls.map((value, index) => {
+              console.log("mapping function", value);
+              console.log("Vote count", value.voteCount.toString());
+            });
+
+            // });
+
+            // console.log("PollInstance", this.pollInstance);
+            // const getall =[];
+            // getall= await this.pollInstance.getAll();
+            // console.log("Get All MEthod", getall);
+
+            // for(var i=0; i<polls.length; i++)
+            // {
+            // console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
+
+            // }
+            // const result = await this.pollInstance.getAll();
+            // console.log("Get All MEthod", result);
+            // this.pollInstance.getAll().then((polls) => {
+            // console.log("Get All MEthod", polls);
+            // });
+            // const p = await this.pollInstance.getAll();
+            // console.log("Get All MEthod2 s", JSON.stringify(p));
+            // const getAll = await instance.methods.getAll().call();
+            // try {
+            // const res = await this.pollInstance.contract.getAll().call();
+            // console.log("Get All", res);
+
+            // // *** Code for SS2 **//
+            // // this.pollInstance.contract.getAllData().call((result)=> {
+            // // console.log("get all method",result)
+            // // })
+            // // *** Code for SS2 **//
+            // // *** Code for SS1 **//
+            // // const p = await this.pollInstance.getAllData();
+            // // console.log("Get All MEthod2 s", p);
+            // // *** Code for SS1 **//
+            // // *** Code for SS3 **//
+            // // const getAll = await this.pollInstance.contract.getAllData().call();
+            // // console.log("GET ALL METHOD", getAll);
+            // // getAll.map((value, index) => {
+            // // console.log("value get all", value);
+            // // });
+            // // *** Code for SS3 **//
+            // // ***** Code for SS4****//
+            // // const results = await this.pollInstance
+            // // .getAll( {
+            // // from: this.state.account,
+            // // })
+            // // .then((result) => console.log("get ALL vote", result, results));
+
+            // this.pollInstance.getAll().then((polls) => {
+            // console.log("Get All MEthod", polls);
+            // });
+            // // // *** Code for SS4 **//
+            // // *** Code for SS5 **//
+            // // const p = await this.pollInstance.getAllData();
+            // // console.log("Get All MEthod2 s", JSON.stringify(p));
+            // // *** Code for SS5 **//
+
+            // } catch (e) {
+            // console.log("Get All MEthod error", e);
+            // }
+          });
+        });
       }
-
-    
     });
-    this.web3.eth.getCoinbase(async (err, account) => {
-      console.log("getCoinbase = ", account);
-      // this.state.account =
-      this.setState({ account: account });
-      // const accounts = await this.web3.eth.getAccounts();
-      // console.log("getCoinbase => getAccounts  === ", accounts);
-
-      //  this.web3.eth.getAccounts()
-      // .then((accounts) => {
-      //    console.log(accounts);
-      // });
-
-      // this.setState({ account });
-      this.pollInstance = await this.election.deployed();
-      console.log("PollInstance", this.pollInstance);
-      const pollCount = await this.pollInstance.pollCount();
-      console.log("pollCount =  ", pollCount);
-      // const result = await this.pollInstance.getAll();
-      // console.log("Get All MEthod", result);
-      const polls = [...this.state.polls];
-      for (var i = 0; i <= pollCount; i++) {
-        const poll = await this.pollInstance.polls(i);
-        polls.push({ id: poll[1], option: poll[2], voteCount: poll[3] });
-      }
-      this.setState({ polls: polls });
-
-      console.log("\n polls list of polls = ", JSON.stringify(polls), polls.length);
-
-      // for(var i=0; i<polls.length; i++)
-      // {
-      //  console.log("Vote count of "+polls[i].id+" of "+polls[i].option+" is "+polls[i].voteCount);
-          
-      // }
-      // const result = await this.pollInstance.getAll();
-      // console.log("Get All MEthod", result);
-      this.pollInstance.getAll().then((polls) => {
-        console.log("Get All MEthod", polls);
-      });
-    });
-
-    // this.loginInstance.getName().then((name) => {
-    //   console.log("=== Sohhhhhhhhhhhh === getName output  = ", name);
-    // });
-
-    // console.log("zara test castVote", candidateId);
-    // this.setState({ voting: true });
-    // //this.loginInstance.
-
-    // this.electionInstance
-    //   .vote(candidateId, { from: this.state.account })
-    //   .then((result) => this.setState({ hasVoted: true }));
-
-    // set state value or update this user in DB and marked as casted so he/she cant vote again
-    // {1,B,5};
-    /**
-     * Get count again and save values into DBs for count.
-     */
-
-    // const pollCount = await this.pollInstance.pollCount();
-    // console.log("pollCount =  ", pollCount);
-    // const polls = [...this.state.polls];
-    // for (var i = 0; i <= pollCount; i++) {
-    //     const poll = await this.pollInstance.polls(i);
-    //     polls.push({ id: poll[1],option: poll[2],voteCount: poll[3]});
-    // }
-    // this.setState({ polls: polls });
-
-    // console.log("results", results);
-    // this.setState({ voting: true });
-    // this.electionInstance
-    //   .vote(candidateId, { from: this.state.account })
-    //   .then((result) => this.setState({ hasVoted: true }));
   }
 
   watchEvents() {
@@ -247,16 +259,14 @@ class Test extends React.Component {
       });
   }
 
-
-
   // castVote(candidateId) {
-  //   console.log("zara test castVote", candidateId);
-  //   this.setState({ voting: true });
-  //   //this.loginInstance.
+  // console.log("zara test castVote", candidateId);
+  // this.setState({ voting: true });
+  // //this.loginInstance.
 
-  //   // this.PollInstance.vote(candidateId, {
-  //   //   from: this.state.account,
-  //   // }).then((result) => this.setState({ hasVoted: true }));
+  // // this.PollInstance.vote(candidateId, {
+  // // from: this.state.account,
+  // // }).then((result) => this.setState({ hasVoted: true }));
   // }
 
   drawGrid() {
@@ -264,37 +274,37 @@ class Test extends React.Component {
       <Row>
         <Col>
           {/* <Card small className="mb-4">
-            <CardHeader className="border-bottom"></CardHeader>
-            <CardBody className="p-0 pb-3">
-              {this.state.loading || this.state.voting ? (
-                <p className="text-center">Loading...</p>
-              ) : (
-                <table className="table mb-0">
-                  <tbody>
-                    <tr>
-                      <td>
-                        {this.state.polls.map((poll) => {
-                          console.log("inside loop = ", poll.id);
-                          return (
-                            <tr>
-                              <td></td>
+<CardHeader className="border-bottom"></CardHeader>
+<CardBody className="p-0 pb-3">
+{this.state.loading || this.state.voting ? (
+<p className="text-center">Loading...</p>
+) : (
+<table className="table mb-0">
+<tbody>
+<tr>
+<td>
+{this.state.polls.map((poll) => {
+console.log("inside loop = ", poll.id);
+return (
+<tr>
+<td></td>
 
-                              {poll.option}
-                            </tr>
-                          );
-                        })}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              )}
-              <hr />
-              {!this.state.hasVoted ? (
-                <Form polls={this.state.polls} castVote={this.castVote} />
-              ) : null}
-              <p>Your account: {this.state.account}</p>
-            </CardBody>
-          </Card> */}
+{poll.option}
+</tr>
+);
+})}
+</td>
+</tr>
+</tbody>
+</table>
+)}
+<hr />
+{!this.state.hasVoted ? (
+<Form polls={this.state.polls} castVote={this.castVote} />
+) : null}
+<p>Your account: {this.state.account}</p>
+</CardBody>
+</Card> */}
         </Col>
       </Row>
     );
@@ -318,7 +328,7 @@ class Test extends React.Component {
             className="text-sm-left"
           />
         </Row>
-        {/* {this.drawGrid()} */}
+        {/* {/ {this.drawGrid()} /} */}
         <Row>
           <Col>
             <Card small>
@@ -341,7 +351,7 @@ class Test extends React.Component {
                           border: "1px solid grey",
                           borderRadius: "10px",
                           padding: "15px",
-                          color:"black",
+                          color: "black",
                         }}
                       >
                         {userData && userData._id
@@ -359,7 +369,7 @@ class Test extends React.Component {
                           border: "1px solid grey",
                           borderRadius: "10px",
                           padding: "15px",
-                           color:"black",
+                          color: "black",
                         }}
                       >
                         {userData && userData._id
@@ -399,7 +409,7 @@ class Test extends React.Component {
                               )}
                             </Form.Item>
                           ))}
-                          <br/>
+                        <br />
                         <Button
                           type="html"
                           style={{ MarginLeft: "100px" }}

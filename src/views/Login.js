@@ -186,10 +186,10 @@ class Login extends React.Component {
               {/* <p style={{color:"white",marginLeft:"20px"}}>Please enter your credientials to login.If you are not a  member.</p> */}
 
               <NavLink to={"/Register"}>
-                <p style={{ color: "white", marginLeft: "10px" }}>
+                <a style={{ color: "white", marginLeft: "10px" ,textDecorationLine: "underline"}}>
                   {" "}
                   Please register Yourself.
-                </p>
+                </a>
               </NavLink>
             </MDBCard>
           </center>

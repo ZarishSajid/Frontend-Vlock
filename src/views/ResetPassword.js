@@ -370,7 +370,7 @@ class ResetPassword extends React.Component {
                       color: "blue",
                       marginRight: "100px",
                     }}
-                    src={require("../../src/images/shards-dashboards-orignal.svg")}
+                    src={require("../../src/images/login.jpg")}
                     alt="VLock"
                   />
 
@@ -407,7 +407,7 @@ class ResetPassword extends React.Component {
                   ],
                   
                   initialValue: this.state.sapID,
-                })(<Input placeholder="sapID"  style={{width:"310px",color:"black"}}/>)}
+                })(<Input placeholder="sapID"  style={{width:"300px",color:"black"}}/>)}
               </FormItem>
               <br />{" "}
           
@@ -416,7 +416,7 @@ class ResetPassword extends React.Component {
                   </Text>
                 
               <PhoneInput 
-              style={{width:"310px"}}
+              style={{width:"360px"}}
                 country={"us"}
                 value={this.state.number}
                 onChange={(number) => this.setState({ number })}

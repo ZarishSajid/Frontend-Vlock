@@ -123,8 +123,10 @@ class CreatePoll extends React.Component {
         console.log(res.message);
         if (res.data.success) {
           alert("Your Request has been sent  to the admin");
+         
           this.setState({
-           
+
+
           });
           console.log("data", res.data.message);
         } else {
@@ -197,7 +199,7 @@ class CreatePoll extends React.Component {
           <Card  sm
             className="mb-4"
             style={{
-              height: "65rem",
+              height: "68rem",
               width: "50rem ",
               marginTop: "30px",
               marginLeft: "130px",
@@ -341,14 +343,14 @@ class CreatePoll extends React.Component {
                   open={this.state.visible}
                   toggle={this.handleCancel}
                 >
-                  <ModalHeader>Enter the Polling question options</ModalHeader>
+                  <ModalHeader></ModalHeader>
                   <ModalBody>
                     <FormItem>
                       {getFieldDecorator("pollingOption", {
                         rules: [
                           {
                             required: true,
-                            message: "Please nter the polling option",
+                            message: "Please enter the polling option",
                           },
                         ],
                       })(<Input placeholder="Enter the polling option" />)}

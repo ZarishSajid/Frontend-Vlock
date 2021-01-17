@@ -38,9 +38,9 @@ class SidebarMainNavbar extends React.Component {
             alt="Shards Dashboard"
           /> */}
           {!hideLogoText && (
-            <span style={{color:"white",fontWeight:"bold"}}>
+            <span style={{color:"#569CE5",marginRight:"40px",fontWeight:"bold"}}>
                
-               VLOCK
+               V<a style={{color:"white"}}>LOCK</a>
             </span>
           )}
         </div>

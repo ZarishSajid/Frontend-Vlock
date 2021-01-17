@@ -33,10 +33,10 @@ class title extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
+      name: localStorage.getItem("name"),
       email: localStorage.getItem("email"),
-      password: localStorage.getItem("department"),
-      department: "",
+      password: localStorage.getItem("password"),
+      department: localStorage.getItem("department"),
       cpassword: "",
     };
   }
@@ -55,6 +55,12 @@ class title extends React.Component {
           password: formData.password,
           department: formData.department,
         };
+        console.log("name in profile",localStorage.getItem("name"));
+        console.log("email in profile",this.email);
+        console.log("department in profile",localStorage.getItem("department"));
+
+
+
         if (formData.password !== formData.cpassword) {
           alert("Your Password did not match");
           return;
@@ -74,7 +80,7 @@ class title extends React.Component {
               //  console.log("else")
               alert(res.data.message);
             }
-            window.location.reload(false);
+            // window.location.reload(false);
 
             //res.sucess=();
           });
@@ -131,6 +137,7 @@ class title extends React.Component {
                     <Col>
                       <FormItem
                         style={{ color: "red" }}
+                        // onChange={(name) => this.setState({name })}
                         label={
                           <Text style={{ fontWeight: "bold", color: "black" }}>
                             Full Name
@@ -256,7 +263,7 @@ class title extends React.Component {
                       <b>
                         {" "}
                         <Button
-                          style={{ marginLeft: "330px", marginTop: "10px" }}
+                          style={{ marginLeft: "330px", marginTop: "20px" }}
                           onClick={() => this.onRedirect()}
                           color="primary"
                         >
