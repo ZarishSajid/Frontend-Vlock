@@ -483,7 +483,7 @@ class UserList extends React.Component {
             <center>
               <Button
                 size="sm"
-                style={{ marginLeft: "270px" }}
+                style={{ marginLeft: "320px" }}
                 type="secondary"
                 onClick={(e) => this.sendEmail()}
               >

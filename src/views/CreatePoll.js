@@ -122,6 +122,7 @@ class CreatePoll extends React.Component {
       startDate,
       endDate,
       startTime,
+      endTime,
       options,
     } = this.state;
     const headers = {
@@ -136,6 +137,7 @@ class CreatePoll extends React.Component {
       startDate: startDate,
       endDate: endDate,
       startTime: startTime,
+      endTime:endTime,
       pollQuestion: getFieldValue("pollQuestion"),
       pollOptions: options,
     };
@@ -278,19 +280,97 @@ class CreatePoll extends React.Component {
                         style={{ color: "black" }}
                         value="CR/GR Selection"
                       >
-                        CR/GR Selection
+                        CR/GR 
                       </option>
                       <option
                         style={{ color: "black" }}
                         value="  Trip Location"
                       >
-                        Trip Location
+                        Trip 
                       </option>
                       <option
                         style={{ color: "black" }}
                         value="Seminar Speaker"
                       >
-                        Seminar Speaker
+                        FC Evening
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Webinar / Seminar
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        University Events
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Discipline Issue
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Cafeteria
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Cabinet Member
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Society
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                         Teacher Evaluation
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Course Issue
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Transportation Issue
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Student Evaluation
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Lab Equipments
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Laibrary 
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Finance 
                       </option>
                       <option style={{ color: "black" }} value="Other">
                         Other

@@ -94,7 +94,7 @@ class UserDetails extends React.Component {
         // console.log("data",res.data.accountId.privateKey)
         this.setState({ pulls: res.data });
         this.userDetails.privateKey = res.data.data.accountId.privateKey;
-
+         localStorage.setItem("PrivateKey", res.data.accountId.privateKey);
         console.log("abc", this.userDetails.privateKey);
       });
     this.setState({
@@ -112,10 +112,11 @@ class UserDetails extends React.Component {
     let { pulls } = this.userDetails.privateKey;
     console.log("inside render ", this.userDetails.privateKey);
     return (
+      
       <Card
         small
         className="mb-4 pt-3"
-        style={{ height: "43rem", marginTop: "20px", border: "red" }}
+        style={{ height: "46rem", marginTop: "20px", border: "red" }}
       >
         <CardHeader className="border-bottom text-center">
           <h4 className="mb-0">{this.userDetails.name}</h4>

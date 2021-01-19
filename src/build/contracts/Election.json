@@ -7171,10 +7171,36 @@
       "links": {},
       "address": "0xCECd020dce1e0b153717E57cc586A4d56FD41D13",
       "transactionHash": "0xd730761dc652d84933464b32fff041b35d7077741bcc8865347817bdd99e46b1"
+    },
+    "1611077865837": {
+      "events": {
+        "0xb72bc004d3c880dde5aa3e326a8cd34deb7b664a4eccf90d78bce917dce6964f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "string",
+              "name": "pollId",
+              "type": "string"
+            },
+            {
+              "indexed": true,
+              "internalType": "string",
+              "name": "option",
+              "type": "string"
+            }
+          ],
+          "name": "votedEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x014465B18698359bC727946Ae192b48Bef9E8C04",
+      "transactionHash": "0x069f13c95c56588242abab2c17e9ed44997266f9380237a3bcb6a22cc2544ddc"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2021-01-18T16:59:09.478Z",
+  "updatedAt": "2021-01-19T17:40:22.238Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

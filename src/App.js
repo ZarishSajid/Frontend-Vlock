@@ -13,6 +13,8 @@ import components from "../src/components";
 import Errors from "../src/common/Errors";
 import Register from "../src/views/Register";
 import ResetPassword from "../src/views/ResetPassword";
+import  PrivacyPolicy from "../src/views/PrivacyPolicy";
+
 // const ngrok = require('ngrok');
 class App extends Component {
   state = {}
@@ -32,6 +34,7 @@ class App extends Component {
         <Route path='/Login' component={Login} />
         <Route path='/Register' component={Register} />
         <Route path ='/ResetPassword' component={ResetPassword}/>
+        <Route path ='/PrivacyPolicy' component={PrivacyPolicy}/>
         <Route path='/components' component={components} />
 
         </Switch>

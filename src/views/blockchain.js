@@ -13,7 +13,7 @@ class Test extends React.Component {
     super(props);
     this.state = {
       pollId: "",
-      pollId1:"",
+      pollId1: "",
       voteCount1: 0,
       pollOption1: "",
 
@@ -150,31 +150,33 @@ class Test extends React.Component {
                   from: this.state.account,
                 }
               );
-              console.log("Inside Cast vote Method", results);
+              // console.log("Inside Cast vote Method", results);
               //API
+              const data = {
+                pollId: userData._id,
+              };
               const headers = {
                 headers: {
                   token: localStorage.getItem("token"),
                 },
               };
-              console.log("token in blockchain page",headers)
-            axios.post(`http://localhost:8080/vlock/votes`,data,headers).then((res) => {
-               
-
-          console.log("***Cast Vote API****",res)
-            });
+              console.log("token  before votess api", headers, data);
+              axios
+                .post(`http://localhost:8080/vlock/votes`, data, headers)
+                .then((res) => {
+                  console.log("***Cast Vote API****", res);
+                });
 
               //API
-            }
-             catch (e) {
+            } catch (e) {
               console.log("Error from log", e);
             }
             // .then(async (result) => {
 
-            console.log("PollInstance", this.pollInstance);
+            //    console.log("PollInstance", this.pollInstance);
             this.setState({ hasVoted: true });
             const pollCount = await this.pollInstance.getLength();
-            console.log("getLength = ", pollCount);
+            //  console.log("getLength = ", pollCount);
             // const polls = [...this.state.polls];
             const polls = [];
             for (var i = 0; i < pollCount; i++) {
@@ -187,74 +189,57 @@ class Test extends React.Component {
             }
             this.setState({ polls: polls });
 
-            console.log(
-              "\n polls list of polls = ",
-              JSON.stringify(polls),
-              polls.length
-            );
+            // console.log(
+            //   "\n polls list of polls = ",
+            //   JSON.stringify(polls),
+            //   polls.length
+            // );
 
             const data = {
-              pollId:this.pollId,
-             
-              
+              pollId: this.pollId,
             };
-              
-            
-//
+
+            //
             polls.map((value, index) => {
-              
-              console.log("mapping function", value);
-              console.log("Vote count", value.voteCount1.toString());
-              this.pollId=value.pollId1;
-              this.pollOption=value.pollOption1;
-              this.voteCount=value.voteCount1;
-              console.log("poll id  before data ", value.pollId1);
-              console.log("poll option   before data", value.pollOption1);
-              console.log("vote count   before data", value.voteCount1);
+              //  console.log("mapping function", value);
+              //console.log("Vote count", value.voteCount1.toString());
+              this.pollId = value.pollId1;
+              this.pollOption = value.pollOption1;
+              this.voteCount = value.voteCount1;
+              // console.log("poll id  before data ", value.pollId1);
+              // console.log("poll option   before data", value.pollOption1);
+              //console.log("vote count   before data", value.voteCount1);
               // console.log("poll id  before data", this.pollId);
 
+              //API START
 
-            //API START
+              //            console.log("token in blockchain page",headers)
 
-
-            console.log("token in blockchain page",headers)
-
-const data = {
-              pollId:this.pollId,
-              pollOption:this.pollOption,
-              voteCount:this.voteCount,
-            };
+              const data = {
+                pollId: this.pollId,
+                pollOption: this.pollOption,
+                voteCount: this.voteCount,
+              };
               //  console.log("poll id  after data", this.pollId);
               //  console.log("poll option  after data", this.pollOption);
               //  console.log("vote count   after data", this.voteCount);
 
-               const headers = {
+              const headers = {
                 headers: {
                   token: localStorage.getItem("token"),
                 },
               };
-              console.log("token in blockchain page",headers)
-            axios.post(`http://localhost:8080/vlock/results`,data,headers).then((res) => {
-               
+              //            console.log("token in blockchain page",headers)
+              axios
+                .post(`http://localhost:8080/vlock/results`, data, headers)
+                .then((res) => {
+                  // console.log("inside blockchain api Respnse",res)
+                });
 
-          console.log("inside blockchain api Respnse",res)
-            });
-
-
-            console.log("token in blockchain page",headers)
-
-
+              // console.log("token in blockchain page",headers)
 
               //ENd
-
             });
-              
-            
-
-
-
-
-
 
             // });
 
@@ -399,17 +384,22 @@ return (
     return (
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
-          <PageTitle
-            
-            className="text-sm-left"
-          />
+          <PageTitle className="text-sm-left" />
         </Row>
         {/* {/ {/ {this.drawGrid()} /} /} */}
         <Row>
           <Col>
             <Card small>
               <CardHeader className="border-bottom">
-               <center> <h6 style={{color:"black",fontWeight:"bold"}}className="m-0">Cast Vote</h6></center>
+                <center>
+                  {" "}
+                  <h6
+                    style={{ color: "black", fontWeight: "bold" }}
+                    className="m-0"
+                  >
+                    Cast Vote
+                  </h6>
+                </center>
               </CardHeader>
               <ListGroup flush>
                 <ListGroupItem className="p-3">
