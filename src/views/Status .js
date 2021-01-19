@@ -370,7 +370,7 @@ class PollStatus extends React.Component {
                       </NavLink>{" "}
                       {values.active ? (
                         <Tooltip
-                          content="Unblock Poll"
+                          content="Block Poll"
                           customCss={css`
                             white-space: nowrap;
                           `}
@@ -390,7 +390,7 @@ class PollStatus extends React.Component {
                         </Tooltip>
                       ) : (
                         <Tooltip
-                          content="Block Poll"
+                          content="Unblock Poll"
                           customCss={css`
                             white-space: nowrap;
                           `}

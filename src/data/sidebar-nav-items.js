@@ -74,13 +74,18 @@ else if(localStorage.getItem('userType') === 'student'){
     //   to: "/components/editPoll",
     // },
     
-    {
-        // title: "Blockchain",
-        htmlBefore: '<i class="material-icons"></i>',
-        to: "/components/blockchain",
-      }, 
-      
+    // {
+    //     // title: "Blockchain",
+    //     htmlBefore: '<i class="material-icons"></i>',
+    //     to: "/components/blockchain",
+    //   }, 
     
+      
+    {
+      title: "Results",
+      htmlBefore: '<i class="material-icons">table_chart</i>',
+      to: "/components/Results",
+    },
   ]
 }
   else if(localStorage.getItem('userType') === 'uniAdmin'){
@@ -110,11 +115,11 @@ else if(localStorage.getItem('userType') === 'student'){
       htmlBefore: '<i class="material-icons">poll</i>',
       to: "/components/CreatePoll",
     },
-    {
-    //  title: "Blockchain",
-        htmlBefore: '<i class="material-icons"></i>',
-         to: "/components/blockchain",
-       },
+    // {
+    // //  title: "Blockchain",
+    //     htmlBefore: '<i class="material-icons"></i>',
+    //      to: "/components/blockchain",
+    //    },
     ]
   }
     else if(localStorage.getItem('userType') === 'faculty'){

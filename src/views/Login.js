@@ -254,7 +254,7 @@ class Login extends React.Component {
                     // },
                   ],
                   initialValue: this.state.sapID,
-                })(<Input placeholder="SapID" />)}
+                })(<Input placeholder=" Enter 6 Character SapID"  maxLength="6"/>)}
               </FormItem>
               <br />
               <FormItem

@@ -55,11 +55,12 @@ class title extends React.Component {
           password: formData.password,
           department: formData.department,
         };
-        console.log("name in profile",localStorage.getItem("name"));
-        console.log("email in profile",this.email);
-        console.log("department in profile",localStorage.getItem("department"));
-
-
+        console.log("name in profile", localStorage.getItem("name"));
+        console.log("email in profile", this.email);
+        console.log(
+          "department in profile",
+          localStorage.getItem("department")
+        );
 
         if (formData.password !== formData.cpassword) {
           alert("Your Password did not match");
@@ -75,7 +76,7 @@ class title extends React.Component {
               localStorage.setItem("name", formData.name);
 
               alert("Updated Sucessfully");
-              
+              window.location.reload(false);
             } else {
               //  console.log("else")
               alert(res.data.message);
@@ -128,7 +129,10 @@ class title extends React.Component {
                 backgroundColor: "#569CE5",
               }}
             >
-             <h4 style={{color:"black",fontWeight:"bold"}} > <center>Profile</center></h4>
+              <h4 style={{ color: "black", fontWeight: "bold" }}>
+                {" "}
+                <center>Profile</center>
+              </h4>
             </CardHeader>
             <CardBody>
               <ListGroup flush>
@@ -257,7 +261,12 @@ class title extends React.Component {
                             },
                           ],
                           initialValue: this.state.cpassword,
-                        })(<Input placeholder=" Confirm Password" type="password" />)}
+                        })(
+                          <Input
+                            placeholder=" Confirm Password"
+                            type="password"
+                          />
+                        )}
                       </FormItem>
                       <b />
                       <b>

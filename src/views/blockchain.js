@@ -6,13 +6,17 @@ import ReactDOM from "react-dom";
 import Web3 from "web3";
 import TruffleContract from "truffle-contract";
 import Election from "../build/contracts/Election.json";
-
+import axios from "axios";
 import { Radio, Form } from "antd";
 class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       pollId: "",
+      pollId1:"",
+      voteCount1: 0,
+      pollOption1: "",
+
       account: "0x0",
       polls: [],
       selectedOption: "",
@@ -147,7 +151,22 @@ class Test extends React.Component {
                 }
               );
               console.log("Inside Cast vote Method", results);
-            } catch (e) {
+              //API
+              const headers = {
+                headers: {
+                  token: localStorage.getItem("token"),
+                },
+              };
+              console.log("token in blockchain page",headers)
+            axios.post(`http://localhost:8080/vlock/votes`,data,headers).then((res) => {
+               
+
+          console.log("***Cast Vote API****",res)
+            });
+
+              //API
+            }
+             catch (e) {
               console.log("Error from log", e);
             }
             // .then(async (result) => {
@@ -161,9 +180,9 @@ class Test extends React.Component {
             for (var i = 0; i < pollCount; i++) {
               const poll = await this.pollInstance.polls(i);
               polls.push({
-                pollId: poll[0],
-                pollOption: poll[1],
-                voteCount: poll[2],
+                pollId1: poll[0],
+                pollOption1: poll[1],
+                voteCount1: poll[2],
               });
             }
             this.setState({ polls: polls });
@@ -173,10 +192,69 @@ class Test extends React.Component {
               JSON.stringify(polls),
               polls.length
             );
+
+            const data = {
+              pollId:this.pollId,
+             
+              
+            };
+              
+            
+//
             polls.map((value, index) => {
+              
               console.log("mapping function", value);
-              console.log("Vote count", value.voteCount.toString());
+              console.log("Vote count", value.voteCount1.toString());
+              this.pollId=value.pollId1;
+              this.pollOption=value.pollOption1;
+              this.voteCount=value.voteCount1;
+              console.log("poll id  before data ", value.pollId1);
+              console.log("poll option   before data", value.pollOption1);
+              console.log("vote count   before data", value.voteCount1);
+              // console.log("poll id  before data", this.pollId);
+
+
+            //API START
+
+
+            console.log("token in blockchain page",headers)
+
+const data = {
+              pollId:this.pollId,
+              pollOption:this.pollOption,
+              voteCount:this.voteCount,
+            };
+              //  console.log("poll id  after data", this.pollId);
+              //  console.log("poll option  after data", this.pollOption);
+              //  console.log("vote count   after data", this.voteCount);
+
+               const headers = {
+                headers: {
+                  token: localStorage.getItem("token"),
+                },
+              };
+              console.log("token in blockchain page",headers)
+            axios.post(`http://localhost:8080/vlock/results`,data,headers).then((res) => {
+               
+
+          console.log("inside blockchain api Respnse",res)
             });
+
+
+            console.log("token in blockchain page",headers)
+
+
+
+              //ENd
+
+            });
+              
+            
+
+
+
+
+
 
             // });
 
@@ -322,9 +400,7 @@ return (
       <Container fluid className="main-content-container px-4">
         <Row noGutters className="page-header py-4">
           <PageTitle
-            sm="4"
-            title="Election Results"
-            subtitle="Retrieve Blockchain"
+            
             className="text-sm-left"
           />
         </Row>
@@ -333,7 +409,7 @@ return (
           <Col>
             <Card small>
               <CardHeader className="border-bottom">
-                <h6 className="m-0">Cast Vote</h6>
+               <center> <h6 style={{color:"black",fontWeight:"bold"}}className="m-0">Cast Vote</h6></center>
               </CardHeader>
               <ListGroup flush>
                 <ListGroupItem className="p-3">

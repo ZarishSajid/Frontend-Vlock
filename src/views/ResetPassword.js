@@ -443,10 +443,10 @@ class ResetPassword extends React.Component {
               <p className="font-small green-text d-flex justify-content-end">
                 <a
                   style={{ color: "black" ,marginTop:"10px",textDecorationLine: "underline" }}
-                  href="/ResetPassword"
+                  href="/Login"
                   className="green-text ml-1 font-weight-bold"
                 >
-                  Forgot Password?
+                  Login Here
                 </a>
               </p>
             </div>

@@ -41,14 +41,16 @@ class CastVote extends React.Component {
     return (
       <div>
         <br />
-        <h4 style={{ marginLeft: "350px",color:"black" }}>How To Import Your Private Key </h4>
+        <h4 style={{ marginLeft: "350px", color: "black" }}>
+          How To Import Your Private Key{" "}
+        </h4>
 
         <center>
           {" "}
-          <br/>
+          <br />
           <ReactPlayer
             controls
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            url="https://youtu.be/_-eu_g_aG_U"
           />
         </center>
       </div>
