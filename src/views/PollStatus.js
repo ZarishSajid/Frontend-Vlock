@@ -21,6 +21,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import SweetAlert from "sweetalert-react/lib/SweetAlert";
 import { css } from "@emotion/core";
 import { AiFillEdit } from "react-icons/ai";
+import {BsLayoutTextSidebarReverse} from "react-icons/bs";
+
 const override = css`
   position: absolute;
   left: 40%;
@@ -252,6 +254,29 @@ class PollStatus extends React.Component {
                           />
                           </Tooltip>
                         </NavLink>
+                      )}
+{/* Expireeee */}
+{values.status !== "expired" ? null : (
+  <NavLink
+  disabled={values.status !== "pending"}
+  to={{
+    pathname: "/components/Results",
+    aboutProps: { userData: values },
+  }}
+>
+                       
+                           <Tooltip
+                          content=" View Result"
+                          customCss={css`
+                            white-space: nowrap;
+                          `}
+                        >
+                          <BsLayoutTextSidebarReverse
+                            style={{ marginTop: "3px", marginLeft: "10px",color:"blue" }}
+                            disabled={values.status !== "expired"}
+                          />
+                          </Tooltip>
+                          </NavLink>
                       )}
                     </td>
                     <td></td>

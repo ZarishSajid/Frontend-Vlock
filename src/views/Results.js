@@ -1,14 +1,29 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
-import { Container, Button } from "shards-react";
-import { ImCross, ImCheckmark } from "react-icons/im";
-import { RiDeleteBinLine } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { Tooltip } from "antd";
-import { Table } from "reactstrap";
-import * as moment from "moment";
-import { IoMdCreate } from "react-icons/io";
-import getToken from "../helpers/auth";
+import { Form, Typography } from "antd";
+import {
+  MDBCard,
+  MDBCardTitle,
+  MDBBtn,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBInput,
+} from "mdbreact";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  ListGroup,
+  ListGroupItem,
+  Row,
+  Col,
+  FormGroup,
+  FormInput,
+  FormSelect,
+  FormTextarea,
+  Button,
+} from "shards-react";
 // import Loader from "Loader"
 import { AiOutlineEye } from "react-icons/ai";
 import { Spinner } from "reactstrap";
@@ -38,59 +53,28 @@ class CastVote extends React.Component {
       index: "",
     };
   }
-  sendData(i) {
-    const headers = {
-      headers: {
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYXBJRCI6IjIzMDAiLCJ0aW1lIjoxNjA1NTU1NDA1NTk0LCJpYXQiOjE2MDU1NTU0MDUsImV4cCI6MTYwNTU1OTAwNX0.jiqGzFmRA2OuUCyxccqwew0g0WbcQPUtjrwS03t7aNA",
-      },
-    };
-    const data = {
-      id: this.state.pulls[i]._id,
-    };
-    console.log("id inside send data", data.id);
-    const id = data.id;
-    axios
-      .get(` http://localhost:8080/vlock/polls`, headers)
-
-      .then((res) => {
-        console.log("RESPONSE = ", res._id);
-        this.setState({ isLoading: false, pulls: res._id });
-        console.log(this.state.pulls);
-
-        console.log(res.message);
-      });
-  }
-
   componentDidMount() {
     this.fetchData();
   }
-  fetchData() {
-    this.setState({ loading: true });
 
+  fetchData() {
+    const userData =
+    this.props.location.aboutProps && this.props.location.aboutProps.userData;
     const headers = {
       headers: {
-        token: localStorage.getItem("token"),
+        token:localStorage.getItem("token"),
       },
     };
-    const data = {
-      pollType: this.state.pollType,
-      createdBy: this.state.createdBy,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-    };
-    axios
-      .get(`http://localhost:8080/vlock/polls`, headers, data)
-      //  console.log("header")
 
-      .then((res) => {
-        console.log("RESPONSE = ", res.data.data);
-        console.log("iddd", res._id);
-        this.setState({ loading: false, pulls: res.data.data });
-        // console.log("this.state.pulls",this.state.pulls);
-        // console.log("this.state.pulls",this.state.pulls[0]._id);
-        console.log(res.message);
-      });
+ console.log("token in result page",headers.headers.token)
+    axios.post(`http://localhost:8080/vlock/getresult/${userData._id}`,).then((res) => {
+      
+      console.log("RESPONSE = ", res.data);
+      // this.setState({ loading: false, pulls: res.data.data });
+      // console.log("this.state.pulls", this.state.pulls);
+
+      console.log(res.message);
+    });
   }
   render() {
     const { pulls } = this.state;
@@ -100,86 +84,41 @@ class CastVote extends React.Component {
     return (
       <div>
         <br />
-        <h3 style={{ marginLeft: "400px",color:"black" }}>Results</h3>
-
-        <div
-          style={{ marginBottom: "10px" }}
-          className="d-flex justify-content-center"
-        ></div>
-         <div className="sweet-loading">
-          <ClipLoader
-            css={override}
-            size={100}
-            color={"#123abc"}
-            loading={this.state.loading}
-          />
-        </div>
-        <Table striped>
-          <thead>
-            <tr style={{ backgroundColor: "#569CE5" }}>
-              <th>#</th>
-              <th>Poll Type</th>
-              <th>Created By</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {!pulls.length ? (
-              <tr>
+        <Form onSubmit={this.onRedirect}>
+        
+          <Card
+            sm
+            className="mb-4"
+            style={{
+              height: "43rem",
+              width: "50rem ",
+              marginTop: "30px",
+              marginLeft: "150px",
+            }}
+          >
+            <CardHeader
+              style={{
+                border: "1px solid white",
+                borderRadius: "10px",
+                padding: "25px",
+                marginLeft: "30px",
+                marginRight: "30px",
+                backgroundColor: "#569CE5",
+              }}
+            >
+              <h4 style={{ color: "black", fontWeight: "bold" }}>
                 {" "}
-                <td
-                  colspan="8"
-                  className="text-center"
-                  style={{ color: "black", fontWeight: "bold" }}
-                >
-                  {" "}
-                  No Poll are Available
-                </td>
-              </tr>
-            ) : (
-              pulls.map((values, index) => {
-                return (
-                  <tr key={index}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{values.pollType}</td>
-                    <td>{values.createdBy.name}</td>
-                    <td>{moment(values.startDate).format("MM-DD-YYYY")}</td>
-                    <td>{moment(values.endDate).format("MM-DD-YYYY")}</td>
-                    <td>
-                      <NavLink
-                        to={{
-                          pathname: "/components/blockchain",
-                          aboutProps: { userData: values },
-                        }}
-                      >
-                        <Button
-                          size="sm"
-                          style={{ marginLeft: "10px", marginTop: "6px" }}
-                        >
-                          Cast Vote
-                        </Button>
-                      </NavLink>
-                    </td>
-                    
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </Table>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+                <center>Result</center>
+              </h4>
+            </CardHeader>
+            <CardBody>
+              <ListGroup flush>
+           
+              </ListGroup>
+            </CardBody>
+          </Card>
+        </Form>
+        
       </div>
     );
   }

@@ -94,7 +94,6 @@ class UserDetails extends React.Component {
         // console.log("data",res.data.accountId.privateKey)
         this.setState({ pulls: res.data });
         this.userDetails.privateKey = res.data.data.accountId.privateKey;
-         localStorage.setItem("PrivateKey", res.data.accountId.privateKey);
         console.log("abc", this.userDetails.privateKey);
       });
     this.setState({
