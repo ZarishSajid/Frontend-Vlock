@@ -183,7 +183,7 @@ class Register extends React.Component {
               marginTop: "20px",
               marginLeft: "280px",
               width: "15rem",
-              height: "1200px",
+              height: "1250px",
               //#00008B
               backgroundColor: "#2980B9 ",
             }}
@@ -232,7 +232,7 @@ class Register extends React.Component {
                     color: "blue",
                     marginLeft: "150px",
                   }}
-                  src={require("../../src/images/shards-dashboards-orignal.svg")}
+                  src={require("../../src/images/login.jpg")}
                   alt="VLock"
                 />
                 {/* <Avatar style={{marginLeft:"200px",color:"white",backgroundColor:"#f58742"}}  >
@@ -268,7 +268,7 @@ class Register extends React.Component {
                     },
                   ],
                   initialValue: this.state.sapID,
-                })(<Input placeholder="Please enter your sap Id" />)}
+                })(<Input placeholder="Please enter your sap Id" maxLength="6"/>)}
               </FormItem>
               <br />
               <FormItem
@@ -283,17 +283,17 @@ class Register extends React.Component {
                   rules: [
                     {
                       required: true,
-                      message: "Full Name is Required",
+                      message: "Full Name is Required.",
                     },
 
-                    // {
-                    //   validator: (rule, value, callback) => {
-                    //      if (!value.match(/^[a-zA-Z]+$/)) {
-                    //       callback("Alphabets only");
-                    //     }
-                    //     return callback();
-                    //   }
-                    // }
+                    {
+                      validator: (rule, value, callback) => {
+                         if (!value.match(/^[a-zA-Z]+$/)) {
+                          callback("Alphabets only *");
+                        }
+                        return callback();
+                      }
+                    }
                   ],
                   initialValue: this.state.name,
                 })(<Input placeholder=" Please enter your full name" />)}
@@ -388,6 +388,7 @@ class Register extends React.Component {
                   <Input
                     placeholder=" Please enter your department"
                     type="text"
+                    maxLength="20"
                   />
                 )}
               </FormItem>
@@ -486,6 +487,7 @@ class Register extends React.Component {
                       <Input
                         placeholder=" Please enter your designation"
                         type="text"
+                        maxLength="20"
                       />
                     )}
                   </FormItem>
@@ -516,15 +518,17 @@ class Register extends React.Component {
                       <Input
                         placeholder=" Please enter your designation"
                         type="text"
+                        maxLength="20"
                       />
                     )}
                  
                   </FormItem>
                 </>
               )}
+              <br/>
                   <FormCheckbox style={{color:"black"}}>
                       {/* eslint-disable-next-line */ }I agree with your{" "}
-                      <a href="#">Privacy Policy</a>.
+                      <NavLink to={`/PrivacyPolicy`}> <a >Privacy Policy</a>.</NavLink>
                     </FormCheckbox>
               <MDBRow className="d-flex align-items-center mb-4">
                 <center>
@@ -532,7 +536,7 @@ class Register extends React.Component {
                   {/* <NavLink to={`/components/Admin`}> */}
                   <p style={{ color: "white", marginLeft: "30px" }}>
                     {" "}
-                    Please register Yourself.
+                    Please register Here.
                   </p>
                    
                   <MDBBtn

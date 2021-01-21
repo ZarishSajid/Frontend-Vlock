@@ -77,8 +77,9 @@ class Login extends React.Component {
                 localStorage.setItem("password", this.state.data.password);
                 localStorage.setItem("name", this.state.data.name);
                 localStorage.setItem("department", this.state.data.department);
-
+                localStorage.setItem("privatekey", res.data.newuser.accountId.privateKey);
                 localStorage.setItem("notifications", JSON.stringify(res.data.notifications));
+                console.log("private key !!!!!!!!!!!",res.data.newuser.accountId.privateKey)
 
                 // localStorage.setItem(
                 //   "notifications",
@@ -118,7 +119,7 @@ class Login extends React.Component {
         } else {
           setTimeout(() => {
             localStorage.setItem("count", 0);
-          }, 5000);
+          }, 10000);
           alert("try 3 and above time");
         }
       }
@@ -186,10 +187,10 @@ class Login extends React.Component {
               {/* <p style={{color:"white",marginLeft:"20px"}}>Please enter your credientials to login.If you are not a  member.</p> */}
 
               <NavLink to={"/Register"}>
-                <p style={{ color: "white", marginLeft: "10px" }}>
+                <a style={{ color: "white", marginLeft: "10px" ,textDecorationLine: "underline"}}>
                   {" "}
                   Please register Yourself.
-                </p>
+                </a>
               </NavLink>
             </MDBCard>
           </center>
@@ -254,7 +255,7 @@ class Login extends React.Component {
                     // },
                   ],
                   initialValue: this.state.sapID,
-                })(<Input placeholder="SapID" />)}
+                })(<Input placeholder=" SapID"  maxLength="6"/>)}
               </FormItem>
               <br />
               <FormItem

@@ -33,10 +33,10 @@ class title extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
+      name: localStorage.getItem("name"),
       email: localStorage.getItem("email"),
-      password: localStorage.getItem("department"),
-      department: "",
+      password: localStorage.getItem("password"),
+      department: localStorage.getItem("department"),
       cpassword: "",
     };
   }
@@ -55,6 +55,13 @@ class title extends React.Component {
           password: formData.password,
           department: formData.department,
         };
+        console.log("name in profile", localStorage.getItem("name"));
+        console.log("email in profile", this.email);
+        console.log(
+          "department in profile",
+          localStorage.getItem("department")
+        );
+
         if (formData.password !== formData.cpassword) {
           alert("Your Password did not match");
           return;
@@ -69,12 +76,12 @@ class title extends React.Component {
               localStorage.setItem("name", formData.name);
 
               alert("Updated Sucessfully");
-              
+              window.location.reload(false);
             } else {
               //  console.log("else")
               alert(res.data.message);
             }
-            window.location.reload(false);
+            // window.location.reload(false);
 
             //res.sucess=();
           });
@@ -122,7 +129,10 @@ class title extends React.Component {
                 backgroundColor: "#569CE5",
               }}
             >
-             <h4 style={{color:"black",fontWeight:"bold"}} > <center>Profile</center></h4>
+              <h4 style={{ color: "black", fontWeight: "bold" }}>
+                {" "}
+                <center>Profile</center>
+              </h4>
             </CardHeader>
             <CardBody>
               <ListGroup flush>
@@ -131,6 +141,7 @@ class title extends React.Component {
                     <Col>
                       <FormItem
                         style={{ color: "red" }}
+                        // onChange={(name) => this.setState({name })}
                         label={
                           <Text style={{ fontWeight: "bold", color: "black" }}>
                             Full Name
@@ -250,13 +261,18 @@ class title extends React.Component {
                             },
                           ],
                           initialValue: this.state.cpassword,
-                        })(<Input placeholder=" Confirm Password" type="password" />)}
+                        })(
+                          <Input
+                            placeholder=" Confirm Password"
+                            type="password"
+                          />
+                        )}
                       </FormItem>
                       <b />
                       <b>
                         {" "}
                         <Button
-                          style={{ marginLeft: "330px", marginTop: "10px" }}
+                          style={{ marginLeft: "330px", marginTop: "20px" }}
                           onClick={() => this.onRedirect()}
                           color="primary"
                         >

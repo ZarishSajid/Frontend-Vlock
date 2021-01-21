@@ -4,8 +4,9 @@ import { Container, Button } from "shards-react";
 import { ImCross, ImCheckmark } from "react-icons/im";
 import { RiDeleteBinLine } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Tooltip } from "antd";
 import { Table } from "reactstrap";
+import Tooltip from "react-simple-tooltip";
+import { FcKey, FcOk } from "react-icons/fc";
 import * as moment from "moment";
 import { IoMdCreate } from "react-icons/io";
 import getToken from "../helpers/auth";
@@ -16,9 +17,10 @@ import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import Loader from "react-loader-spinner";
 import { css } from "@emotion/core";
+import { Modal, ModalBody, ModalHeader } from "shards-react";
 const override = css`
   position: absolute;
-  left: 70%;
+  left: 40%;
   right: 0;
   top: 50%;
   border-color: blue;
@@ -37,12 +39,18 @@ class CastVote extends React.Component {
       _id: "",
       index: "",
     };
+
+    this.toggle = this.toggle.bind(this);
+  }
+  toggle() {
+    this.setState({
+      open: !this.state.open,
+    });
   }
   sendData(i) {
     const headers = {
       headers: {
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYXBJRCI6IjIzMDAiLCJ0aW1lIjoxNjA1NTU1NDA1NTk0LCJpYXQiOjE2MDU1NTU0MDUsImV4cCI6MTYwNTU1OTAwNX0.jiqGzFmRA2OuUCyxccqwew0g0WbcQPUtjrwS03t7aNA",
+        token: localStorage.getItem("token"),
       },
     };
     const data = {
@@ -92,21 +100,28 @@ class CastVote extends React.Component {
         console.log(res.message);
       });
   }
+  handleBack = () => {
+    this.setState({
+      //openActive: !this.state.openActive,
+      open: !this.state.open,
+    });
+  };
   render() {
     const { pulls } = this.state;
     // if (this.state.loading) return <Loader />;
     const { match } = this.props;
+    const { open, userType } = this.state;
 
     return (
       <div>
         <br />
-        <h3 style={{ marginLeft: "400px",color:"black" }}>Cast Vote</h3>
+        <h3 style={{ marginLeft: "400px", color: "black" }}>Cast Vote</h3>
 
         <div
           style={{ marginBottom: "10px" }}
           className="d-flex justify-content-center"
         ></div>
-         <div className="sweet-loading">
+        <div className="sweet-loading">
           <ClipLoader
             css={override}
             size={100}
@@ -154,20 +169,57 @@ class CastVote extends React.Component {
                           aboutProps: { userData: values },
                         }}
                       >
-                        <Button
-                          size="sm"
-                          style={{ marginLeft: "10px", marginTop: "6px" }}
-                        >
+                        <Button size="sm" style={{ marginTop: "6px" }}>
                           Cast Vote
                         </Button>
                       </NavLink>
+                      <Tooltip
+                        content=" Your Private Key"
+                        customCss={css`
+                          white-space: nowrap;
+                        `}
+                      >
+                        <FcKey
+                          style={{ marginLeft: "10px" }}
+                          onClick={this.toggle}
+                        ></FcKey>
+                      </Tooltip>
                     </td>
-                    
                   </tr>
                 );
               })
             )}
           </tbody>
+          <Modal size="lg" open={open} toggle={this.toggle}>
+            <center>
+              {" "}
+              <p
+                style={{
+                  marginTop: "30px",
+                  fontWeight: "bold",
+                  color: "black",
+                }}
+              >
+                <FcKey></FcKey> Your Private Key
+              </p>o
+            </center>
+
+            <ModalBody>
+              <p style={{ marginLeft: "30px" }}>
+                {localStorage.getItem("privatekey")}
+              </p>
+              <center>
+                {" "}
+                <Button
+                  style={{ marginLeft: "0px" }}
+                  type="secondary"
+                  onClick={this.handleBack}
+                >
+                  Cancel
+                </Button>
+              </center>
+            </ModalBody>
+          </Modal>
         </Table>
 
         <br />

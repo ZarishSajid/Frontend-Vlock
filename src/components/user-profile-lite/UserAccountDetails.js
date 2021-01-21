@@ -94,7 +94,9 @@ class title extends React.Component {
   //   this.setState({password: e.target.value
   //   })
   // }
-
+issue(){
+  alert("Incase of issue send email to teamvlock@gmail.com")
+}
   render() {
     const { getFieldDecorator } = this.props.form;
 
@@ -104,7 +106,7 @@ class title extends React.Component {
           sm
           className="mb-4"
           style={{
-            height: "43rem",
+            height: "46rem",
             width: "42rem ",
             marginTop: "20px",
           }}
@@ -257,6 +259,7 @@ class title extends React.Component {
                     <b>
                       {" "}
                       <br/>
+
                       <Button
                         style={{ marginLeft: "250px", marginTop: "10px" }}
                         onClick={() => this.onRedirect()}
@@ -264,10 +267,15 @@ class title extends React.Component {
                         theme="accent"
                       >
                         Update
+        
                       </Button>
+                      <p onClick={this.issue} style={{color:"blue",marginLeft:"430px"}}>Having Issue?</p>
+                      {/* alert("Login Sucessfully"); */}
                     </b>
                   </Col>
+                  
                 </Row>
+
               </ListGroupItem>
             </ListGroup>
           </CardBody>

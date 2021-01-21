@@ -32,6 +32,7 @@ import PollRequest from "../src/views/PollRequest";
 import userGuide from "../src/views/userGuide";
 import editUser from "../src/views/editUser";
 import Profile from "../src/views/Profile";
+import Results from "../src/views/Results";
 
 class Components extends Component {
     
@@ -82,6 +83,7 @@ class Components extends Component {
                   <Route path='/components/userGuide' component={userGuide}/>
                   <Route path='/components/editUser' component={editUser}/>
                   <Route path='/components/Profile' component={Profile}/>
+                  <Route path='/components/Results' component={Results}/>
 
 
                   {/* <Route path='/ResetPassword' component={ResetPassword}/> */}

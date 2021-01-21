@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "shards-react";
 import { FormSelect } from "shards-react";
 import { Colxx, Separator } from "../../src/common/CustomBootstrap";
@@ -41,22 +41,26 @@ import { unmountComponentAtNode } from "react-dom";
 import { formatCountdown } from "antd/lib/statistic/utils";
 import { useParams } from "react-router-dom";
 import * as moment from "moment";
-
+import TimePicker from "react-bootstrap-time-picker";
 const FormItem = Form.Item;
 const { Text } = Typography;
 var today = moment();
-var tomorrow = moment(today).add(1, 'days');
+var tomorrow = moment(today).add(1, "days");
 const date = new Date(tomorrow);
+
 class CreatePoll extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      time: "00:00",
       selectValue: "",
       pollDescription: "",
       audienceAdded: false,
       optionAdded: false,
       startDate: "",
       endDate: "",
+      startTime: "",
+      endTime: "",
       visible: false,
       optionValue: "",
       options: [],
@@ -81,6 +85,25 @@ class CreatePoll extends React.Component {
       pollDescription: e.target.value,
     });
   };
+  startTime = (e) => {
+    console.log("valueeee", e.target.value);
+    this.setState({
+      startTime: moment(e.target.value, "hh:mm").format("LT"),
+    });
+    console.log("valueeee 2", this.state.startTime);
+  };
+  endTime = (e) => {
+    console.log("valueeee", e.target.value);
+    this.setState({
+      sndTime: moment(e.target.value, "hh:mm").format("LT"),
+    });
+    console.log("valueeee 2", this.state.andTime);
+  };
+  handleTimeChange(time) {
+    console.log(time); // <- prints "3600" if "01:00" is picked
+    this.setState({ time });
+  }
+
   handleAudience(e) {
     console.log("You Selected", e.target.value);
 
@@ -88,7 +111,6 @@ class CreatePoll extends React.Component {
   }
 
   onRedirect = (e) => {
-  
     console.log("clicked");
     const { getFieldValue } = this.props.form;
     const {
@@ -99,6 +121,8 @@ class CreatePoll extends React.Component {
 
       startDate,
       endDate,
+      startTime,
+      endTime,
       options,
     } = this.state;
     const headers = {
@@ -112,6 +136,8 @@ class CreatePoll extends React.Component {
       pollDescription: pollDescription,
       startDate: startDate,
       endDate: endDate,
+      startTime: startTime,
+      endTime:endTime,
       pollQuestion: getFieldValue("pollQuestion"),
       pollOptions: options,
     };
@@ -122,10 +148,9 @@ class CreatePoll extends React.Component {
         console.log("RESPONSE = ", res);
         console.log(res.message);
         if (res.data.success) {
+          this.props.history.push("/components/FacultyPanel");
           alert("Your Request has been sent  to the admin");
-          this.setState({
-           
-          });
+          this.setState({});
           console.log("data", res.data.message);
         } else {
           //  console.log("else")
@@ -167,6 +192,18 @@ class CreatePoll extends React.Component {
       });
     }
   };
+  handleSelectedTime = (type, value) => {
+    debugger;
+    if (type === "startTime") {
+      this.setState({
+        startTime: value,
+      });
+    } else {
+      this.setState({
+        endTime: value,
+      });
+    }
+  };
 
   handleOk = () => {
     const { options, optionValue } = this.state;
@@ -189,21 +226,22 @@ class CreatePoll extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    console.log("field decarotrrrr", this.props.form);
 
     return (
       <Container>
-
         <Col lg="10" md="14">
-          <Card  sm
+          <Card
+            sm
             className="mb-4"
             style={{
-              height: "65rem",
+              height: "68rem",
               width: "50rem ",
               marginTop: "30px",
               marginLeft: "130px",
             }}
           >
-             <CardHeader
+            <CardHeader
               style={{
                 border: "1px solid white",
                 borderRadius: "10px",
@@ -213,7 +251,10 @@ class CreatePoll extends React.Component {
                 backgroundColor: "#569CE5",
               }}
             >
-             <h4 style={{color:"black",fontWeight:"bold"}} > <center>Create Poll</center></h4>
+              <h4 style={{ color: "black", fontWeight: "bold" }}>
+                {" "}
+                <center>Create Poll</center>
+              </h4>
             </CardHeader>
             <CardBody>
               <Form className="add-new-post">
@@ -223,10 +264,8 @@ class CreatePoll extends React.Component {
                       Poll Type
                     </Label>
                     {getFieldDecorator("pollType", {
-                      
                       rules: [
                         {
-                          
                           required: true,
                           message: "Please select Your pollType",
                         },
@@ -241,19 +280,97 @@ class CreatePoll extends React.Component {
                         style={{ color: "black" }}
                         value="CR/GR Selection"
                       >
-                        CR/GR Selection
+                        CR/GR 
                       </option>
                       <option
                         style={{ color: "black" }}
                         value="  Trip Location"
                       >
-                        Trip Location
+                        Trip 
                       </option>
                       <option
                         style={{ color: "black" }}
                         value="Seminar Speaker"
                       >
-                        Seminar Speaker
+                        FC Evening
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Webinar / Seminar
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        University Events
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Discipline Issue
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Cafeteria
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Cabinet Member
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Society
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                         Teacher Evaluation
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Course Issue
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Transportation Issue
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Student Evaluation
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Lab Equipments
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Laibrary 
+                      </option>
+                      <option
+                        style={{ color: "black" }}
+                        value="Seminar Speaker"
+                      >
+                        Finance 
                       </option>
                       <option style={{ color: "black" }} value="Other">
                         Other
@@ -268,7 +385,7 @@ class CreatePoll extends React.Component {
                     <Label style={{ color: "black", marginLeft: "0px" }}>
                       Select Audience
                     </Label>
-                    
+
                     {getFieldDecorator("selectedAudience", {
                       rules: [
                         {
@@ -303,8 +420,7 @@ class CreatePoll extends React.Component {
                 </Row>
                 <br />
                 <b style={{ color: "black" }}> Poll Question</b>
-                <FormItem   style={{ color: "red" }}
->
+                <FormItem style={{ color: "red" }}>
                   {getFieldDecorator("pollQuestion", {
                     rules: [
                       {
@@ -322,15 +438,12 @@ class CreatePoll extends React.Component {
                   )}
                 </FormItem>
                 {this.state.optionAdded && (
-              
                   <Radio.Group
                     options={this.state.options}
                     //when you want to change the radio button here you will call a fucn
                     onChange={(e) => this.handleOnChange(e.target.value)}
                     value={this.state.optionValue}
-                    
-                  >
-                  </Radio.Group>
+                  ></Radio.Group>
                 )}
                 <Button type="primary" onClick={this.showModal}>
                   Add Options
@@ -341,14 +454,14 @@ class CreatePoll extends React.Component {
                   open={this.state.visible}
                   toggle={this.handleCancel}
                 >
-                  <ModalHeader>Enter the Polling question options</ModalHeader>
+                  <ModalHeader></ModalHeader>
                   <ModalBody>
                     <FormItem>
                       {getFieldDecorator("pollingOption", {
                         rules: [
                           {
                             required: true,
-                            message: "Please nter the polling option",
+                            message: "Please enter the polling option",
                           },
                         ],
                       })(<Input placeholder="Enter the polling option" />)}
@@ -386,14 +499,14 @@ class CreatePoll extends React.Component {
                   initialValue: this.state.pollDescription,
                 })}
                 <FormInput
-                  style={{color:"black"}}
+                  style={{ color: "black" }}
                   type="Description"
                   onChange={this.handleDescription}
                   size="lg"
                   className="mb-3"
                   placeholder=""
                 />
-                    <b style={{ color: "black" }}>Start Date </b>
+                <b style={{ color: "black" }}>Start Date </b>
                 <FormItem>
                   {getFieldDecorator("startDate", {
                     rules: [
@@ -404,18 +517,19 @@ class CreatePoll extends React.Component {
                     ],
                     // initialValue: this.state.startDate,
                   })(
-                    <DayPickerInput  
-                      dayPickerProps={{ disabledDays: {before: new Date()} }}
+                    <DayPickerInput
+                      dayPickerProps={{ disabledDays: { before: new Date() } }}
                       selected={this.state.startDate}
                       style={{ marginLeft: "20px" }}
                       onDayChange={(day) =>
                         this.handleSelectedDate("startDate", day)
                       }
+
                       // onDayChange={(day) => console.log(day)}
                     />
                   )}
                 </FormItem>
-                <br/>
+                <br />
                 <b style={{ color: "black", marginLeft: "0px" }}> End Date </b>
                 <FormItem>
                   {getFieldDecorator("endDate", {
@@ -428,13 +542,61 @@ class CreatePoll extends React.Component {
                     // initialValue: this.state.endDate,
                   })(
                     <DayPickerInput
-                    dayPickerProps={{ disabledDays: {before: new Date()}}}
-                      style={{ marginLeft: "20px" }}
+                      dayPickerProps={{ disabledDays: { before: new Date() } }}
+                      style={{ marginLeft: "20px", height: "30px" }}
                       selected={this.state.endDate}
                       onDayChange={(day) =>
                         this.handleSelectedDate("endDate", day)
                       }
                       // onDayChange={(day) => console.log(day)}
+                    />
+                  )}
+                  <br />
+                  <br />
+                </FormItem>
+                <b style={{ color: "black", marginLeft: "0px" }}>
+                  {" "}
+                  Start Time{" "}
+                </b>
+                <FormItem style={{ color: "red" }}>
+                  {getFieldDecorator("startTime", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "*Required",
+                      },
+                    ],
+                  })(
+                    <Input
+                      type="time"
+                      style={{
+                        marginLeft: "20px",
+                        width: "210px",
+                        border: "1px solid  black",
+                      }}
+                      onChange={this.startTime}
+                    />
+                  )}
+                </FormItem>
+                <br />
+                <b style={{ color: "black", marginLeft: "0px" }}> End Time </b>
+                <FormItem style={{ color: "red" }}>
+                  {getFieldDecorator("endTime", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "*Required",
+                      },
+                    ],
+                  })(
+                    <Input
+                      type="time"
+                      style={{
+                        marginLeft: "20px",
+                        width: "210px",
+                        border: "1px solid black",
+                      }}
+                      onChange={this.endTime}
                     />
                   )}
                 </FormItem>
@@ -458,8 +620,6 @@ class CreatePoll extends React.Component {
             </CardBody>
           </Card>
         </Col>
-
-       
       </Container>
     );
   }

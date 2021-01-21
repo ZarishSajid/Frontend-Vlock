@@ -5080,7 +5080,7 @@ a.text-accent:hover {
 .main-navbar .navbar .nav-link-icon i {
   background-color:#424242;
 
-  line-height: 2.5rem;
+  /* line-height: 2.5rem; */
 }
 .main-content .header-navbar,
 .main-content > .main-navbar {

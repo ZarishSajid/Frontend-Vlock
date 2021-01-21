@@ -150,8 +150,7 @@ export default class Admin extends React.Component {
         this.state.pendingCount = res.data.data.pendingCount;
         pieChart.datasets[0].data = [this.state.approvedCount,this.state.disapprovedCount,this.state.pendingCount]
         console.log(
-          "this.state.disapprovedCount  =",
-          this.state.disapprovedCount
+          "this.state.disapprovedCount  =",this.state.disapprovedCount
         );
         console.log("this.state.approvedCount  =", this.state.approvedCount);
         console.log("this.state.pendingCount  =", this.state.pendingCount);
