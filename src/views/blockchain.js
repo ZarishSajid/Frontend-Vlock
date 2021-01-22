@@ -125,9 +125,9 @@ class Test extends React.Component {
   async castVoteToZara(e, values) {
     e.preventDefault();
     const userData =
-      this.props.location &&
-      this.props.location.aboutProps &&
-      this.props.location.aboutProps.userData;
+    this.props.location &&
+    this.props.location.aboutProps &&
+    this.props.location.aboutProps.userData;
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log("sselected options!!!", values.pollOption);
