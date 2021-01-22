@@ -64,6 +64,11 @@ else if(localStorage.getItem('userType') === 'student'){
       to: "/components/CreatePoll",
     },
     {
+      title: "Results",
+      htmlBefore: '<i class="material-icons">Result</i>',
+      to: "/components/PollResult",
+    },
+    {
       title: "Help",
       htmlBefore: '<i class="material-icons">help</i>',
       to: "/components/userGuide",
@@ -84,7 +89,7 @@ else if(localStorage.getItem('userType') === 'student'){
     {
       title: "Results",
       htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/components/Results",
+      to: "/components/PollResult",
     },
   ]
 }
@@ -114,6 +119,16 @@ else if(localStorage.getItem('userType') === 'student'){
       title: "Create Poll",
       htmlBefore: '<i class="material-icons">poll</i>',
       to: "/components/CreatePoll",
+    },
+    {
+      title: "Results",
+      htmlBefore: '<i class="material-icons">table_chart</i>',
+      to: "/components/PollResult",
+    },
+    {
+      title: "Help",
+      htmlBefore: '<i class="material-icons">help</i>',
+      to: "/components/userGuide",
     },
     // {
     // //  title: "Blockchain",
@@ -149,6 +164,11 @@ else if(localStorage.getItem('userType') === 'student'){
               title: "Create Poll",
               htmlBefore: '<i class="material-icons">note_add</i>',
               to: "/components/CreatePoll",
+                  },
+                  {
+                    title: "Results",
+                    htmlBefore: '<i class="material-icons">table_chart</i>',
+                    to: "/components/PollResult",
                   },
                   {
                     title: "Help",

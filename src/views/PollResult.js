@@ -21,7 +21,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import SweetAlert from "sweetalert-react/lib/SweetAlert";
 import { css } from "@emotion/core";
 import { AiFillEdit } from "react-icons/ai";
-import {BsLayoutTextSidebarReverse} from "react-icons/bs";
+import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 
 const override = css`
   position: absolute;
@@ -90,15 +90,10 @@ class PollStatus extends React.Component {
         token: localStorage.getItem("token"),
       },
     };
+    console.log("result page", headers);
 
-    const data = {
-      pollType: this.state.pollType,
-      createdBy: this.state.createdBy,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-    };
-    axios.get(`http://localhost:8080/vlock/poll`, headers, data).then((res) => {
-      console.log("RESPONSE = ", res.data.data);
+    axios.get(`http://localhost:8080/vlock/allresult`, headers).then((res) => {
+      console.log("RESPONSE = ", res.data);
       this.setState({ loading: false, pulls: res.data.data });
       console.log("this.state.pulls", this.state.pulls);
 
@@ -145,7 +140,7 @@ class PollStatus extends React.Component {
 
       <div>
         <br />
-        <h3 style={{ marginLeft: "400px" ,color:"black"}}>Poll Status</h3>
+        <h3 style={{ marginLeft: "400px", color: "black" }}>Poll List</h3>
         <div
           style={{ marginBottom: "10px" }}
           className="d-flex justify-content-center"
@@ -162,10 +157,8 @@ class PollStatus extends React.Component {
           <thead>
             <tr style={{ backgroundColor: "#569CE5" }}>
               <th>#</th>
-              <th> Poll Type</th>
               <th>Created By</th>
-              <th>Start Date</th>
-              <th>End Date</th>
+              <th> Poll Type</th>
               <th>Status</th>
               <th>Action</th>
               <th></th>
@@ -189,10 +182,8 @@ class PollStatus extends React.Component {
                 return (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{values.pollType}</td>
                     <td>{values.createdBy.name}</td>
-                    <td>{moment(values.startDate).format("MM-DD-YYYY")}</td>
-                    <td>{moment(values.endDate).format("MM-DD-YYYY")}</td>
+                    <td>{values.pollType}</td>
                     <td>
                       {values.status == "approved"
                         ? "Approved"
@@ -217,23 +208,13 @@ class PollStatus extends React.Component {
                             white-space: nowrap;
                           `}
                         >
-                        <AiOutlineEye
-                          onClick={this.toggle}
-                          style={{ marginLeft: "10px", color: "blue" }}
-                        />
+                          <AiOutlineEye
+                            onClick={this.toggle}
+                            style={{ marginLeft: "10px", color: "blue" }}
+                          />
                         </Tooltip>
                       </NavLink>
-                      <Tooltip
-                          content=" Delete Poll"
-                          customCss={css`
-                            white-space: nowrap;
-                          `}
-                        >
-                      <AiOutlineRest
-                        style={{ marginLeft: "10px", color: "blue" }}
-                        onClick={(e) => this.deletePoll(e, values._id)}
-                      ></AiOutlineRest>
-                      </Tooltip>
+                      
                       {values.status !== "pending" ? null : (
                         <NavLink
                           disabled={values.status !== "pending"}
@@ -242,41 +223,48 @@ class PollStatus extends React.Component {
                             aboutProps: { userData: values },
                           }}
                         >
-                           <Tooltip
-                          content="Edit Poll"
-                          customCss={css`
-                            white-space: nowrap;
-                          `}
-                        >
-                          <AiFillEdit
-                            style={{ marginTop: "3px", marginLeft: "10px",color:"blue" }}
-                            disabled={values.status !== "pending"}
-                          />
+                          <Tooltip
+                            content="Edit Poll"
+                            customCss={css`
+                              white-space: nowrap;
+                            `}
+                          >
+                            <AiFillEdit
+                              style={{
+                                marginTop: "3px",
+                                marginLeft: "10px",
+                                color: "blue",
+                              }}
+                              disabled={values.status !== "pending"}
+                            />
                           </Tooltip>
                         </NavLink>
                       )}
-{/* Expireeee */}
-{values.status !== "expired" ? null : (
-  <NavLink
-  disabled={values.status !== "pending"}
-  to={{
-    pathname: "/components/Results",
-    aboutProps: { userData: values },
-  }}
->
-                       
-                           <Tooltip
-                          content=" View Result"
-                          customCss={css`
-                            white-space: nowrap;
-                          `}
+                      {/* Expireeee */}
+                      {values.status !== "expired" ? null : (
+                        <NavLink
+                          disabled={values.status !== "pending"}
+                          to={{
+                            pathname: "/components/Results",
+                            aboutProps: { userData: values },
+                          }}
                         >
-                          <BsLayoutTextSidebarReverse
-                            style={{ marginTop: "3px", marginLeft: "10px",color:"blue" }}
-                            disabled={values.status !== "expired"}
-                          />
+                          <Tooltip
+                            content=" View Result"
+                            customCss={css`
+                              white-space: nowrap;
+                            `}
+                          >
+                            <BsLayoutTextSidebarReverse
+                              style={{
+                                marginTop: "3px",
+                                marginLeft: "10px",
+                                color: "blue",
+                              }}
+                              disabled={values.status !== "expired"}
+                            />
                           </Tooltip>
-                          </NavLink>
+                        </NavLink>
                       )}
                     </td>
                     <td></td>
@@ -285,7 +273,11 @@ class PollStatus extends React.Component {
               })
             )}
             <Modal size="md" open={open} toggle={this.toggle}>
-                <center><h4 style={{ marginTop: "30px" ,color:"black"}}>Poll Detail</h4></center>
+              <center>
+                <h4 style={{ marginTop: "30px", color: "black" }}>
+                  Poll Detail
+                </h4>
+              </center>
               <ModalBody>
                 <p
                   style={{
@@ -312,16 +304,14 @@ class PollStatus extends React.Component {
                       ? userData.createdBy.name
                       : this.state.createdBy.name}
                   </p> */}
-
                   <p style={{ color: "black" }}>
                     Email:{" "}
                     {userData && userData._id
                       ? userData.createdBy.email
                       : this.state.createdBy.email}
                   </p>
-
-                  Selected Audience: {this.getAudience(userData)}
-                   Poll Options:{" "}
+                 
+                  Poll Options:{" "}
                   {userData && userData._id ? (
                     userData.pollOptions.map((option) => (
                       <li style={{ color: "black" }}>{option}</li>
@@ -330,7 +320,7 @@ class PollStatus extends React.Component {
                     <p style={{ color: "black" }}>{this.state.pollOptions}</p>
                   )}
                   <p style={{ color: "black" }}>
-                    <br/>
+                    <br />
                     Start Date:
                     {userData && userData._id
                       ? moment(userData.startDate).format("MM-DD-YYYY")
@@ -343,13 +333,15 @@ class PollStatus extends React.Component {
                       : this.state.endDate}
                   </p>
                 </p>
-               <center> <Button
-                  style={{ marginLeft: "0px" }}
-                  type="secondary"
-                  onClick={this.handleBack}
-                >
-                  Cancel
-                </Button>
+                <center>
+                  {" "}
+                  <Button
+                    style={{ marginLeft: "0px" }}
+                    type="secondary"
+                    onClick={this.handleBack}
+                  >
+                    Cancel
+                  </Button>
                 </center>
               </ModalBody>
             </Modal>

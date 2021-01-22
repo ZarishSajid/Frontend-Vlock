@@ -176,6 +176,9 @@ class PollStatus extends React.Component {
           //  console.log("else")
           alert(res.data.message);
         }
+        if (res.data.success === true) {
+          this.fetchData();
+        }
         //res.sucess=();
       });
   }
