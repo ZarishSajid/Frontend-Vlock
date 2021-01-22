@@ -71,6 +71,8 @@ class CreatePoll extends React.Component {
     };
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleAudience = this.handleAudience.bind(this);
+    this. handleResultAudience = this. handleResultAudience.bind(this);
+
 
     // this.showModal = this.showModal.bind(this);
     // this.handleOk = this.handleOk.bind(this);
@@ -109,7 +111,11 @@ class CreatePoll extends React.Component {
 
     this.setState({ selectedAudience: e.target.value });
   }
+  handleResultAudience(e) {
+    console.log("Result Audience in create poll", e.target.value);
 
+    this.setState({ resultAudience: e.target.value });
+  }
   onRedirect = (e) => {
     console.log("clicked");
     const { getFieldValue } = this.props.form;
@@ -118,7 +124,7 @@ class CreatePoll extends React.Component {
       selectedAudience,
       pollDescription,
       optionValue,
-
+    resultAudience,
       startDate,
       endDate,
       startTime,
@@ -133,6 +139,7 @@ class CreatePoll extends React.Component {
     const data = {
       pollType: pollType,
       selectedAudience: selectedAudience,
+      resultAudience: resultAudience,
       pollDescription: pollDescription,
       startDate: startDate,
       endDate: endDate,
@@ -222,6 +229,9 @@ class CreatePoll extends React.Component {
   };
   allSelected = () => {
     this.setState({ selectedAudience: [] });
+  };
+  allresultSelected = () => {
+    this.setState({ resultAudience: [] });
   };
 
   render() {
@@ -599,7 +609,50 @@ class CreatePoll extends React.Component {
                       onChange={this.endTime}
                     />
                   )}
+                   <br/>
                 </FormItem>
+                <Col lg="10" md="12">
+                    <Label style={{ color: "black", marginLeft: "0px" }}>
+                      Show Poll Result To 
+                    </Label>
+
+                    {getFieldDecorator("resultAudience", {
+                      rules: [
+                        {
+                          required: true,
+                          message: "Please select Your Audience",
+                        },
+                      ],
+                      initialValue: this.state.resultAudience,
+                    })}
+                   <br/>
+                    <FormSelect
+                      style={{ height: "50px", width: "15rem" }}
+                      onChange={this.handleResultAudience}
+                    >
+                      <option style={{ color: "black" }} value="Student">
+                        Student
+                      </option>
+                      <option style={{ color: "black" }} value="  Faculty">
+                        Faculty
+                      </option>
+                      <option style={{ color: "black" }} value="Uni Admin">
+                        University Administration
+                      </option>
+                      <option style={{ color: "black" }} value="onlyme">
+                        Only Me
+                      </option>
+                      <option
+                      
+                        style={{ color: "black" }}
+                        value="All"
+                        onClick={this.allresultSelected}
+                      >
+                        All
+                      </option>
+                    
+                    </FormSelect>
+                  </Col>
               </Form>
 
               <br />
