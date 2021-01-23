@@ -611,48 +611,7 @@ class CreatePoll extends React.Component {
                   )}
                    <br/>
                 </FormItem>
-                <Col lg="10" md="12">
-                    <Label style={{ color: "black", marginLeft: "0px" }}>
-                      Show Poll Result To 
-                    </Label>
-
-                    {getFieldDecorator("resultAudience", {
-                      rules: [
-                        {
-                          required: true,
-                          message: "Please select Your Audience",
-                        },
-                      ],
-                      initialValue: this.state.resultAudience,
-                    })}
-                   <br/>
-                    <FormSelect
-                      style={{ height: "50px", width: "15rem" }}
-                      onChange={this.handleResultAudience}
-                    >
-                      <option style={{ color: "black" }} value="Student">
-                        Student
-                      </option>
-                      <option style={{ color: "black" }} value="  Faculty">
-                        Faculty
-                      </option>
-                      <option style={{ color: "black" }} value="Uni Admin">
-                        University Administration
-                      </option>
-                      <option style={{ color: "black" }} value="onlyme">
-                        Only Me
-                      </option>
-                      <option
-                      
-                        style={{ color: "black" }}
-                        value="All"
-                        onClick={this.allresultSelected}
-                      >
-                        All
-                      </option>
-                    
-                    </FormSelect>
-                  </Col>
+                
               </Form>
 
               <br />
