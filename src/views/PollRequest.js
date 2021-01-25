@@ -86,6 +86,7 @@ class PollStatus extends React.Component {
         console.log(res.message);
         if (res.data.success) {
           alert("Approved Sucessfully");
+          
           if (res.data.success === true) {
             this.fetchData();
           }

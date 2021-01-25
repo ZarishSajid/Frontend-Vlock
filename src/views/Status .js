@@ -90,12 +90,12 @@ class PollStatus extends React.Component {
     const data = {
       status: "inactive",
     };
-    const header = {
-      header: {
+    const headers = {
+      headers: {
         token: localStorage.getItem("token"),
       },
     };
-    axios.put(`http://localhost:8080/vlock/polin/${id}`, data).then((res) => {
+    axios.put(`http://localhost:8080/vlock/polin/${id}`, data,headers).then((res) => {
       alert("Poll Blocked Sucessfully ");
       if (res.data.success === true) {
         this.fetchData();
@@ -114,8 +114,8 @@ class PollStatus extends React.Component {
       status: "active",
     };
 
-    const header = {
-      header: {
+    const headers = {
+      headers: {
         token: localStorage.getItem("token"),
       },
     };
@@ -123,7 +123,7 @@ class PollStatus extends React.Component {
     console.log("iddd",id);
 
 
-    axios.put(`http://localhost:8080/vlock/pollact/${id}`, data)
+    axios.put(`http://localhost:8080/vlock/pollact/${id}`, data,headers)
     .then((res) => {
       alert("Poll Unblocked Sucessfully ");
       if (res.data.success === true) {
@@ -150,7 +150,10 @@ class PollStatus extends React.Component {
       .then((res) => {
         console.log("RESPONSE = ", res._id);
         alert("Sucesfully Deleted");
-        window.location.reload(false);
+         
+        if (res.data.success === true) {
+          this.fetchData();
+        }
         console.log(res.message);
       });
   }

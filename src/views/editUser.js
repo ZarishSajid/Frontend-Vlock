@@ -86,6 +86,16 @@ class CreatePoll extends React.Component {
       email: e.target.value,
     });
   };
+  handleDepartment=(e)=>{
+    this.setState({
+    department: e.target.value,
+    });
+  }; 
+  handlepassword=(e)=>{
+    this.setState({
+      passward: e.target.value,
+      });
+  }
   handleAudience(e) {
     console.log("You Selected", e.target.value);
 
@@ -93,6 +103,8 @@ class CreatePoll extends React.Component {
   }
 
   onRedirect = (e) => {
+    this.props.form.validateFieldsAndScroll((error, formData) => {
+      if (!error && formData) {
     const userData =
       this.props.location.aboutProps && this.props.location.aboutProps.userData;
 
@@ -113,7 +125,7 @@ class CreatePoll extends React.Component {
 
     console.log("dataaaa", data);
     axios
-      .put(`http://localhost:8080/vlock/polls/${userData._id}`, data, headers)
+      .put(`http://localhost:8080/vlock/update`, data, headers)
       .then((res) => {
         console.log("RESPONSE = ", res);
         console.log(res.message);
@@ -127,7 +139,8 @@ class CreatePoll extends React.Component {
         }
         //res.sucess=();
       });
-  };
+    }
+   } )};
   hideSwitch = (ev) => {
     this.setState({ hide: !this.state.hide });
   };
@@ -165,7 +178,7 @@ class CreatePoll extends React.Component {
             </CardHeader>
             <CardBody>
               <Form className="add-new-post">
-                <FormItem>
+                <FormItem   style={{ color: "red" }}>
                   <b style={{ color: "black" }}>Name</b>
                   {getFieldDecorator(" name", {
                     rules: [
@@ -187,11 +200,11 @@ class CreatePoll extends React.Component {
                       placeholder=""
                     />
                   )}
-                </FormItem>
+                </FormItem >
                 <b style={{ color: "black" }}>Email </b>
                 <br />
                 <br />
-                <FormItem>
+                <FormItem   style={{ color: "red" }}> 
                   {getFieldDecorator("email", {
                     rules: [
                       {
@@ -214,7 +227,7 @@ class CreatePoll extends React.Component {
                   )}
                 </FormItem>
                 <br />
-                <FormItem>
+                <FormItem   style={{ color: "red" }}>
                   <b style={{ color: "black" }}>Department</b>
                   {getFieldDecorator("department", {
                     rules: [
@@ -238,7 +251,7 @@ class CreatePoll extends React.Component {
                   )}
                 </FormItem>
                 <br />
-                <FormItem>
+                <FormItem   style={{ color: "red" }}>
                   <b style={{ color: "black" }}>Password</b>
                   {getFieldDecorator("password", {
                     rules: [

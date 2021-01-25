@@ -65,7 +65,7 @@ else if(localStorage.getItem('userType') === 'student'){
     },
     {
       title: "Results",
-      htmlBefore: '<i class="material-icons">Result</i>',
+      htmlBefore: '<i class="material-icons">table_chart</i>',
       to: "/components/PollResult",
     },
     {
@@ -86,11 +86,7 @@ else if(localStorage.getItem('userType') === 'student'){
     //   }, 
     
       
-    {
-      title: "Results",
-      htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/components/PollResult",
-    },
+   
   ]
 }
   else if(localStorage.getItem('userType') === 'uniAdmin'){

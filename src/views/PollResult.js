@@ -55,7 +55,6 @@ class PollStatus extends React.Component {
       open: !this.state.open,
     });
   }
-
   deletePoll(e, id) {
     e.preventDefault();
     console.log("id inside delete poll");
@@ -65,7 +64,6 @@ class PollStatus extends React.Component {
       },
     };
     console.log("before axios", id);
-
     axios
       .delete(`http://localhost:8080/vlock/poll/${id}`, headers)
 

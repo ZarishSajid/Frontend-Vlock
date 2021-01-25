@@ -269,7 +269,7 @@ issue(){
                         Update
         
                       </Button>
-                      <p onClick={this.issue} style={{color:"blue",marginLeft:"430px"}}>Having Issue?</p>
+                      <p onClick={this.issue} style={{color:"#569CE5",marginLeft:"430px"}}>Having Issue?</p>
                       {/* alert("Login Sucessfully"); */}
                     </b>
                   </Col>

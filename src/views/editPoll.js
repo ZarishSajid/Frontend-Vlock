@@ -40,7 +40,8 @@ import {
 import { unmountComponentAtNode } from "react-dom";
 import { formatCountdown } from "antd/lib/statistic/utils";
 import { useParams } from "react-router-dom";
-
+const newDate = new Date();
+const formatDate = moment(newDate).format('YYYY-MM-DDTHH:mm');
 const FormItem = Form.Item;
 const { Text } = Typography;
 var today = moment();
@@ -69,7 +70,18 @@ class CreatePoll extends React.Component {
     // this.showModal = this.showModal.bind(this);
     // this.handleOk = this.handleOk.bind(this);
   }
-
+  startDate= (e) => {
+    console.log("start Date", e.target.value);
+    this.setState({
+      startDate: e.target.value,
+    });
+  };
+  endDate = (e) => {
+    console.log("End Date", e.target.value);
+    this.setState({
+      endDate:e.target.value,
+    });
+  };
   handleDescription = (e) => {
     this.setState({
       pollDescription: e.target.value,
@@ -251,17 +263,18 @@ class CreatePoll extends React.Component {
                     ],
                     initialValue:
                       userData && userData._id
-                        ? moment(userData.startDate).format("MM-DD-YYYY")
+                        ? (userData.startDate).formatDate
                         : this.state.startDate,
                   })(
-                    <DayPickerInput
-                      dayPickerProps={{ disabledDays: { before: new Date() } }}
-                      selected={this.state.startDate}
-                      style={{ marginLeft: "20px" }}
-                      onDayChange={(day) =>
-                        this.handleSelectedDate("startDate", day)
-                      }
-                      // onDayChange={(day) => console.log(day)}
+                    <Input
+                    type="datetime-local" 
+                    min= {formatDate}
+                      style={{
+                        marginLeft: "20px",
+                        width: "210px",
+                        border: "1px solid  black",
+                      }}
+                      onChange={this.startDate}
                     />
                   )}
                 </FormItem>
@@ -280,17 +293,18 @@ class CreatePoll extends React.Component {
                     ],
                     initialValue:
                       userData && userData._id
-                        ? moment(userData.endDate).format("MM-DD-YYYY")
+                        ? (userData.endDate).formatDate
                         : this.state.endDate,
                   })(
-                    <DayPickerInput
-                      dayPickerProps={{ disabledDays: { before: new Date() } }}
-                      style={{ marginLeft: "20px" }}
-                      selected={this.state.endDate}
-                      onDayChange={(day) =>
-                        this.handleSelectedDate("endDate", day)
-                      }
-                      // onDayChange={(day) => console.log(day)}
+                    <Input
+                    type="datetime-local" 
+                    min= {formatDate}
+                      style={{
+                        marginLeft: "20px",
+                        width: "210px",
+                        border: "1px solid black",
+                      }}
+                      onChange={this.endDate}
                     />
                   )}
                 </FormItem>

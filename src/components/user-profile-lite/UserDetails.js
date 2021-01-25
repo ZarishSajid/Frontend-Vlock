@@ -56,7 +56,7 @@ class UserDetails extends React.Component {
 
         <ul>
 
-<p style={{ color: "black",fontWeight:"bold",fontSize:"30sp" }}>Dear  {localStorage.getItem("name")}</p>
+<p style={{ color: "black",fontWeight:"bold",fontSize:"30sp" }}>Dear  {localStorage.getItem("name")}, please follow these steps:</p>
 
           <p> 1- Click on the view key button.</p>
    

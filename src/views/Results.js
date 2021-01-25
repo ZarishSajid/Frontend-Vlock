@@ -58,31 +58,34 @@ class CastVote extends React.Component {
   }
 
   fetchData() {
-    debugger
-    const userData = this.props.location.aboutProps && this.props.location.aboutProps.userData;
+    debugger;
+    const userData =
+      this.props.location.aboutProps && this.props.location.aboutProps.userData;
     const headers = {
       headers: {
-        token:localStorage.getItem("token"),
+        token: localStorage.getItem("token"),
       },
     };
 
- console.log("token in result page",headers.headers.token)
-    axios.get(`http://localhost:8080/vlock/getresult/${userData._id}`,headers).then((res) => {
-      console.log("Poll Question",userData.pollQuestion)
+    console.log("token in result page", headers.headers.token);
+    axios
+      .get(`http://localhost:8080/vlock/getresult/${userData._id}`, headers)
+      .then((res) => {
+        console.log("Poll Question", userData.pollQuestion);
 
-      console.log("RESPONSE = ", res.data.data);
-      this.setState({  pulls: res.data.data });
+        console.log("RESPONSE = ", res.data.data);
+        this.setState({ pulls: res.data.data });
 
-      // console.log("this.state.pulls", this.state.pulls);
+        // console.log("this.state.pulls", this.state.pulls);
 
-      console.log(res.message);
-    });
+        console.log(res.message);
+      });
   }
   render() {
     const userData =
-    this.props.location &&
-    this.props.location.aboutProps &&
-    this.props.location.aboutProps.userData;
+      this.props.location &&
+      this.props.location.aboutProps &&
+      this.props.location.aboutProps.userData;
     const { pulls } = this.state;
     // if (this.state.loading) return <Loader />;
     const { match } = this.props;
@@ -91,7 +94,6 @@ class CastVote extends React.Component {
       <div>
         <br />
         <Form onSubmit={this.onRedirect}>
-        
           <Card
             sm
             className="mb-4"
@@ -119,36 +121,51 @@ class CastVote extends React.Component {
             </CardHeader>
             <CardBody>
               <ListGroup flush>
-            
-            <p  style={{color:"black",fontWeight:"bold"}}>Poll Question:  {userData.pollQuestion}</p>
-            
+                <p style={{ color: "black", fontWeight: "bold" }}>
+                  Poll Question: {userData.pollQuestion}
+                </p>
+
                 <ul class="list-group">
-         
-<li class="list-group-item d-flex justify-content-between align-items-center">
-Poll Options
-<span class="badge badge-primary badge-pill">Vote Count</span>
-</li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Poll Options
+                    <span class="badge badge-primary badge-pill">
+                      Vote Count
+                    </span>
+                  </li>
 
-{!pulls.length ?  ( <p>No Data Found</p>) : ( pulls.map((values, index) => {
-                return (
-<li key={index} class="list-group-item d-flex justify-content-between align-items-center">
-
-{values.pollOption}
-<span class="badge badge-primary badge-pill">{values.voteCount}</span>
-</li>
-     
-     );
-    })
-  )
-  }           
-</ul>
-
-                
+                  {!pulls.length ? (
+                    <p>No Data Found</p>
+                  ) : (
+                    pulls.map((values, index) => {
+                      return (
+                        <li
+                          key={index}
+                          class="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                          {values.pollOption}
+                          <span class="badge badge-primary badge-pill">
+                            {values.voteCount}
+                          </span>
+                        </li>
+                      );
+                    })
+                  )}
+                </ul>
+               
+               <center> <NavLink
+                  to={{
+                    pathname: "/components/PollStatus",
+                  }}
+                >
+                  <Button style={{ marginLeft: "30px" ,marginTop:"170px"}} type="secondary">
+                    Back
+                  </Button>
+                </NavLink>
+                </center>
               </ListGroup>
             </CardBody>
           </Card>
         </Form>
-        
       </div>
     );
   }

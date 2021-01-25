@@ -58,7 +58,7 @@ class UserList extends React.Component {
     const data = {
       //email: "rajazara75@gmail.com",
       email: this.state.email,
-      subject: "Vlock Notification",
+      subject: this.state.subject,
       message: this.state.Description,
       //message: "Dear zara your account has been blocked",
     };
@@ -82,6 +82,11 @@ class UserList extends React.Component {
       Description: e.target.value,
     });
   };
+  handleSubject=(e)=>{
+    this.setState({
+      subject:e.target.value,
+    });
+  }
   toggle() {
     this.setState({
       open: !this.state.open,
@@ -481,14 +486,23 @@ class UserList extends React.Component {
               Cancel
             </Button> */}
             <center>
-              <Button
+            <Button
+              size="sm"
+              style={{ marginLeft: "0px" }}
+              type="secondary"
+         
+            >
+              Cancel
+            </Button>
+              {/* <Button
                 size="sm"
-                style={{ marginLeft: "320px" }}
+                style={{ marginLeft: "20px" }}
                 type="secondary"
                 onClick={(e) => this.sendEmail()}
               >
                 Send
               </Button>
+               */}
             </center>
           </ModalBody>
         </Modal>
@@ -551,6 +565,14 @@ class UserList extends React.Component {
             >
               Send
             </Button>
+            {/* <Button
+                size="sm"
+                style={{ marginLeft: "20px" }}
+                type="secondary"
+              >
+                Cancel
+              </Button> */}
+           
           </ModalBody>
         </Modal>
       </div>

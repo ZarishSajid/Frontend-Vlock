@@ -555,7 +555,7 @@ class CreatePoll extends React.Component {
                 </FormItem> */}
                 <b style={{ color: "black", marginLeft: "0px" }}>
                   {" "}
-                  Start Time{" "}
+                  Start Date{" "}
                 </b>
                 <FormItem style={{ color: "red" }}>
                   {getFieldDecorator("startDate",{
