@@ -109,7 +109,7 @@ class Login extends React.Component {
 
                   fireRedirect: true,
                 });
-                window.location.reload(false);
+                // window.location.reload(false);
               } else {
                 console.log("else", count + 1);
                 count = count + 1;

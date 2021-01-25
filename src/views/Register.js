@@ -83,7 +83,7 @@ class Register extends React.Component {
             console.log("RESPONSE = ", res);
             console.log(res.message);
             if (res.data.success) {
-              alert("Registerd");
+              alert("Congratulations! Your account has been created");
               const userType = this.state.userType;
 
               console.log("data", res.data.message);
@@ -196,11 +196,19 @@ class Register extends React.Component {
             </h4>
             {/* <p style={{color:"white",marginLeft:"20px"}}>Register yourself here and be a part of Riphah biggest decision making platform.If you are already a member.</p> */}
 
-            <p style={{ color: "white", marginLeft: "30px" }}>
-              {" "}
-              Please register Yourself.
-            </p>
-
+            <p
+                className="font-small green-text d-flex justify-content-end"
+                style={{ color: "white" }}
+              >
+                Have an account?
+                <a
+                  style={{ color: "black", textDecorationLine: "underline" }}
+                  href="/Login"
+                  className="green-text ml-1 font-weight-bold"
+                >
+                  Login Here
+                </a>
+              </p>
             <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
               <div>
                 <h5 className="pink-text"></h5>
@@ -542,19 +550,7 @@ class Register extends React.Component {
                 </center>
               </MDBRow>
 
-              <p
-                className="font-small green-text d-flex justify-content-end"
-                style={{ color: "black" }}
-              >
-                Have an account?
-                <a
-                  style={{ color: "black", textDecorationLine: "underline" }}
-                  href="/Login"
-                  className="green-text ml-1 font-weight-bold"
-                >
-                  Login Here
-                </a>
-              </p>
+              
             </div>
           </MDBCard>
         </MDBRow>
