@@ -115,6 +115,7 @@ class CreatePoll extends React.Component {
  
   onRedirect = (e) => {
     console.log("clicked");
+    
     const { getFieldValue } = this.props.form;
     const {
       pollType,

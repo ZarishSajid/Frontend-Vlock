@@ -75,7 +75,7 @@ class Register extends React.Component {
             name: formData.name,
             department: formData.department,
             designation: formData.designation,
-            userType: formData.userType,
+            userType: this.state.userType,
             semester: formData.semester,
             degree: formData.degree,
           })

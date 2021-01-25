@@ -389,24 +389,29 @@ return (
         {/* {/ {/ {this.drawGrid()} /} /} */}
         <Row>
           <Col>
-            <Card small>
-              <CardHeader className="border-bottom">
-                <center>
-                  {" "}
-                  <h6
-                    style={{ color: "black", fontWeight: "bold" }}
-                    className="m-0"
-                  >
-                    Cast Vote
-                  </h6>
-                </center>
-              </CardHeader>
+            <Card >
+            <CardHeader
+              style={{
+                border: "1px solid white",
+                borderRadius: "10px",
+                padding: "25px",
+                marginLeft: "30px",
+                marginRight: "30px",
+                backgroundColor: "#569CE5",
+              }}
+            >
+              <h4 style={{ color: "black", fontWeight: "bold" }}>
+                {" "}
+                <center>Cast Vote</center>
+              </h4>
+            </CardHeader>
               <ListGroup flush>
                 <ListGroupItem className="p-3">
                   <Row>
                     <Col md="6" className="form-group">
-                      <label
-                        style={{ color: "black", fontWeight: "bold" }}
+                      <br/>
+                   <label
+                        style={{ color: "black",marginLeft:"30px", fontWeight: "bold" }}
                         htmlFor=""
                       >
                         {" "}
@@ -414,6 +419,7 @@ return (
                       </label>
                       <p
                         style={{
+                          marginLeft:"30px",
                           border: "1px solid grey",
                           borderRadius: "10px",
                           padding: "15px",
@@ -425,13 +431,14 @@ return (
                           : this.state.pollQuestion}
                       </p>
                       <label
-                        style={{ color: "black", fontWeight: "bold" }}
+                        style={{ color: "black", marginLeft:"30px",fontWeight: "bold" }}
                         htmlFor=""
                       >
                         Description
                       </label>
                       <p
                         style={{
+                          marginLeft:"30px",
                           border: "1px solid grey",
                           borderRadius: "10px",
                           padding: "15px",
@@ -442,13 +449,13 @@ return (
                           ? userData.pollDescription
                           : this.state.pollDescription}
                       </p>
-                      <Form onSubmit={this.castVoteToZara}>
+                      <Form  onSubmit={this.castVoteToZara}>
                         {userData &&
                           userData._id &&
                           userData.pollOptions &&
                           userData.pollOptions.length > 0 &&
                           userData.pollOptions.map((option, index) => (
-                            <Form.Item>
+                            <Form.Item style={{color:"red"}}>
                               {getFieldDecorator("pollOption", {
                                 rules: [
                                   {
@@ -458,15 +465,16 @@ return (
                                 ],
                               })(
                                 <Radio.Group
+                                style={{marginLeft:"30px"}}
                                   key={index.toString()}
                                   value={this.state.selectedOption}
                                   onChange={this.selectPollOption}
                                 >
                                   <Radio
-                                    style={{ color: "black" }}
+                                    style={{ color: "black",marginLeft:"30px" }}
                                     value={option}
                                   >
-                                    <span style={{ paddingLeft: "10px" }}>
+                                    <span style={{ paddingLeft: "30px" }}>
                                       {option}
                                     </span>
                                   </Radio>
@@ -476,15 +484,16 @@ return (
                             </Form.Item>
                           ))}
                         <br />
-                        <Button
+                       <center><Button
                           type="html"
                           style={{ MarginLeft: "100px" }}
                           // onClick={() => this.castVoteToZara()}
                         >
                           Vote
                         </Button>
+                        </center> 
+                           Your Account:  <p>{this.state.account}</p>
                       </Form>
-                      <p>Your account: {this.state.account}</p>
                     </Col>
                   </Row>
                 </ListGroupItem>
