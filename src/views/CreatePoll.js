@@ -363,7 +363,7 @@ class CreatePoll extends React.Component {
                         style={{ color: "black" }}
                         value="Seminar Speaker"
                       >
-                        Laibrary 
+                        Library 
                       </option>
                       <option
                         style={{ color: "black" }}
@@ -398,13 +398,13 @@ class CreatePoll extends React.Component {
                       style={{ height: "50px", width: "47rem" }}
                       onChange={this.handleAudience}
                     >
-                      <option style={{ color: "black" }} value="Student">
+                      <option style={{ color: "black" }} value="student">
                         Student
                       </option>
-                      <option style={{ color: "black" }} value="  Faculty">
+                      <option style={{ color: "black" }} value=" faculty">
                         Faculty
                       </option>
-                      <option style={{ color: "black" }} value="Uni Admin">
+                      <option style={{ color: "black" }} value="uniAdmin">
                         University Administration
                       </option>
                       <option

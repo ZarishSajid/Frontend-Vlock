@@ -196,19 +196,16 @@ class Register extends React.Component {
             </h4>
             {/* <p style={{color:"white",marginLeft:"20px"}}>Register yourself here and be a part of Riphah biggest decision making platform.If you are already a member.</p> */}
 
-            <p
-                className="font-small green-text d-flex justify-content-end"
-                style={{ color: "white" }}
-              >
-                Have an account?
-                <a
-                  style={{ color: "black", textDecorationLine: "underline" }}
+        <center> <p style={{color: "white",fontWeight:"bold"}}>Have an account?</p></center>
+          <center> <a
+                  style={{ color: "white", textDecorationLine: "underline" }}
                   href="/Login"
                   className="green-text ml-1 font-weight-bold"
                 >
+                  
                   Login Here
                 </a>
-              </p>
+                </center> 
             <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
               <div>
                 <h5 className="pink-text"></h5>

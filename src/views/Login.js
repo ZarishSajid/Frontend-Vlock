@@ -187,6 +187,7 @@ class Login extends React.Component {
               >
                 Lock Your Decision
               </h4>
+              <br/>
               {/* <p style={{color:"white",marginLeft:"20px"}}>Please enter your credientials to login.If you are not a  member.</p> */}
 
               <NavLink to={"/Register"}>
@@ -195,6 +196,7 @@ class Login extends React.Component {
                   Please register Yourself.
                 </a>
               </NavLink>
+              
             </MDBCard>
           </center>
           <MDBCard
