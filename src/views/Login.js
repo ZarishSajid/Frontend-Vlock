@@ -51,8 +51,11 @@ class Login extends React.Component {
   }
 
   onRedirect = (e) => {
+    
     this.props.form.validateFieldsAndScroll((error, formData) => {
       if (!error && formData) {
+        console.log("inside field validator");
+
         if (Number(localStorage.getItem("count")) < 3) {
           axios
             .post("http://localhost:8080/vlock/login", {

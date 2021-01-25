@@ -59,6 +59,48 @@ class Register extends React.Component {
     };
     // this.initialState = this.state;
   }
+  onRedirect = (e) => {
+    console.log("clicked signup button");
+
+    this.props.form.validateFieldsAndScroll((error, formData) => {
+      console.log("inside before if condition field validator");
+      if (!error && formData) {
+        console.log("inside field after if validator");
+
+        axios
+          .post(`http://localhost:8080/signup2`, {
+            sapID: formData.sapID,
+            password: formData.password,
+            email: formData.email,
+            name: formData.name,
+            department: formData.department,
+            designation: formData.designation,
+            userType: formData.userType,
+            semester: formData.semester,
+            degree: formData.degree,
+          })
+          .then((res) => {
+            console.log("RESPONSE = ", res);
+            console.log(res.message);
+            if (res.data.success) {
+              alert("Registerd");
+              const userType = this.state.userType;
+
+              console.log("data", res.data.message);
+              this.setState({
+                // redirectRoute: userType === 'faculty' ? "/components/FacultyPanel" : userType === 'student' ? "/components/StudentPanel" : userType === 'uniAdmin' ? "/components/UniversityAdministration":"/components/Admin" ,
+                fireRedirect: true,
+                fireRedirect: "/Login",
+              });
+            } else {
+              //  console.log("else")
+              alert(res.data.message);
+            }
+            //res.sucess=();
+          });
+      }
+    });
+  };
   myChangeHandler = (event) => {
     this.setState({ email: event.target.value });
   };
@@ -100,49 +142,6 @@ class Register extends React.Component {
     return callback();
   };
 
-  onRedirect = (e) => {
-    // e.preventDefault();
-
-    // this.setState(this.initialState)
-
-    console.log("clicked");
-
-    this.props.form.validateFieldsAndScroll((error, formData) => {
-      if (!error && formData) {
-        axios
-          .post(`http://localhost:8080/signup2`, {
-            sapID: formData.sapID,
-            password: formData.password,
-            email: formData.email,
-            name: formData.name,
-            department: formData.department,
-            designation: formData.designation,
-            userType: this.state.userType,
-            semester: formData.semester,
-            degree: formData.degree,
-          })
-          .then((res) => {
-            console.log("RESPONSE = ", res);
-            console.log(res.message);
-            if (res.data.success) {
-              alert("Registerd");
-              const userType = this.state.userType;
-
-              console.log("data", res.data.message);
-              this.setState({
-                // redirectRoute: userType === 'faculty' ? "/components/FacultyPanel" : userType === 'student' ? "/components/StudentPanel" : userType === 'uniAdmin' ? "/components/UniversityAdministration":"/components/Admin" ,
-                fireRedirect: true,
-                fireRedirect: "/Login",
-              });
-            } else {
-              //  console.log("else")
-              alert(res.data.message);
-            }
-            //res.sucess=();
-          });
-      }
-    });
-  };
   onChange = (e) => {
     console.log("radio checked", e.target.value);
     this.setState({
@@ -268,7 +267,7 @@ class Register extends React.Component {
                     },
                   ],
                   initialValue: this.state.sapID,
-                })(<Input placeholder="Please enter your sap Id" maxLength="6"/>)}
+                })(<Input  maxLength="6" placeholder="Please enter your sap Id" /> )}
               </FormItem>
               <br />
               <FormItem
@@ -286,14 +285,14 @@ class Register extends React.Component {
                       message: "Full Name is Required.",
                     },
 
-                    {
-                      validator: (rule, value, callback) => {
-                         if (!value.match(/^[a-zA-Z]+$/)) {
-                          callback("Alphabets only *");
-                        }
-                        return callback();
-                      }
-                    }
+                    // {
+                    //   validator: (rule, value, callback) => {
+                    //     if (!value.match(/^[a-zA-Z]+$/)) {
+                    //       callback(" Alphabets only *");
+                    //     }
+                    //     return callback();
+                    //   },
+                    // },
                   ],
                   initialValue: this.state.name,
                 })(<Input placeholder=" Please enter your full name" />)}
@@ -388,7 +387,6 @@ class Register extends React.Component {
                   <Input
                     placeholder=" Please enter your department"
                     type="text"
-                    maxLength="20"
                   />
                 )}
               </FormItem>
@@ -487,7 +485,6 @@ class Register extends React.Component {
                       <Input
                         placeholder=" Please enter your designation"
                         type="text"
-                        maxLength="20"
                       />
                     )}
                   </FormItem>
@@ -518,18 +515,13 @@ class Register extends React.Component {
                       <Input
                         placeholder=" Please enter your designation"
                         type="text"
-                        maxLength="20"
                       />
                     )}
-                 
                   </FormItem>
                 </>
               )}
-              <br/>
-                  <FormCheckbox style={{color:"black"}}>
-                      {/* eslint-disable-next-line */ }I agree with your{" "}
-                      <NavLink to={`/PrivacyPolicy`}> <a >Privacy Policy</a>.</NavLink>
-                    </FormCheckbox>
+              <br />
+
               <MDBRow className="d-flex align-items-center mb-4">
                 <center>
                   {" "}
@@ -538,7 +530,6 @@ class Register extends React.Component {
                     {" "}
                     Please register Here.
                   </p>
-                   
                   <MDBBtn
                     style={{ width: "180px", marginLeft: "100px" }}
                     onClick={() => this.onRedirect()}

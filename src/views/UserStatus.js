@@ -392,35 +392,42 @@ class UserList extends React.Component {
                     padding: "15px",
                   }}
                 >
-                  <p style={{ color: "black" }}>
+                  <span style={{ color:"#569CE5" }}> 
                     Name:
-                    {userData && userData._id ? userData.name : this.state.name}
-                  </p>
-                  <p style={{ color: "black" }}>
+                    <a style={{color:"black"}}>  {userData && userData._id ? userData.name : this.state.name}
+                  </a></span>
+                  <br/>
+                  <br/>
+                  <span style={{ color:"#569CE5" }}> 
+                 
                     Sap Id:{" "}
-                    {userData && userData._id
+                    <a style={{color:"black"}}> {userData && userData._id
                       ? userData.sapID
                       : this.state.sapID}
-                  </p>
-                  <p style={{ color: "black" }}>
+                  </a></span>
+                  <br/>
+                  <br/>
+                  <span style={{ color:"#569CE5" }}> 
                     Email:
-                    {userData && userData._id
+                    <a style={{color:"black"}}> {userData && userData._id
                       ? userData.email
                       : this.state.email}
-                  </p>
-                  <p style={{ color: "black" }}>
+                  </a></span>
+                  <br/><br/>
+                  <span style={{ color:"#569CE5" }}>
                     Department:{" "}
-                    {userData && userData._id
+                    <a style={{color:"black"}}> {userData && userData._id
                       ? userData.department
                       : this.state.department}
-                  </p>
-                  <p style={{ color: "black" }}>
+                  </a></span>
+                  <br/><br/>
+                  <span style={{ color:"#569CE5" }}>
                     {" "}
                     User Type:{" "}
-                    {userData && userData._id
+                    <a style={{color:"black"}}>{userData && userData._id
                       ? userData.userType
                       : this.state.userType}
-                  </p>
+                 </a></span>
                 </p>
                 <Button
                   style={{ marginLeft: "160px" }}

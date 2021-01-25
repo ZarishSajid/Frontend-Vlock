@@ -343,36 +343,44 @@ class PollStatus extends React.Component {
                       ? userData.createdBy.department
                       : this.state.createdBy.department}
                   </p> */}
-                  <p style={{ color: "black" }}>
+                 <span style={{ color:"#569CE5" }}>
                     Email:{" "}
-                    {userData && userData._id
+                    <a style={{color:"black"}}> {userData && userData._id
                       ? userData.createdBy.email
                       : this.state.createdBy.email}
-                  </p>
-                  <p style={{ color: "black" }}>
-                  Selected Audience: {this.getAudience(userData)}
-                  </p>
-                  Poll Options:{" "}
-                  {userData && userData._id ? (
+                  </a></span>
+                  <br/>
+                  <br/>
+                  <span style={{ color:"#569CE5" }}>
+                  <a style={{color:"black"}}> Selected Audience: {this.getAudience(userData)}
+                  </a></span>
+                  <br/>
+             
+                  <span style={{ color:"#569CE5" }}>Poll Options:{" "}
+                  <a style={{color:"black"}}> {userData && userData._id ? (
                     userData.pollOptions.map((option) => (
                       <li style={{ color: "black" }}>{option}</li>
                     ))
                   ) : (
                     <p style={{ color: "black" }}>{this.state.pollOptions}</p>
-                  )}
+                  )}</a></span>
+                  
                   <br/>
-                  <p style={{ color: "black" }}>
+                  <span style={{ color:"#569CE5" }}>
                     Start Date:
-                    {userData && userData._id
+                    <a style={{color:"black"}}>  {userData && userData._id
                       ? moment(userData.startDate).format("MM-DD-YYYY")
                       : this.state.startDate}
-                  </p>
-                  <p style={{ color: "black" }}>
+                  </a></span>
+                  <br/>
+                  <br/>
+                  <span style={{ color:"#569CE5" }}>
                     End Date:{" "}
-                    {userData && userData._id
+                    <a style={{color:"black"}}>   {userData && userData._id
                       ? moment(userData.endDate).format("MM-DD-YYYY")
                       : this.state.endDate}
-                  </p>
+                </a>
+                </span>
                 </p>
                <center> <Button
                   style={{ marginLeft: "0px" }}
