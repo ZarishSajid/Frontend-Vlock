@@ -82,8 +82,10 @@ class Login extends React.Component {
                 localStorage.setItem("department", this.state.data.department);
                 localStorage.setItem("privatekey", res.data.newuser.accountId.privateKey);
                 localStorage.setItem("notifications", JSON.stringify(res.data.notifications));
-                console.log("private key !!!!!!!!!!!",res.data.newuser.accountId.privateKey)
+                localStorage.setItem("read",true);
 
+                console.log("private key !!!!!!!!!!!",res.data.newuser.accountId.privateKey)
+              
                 // localStorage.setItem(
                 //   "notifications",
                 //   res.data.notifications.map(

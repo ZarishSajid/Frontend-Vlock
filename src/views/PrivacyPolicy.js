@@ -1,6 +1,6 @@
 import React from "react";
 import { Input, CardBody } from "reactstrap";
-
+import { NavLink } from "react-router-dom";
 import {
   MDBCard,
   MDBCardTitle,
@@ -121,7 +121,7 @@ class title extends React.Component {
             sm
             className="mb-4"
             style={{
-              height: "43rem",
+              height: "40rem",
               width: "50rem ",
               marginTop: "30px",
               marginLeft: "250px",
@@ -144,12 +144,33 @@ class title extends React.Component {
             </CardHeader>
             <CardBody>
               <ListGroup flush>
-           
+              <p style={{color:"black"}}> By submitting this, user agrees to be bound by these Terms and Conditions. </p>
+             <p  style={{color:"black"}} >1- University has the right to active or inactive your poll incase of violation of the rules</p>
+              <p  style={{color:"black"}}>2-Your poll should not contain inappropriate content otherwise University has the right to block or disapprove your poll</p>
+              <p  style={{color:"black"}}>3 -In case of having any issue regarding the content of the poll you are voting, please send email to the teamvlock@gmail.com</p>
+              <p  style={{color:"black"}}>4- If you have any issue in updating your profile, you can contact admin via email.</p>
+              <p  style={{color:"black"}}>5- It is mandatory to watch user guide before casting any vote</p>
               </ListGroup>
+              <center><NavLink
+                        to={{
+                          pathname: "/Register",
+                        }}
+                      >
+              <Button
+                style={{ marginTop: "20px" }}
+                type="secondary"
+              >
+                Back
+              </Button>
+              </NavLink>
+              </center>
             </CardBody>
+           
           </Card>
+
           </MDBRow>
         </Form>
+        
       </div>
     );
   }

@@ -543,6 +543,12 @@ class Register extends React.Component {
                   >
                     Register
                   </MDBBtn>
+                  <Col md="12" className="form-group"  style={{marginTop:"30px"}}>
+                <FormCheckbox>
+                  {/* eslint-disable-next-line */}I agree with your{" "}
+                  <a href="/PrivacyPolicy">Privacy Policy</a>.
+                </FormCheckbox>
+              </Col>
                   {/* </NavLink>{" "} */}
                 </center>
               </MDBRow>

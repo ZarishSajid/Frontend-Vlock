@@ -68,7 +68,7 @@ class UserList extends React.Component {
       },
     };
     axios.post(`http://localhost:8080/vlock/email`, data).then((res) => {
-      alert("Email Sent ");
+      alert("Email sent to the user ");
       this.setState({
         openActive: !this.state.openActive,
       });
@@ -148,7 +148,13 @@ class UserList extends React.Component {
   handleBack = () => {
     this.setState({
       //openActive: !this.state.openActive,
-      open: !this.state.open,
+      // open: !this.state.open,
+    });
+  };
+  Back = () => {
+  
+    this.setState({
+      openActive: !this.state.openActive,
     });
   };
   componentDidMount() {
@@ -452,7 +458,7 @@ class UserList extends React.Component {
               }}
             >
               {" "}
-              Compose Your Message
+              Compose Your Email
             </h6>
           </center>
 
@@ -494,13 +500,12 @@ class UserList extends React.Component {
             </Button> */}
             <center>
             <Button
-              size="sm"
-              style={{ marginLeft: "0px" }}
-              type="secondary"
-         
-            >
-              Cancel
-            </Button>
+                  style={{ marginLeft: "30px" }}
+                  type="secondary"
+                  onClick={this.Back}
+                >
+                  Cancel
+                </Button>
               {/* <Button
                 size="sm"
                 style={{ marginLeft: "20px" }}
@@ -525,7 +530,7 @@ class UserList extends React.Component {
               }}
             >
               {" "}
-              Compose Your Message
+              Compose Your Email
             </h6>
           </center>
           <ModalBody>
@@ -572,6 +577,13 @@ class UserList extends React.Component {
             >
               Send
             </Button>
+            <Button
+                  style={{ marginLeft: "30px" }}
+                  type="secondary"
+                  onClick={this.Back}
+                >
+                  Cancel
+                </Button>
             {/* <Button
                 size="sm"
                 style={{ marginLeft: "20px" }}

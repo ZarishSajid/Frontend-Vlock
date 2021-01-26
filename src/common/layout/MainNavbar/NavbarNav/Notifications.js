@@ -1,7 +1,7 @@
+
 import React from "react";
 import { NavItem, NavLink, Badge, Collapse, DropdownItem } from "shards-react";
 import { notification } from "antd";
-
 export default class Notifications extends React.Component {
   constructor(props) {
     super(props);
@@ -17,9 +17,12 @@ export default class Notifications extends React.Component {
     this.setState({
       visible: !this.state.visible,
     });
+    localStorage.setItem("read",false)
   }
 
   render() {
+  const read =localStorage.getItem("read")
+  console.log("readdddd",read)
     // const notifications = localStorage.getItem("notifications");
     const notifications= JSON.parse(localStorage.getItem("notifications")) || [];
     console.log("notificationssssss",notifications);
@@ -31,9 +34,10 @@ export default class Notifications extends React.Component {
         >
           <div className="nav-link-icon__wrapper" style={{ marginTop: "5px" }}>
             <i className="material-icons">&#xE7F4;</i>
-            <Badge pill theme="danger">
+    {read==="true" && <Badge pill theme="danger">
               {notifications.length}
-            </Badge>
+    </Badge>
+    }
           </div>
         </NavLink>
         <Collapse

@@ -9,6 +9,7 @@ import SidebarActions from "../components/add-new-post/SidebarActions";
 import SidebarCategories from "../components/add-new-post/SidebarCategories";
 import { Radio, Form, Typography } from "antd";
 import { Input } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 import {
   MDBCard,
@@ -195,7 +196,7 @@ class CreatePoll extends React.Component {
                     {getFieldDecorator("selectedAudience", {
                       rules: [
                         {
-                          required: true,
+                          required: false,
                           message: "Please select Your Audience",
                         },
                       ],
@@ -232,7 +233,7 @@ class CreatePoll extends React.Component {
                   {getFieldDecorator(" Poll Description", {
                     rules: [
                       {
-                        required: true,
+                        required: false,
                         message: "Please enter your  Poll Description",
                       },
                     ],
@@ -257,7 +258,7 @@ class CreatePoll extends React.Component {
                   {getFieldDecorator("startDate", {
                     rules: [
                       {
-                        required: true,
+                        required: false,
                         message: "Please select Your Date",
                       },
                     ],
@@ -287,7 +288,7 @@ class CreatePoll extends React.Component {
                   {getFieldDecorator("endDate", {
                     rules: [
                       {
-                        required: true,
+                        required: false,
                         message: "Please select Your Date",
                       },
                     ],
@@ -315,9 +316,8 @@ class CreatePoll extends React.Component {
               <MDBBtn
                 onClick={() => this.onRedirect()}
                 style={{
-                  width: "140px",
-                  mrginTop: "10px",
-                  marginLeft: "290px",
+                  mrginTop: "20px",
+                  marginLeft: "230px",
                 }}
                 onClick={() => this.onRedirect()}
                 color="primary"
@@ -325,6 +325,18 @@ class CreatePoll extends React.Component {
               >
                 Submit
               </MDBBtn>
+            <NavLink
+                        to={{
+                          pathname: "/components/PollStatus",
+                        }}
+                      >
+              <Button
+                style={{ marginTop: "0px",marginLeft:"20px" }}
+                color="primary" >
+                Back
+              </Button>
+              </NavLink>
+            
             </CardBody>
           </Card>
         </Col>

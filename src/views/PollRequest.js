@@ -351,8 +351,8 @@ class PollStatus extends React.Component {
                   </a></span>
                   <br/>
                   <br/>
-                  <span style={{ color:"#569CE5" }}>
-                  <a style={{color:"black"}}> Selected Audience: {this.getAudience(userData)}
+                 
+                  <span style={{ color:"#569CE5" }}> Selected Audience:   <a style={{color:"black"}}>{this.getAudience(userData)}
                   </a></span>
                   <br/>
              

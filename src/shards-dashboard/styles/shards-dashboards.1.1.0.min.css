@@ -5182,7 +5182,7 @@ a.text-accent:hover {
 .main-sidebar .nav .nav-item .nav-link:hover i,
 .main-sidebar .nav .nav-item.active i,
 .main-sidebar .nav .nav-item:hover i {
-  color: #007bff;
+  color: #fff;
 }
 .main-sidebar .nav--no-borders .nav-item .nav-link {
   border-bottom: 0;

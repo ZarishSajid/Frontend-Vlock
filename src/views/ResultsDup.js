@@ -79,9 +79,7 @@ class CastVote extends React.Component {
         // console.log("this.state.pulls", this.state.pulls);
 
         console.log(res.message);
-
       });
-     
   }
   render() {
     const userData =
@@ -156,7 +154,7 @@ class CastVote extends React.Component {
                
                <center> <NavLink
                   to={{
-                    pathname: "/components/PollStatus",
+                    pathname: "/components/PollResult",
                   }}
                 >
                   <Button style={{ marginLeft: "30px" ,marginTop:"170px"}} type="secondary">

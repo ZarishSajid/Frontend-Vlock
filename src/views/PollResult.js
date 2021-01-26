@@ -243,7 +243,7 @@ class PollStatus extends React.Component {
                         <NavLink
                           disabled={values.status !== "pending"}
                           to={{
-                            pathname: "/components/Results",
+                            pathname: "/components/ResultDup",
                             aboutProps: { userData: values },
                           }}
                         >
@@ -290,47 +290,59 @@ class PollStatus extends React.Component {
                       ? userData.pollType
                       : this.state.pollType}
                   </p> */}
-                  <p style={{ color: "black" }}>
+                  <span style={{ color:"#569CE5" }}>
                     Poll Question:{" "}
-                    {userData && userData._id
+                    <a style={{color:"black"}}>
+ {userData && userData._id
                       ? userData.pollQuestion
                       : this.state.pollQuestion}
-                  </p>
-                  {/* <p style={{ color: "black" }}>
-                    Created By:{" "}
-                    {userData && userData._id
-                      ? userData.createdBy.name
-                      : this.state.createdBy.name}
-                  </p> */}
-                  <p style={{ color: "black" }}>
+                      </a></span>
+                  
+                 
+
+<br/>
+<br/>
+<span style={{ color:"#569CE5" }}>
                     Email:{" "}
-                    {userData && userData._id
+                    <a style={{color:"black"}}> {userData && userData._id
                       ? userData.createdBy.email
                       : this.state.createdBy.email}
-                  </p>
-                 
-                  Poll Options:{" "}
-                  {userData && userData._id ? (
+                  </a></span>
+                 <br/>
+                 <br/>
+                 <span style={{ color:"#569CE5" }}>
+ Poll Options:{" "}
+ <a style={{color:"black"}}>    {userData && userData._id ? (
                     userData.pollOptions.map((option) => (
                       <li style={{ color: "black" }}>{option}</li>
                     ))
                   ) : (
                     <p style={{ color: "black" }}>{this.state.pollOptions}</p>
                   )}
-                  <p style={{ color: "black" }}>
+                  </a></span>
+                  <br/>
                     <br />
+                    <span style={{ color:"#569CE5" }}>
                     Start Date:
-                    {userData && userData._id
+                    <a style={{color:"black"}}>
+ {userData && userData._id
                       ? moment(userData.startDate).format("MM-DD-YYYY")
                       : this.state.startDate}
-                  </p>
-                  <p style={{ color: "black" }}>
+                
+</a></span>
+
+
+                 <br/>
+<br/>
+                 <span style={{ color:"#569CE5" }}>
+
                     End Date:{" "}
-                    {userData && userData._id
+                     <a style={{color:"black"}}>{userData && userData._id
                       ? moment(userData.endDate).format("MM-DD-YYYY")
                       : this.state.endDate}
-                  </p>
+                </a></span>
                 </p>
+                <br/>
                 <center>
                   {" "}
                   <Button

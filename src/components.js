@@ -34,6 +34,7 @@ import editUser from "../src/views/editUser";
 import Profile from "../src/views/Profile";
 import Results from "../src/views/Results";
 import PollResult from "../src/views/PollResult";
+import ResultDup from "../src/views/ResultsDup";
 
 class Components extends Component {
     
@@ -86,6 +87,7 @@ class Components extends Component {
                   <Route path='/components/Profile' component={Profile}/>
                   <Route path='/components/Results' component={Results}/>
                   <Route path='/components/PollResult' component={PollResult}/>
+                  <Route path='/components/ResultDup' component={ResultDup}/>
 
 
                   {/* <Route path='/ResetPassword' component={ResetPassword}/> */}

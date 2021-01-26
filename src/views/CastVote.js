@@ -201,7 +201,7 @@ class CastVote extends React.Component {
                 }}
               >
                 <FcKey></FcKey> Your Private Key
-              </p>o
+              </p>
             </center>
 
             <ModalBody>

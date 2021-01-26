@@ -115,7 +115,6 @@ class CreatePoll extends React.Component {
  
   onRedirect = (e) => {
     console.log("clicked");
-    
     const { getFieldValue } = this.props.form;
     const {
       pollType,
@@ -126,12 +125,23 @@ class CreatePoll extends React.Component {
       endDate,
       options,
     } = this.state;
+
+    if(!pollType) return alert("Poll Type is required")
+    if(!pollDescription) return alert("Poll Description is required")
+    if(!selectedAudience) return alert("Selected Audience is required")
+    if(!pollDescription) return alert("Poll Description is required")
+    if(!startDate) return alert("Start date is required")
+    if(!endDate) return alert("End date is required")
+
+
     const headers = {
       headers: {
         token: localStorage.getItem("token"),
       },
     };
+
     const data = {
+      
       pollType: pollType,
       selectedAudience: selectedAudience,
       pollDescription: pollDescription,
@@ -140,6 +150,8 @@ class CreatePoll extends React.Component {
       pollQuestion: getFieldValue("pollQuestion"),
       pollOptions: options,
     };
+    if(!data.pollQuestion) return alert("Poll Question is required")
+
     console.log("dataaaa", data);
     axios
       .post(`http://localhost:8080/vlock/poll`, data, headers)
@@ -402,7 +414,7 @@ class CreatePoll extends React.Component {
                       <option style={{ color: "black" }} value="student">
                         Student
                       </option>
-                      <option style={{ color: "black" }} value=" faculty">
+                      <option style={{ color: "black" }} value="  faculty">
                         Faculty
                       </option>
                       <option style={{ color: "black" }} value="uniAdmin">
@@ -489,7 +501,7 @@ class CreatePoll extends React.Component {
                 <br />
                 <br />
                 <b style={{ color: "black" }}>Description</b>
-                {getFieldDecorator(" Poll Description", {
+                {getFieldDecorator(" pollDescription", {
                   rules: [
                     {
                       required: true,
@@ -609,7 +621,6 @@ class CreatePoll extends React.Component {
               <br />
               <br />
               <MDBBtn
-                onClick={() => this.onRedirect()}
                 style={{
                   width: "140px",
                   mrginTop: "10px",

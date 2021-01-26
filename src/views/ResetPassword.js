@@ -263,8 +263,8 @@ class ResetPassword extends React.Component {
       number: "+" + this.state.number,
     };
 
-    console.log("SapID", this.state.sapID);
-    console.log("Number", this.state.number);
+    console.log("SapID state ", this.state.sapID);
+    console.log("Number state", this.state.number);
 
 
 
@@ -277,11 +277,19 @@ class ResetPassword extends React.Component {
       .then((res) => {
         console.log("RESPONSE = ", res);
 
-        this.setState({ pulls: res.data });
+        this.setState({ pulls: res.data.data });
+        console.log("in phone numberrrrr",res.message);
+
+        if (res.data.success) {
+          alert("Your password has been sent to the number");        }
+        else{
+               alert(res.data.message);
+  
+        }
         // this.userDetails.privateKey = res.data.data.accountId.privateKey;
       });
+      
   }
-
   // validateSapId = (value, callback) => {
   //   if (!/^[0-9]*$/i.test(value)) {
   //     callback("Invalid SapId");
