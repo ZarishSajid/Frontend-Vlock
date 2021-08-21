@@ -430,25 +430,7 @@ return (
                           ? userData.pollQuestion
                           : this.state.pollQuestion}
                       </p>
-                      <label
-                        style={{ color: "black", marginLeft:"30px",fontWeight: "bold" }}
-                        htmlFor=""
-                      >
-                        Description
-                      </label>
-                      <p
-                        style={{
-                          marginLeft:"30px",
-                          border: "1px solid grey",
-                          borderRadius: "10px",
-                          padding: "15px",
-                          color: "black",
-                        }}
-                      >
-                        {userData && userData._id
-                          ? userData.pollDescription
-                          : this.state.pollDescription}
-                      </p>
+                     
                       <Form  onSubmit={this.castVoteToZara}>
                         {userData &&
                           userData._id &&

@@ -148,7 +148,7 @@ class UserList extends React.Component {
   handleBack = () => {
     this.setState({
       //openActive: !this.state.openActive,
-      // open: !this.state.open,
+      open: !this.state.open,
     });
   };
   Back = () => {
@@ -170,13 +170,13 @@ class UserList extends React.Component {
       },
     };
     const data = {
-      name: this.state.name,
-      email: this.state.email,
+      fullname: this.state.fullname,
+      cnic: this.state.cnic,
       sapID: this.state.sapID,
       department: this.state.department,
     };
     axios
-      .get(`http://localhost:8080/vlock/user`, headers, data)
+      .get(`http://localhost:8080/vlock/voterList`, headers, data)
       //  console.log("header")
 
       .then((res) => {
@@ -283,10 +283,10 @@ class UserList extends React.Component {
                 return (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{values.name}</td>
-                    <td>{values.sapID}</td>
+                    <td>{values.fullname}</td>
+                    <td>{values.cnic}</td>
                     <td>{values.active ? "Active" : "Inactive"}</td>
-                    <td>{values.department}</td>
+                    <td>NO</td>
                     <td>
                       {" "}
                       
@@ -334,7 +334,7 @@ class UserList extends React.Component {
                 >
                   <span style={{ color:"#569CE5" }}> 
                     Name:
-                    <a style={{color:"black"}}>  {userData && userData._id ? userData.name : this.state.name}
+                    <a style={{color:"black"}}>  {userData && userData._id ? userData.fullname : this.state.fullname}
                   </a></span>
                   <br/>
                   <br/>
@@ -342,32 +342,53 @@ class UserList extends React.Component {
                  
                     CNIC Number:{" "}
                     <a style={{color:"black"}}> {userData && userData._id
-                      ? userData.sapID
-                      : this.state.sapID}
+                      ? userData.cnic
+                      : this.state.cnic}
                   </a></span>
                   <br/>
                   <br/>
                   <span style={{ color:"#569CE5" }}> 
-                    Email:
+                    Father Name:
                     <a style={{color:"black"}}> {userData && userData._id
-                      ? userData.email
-                      : this.state.email}
+                      ? userData.fathername
+                      : this.state.fathername}
                   </a></span>
                   <br/><br/>
                   <span style={{ color:"#569CE5" }}>
-                    Department:{" "}
+                  Gender:{" "}
                     <a style={{color:"black"}}> {userData && userData._id
-                      ? userData.department
-                      : this.state.department}
+                      ? userData.gender
+                      : this.state.gender}
                   </a></span>
                   <br/><br/>
                   <span style={{ color:"#569CE5" }}>
-                    {" "}
-                    User Type:{" "}
-                    <a style={{color:"black"}}>{userData && userData._id
-                      ? userData.userType
-                      : this.state.userType}
-                 </a></span>
+                  City:{" "}
+                    <a style={{color:"black"}}> {userData && userData._id
+                      ? userData.city
+                      : this.state.city}
+                  </a></span>
+                  <br/><br/>
+                  <span style={{ color:"#569CE5" }}>
+                  District:{" "}
+                    <a style={{color:"black"}}> {userData && userData._id
+                      ? userData.district
+                      : this.state.district}
+                  </a></span>
+                  <br/><br/>
+                  <span style={{ color:"#569CE5" }}>
+                  Constituency Area:{" "}
+                    <a style={{color:"black"}}> {userData && userData._id
+                      ? userData.constituencyArea
+                      : this.state.constituencyArea}
+                  </a></span>
+                  <br/><br/>
+                  <span style={{ color:"#569CE5" }}>
+                  Constituency No:{" "}
+                    <a style={{color:"black"}}> {userData && userData._id
+                      ? userData.constituencyNo
+                      : this.state.constituencyNo}
+                  </a></span>
+                  <br/><br/>
                 </p>
                 <Button
                   style={{ marginLeft: "160px" }}

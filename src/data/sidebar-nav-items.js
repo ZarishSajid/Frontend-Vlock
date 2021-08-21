@@ -80,7 +80,7 @@ if(localStorage.getItem('userType') === 'admin')
     
   ];
 }
-else if(localStorage.getItem('userType') === 'student'){
+else if(localStorage.getItem('userType') === 'voter'){
   return[
     {
         title: "Dashboard",
@@ -134,7 +134,7 @@ else if(localStorage.getItem('userType') === 'student'){
    
   ]
 }
-  else if(localStorage.getItem('userType') === 'uniAdmin'){
+  else if(localStorage.getItem('userType') === 'A1' ||localStorage.getItem('userType') === 'A2'|| localStorage.getItem('userType') === 'A3'   ){
     return[
       {
           title: "Dashboard",

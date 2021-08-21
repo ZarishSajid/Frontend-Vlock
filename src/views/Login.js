@@ -121,9 +121,9 @@ class Login extends React.Component {
                   redirectRoute:
                     userType === "admin"
                       ? "/components/Admin"
-                      : userType === "student"
+                      : userType === "voter"
                       ? "/components/StudentPanel"
-                      : userType === "uniAdmin"
+                      : userType === "A1" || userType === "A2" || userType === "A3"
                       ? "/components/UniversityAdministration"
                       : "/components/FacultyPanel",
 
