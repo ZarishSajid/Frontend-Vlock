@@ -27,7 +27,7 @@ class Login extends React.Component {
     super(props);
     this.onRedirect = this.onRedirect.bind(this);
     this.state = {
-      sapID: "",
+      cnic: "",
       password: "",
       email: "",
       name: "",
@@ -51,7 +51,6 @@ class Login extends React.Component {
   }
 
   onRedirect = (e) => {
-    
     this.props.form.validateFieldsAndScroll((error, formData) => {
       if (!error && formData) {
         console.log("inside field validator");
@@ -59,7 +58,7 @@ class Login extends React.Component {
         if (Number(localStorage.getItem("count")) < 3) {
           axios
             .post("http://localhost:8080/vlock/login", {
-              sapID: formData.sapID,
+              cnic: formData.cnic,
               password: formData.password,
             })
             .then((res) => {
@@ -74,18 +73,37 @@ class Login extends React.Component {
                 console.log(this.state.data.token);
                 localStorage.setItem("token", this.state.data.token);
                 localStorage.setItem("userType", this.state.data.userType);
-                localStorage.setItem("id", this.state.data._id);
-                localStorage.setItem("sapID", this.state.data.sapID);
-                localStorage.setItem("email", this.state.data.email);
-                localStorage.setItem("password", this.state.data.password);
-                localStorage.setItem("name", this.state.data.name);
-                localStorage.setItem("department", this.state.data.department);
-                localStorage.setItem("privatekey", res.data.newuser.accountId.privateKey);
-                localStorage.setItem("notifications", JSON.stringify(res.data.notifications));
-                localStorage.setItem("read",true);
+                // localStorage.setItem("id", this.state.data._id);
+                localStorage.setItem("CNIC", this.state.data.cnic);
+                localStorage.setItem("fullname", this.state.data.fullname);
+                localStorage.setItem("fathername", this.state.data.fathername);
+                localStorage.setItem("country", this.state.data.country);
+                localStorage.setItem("gender", this.state.data.gender);
+                localStorage.setItem("city", this.state.data.city);
+                localStorage.setItem("district", this.state.data.district);
+                localStorage.setItem("birthmark", this.state.data.birthmark);
+                localStorage.setItem("dob", this.state.data.dob);
+                localStorage.setItem("constituencyNo",this.state.data.constituencyNo);
+                localStorage.setItem("constituencyArea",this.state.data.constituencyArea);
 
-                console.log("private key !!!!!!!!!!!",res.data.newuser.accountId.privateKey)
-              
+
+
+
+
+
+
+
+
+                // localStorage.setItem("email", this.state.data.email);
+                localStorage.setItem("password", this.state.data.password);
+                // localStorage.setItem("name", this.state.data.name);
+                // localStorage.setItem("department", this.state.data.department);
+                // localStorage.setItem("privatekey", res.data.newuser.accountId.privateKey);
+                // localStorage.setItem("notifications", JSON.stringify(res.data.notifications));
+                // localStorage.setItem("read",true);
+
+                // console.log("private key !!!!!!!!!!!",res.data.newuser.accountId.privateKey)
+
                 // localStorage.setItem(
                 //   "notifications",
                 //   res.data.notifications.map(
@@ -131,7 +149,7 @@ class Login extends React.Component {
     });
   };
   validateSapId = (value, callback) => {
-    if (!/^[0-9]*$/i.test(value)) {
+    if ("^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$".test(value)) {
       callback("Invalid SapId");
     }
     return callback();
@@ -189,16 +207,15 @@ class Login extends React.Component {
               >
                 Lock Your Decision
               </h4>
-              <br/>
+              <br />
               {/* <p style={{color:"white",marginLeft:"20px"}}>Please enter your credientials to login.If you are not a  member.</p> */}
 
-              <NavLink to={"/Register"}>
+              {/* <NavLink to={"/Register"}>
                 <a style={{ color: "white", marginLeft: "10px" ,textDecorationLine: "underline"}}>
                   {" "}
                   Please register Yourself.
                 </a>
-              </NavLink>
-              
+              </NavLink> */}
             </MDBCard>
           </center>
           <MDBCard
@@ -242,27 +259,29 @@ class Login extends React.Component {
                 style={{ color: "red" }}
                 label={
                   <Text style={{ fontWeight: "bold", color: "black" }}>
-                    Sap ID
+                    CNIC Number
                   </Text>
                 }
               >
-                {getFieldDecorator("sapID", {
+                {getFieldDecorator("cnic", {
                   rules: [
                     {
                       // type: 'sapID',
-                      message: "Please enter valid  Sap Id",
+
+                      message: "Please enter valid  CNIC number",
                     },
+
                     {
                       required: true,
-                      message: "Please enter your Sap Id",
+                      message: "Please enter your CNIC number",
                     },
                     // {
                     //   validator: (rule, value, callback) =>
                     //     this.validateSapId(value, callback),
                     // },
                   ],
-                  initialValue: this.state.sapID,
-                })(<Input placeholder=" SapID"  maxLength="6"/>)}
+                  initialValue: this.state.cnic,
+                })(<Input placeholder="XXXXX-XXXXXXX-X" maxLength="14" />)}
               </FormItem>
               <br />
               <FormItem

@@ -12,21 +12,66 @@ if(localStorage.getItem('userType') === 'admin')
       htmlBefore: '<i class="material-icons">person</i>',
       to: "/components/Profile",
     },
+    // {
+    //   title: "Poll Status",
+    //   htmlBefore: '<i class="material-icons"> poll</i>',
+    //   to: "/components/Status",
+    // },
     {
-      title: "Poll Status",
-      htmlBefore: '<i class="material-icons"> poll</i>',
-      to: "/components/Status",
-    },
-    {
-      title: " User Status",
+      title: " Voters Status",
       htmlBefore: '<i class="material-icons">person</i>',
       to: "/components/UserStatus",
     },
     {
-      title: "Poll Request",
-      htmlBefore: '<i class="material-icons"> poll</i>',
-      to: "/components/PollRequest",
+      title: " Agents Status",
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: "/components/agentStatus",
     },
+    {
+      title: "Admins Status",
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: "/components/adminStatus",
+    },
+    {
+      title: "Poll Status",
+      htmlBefore: '<i class="material-icons"> poll</i>',
+      to: "/components/PollStatus",
+    },
+    {
+        title: "Create Poll",
+         htmlBefore: '<i class="material-icons">poll</i>',
+      to: "/components/CreatePoll",
+      },
+      {
+        title: "Register Voter ",
+         htmlBefore: '<i class="material-icons">person</i>',
+      to: "/components/RegisterVoter",
+      },
+      {
+        title: "Register Admin",
+         htmlBefore: '<i class="material-icons">person</i>',
+      to: "/components/AdminRegistration",
+      },
+      {
+        title: "Register Agent ",
+         htmlBefore: '<i class="material-icons">person</i>',
+      to: "/components/PollingAgentRegistration",
+      },
+      {
+        
+
+      to: "/components/RegisteredVoterInfo",
+      },
+      {
+        
+
+        to: "/components/RegisteredAdminInfo",
+        },
+        {
+        
+
+          to: "/components/RegisteredAgentInfo",
+          },
     // {
     //   title: "",
     //   htmlBefore: '<i class="material-icons"> </i>',
@@ -43,31 +88,31 @@ else if(localStorage.getItem('userType') === 'student'){
         to: "/components/StudentPanel",
       },
    
-      {
-          title: " Profile",
-          htmlBefore: '<i class="material-icons">person</i>',
-          to: "/components/user-profile-lite",
-        },
-        {
-          title: "Poll Status",
-          htmlBefore: '<i class="material-icons">poll</i>',
-          to: "/components/PollStatus",
-        },
+      // {
+      //     title: " Profile",
+      //     htmlBefore: '<i class="material-icons">person</i>',
+      //     to: "/components/user-profile-lite",
+      //   },
+        // {
+        //   title: "Poll Status",
+        //   htmlBefore: '<i class="material-icons">poll</i>',
+        //   to: "/components/PollStatus",
+        // },
         {
             title: "Cast Vote",
             htmlBefore: '<i class="material-icons">table_chart</i>',
             to: "/components/CastVote",
           },
-          {
-      title: "Create Poll",
-      htmlBefore: '<i class="material-icons">note_add</i>',
-      to: "/components/CreatePoll",
-    },
-    {
-      title: "Results",
-      htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/components/PollResult",
-    },
+    //       {
+    //   title: "Create Poll",
+    //   htmlBefore: '<i class="material-icons">note_add</i>',
+    //   to: "/components/CreatePoll",
+    // },
+    // {
+    //   title: "Results",
+    //   htmlBefore: '<i class="material-icons">table_chart</i>',
+    //   to: "/components/PollResult",
+    // },
     {
       title: "Help",
       htmlBefore: '<i class="material-icons">help</i>',
@@ -97,35 +142,35 @@ else if(localStorage.getItem('userType') === 'student'){
           to: "/components/UniversityAdministration",
         },
         {
-          title: "Profile",
+          title: "Voters Status",
           htmlBefore: '<i class="material-icons">person</i>',
-          to: "/components/user-profile-lite",
+          to: "/components/voterStatusPollingAgent",
         },
-        {
-          title: "Poll Status",
-          htmlBefore: '<i class="material-icons">poll</i>',
-          to: "/components/PollStatus",
-        },
-        {
-            title: "Cast Vote",
-            htmlBefore: '<i class="material-icons">table_chart</i>',
-            to: "/components/CastVote",
-          },
-          {
-      title: "Create Poll",
-      htmlBefore: '<i class="material-icons">poll</i>',
-      to: "/components/CreatePoll",
-    },
-    {
-      title: "Results",
-      htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/components/PollResult",
-    },
-    {
-      title: "Help",
-      htmlBefore: '<i class="material-icons">help</i>',
-      to: "/components/userGuide",
-    },
+        // {
+        //   title: "Poll Status",
+        //   htmlBefore: '<i class="material-icons">poll</i>',
+        //   to: "/components/PollStatus",
+        // },
+        // {
+        //     title: "Cast Vote",
+        //     htmlBefore: '<i class="material-icons">table_chart</i>',
+        //     to: "/components/CastVote",
+        //   },
+    //       {
+    //   title: "Create Poll",
+    //   htmlBefore: '<i class="material-icons">poll</i>',
+    //   to: "/components/CreatePoll",
+    // },
+    // {
+    //   title: "Results",
+    //   htmlBefore: '<i class="material-icons">table_chart</i>',
+    //   to: "/components/PollResult",
+    // },
+    // {
+    //   title: "Help",
+    //   htmlBefore: '<i class="material-icons">help</i>',
+    //   to: "/components/userGuide",
+    // },
     // {
     // //  title: "Blockchain",
     //     htmlBefore: '<i class="material-icons"></i>',
@@ -146,21 +191,21 @@ else if(localStorage.getItem('userType') === 'student'){
                   htmlBefore: '<i class="material-icons">person</i>',
                   to: "/components/user-profile-lite",
                 },
-                {
-                  title: "Poll Status",
-                  htmlBefore: '<i class="material-icons">poll</i>',
-                  to: "/components/PollStatus",
-                },
+                // {
+                //   title: "Poll Status",
+                //   htmlBefore: '<i class="material-icons">poll</i>',
+                //   to: "/components/PollStatus",
+                // },
                 {
                     title: "Cast Vote",
                     htmlBefore: '<i class="material-icons">table_chart</i>',
                     to: "/components/CastVote",
                   },
-                  {
-              title: "Create Poll",
-              htmlBefore: '<i class="material-icons">note_add</i>',
-              to: "/components/CreatePoll",
-                  },
+              //     {
+              // title: "Create Poll",
+              // htmlBefore: '<i class="material-icons">note_add</i>',
+              // to: "/components/CreatePoll",
+              //     },
                   {
                     title: "Results",
                     htmlBefore: '<i class="material-icons">table_chart</i>',

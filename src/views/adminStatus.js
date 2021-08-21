@@ -54,29 +54,7 @@ class UserList extends React.Component {
     this.toggle = this.toggle.bind(this);
     // this.Activetoggle = this.Activetoggle.bind(this);
   }
-  // sendEmail(e) {
-  //   const data = {
-  //     //email: "rajazara75@gmail.com",
-  //     email: this.state.email,
-  //     subject: this.state.subject,
-  //     message: this.state.Description,
-  //     //message: "Dear zara your account has been blocked",
-  //   };
-  //   const header = {
-  //     header: {
-  //       token: localStorage.getItem("token"),
-  //     },
-  //   };
-  //   axios.post(`http://localhost:8080/vlock/email`, data).then((res) => {
-  //     alert("Email sent to the user ");
-  //     this.setState({
-  //       openActive: !this.state.openActive,
-  //     });
-  //     if (res.data.success === true) {
-  //       this.fetchData();
-  //     }
-  //   });
-  // }
+
   handleDescription = (e) => {
     this.setState({
       Description: e.target.value,
@@ -94,9 +72,7 @@ class UserList extends React.Component {
   }
   Activetoggle(e, id) {
     e.preventDefault();
-    // this.setState({
-    //   openActive: !this.state.openActive,
-    // });
+ 
     const data = {
       status: "active",
     };
@@ -108,16 +84,14 @@ class UserList extends React.Component {
     console.log("token in active", localStorage.getItem("token"));
 
     axios.put(`http://localhost:8080/vlock/active/${id}`, data).then((res) => {
-      alert("Unblocked Sucessfully ");
-      window.location.reload(false);
+      alert("Blocked Sucessfully");
+       window.location.reload(false);
     });
   }
 
   Activetogglee(e, id) {
     e.preventDefault();
-    // this.setState({
-    //   openActive: !this.state.openActive,
-    // });
+   
     const data = {
       status: "inactive",
     };
@@ -131,10 +105,10 @@ class UserList extends React.Component {
     axios
       .put(`http://localhost:8080/vlock/inactive/${id}`, data)
       .then((res) => {
-         alert("Blocked Sucessfully ");
+         alert("UnBlocked Sucessfully ");
         console.log("token in inside apiii", localStorage.getItem("token"));
 
-       window.location.reload(false);
+        window.location.reload(false);
       });
   }
   handleOk = (e) => {
@@ -175,7 +149,7 @@ class UserList extends React.Component {
       department: this.state.department,
     };
     axios
-      .get(`http://localhost:8080/vlock/voterList`, headers)
+      .get(`http://localhost:8080/vlock/adminList`, headers)
       //  console.log("header")
 
       .then((res) => {
@@ -364,7 +338,7 @@ class UserList extends React.Component {
                           <BsLockFill
                             // InActive
                             onClick={(e) =>
-                              this.Activetoggle(e,  values._id)
+                              this.Activetoggle(e, values._id)
                             }
                             style={{
                               marginTop: "3px",
@@ -572,7 +546,7 @@ class UserList extends React.Component {
               size="sm"
               style={{ marginLeft: "270px" }}
               type="secondary"
-              // onClick={(e) => this.sendEmail()}
+              onClick={(e) => this.sendEmail()}
             >
               Send
             </Button>

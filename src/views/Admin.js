@@ -63,7 +63,7 @@ const linChart = {
   ],
 };
 const pieChart = {
-	labels: ["Accepted", "Rejected", "Pending"],
+	labels: ["Voters", "Admins", "Agents"],
 	datasets: [{
 		data: [0,0,0],
 		backgroundColor: [
@@ -81,9 +81,9 @@ export default class Admin extends React.Component {
     super(props);
 
     this.state = {
-      approvedCount: "",
-      disapprovedCount: "",
-      pendingCount: "",
+      voterCount:"",
+      adminCount:"",
+      agentCount:"",
       bigChartData: "data1",
       isLoading: true,
       pulls: [],
@@ -110,8 +110,8 @@ export default class Admin extends React.Component {
       },
     };
     const data = {
-      approvedCount: this.state.approvedCount,
-      disapprovedCount: this.state.disapprovedCount,
+      voterCount: this.state.voterCount,
+      adminCount: this.state.adminCountt,
       bigChartData: this.state.bigChartData,
     };
     axios.get("http://localhost:8080/vlock/graph", headers).then((res) => {
@@ -134,45 +134,43 @@ export default class Admin extends React.Component {
       //  console.log("header")
 
       .then((res) => {
-        // console.log("RESPONSE = ", res.data);
-        this.setState({ pulls: res.data });
-        // console.log("approved count  =", res.data.data.approvedCount);
-        // console.log("poending count  =", res.data.data.pendingCount);
-        // console.log(
-        //   "disapprovedCount count  =",
-        //   res.data.data.disapprovedCount
-        // );
-
-        this.state.disapprovedCount = res.data.data.disapprovedCount;
-
-        this.state.approvedCount = res.data.data.approvedCount;
-
-        this.state.pendingCount = res.data.data.pendingCount;
-        pieChart.datasets[0].data = [this.state.approvedCount,this.state.disapprovedCount,this.state.pendingCount]
+         console.log("RESPONSE = ", res.data);
+         this.setState({ pulls: res.data });
+         console.log("voter count  =", res.data.data.voterCount);
+        console.log("admin Count  =", res.data.data.adminCount);
         console.log(
-          "this.state.disapprovedCount  =",this.state.disapprovedCount
+          "agent Count  =",
+          res.data.data.agentCount
         );
-        console.log("this.state.approvedCount  =", this.state.approvedCount);
-        console.log("this.state.pendingCount  =", this.state.pendingCount);
+
+        this.state.voterCount = res.data.data.voterCount;
+
+         this.state.adminCount = res.data.data.adminCount;
+
+         this.state.agentCount = res.data.data.agentCount;
+        pieChart.datasets[0].data = [this.state.voterCount,this.state.adminCount,this.state.agentCount]
+        console.log(   "this.state.voterCount  =",this.state.voterCount);
+        console.log("this.state.adminCount  =", this.state.adminCount);
+        // console.log("this.state.pendingCount  =", this.state.pendingCount);
 
         //local storage
-        localStorage.setItem("approve count", this.state.approvedCount);
-        localStorage.setItem("disapprove count ", this.state.disapprovedCount);
-        localStorage.setItem("pending count ", this.state.pendingCount);
+        // localStorage.setItem("approve count", this.state.approvedCount);
+        // localStorage.setItem("disapprove count ", this.state.disapprovedCount);
+        // localStorage.setItem("pending count ", this.state.pendingCount);
 
-        console.log(res.message);
+        // console.log(res.message);
       });
   }
   render() {
   
   // window.location.reload(false);
     let { pulls } = this.state;
-    // const {approvedCount} = pulls;
+  const {approvedCount} = pulls;
     console.log("pulsss12345s", pulls);
     console.log("ttttttttt", JSON.parse(localStorage.getItem("days")));
     const data = pulls;
 
-    // const {approvedCount} = data;
+    const {voterCount} = data;
     // pulls = JSON.stringify(pulls);
     // pulls = JSON.parse(pulls);
     // const {success, data } = pulls;
@@ -202,11 +200,11 @@ export default class Admin extends React.Component {
                 </center>
                 <center>
                   {" "}
-                  <CardTitle style={{color:"white"}}>Polls Approved</CardTitle>
+                  <CardTitle style={{color:"white"}}>Total Voters</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "white" ,fontWeight:"bold"}}>{this.state.approvedCount}</p>
+                  <p style={{ color: "white" ,fontWeight:"bold"}}>{this.state.voterCount}</p>
                 </center>
               </CardBody>
             </Card>
@@ -221,11 +219,11 @@ export default class Admin extends React.Component {
                 </center>
                 <center>
                   {" "}
-                  <CardTitle style={{color:"white"}}>Polls Dispproved</CardTitle>
+                  <CardTitle style={{color:"white"}}>Total Admins</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "white",fontWeight:"bold" }}>{this.state.disapprovedCount}</p>
+                  <p style={{ color: "white",fontWeight:"bold" }}>{this.state.adminCount}</p>
                 </center>
               </CardBody>
             </Card>
@@ -240,11 +238,11 @@ export default class Admin extends React.Component {
                 </center>
                 <center>
                   {" "}
-                  <CardTitle style={{color:"white"}}>Polls Request</CardTitle>
+                  <CardTitle style={{color:"white"}}>Total Agents</CardTitle>
                 </center>
                 <center>
                   {" "}
-                  <p style={{ color: "white",fontWeight:"bold" }}>{this.state.pendingCount}</p>
+                  <p style={{ color: "white",fontWeight:"bold" }}>{this.state.agentCount}</p>
                 </center>
               </CardBody>
             </Card>

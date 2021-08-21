@@ -49,9 +49,8 @@ const { Text } = Typography;
 // const date = new Date(tomorrow);
 // var time = moment.utc(" 12:19:14").local().format(" HH:mm:ss");
 
-
 const newDate = new Date();
-const formatDate = moment(newDate).format('YYYY-MM-DDTHH:mm');
+const formatDate = moment(newDate).format("YYYY-MM-DDTHH:mm");
 class CreatePoll extends React.Component {
   constructor(props) {
     super(props);
@@ -63,9 +62,10 @@ class CreatePoll extends React.Component {
       optionAdded: false,
       startDate: "",
       endDate: "",
-     
+      file: null,
       visible: false,
       optionValue: "",
+      fileValue:"",
       options: [],
       value: "",
       // selectedAudience:["student","faculty","uniAdmin"],
@@ -74,8 +74,8 @@ class CreatePoll extends React.Component {
     };
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleAudience = this.handleAudience.bind(this);
-
-
+    this.onChange = this.onChange.bind(this);
+    this.resetFile = this.resetFile.bind(this);
 
     // this.showModal = this.showModal.bind(this);
     // this.handleOk = this.handleOk.bind(this);
@@ -83,14 +83,14 @@ class CreatePoll extends React.Component {
   handleDropdownChange(e) {
     console.log("You Selected", e.target.value);
 
-    this.setState({ pollType: e.target.value });
+    this.setState({ electionType: e.target.value });
   }
   handleDescription = (e) => {
     this.setState({
       pollDescription: e.target.value,
     });
   };
-  startDate= (e) => {
+  startDate = (e) => {
     console.log("start Date", e.target.value);
     this.setState({
       startDate: e.target.value,
@@ -99,7 +99,7 @@ class CreatePoll extends React.Component {
   endDate = (e) => {
     console.log("End Date", e.target.value);
     this.setState({
-      endDate:e.target.value,
+      endDate: e.target.value,
     });
   };
   handleTimeChange(time) {
@@ -110,14 +110,15 @@ class CreatePoll extends React.Component {
   handleAudience(e) {
     console.log("You Selected", e.target.value);
 
-    this.setState({ selectedAudience: e.target.value });
+    this.setState({ assemblyType: e.target.value });
   }
- 
+
   onRedirect = (e) => {
     console.log("clicked");
     const { getFieldValue } = this.props.form;
     const {
-      pollType,
+      electionType,
+      assemblyType,
       selectedAudience,
       pollDescription,
       optionValue,
@@ -126,13 +127,10 @@ class CreatePoll extends React.Component {
       options,
     } = this.state;
 
-    if(!pollType) return alert("Poll Type is required")
-    if(!pollDescription) return alert("Poll Description is required")
-    if(!selectedAudience) return alert("Selected Audience is required")
-    if(!pollDescription) return alert("Poll Description is required")
-    if(!startDate) return alert("Start date is required")
-    if(!endDate) return alert("End date is required")
-
+    if (!optionValue) return alert("Poll Option  Description is required");
+    if (!assemblyType) return alert("Assembly Type is required");
+    if (!startDate) return alert("Start date is required");
+    if (!endDate) return alert("End date is required");
 
     const headers = {
       headers: {
@@ -141,16 +139,14 @@ class CreatePoll extends React.Component {
     };
 
     const data = {
-      
-      pollType: pollType,
-      selectedAudience: selectedAudience,
-      pollDescription: pollDescription,
+      electionType: electionType,
+      assemblyType: assemblyType,
       startDate: startDate,
       endDate: endDate,
       pollQuestion: getFieldValue("pollQuestion"),
       pollOptions: options,
     };
-    if(!data.pollQuestion) return alert("Poll Question is required")
+    if (!data.pollQuestion) return alert("Poll Question is required");
 
     console.log("dataaaa", data);
     axios
@@ -159,8 +155,7 @@ class CreatePoll extends React.Component {
         console.log("RESPONSE = ", res);
         console.log(res.message);
         if (res.data.success) {
-          this.props.history.push("/components/FacultyPanel");
-          alert("Your Request has been sent  to the admin");
+          alert("Poll Created");
           this.setState({});
           console.log("data", res.data.message);
         } else {
@@ -176,6 +171,7 @@ class CreatePoll extends React.Component {
 
     this.setState({
       optionValue: value,
+      fileValue:value
       // value: e.target.value,
     });
   };
@@ -217,8 +213,10 @@ class CreatePoll extends React.Component {
   // };
 
   handleOk = () => {
+    const {file,fileValue}=this.state;
     const { options, optionValue } = this.state;
     const { getFieldValue } = this.props.form;
+    
     this.setState({
       optionAdded: true,
       visible: !this.state.visible,
@@ -234,8 +232,17 @@ class CreatePoll extends React.Component {
   allSelected = () => {
     this.setState({ selectedAudience: [] });
   };
- 
 
+  onChange(event) {
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0])
+    });
+  }
+
+  resetFile(event) {
+    event.preventDefault();
+    this.setState({ file: null });
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     console.log("field decarotrrrr", this.props.form);
@@ -273,16 +280,16 @@ class CreatePoll extends React.Component {
                 <Row>
                   <Col lg="10" md="12">
                     <Label style={{ color: "black", marginLeft: "0px" }}>
-                      Poll Type
+                      Election Type
                     </Label>
-                    {getFieldDecorator("pollType", {
+                    {getFieldDecorator("electionType", {
                       rules: [
                         {
                           required: true,
-                          message: "Please select Your pollType",
+                          message: "Please select Your electionType",
                         },
                       ],
-                      initialValue: this.state.pollType,
+                      initialValue: this.state.electionType,
                     })}
                     <FormSelect
                       style={{ height: "50px", width: "47rem" }}
@@ -290,104 +297,16 @@ class CreatePoll extends React.Component {
                     >
                       <option
                         style={{ color: "black" }}
-                        value="CR/GR Selection"
+                        value="election 1"
                       >
-                        CR/GR 
+                        election type 1
                       </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="  Trip Location"
-                      >
-                        Trip 
+                      <option style={{ color: "black" }} value="election 2">
+                      election type 2
                       </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="FC Evening"
-                      >
-                        FC Evening
+                      <option style={{ color: "black" }} value="election 3">
+                      election type 3
                       </option>
-                      <option
-                        style={{ color: "black" }}
-                        value=" Webinar / Seminar"
-                      >
-                        Webinar / Seminar
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="University Events"
-                      >
-                        University Events
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value=" Discipline Issue"
-                      >
-                        Discipline Issue
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="Cafeteria"
-                      >
-                        Cafeteria
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="Cabinet Member"
-                      >
-                        Cabinet Member
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value=" Society"
-                      >
-                        Society
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="Teacher Evaluation"
-                      >
-                         Teacher Evaluation
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="Course Issue"
-                      >
-                        Course Issue
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="Transportation Issue"
-                      >
-                        Transportation Issue
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value=" Student Evaluation"
-                      >
-                        Student Evaluation
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="Lab Equipmentsr"
-                      >
-                        Lab Equipments
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value="Seminar Speaker"
-                      >
-                        Library 
-                      </option>
-                      <option
-                        style={{ color: "black" }}
-                        value=" Finance "
-                      >
-                        Finance 
-                      </option>
-                      <option style={{ color: "black" }} value="Other">
-                        Other
-                      </option>
-                      Student
                     </FormSelect>
                   </Col>
                 </Row>
@@ -395,29 +314,29 @@ class CreatePoll extends React.Component {
                 <Row>
                   <Col lg="10" md="12">
                     <Label style={{ color: "black", marginLeft: "0px" }}>
-                      Select Audience
+                      Select Assessmblies
                     </Label>
 
-                    {getFieldDecorator("selectedAudience", {
+                    {getFieldDecorator("assemblyType", {
                       rules: [
                         {
                           required: true,
-                          message: "Please select Your Audience",
+                          message: "Please select Your Assembly",
                         },
                       ],
-                      initialValue: this.state.selectedAudience,
+                      initialValue: this.state.assemblyType,
                     })}
                     <FormSelect
                       style={{ height: "50px", width: "47rem" }}
                       onChange={this.handleAudience}
                     >
-                      <option style={{ color: "black" }} value="student">
-                        Student
+                      <option style={{ color: "black" }} value="NA">
+                       NA
                       </option>
-                      <option style={{ color: "black" }} value="  faculty">
-                        Faculty
+                      <option style={{ color: "black" }} value="PA">
+                       PA
                       </option>
-                      <option style={{ color: "black" }} value="uniAdmin">
+                      {/* <option style={{ color: "black" }} value="uniAdmin">
                         University Administration
                       </option>
                       <option
@@ -426,7 +345,7 @@ class CreatePoll extends React.Component {
                         onClick={this.allSelected}
                       >
                         All
-                      </option>
+                      </option> */}
                     </FormSelect>
                   </Col>
                 </Row>
@@ -452,17 +371,20 @@ class CreatePoll extends React.Component {
                 {this.state.optionAdded && (
                   <Radio.Group
                     options={this.state.options}
+                   
                     //when you want to change the radio button here you will call a fucn
                     onChange={(e) => this.handleOnChange(e.target.value)}
                     value={this.state.optionValue}
+                    
                   ></Radio.Group>
+                 
                 )}
                 <Button type="primary" onClick={this.showModal}>
                   Add Options
                 </Button>{" "}
                 <br />
                 <Modal
-                  size="sm"
+                  size="md"
                   open={this.state.visible}
                   toggle={this.handleCancel}
                 >
@@ -473,11 +395,12 @@ class CreatePoll extends React.Component {
                         rules: [
                           {
                             required: true,
-                            message: "Please enter the polling option",
+                            message: "Please Enter Name",
                           },
                         ],
-                      })(<Input placeholder="Enter the polling option" />)}
+                      })(<Input placeholder="Name" />)}
                     </FormItem>
+                    
                     {/* <FormInput
                       size="lg"
                       className="mb-3"
@@ -500,7 +423,7 @@ class CreatePoll extends React.Component {
                 </Modal>
                 <br />
                 <br />
-                <b style={{ color: "black" }}>Description</b>
+                {/* <b style={{ color: "black" }}>Description</b>
                 {getFieldDecorator(" pollDescription", {
                   rules: [
                     {
@@ -517,7 +440,7 @@ class CreatePoll extends React.Component {
                   size="lg"
                   className="mb-3"
                   placeholder=""
-                />
+                /> */}
                 {/* <b style={{ color: "black" }}>Start Date </b>
                 <FormItem>
                   {getFieldDecorator("startDate", {
@@ -563,15 +486,25 @@ class CreatePoll extends React.Component {
                       // onDayChange={(day) => console.log(day)}
                     />
                   )} */}
-                  {/* <br />
+                {/* <br />
                   <br />
                 </FormItem> */}
+                <div>
+        {/* <input type="file" onChange={this.onChange} />
+        {this.state.file && (
+          <div style={{ textAlign: "center" }}>
+            <button onClick={this.resetFile}>Remove File</button>
+          </div>
+        )} */}
+        {/* <img style={{ width: "30%",height:"30%" }} src={this.state.file} /> */}
+      </div>
+    
                 <b style={{ color: "black", marginLeft: "0px" }}>
                   {" "}
                   Start Date{" "}
                 </b>
                 <FormItem style={{ color: "red" }}>
-                  {getFieldDecorator("startDate",{
+                  {getFieldDecorator("startDate", {
                     rules: [
                       {
                         required: true,
@@ -580,8 +513,8 @@ class CreatePoll extends React.Component {
                     ],
                   })(
                     <Input
-                    type="datetime-local" 
-                    min= {formatDate}
+                      type="datetime-local"
+                      min={formatDate}
                       style={{
                         marginLeft: "20px",
                         width: "210px",
@@ -603,8 +536,8 @@ class CreatePoll extends React.Component {
                     ],
                   })(
                     <Input
-                    type="datetime-local" 
-                    min= {formatDate}
+                      type="datetime-local"
+                      min={formatDate}
                       style={{
                         marginLeft: "20px",
                         width: "210px",
@@ -613,9 +546,8 @@ class CreatePoll extends React.Component {
                       onChange={this.endDate}
                     />
                   )}
-                   <br/>
+                  <br />
                 </FormItem>
-                
               </Form>
 
               <br />

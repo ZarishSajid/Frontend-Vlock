@@ -34,7 +34,6 @@ class title extends React.Component {
 
     this.state = {
       name: localStorage.getItem("name"),
-      email: localStorage.getItem("email"),
       password: localStorage.getItem("password"),
       department: localStorage.getItem("department"),
       cpassword: "",
@@ -50,18 +49,12 @@ class title extends React.Component {
           },
         };
         const data = {
-          name: formData.name,
-          email: formData.email,
+          cnic:formData.cnic,
+          fullname: formData.fullname,
           password: formData.password,
-          department: formData.department,
         };
-        console.log("name in profile", localStorage.getItem("name"));
-        console.log("email in profile", this.email);
-        console.log(
-          "department in profile",
-          localStorage.getItem("department")
-        );
-
+        console.log("fullname in profile", localStorage.getItem("fullname"));
+      
         if (formData.password !== formData.cpassword) {
           alert("Your Password did not match");
           return;
@@ -73,8 +66,6 @@ class title extends React.Component {
             console.log("RESPONSE = ", res);
             console.log(res.message);
             if (res.data.success) {
-              localStorage.setItem("name", formData.name);
-
               alert("Updated Sucessfully");
               window.location.reload(false);
             } else {
@@ -139,82 +130,50 @@ class title extends React.Component {
                 <ListGroupItem className="p-3">
                   <Row>
                     <Col>
-                      <FormItem
-                        style={{ color: "red" }}
-                        // onChange={(name) => this.setState({name })}
-                        label={
-                          <Text style={{ fontWeight: "bold", color: "black" }}>
-                            Full Name
-                          </Text>
-                        }
+                    <Col md="14" className="form-group">
+                      <label
+                        style={{
+                          color: "black",
+                          fontWeight: "bold",
+                        }}
+                        htmlFor=""
                       >
-                        {getFieldDecorator("name", {
-                          rules: [
-                            {
-                              required: true,
-                              message: "Full Name is Required",
-                            },
+                        Full Name
+                      </label>
+                      <p
+                        style={{
+                          border: "1px solid lightgray",
+                          borderRadius: "4px",
+                          padding: "17px",
+                        }}
+                      >
+                        {localStorage.getItem("fullname")}
+                      </p>{" "}
+                    </Col>
 
-                            // {
-                            //   validator: (rule, value, callback) => {
-                            //      if (!value.match(/^[a-zA-Z]+$/)) {
-                            //       callback("Alphabets only");
-                            //     }
-                            //     return callback();
-                            //   }
-                            // }
-                          ],
-                          initialValue: this.state.name,
-                        })(<Input placeholder=" Full Name" />)}
-                      </FormItem>
                       <br />
-                      <FormItem
-                        style={{ color: "red" }}
-                        label={
-                          <Text style={{ fontWeight: "bold", color: "black" }}>
-                            Email
-                          </Text>
-                        }
+                      
+                     
+                      <Col md="14" className="form-group">
+                      <label
+                        style={{
+                          color: "black",
+                          fontWeight: "bold",
+                        }}
+                        htmlFor=""
                       >
-                        {getFieldDecorator("email", {
-                          rules: [
-                            {
-                              type: "email",
-                              message: "Please enter valid E-mail",
-                            },
-                            {
-                              required: true,
-                              message: "Email is Required",
-                            },
-                          ],
-                          initialValue: this.state.email,
-                        })(<Input placeholder=" abc@gmail.com" type="email" />)}
-                      </FormItem>
-                      <br />
-                      <br />
-                      <FormItem
-                        style={{ color: "red" }}
-                        label={
-                          <Text style={{ fontWeight: "bold", color: "black" }}>
-                            Department
-                          </Text>
-                        }
+                        CNIC Number
+                      </label>
+                      <p
+                        style={{
+                          border: "1px solid lightgray",
+                          borderRadius: "4px",
+                          padding: "17px",
+                        }}
                       >
-                        {getFieldDecorator("department", {
-                          rules: [
-                            {
-                              required: true,
-                              message: "Department is Required",
-                            },
-                          ],
-                          initialValue: this.state.department,
-                        })(
-                          <Input
-                            placeholder=" Please enter your department"
-                            type="text"
-                          />
-                        )}
-                      </FormItem>
+                        {localStorage.getItem("CNIC")}
+                      </p>{" "}
+                    </Col>
 
                       <br />
                       <FormItem

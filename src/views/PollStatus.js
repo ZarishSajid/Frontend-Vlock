@@ -162,8 +162,9 @@ class PollStatus extends React.Component {
           <thead>
             <tr style={{ backgroundColor: "#569CE5" }}>
               <th>#</th>
-              <th> Poll Type</th>
+              <th>  Election Type</th>
               <th>Created By</th>
+              <th>Creater Name</th>
               <th>Start Date</th>
               <th>End Date</th>
               <th>Status</th>
@@ -189,8 +190,9 @@ class PollStatus extends React.Component {
                 return (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{values.pollType}</td>
-                    <td>{values.createdBy.name}</td>
+                    <td>{values.electionType}</td>
+                    <td>{values.createdBy.userType}</td>
+                    <td>{values.createdBy.fullname}</td>
                     <td>{moment(values.startDate).format("MM-DD-YYYY")}</td>
                     <td>{moment(values.endDate).format("MM-DD-YYYY")}</td>
                     <td>
@@ -294,12 +296,6 @@ class PollStatus extends React.Component {
                     padding: "15px",
                   }}
                 >
-                  {/* <p style={{ color: "black" }}>
-                    Poll Type:{" "}
-                    {userData && userData._id
-                      ? userData.pollType
-                      : this.state.pollType}
-                  </p> */}
                      <span style={{color:"#569CE5"}}>
                
                      Poll Question:<a style={{color:"black"}}> {userData && userData._id
@@ -309,16 +305,18 @@ class PollStatus extends React.Component {
               
             <br/>
             <br/>
-
                   <span style={{ color:"#569CE5" }}>
-                    Email:{" "}
+                    Election Type:{" "}
                     <a style={{color:"black"}}> {userData && userData._id
-                      ? userData.createdBy.email
-                      : this.state.createdBy.email}</a>
+                      ? userData.electionType
+                      : this.state.electionType}</a>
                   </span>
 <br/>
 <br/>
-<span style={{ color:"#569CE5" }}>Selected Audience: <a style={{color:"black"}} >{this.getAudience(userData)}</a></span>
+<span style={{ color:"#569CE5" }}>Assembly Type: <a style={{color:"black"}}> {userData && userData._id
+                      ? userData.assemblyType
+                      : this.state.asseemblyType}</a></span>
+             <br/>
              <br/>
              <span style={{ color:"#569CE5" }}> Poll Options:{" "}
              <a style={{color:"black"}}> {userData && userData._id ? (

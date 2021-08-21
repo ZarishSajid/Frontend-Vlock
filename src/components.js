@@ -22,7 +22,7 @@ import AdminPollDisapproved from "../src/views/AdminPollDisapproved";
 import AdminPollRequest from "../src/views/AdminPollRequest";
 import ForgotPassword from "../src/views/ForgotPassword";
 import ResetPassword from "../src/views/ResetPassword";
-import Register from "../src/views/Register";
+import RegisterVoter from "../src/views/RegisterVoter";
 import UserStatus from "../src/views/UserStatus";
 import PollList from "../src/views/PollList"
 import ComponentsOverview from "../src/views/ComponentsOverview";
@@ -35,6 +35,14 @@ import Profile from "../src/views/Profile";
 import Results from "../src/views/Results";
 import PollResult from "../src/views/PollResult";
 import ResultDup from "../src/views/ResultsDup";
+import PollingAgentRegistration from "../src/views/PollingAgentRegistration";
+import AdminRegistration from "../src/views/AdminRegistration";
+import voterStatusPollingAgent from "../src/views/voterStatusPollingAgent";
+import RegisteredVoterInfo from "../src/views/RegisteredVoterInfo"
+import adminStatus from "../src/views/adminStatus"
+import RegisteredAdminInfo from "../src/views/RegisteredAdminInfo";
+import RegisteredAgentInfo from "../src/views/RegisteredAgentInfo";
+import agentStatus from "../src/views/agentStatus ";
 
 class Components extends Component {
     
@@ -88,7 +96,15 @@ class Components extends Component {
                   <Route path='/components/Results' component={Results}/>
                   <Route path='/components/PollResult' component={PollResult}/>
                   <Route path='/components/ResultDup' component={ResultDup}/>
-
+                 <Route path="/components/voterStatusPollingAgent" component={voterStatusPollingAgent}/>
+                 <Route path='/components/RegisterVoter' component={RegisterVoter}/>
+                 <Route path="/components/AdminRegistration" component={AdminRegistration}/>
+                 <Route path="/components/PollingAgentRegistration" component={PollingAgentRegistration}/>
+                 <Route path="/components/RegisteredVoterInfo" component={RegisteredVoterInfo}/>
+                 <Route path="/components/RegisteredAdminInfo" component={RegisteredAdminInfo}/>
+                 <Route path="/components/RegisteredAgentInfo" component={RegisteredAgentInfo}/>
+                 <Route path="/components/adminStatus" component={adminStatus}/>
+                 <Route path="/components/agentStatus" component={agentStatus}/>
 
                   {/* <Route path='/ResetPassword' component={ResetPassword}/> */}
                   {/* <Route path='/components/Register' component={Register}/> */}

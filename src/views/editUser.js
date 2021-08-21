@@ -51,6 +51,9 @@ class CreatePoll extends React.Component {
     super(props);
     this.state = {
       selectValue: "",
+      address: "",
+      district: "",
+      city: "",
       name: "",
       password: "",
       department: "",
@@ -75,6 +78,11 @@ class CreatePoll extends React.Component {
     // this.showModal = this.showModal.bind(this);
     // this.handleOk = this.handleOk.bind(this);
   }
+  handleAddress = (e) => {
+    this.setState({
+      pollDescription: e.target.value,
+    });
+  };
 
   handleName = (e) => {
     this.setState({
@@ -86,16 +94,16 @@ class CreatePoll extends React.Component {
       email: e.target.value,
     });
   };
-  handleDepartment=(e)=>{
+  handleDepartment = (e) => {
     this.setState({
-    department: e.target.value,
+      department: e.target.value,
     });
-  }; 
-  handlepassword=(e)=>{
+  };
+  handlepassword = (e) => {
     this.setState({
       passward: e.target.value,
-      });
-  }
+    });
+  };
   handleAudience(e) {
     console.log("You Selected", e.target.value);
 
@@ -105,42 +113,44 @@ class CreatePoll extends React.Component {
   onRedirect = (e) => {
     this.props.form.validateFieldsAndScroll((error, formData) => {
       if (!error && formData) {
-    const userData =
-      this.props.location.aboutProps && this.props.location.aboutProps.userData;
+        const userData =
+          this.props.location.aboutProps &&
+          this.props.location.aboutProps.userData;
 
-    console.log("clicked");
-    const { getFieldValue } = this.props.form;
-    const { name, password, email, department } = this.state;
-    const headers = {
-      headers: {
-        token: localStorage.getItem("token"),
-      },
-    };
-    const data = {
-      name: name,
-      password: password,
-      email: email,
-      department: department,
-    };
+        console.log("clicked");
+        const { getFieldValue } = this.props.form;
+        const { name, password, email, department } = this.state;
+        const headers = {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        };
+        const data = {
+          name: name,
+          password: password,
+          email: email,
+          department: department,
+        };
 
-    console.log("dataaaa", data);
-    axios
-      .put(`http://localhost:8080/vlock/update`, data, headers)
-      .then((res) => {
-        console.log("RESPONSE = ", res);
-        console.log(res.message);
-        if (res.data.success) {
-          alert("Sucessfully Updated");
+        console.log("dataaaa", data);
+        axios
+          .put(`http://localhost:8080/vlock/update`, data, headers)
+          .then((res) => {
+            console.log("RESPONSE = ", res);
+            console.log(res.message);
+            if (res.data.success) {
+              alert("Sucessfully Updated");
 
-          console.log("data", res.data.message);
-        } else {
-          //  console.log("else")
-          alert(res.data.message);
-        }
-        //res.sucess=();
-      });
-    }
-   } )};
+              console.log("data", res.data.message);
+            } else {
+              //  console.log("else")
+              alert(res.data.message);
+            }
+            //res.sucess=();
+          });
+      }
+    });
+  };
   hideSwitch = (ev) => {
     this.setState({ hide: !this.state.hide });
   };
@@ -155,151 +165,365 @@ class CreatePoll extends React.Component {
         {/* Page Header */}
 
         <Card
-            sm
-            className="mb-4"
+          sm
+          className="mb-4"
+          style={{
+            height: "50%",
+            width: "50rem ",
+            marginTop: "30px",
+            marginLeft: "145px",
+          }}
+        >
+          <CardHeader
             style={{
-              height: "43rem",
-              width: "50rem ",
-              marginTop: "30px",
-              marginLeft: "145px",
+              border: "1px solid white",
+              borderRadius: "10px",
+              padding: "25px",
+              marginLeft: "30px",
+              marginRight: "30px",
+              backgroundColor: "#569CE5",
             }}
           >
-            <CardHeader
-              style={{
-                border: "1px solid white",
-                borderRadius: "10px",
-                padding: "25px",
-                marginLeft: "30px",
-                marginRight: "30px",
-                backgroundColor: "#569CE5",
+            <h4 style={{ color: "black", fontWeight: "bold" }}>
+              {" "}
+              <center>Edit User</center>
+            </h4>
+          </CardHeader>
+          <CardBody>
+            <Form className="add-new-post">
+              <Row>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    Full Name
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id
+                      ? userData.fullname
+                      : this.state.fullname}
+                  </p>{" "}
+                </Col>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    Father Name
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id
+                      ? userData.fathername
+                      : this.state.fathername}
+                  </p>{" "}
+                </Col>{" "}
+              </Row>
+              <Row>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    Gender
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id
+                      ? userData.gender
+                      : this.state.gender}
+                  </p>{" "}
+                </Col>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    Country
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                   Pakistan
+                  </p>{" "}
+                </Col>{" "}
+              </Row>
+              <Row>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    City
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id ? userData.city : this.state.city}
+                  </p>{" "}
+                </Col>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    District
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id
+                      ? userData.district
+                      : this.state.district}
+                  </p>{" "}
+                </Col>{" "}
+              </Row>
+              <Row>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    Constituency Area
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id
+                      ? userData.constituencyArea
+                      : this.state.constituencyArea}
+                  </p>
+                </Col>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    Birth Mark
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id
+                      ? userData.birthmark
+                      : this.state.birthmark}
+                  </p>{" "}
+                </Col>{" "}
+              </Row>
+              <Row>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    DOB
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id
+                      ? userData.dob
+                      : this.state.dob}{" "}
+                  </p>{" "}
+                </Col>
+                <Col md="6" className="form-group">
+                  <label
+                    style={{
+                      color: "black",
+                      marginLeft: "30px",
+                      fontWeight: "bold",
+                    }}
+                    htmlFor=""
+                  >
+                    Constituency Number
+                  </label>
+                  <p
+                    style={{
+                      border: "1px solid black",
+                      borderRadius: "10px",
+                      padding: "20px",
+                      marginLeft: "30px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    {userData && userData._id
+                          ? userData.constituencyNo
+                          : this.state.constituencyNo}
+                  </p>{" "}
+                </Col>{" "}
+              </Row>
+              <br />
+              <b style={{ color: "black" }}> Address</b>
+              {getFieldDecorator(" pollDescription", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please enter your  Address",
+                  },
+                ],
+                initialValue: this.state.address,
+              })}
+              <FormInput
+                style={{ color: "black" }}
+                type="Description"
+                onChange={this.handleAddress}
+                size="lg"
+                className="mb-3"
+                placeholder={localStorage.getItem("address")}
+              />{" "}
+              <b style={{ color: "black" }}> District</b>
+              {getFieldDecorator("district", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please enter your  district",
+                  },
+                ],
+                initialValue: this.state.address,
+              })}
+              <FormInput
+                style={{ color: "black" }}
+                type="district"
+                onChange={this.handleAddress}
+                size="lg"
+                className="mb-3"
+                placeholder={localStorage.getItem("district")}
+              />
+              <b style={{ color: "black" }}> City</b>
+              {getFieldDecorator(" city", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please enter your  City",
+                  },
+                ],
+                initialValue: this.state.address,
+              })}
+              <FormInput
+                style={{ color: "black" }}
+                type="text"
+                onChange={this.handleAddress}
+                size="lg"
+                className="mb-3"
+                placeholder={localStorage.getItem("city")}
+              />
+            </Form>
+
+            <br />
+            <Button
+              style={{ marginLeft: "280px" }}
+              onClick={() => this.onRedirect()}
+              color="primary"
+              rounded
+            >
+              Update
+            </Button>
+            <NavLink
+              to={{
+                pathname: "/components/UserStatus",
               }}
             >
-             <h4 style={{color:"black",fontWeight:"bold"}} > <center>Edit User</center></h4>
-            </CardHeader>
-            <CardBody>
-              <Form className="add-new-post">
-                <FormItem   style={{ color: "red" }}>
-                  <b style={{ color: "black" }}>Name</b>
-                  {getFieldDecorator(" name", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter your Name",
-                      },
-                    ],
-                    initialValue:
-                      userData && userData._id
-                        ? userData.name
-                        : this.state.name,
-                  })(
-                    <FormInput
-                      type="name"
-                      onChange={this.handleName}
-                      size="lg"
-                      className="mb-3"
-                      placeholder=""
-                    />
-                  )}
-                </FormItem >
-                <b style={{ color: "black" }}>Email </b>
-                <br />
-                <br />
-                <FormItem   style={{ color: "red" }}> 
-                  {getFieldDecorator("email", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter your email",
-                      },
-                    ],
-                    initialValue:
-                      userData && userData._id
-                        ? userData.email
-                        : this.state.email,
-                  })(
-                    <FormInput
-                      type="name"
-                      onChange={this.handleEmail}
-                      size="lg"
-                      className="mb-3"
-                      placeholder=""
-                    />
-                  )}
-                </FormItem>
-                <br />
-                <FormItem   style={{ color: "red" }}>
-                  <b style={{ color: "black" }}>Department</b>
-                  {getFieldDecorator("department", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter your Department",
-                      },
-                    ],
-                    initialValue:
-                      userData && userData._id
-                        ? userData.department
-                        : this.state.department,
-                  })(
-                    <FormInput
-                      type="name"
-                      onChange={this.handleDepartment}
-                      size="lg"
-                      className="mb-3"
-                      placeholder=""
-                    />
-                  )}
-                </FormItem>
-                <br />
-                <FormItem   style={{ color: "red" }}>
-                  <b style={{ color: "black" }}>Password</b>
-                  {getFieldDecorator("password", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter your password",
-                      },
-                    ],
-                    initialValue:
-                      userData && userData._id
-                        ? userData.password
-                        : this.state.password,
-                  })(
-                    <FormInput
-                      type={hide ? "password" : "input"}
-                      onChange={this.handlepassword}
-                      size="lg"
-                      className="mb-3"
-                      placeholder=""
-                    />
-                  )}
-                </FormItem>
-              </Form>
-
-             
-              <br />
-              <Button
-                style={{ marginLeft: "280px" }}
-                onClick={() => this.onRedirect()}
-                color="primary"
-                rounded
-              >
-                Update
-              </Button>
-              <NavLink
-                        to={{
-                          pathname: "/components/UserStatus",
-                        }}
-                      >
-              <Button
-                style={{ marginLeft: "30px" }}
-                type="secondary"
-              >
+              <Button style={{ marginLeft: "30px" }} type="secondary">
                 Cancel
               </Button>
-              </NavLink>
-            </CardBody>
-          </Card>
+            </NavLink>
+          </CardBody>
+        </Card>
 
         {/* <Col lg="9" md="12">
         <Editor />

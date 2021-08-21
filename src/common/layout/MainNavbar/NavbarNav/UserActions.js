@@ -293,7 +293,7 @@ export default class UserActions extends React.Component {
               verticalAlign: "sub",
             }}
           >
-            {localStorage.getItem("name")}
+            {localStorage.getItem("fullname")}
           </span>
           <br />
           <p

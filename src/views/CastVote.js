@@ -133,8 +133,8 @@ class CastVote extends React.Component {
           <thead>
             <tr style={{ backgroundColor: "#569CE5" }}>
               <th>#</th>
-              <th>Poll Type</th>
-              <th>Created By</th>
+              <th>Contestent</th>
+              {/* <th>Created By</th> */}
               <th>Start Date</th>
               <th>End Date</th>
               <th>Action</th>
@@ -159,7 +159,7 @@ class CastVote extends React.Component {
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{values.pollType}</td>
-                    <td>{values.createdBy.name}</td>
+                    {/* <td>{values.createdBy.name}</td> */}
                     <td>{moment(values.startDate).format("MM-DD-YYYY")}</td>
                     <td>{moment(values.endDate).format("MM-DD-YYYY")}</td>
                     <td>
